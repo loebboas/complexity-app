@@ -1,9 +1,8 @@
-var http = require('http');
+var express = require('express');
+var app = express();
 
-http.createServer(function(request, response) {
-	response.writeHead(200);
-	response.write("Hello, this is dog");
-	response.end();
-}).listen(8080);
+app.get('/', function(request, response) {
+	response.sendfile(__dirname + "/index.html");
+});
 
-console.log('Node app is running on port 8080');
+app.listen(8080);
