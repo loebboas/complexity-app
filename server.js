@@ -7,7 +7,7 @@ app.listen(8080);
 
 //PathLocationStrategy
 app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname + '/dist/index.html'));
+	res.sendfile(path.join(__dirname + '/dist/index.html'));
 })
 
 console.log('Console listening!');
