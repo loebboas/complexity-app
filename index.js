@@ -6,4 +6,4 @@ http.createServer(function(request, response) {
 	response.end();
 }).listen(8080);
 
-console.log('Node app is running on port', app.get('port'));
+console.log('Node app is running on port 8080');
