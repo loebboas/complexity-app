@@ -1,0 +1,30 @@
+{
+  "name": "complexity-app",
+  "version": "1.0.0",
+  "description": "Complexity App with Angular",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loebboas/Complexity.git"
+  },
+  "keywords": [
+    "Complexity",
+    "Nodes",
+    "Thoughts",
+    "Values"
+  ],
+  "author": "Boas Loeb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loebboas/Complexity/issues"
+  },
+  "homepage": "https://github.com/loebboas/Complexity#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.13.0"
+  }
+}
