@@ -14,7 +14,11 @@
   <div class="form-group">
     <label for="username">Username</label>
     <div [ngClass]="{'has-error': (form.controls.username.errors && form.controls.username.dirty) || (!usernameValid && form.controls.username.dirty), 'has-success': !form.controls.username.errors && usernameValid}">
+<<<<<<< HEAD
       <input type="text" name="username" class="form-control" autocomplete="off" placeholder="*Username" formControlName="username" />
+=======
+      <input type="text" name="username" class="form-control" autocomplete="off" placeholder="*Username" formControlName="username" (blur)="checkUsername()"  />
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
       <!-- Validation -->
       <ul class="help-block">
         <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">This field is required</li>
@@ -29,7 +33,11 @@
   <div class="form-group">
     <label for="email">Email</label>
     <div [ngClass]="{'has-error': (form.controls.email.errors && form.controls.email.dirty) || (!emailValid && form.controls.email.dirty), 'has-success': !form.controls.email.errors && emailValid}">
+<<<<<<< HEAD
       <input type="text" name="email" class="form-control" autocomplete="off" placeholder="*Email" formControlName="email" />
+=======
+      <input type="text" name="email" class="form-control" autocomplete="off" placeholder="*Email" formControlName="email" (blur)="checkEmail()" />
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
       <!-- Validation -->
       <ul class="help-block">
         <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
@@ -70,4 +78,9 @@
   <!-- Submit Input -->
   <input [disabled]="!form.valid || processing || !emailValid || !usernameValid" type="submit" class="btn btn-primary" value="Submit" />
 
+<<<<<<< HEAD
 </form>
+=======
+</form>
+<!-- Registration Form /-->
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2

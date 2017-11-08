@@ -1,4 +1,8 @@
 const User = require('../models/user'); // Import User Model Schema
+<<<<<<< HEAD
+=======
+const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
 const config = require('../config/database'); // Import database configuration
 
 module.exports = (router) => {
@@ -223,4 +227,8 @@ module.exports = (router) => {
   });
 
   return router; // Return router object to main index.js
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2

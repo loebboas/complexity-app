@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+/* ===================
+   Import Node Modules
+=================== */
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
 const mongoose = require('mongoose'); // Node Tool for MongoDB
 mongoose.Promise = global.Promise; // Configure Mongoose Promises
 const Schema = mongoose.Schema; // Import Schema from Mongoose
@@ -107,7 +113,11 @@ let validPassword = (password) => {
     return false; // Return error
   } else {
     // Regular Expression to test if password is valid format
+<<<<<<< HEAD
     const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d]).{8,35}$/);
+=======
+    const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
     return regExp.test(password); // Return regular expression test result (true or false)
   }
 };
@@ -122,7 +132,11 @@ const passwordValidators = [
   // Second password validator
   {
     validator: validPassword,
+<<<<<<< HEAD
     message: 'Must have at least one uppercase, lowercase and number'
+=======
+    message: 'Must have at least one uppercase, lowercase, special character, and number'
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
   }
 ];
 
@@ -153,4 +167,8 @@ userSchema.methods.comparePassword = function(password) {
 };
 
 // Export Module/Schema
+<<<<<<< HEAD
 module.exports = mongoose.model('User', userSchema);
+=======
+module.exports = mongoose.model('User', userSchema);
+>>>>>>> 4b9ac8810f505e5804a1f7def4e486b3cc3d62f2
