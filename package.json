@@ -1,0 +1,27 @@
+{
+  "name": "complexity-app",
+  "version": "1.0.0",
+  "description": "Structuring complex thoughts and concepts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loebboas/complexity-app.git"
+  },
+  "keywords": [
+    "complex",
+    "structure",
+    "mindmap"
+  ],
+  "author": "Boas Loeb",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/loebboas/complexity-app/issues"
+  },
+  "homepage": "https://github.com/loebboas/complexity-app#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
