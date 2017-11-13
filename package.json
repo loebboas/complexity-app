@@ -4,7 +4,8 @@
   "description": "Structuring complex thoughts and concepts",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "cd client && ng build --prod --env=prod"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,15 @@
   },
   "homepage": "https://github.com/loebboas/complexity-app#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.2",
     "postinstall-build": "^5.0.1"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.5.0"
   }
 }
