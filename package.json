@@ -23,6 +23,7 @@
   "homepage": "https://github.com/loebboas/complexity-app#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^4.13.2"
+    "mongoose": "^4.13.2",
+    "postinstall-build": "^5.0.1"
   }
 }
