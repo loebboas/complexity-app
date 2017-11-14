@@ -5,18 +5,21 @@ import { EverythingComponent } from './components/everything/everything.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/notAuth.guard';
+
 
 const appRoutes: Routes = [
   { 
   	path: '', component: HomeComponent 
   },
-  { path: 'everything', component: EverythingComponent 
+  { path: 'everything', component: EverythingComponent, canActivate: [AuthGuard] 
   },
-  { path: 'register', component: RegisterComponent 
+  { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] 
   },
-  { path: 'login', component: LoginComponent 
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] 
   },
-  { path: 'profile', component: ProfileComponent 
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] 
   },
   {
   	path: '**', component: HomeComponent
