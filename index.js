@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const path = require('path');
 const authentication = require('./routes/authentication')(router);
+const datatransfer = require('./routes/datatransfer')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -27,7 +28,7 @@ app. use(bodyParser.json());
 
 app.use(express.static(__dirname + '/client/dist'));
 app.use('/authentication', authentication);
-
+app.use('/datatransfer', datatransfer);
 
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '/client/dist/index.html'));
