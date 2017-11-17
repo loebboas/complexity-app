@@ -13,9 +13,12 @@ import { DataService } from '../../services/data.service';
 })
 export class NewComponent implements OnInit {
   
-  form: FormGroup;
+  form;
   message;
   messageClass;	
+  processing = false;
+  allThought;
+  username;
 
   constructor(
   	private formBuilder: FormBuilder,
@@ -45,6 +48,7 @@ export class NewComponent implements OnInit {
 
  onNewSubmit() {
   	// Create user object form user's inputs
+    this.processing = true;    
     const thought = {
       value: this.form.get('value').value, // E-mail input field
       user: this.form.get('user').value, // Username input field

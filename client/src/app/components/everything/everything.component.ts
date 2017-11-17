@@ -22,7 +22,7 @@ export class EverythingComponent implements OnInit {
   constructor(
 	private formBuilder: FormBuilder,
     private authService: AuthService,
-	private dataservice: DataService
+	private dataService: DataService
   	) {
   	 this.createNewThoughtForm(); // Create new blog form on start up
   	 }
