@@ -31,10 +31,10 @@ export class NewComponent implements OnInit {
   createForm() {
   	this.form = this.formBuilder.group({
   		value: '',
-  		user: 'boasloeb',
-		linkTo: '', 
-		linkFrom: '', 
-		equals: ''
+  		user: this.username,
+		  linkTo: '', 
+		  linkFrom: '', 
+		  equals: ''
   	})
   }
 

@@ -9,7 +9,6 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class DataService {
 	
 	options;
-	authToken;
 	user;
 	domain = this.authService.domain;
 
@@ -37,6 +36,6 @@ export class DataService {
   }
   newThought(thought) {
   	this.createAuthenticationHeaders(); // Create headers
-  	return this.http.post(this.domain + '/datatransfer/new', thought).map(res => res.json());
+  	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
   }
  }

@@ -1,15 +1,12 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
+const jwt = require('jsonwebtoken'); 
 const config = require('../config/database'); // Import database configuration
 
 
 module.exports = (router) => {
   
-router.post('/new', (req, res) => {
-	req.body.value;
-	req.body.linkTo;
-	req.body.linkFrom;
-	req.body.equals;
+router.post('/newThought', (req, res) => {
 	if(!req.body.value) {
 		res.json({ success: false, message: 'You must input something'});
 	} else {
