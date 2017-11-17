@@ -12,7 +12,7 @@ router.post('/newThought', (req, res) => {
 	} else {
 		let thought = new Thought({
 		value: req.body.value,
-		user: "boasloeb",
+		user: req.body.user,
 		linkTo: req.body.linkTo, 
 		linkFrom: req.body.linkFrom, 
 		equals: req.body.equals

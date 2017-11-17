@@ -18,8 +18,7 @@ export class NewComponent implements OnInit {
   messageClass;	
   processing = false;
   allThought;
-  username;
-
+  username = '';
   constructor(
   	private formBuilder: FormBuilder,
   	private authService: AuthService,
@@ -31,7 +30,7 @@ export class NewComponent implements OnInit {
   createForm() {
   	this.form = this.formBuilder.group({
   		value: '',
-  		user: this.username,
+  		user: '',
 		  linkTo: '', 
 		  linkFrom: '', 
 		  equals: ''
