@@ -19,6 +19,7 @@ export class NewComponent implements OnInit {
   processing = false;
   allThought;
   username = '';
+  userId;
   constructor(
   	private formBuilder: FormBuilder,
   	private authService: AuthService,
