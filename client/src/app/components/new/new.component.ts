@@ -12,10 +12,10 @@ import { DataService } from '../../services/data.service';
   encapsulation: ViewEncapsulation.None
 })
 export class NewComponent implements OnInit {
-  
+
   form;
   message;
-  messageClass;	
+  messageClass;
   processing = false;
   allThought;
   username = '';
@@ -23,7 +23,7 @@ export class NewComponent implements OnInit {
   	private formBuilder: FormBuilder,
   	private authService: AuthService,
   	private dataService: DataService
-  	) { 
+  	) {
   	this.createForm();
   }
 
@@ -31,9 +31,6 @@ export class NewComponent implements OnInit {
   	this.form = this.formBuilder.group({
   		value: '',
   		user: '',
-		  linkTo: '', 
-		  linkFrom: '', 
-		  equals: ''
   	})
   }
 
@@ -47,16 +44,12 @@ export class NewComponent implements OnInit {
 
  onNewSubmit() {
   	// Create user object form user's inputs
-    this.processing = true;    
+    this.processing = true;
     const thought = {
       value: this.form.get('value').value, // E-mail input field
-      user: this.form.get('user').value, // Username input field
-      linkTo: this.form.get('linkTo').value, // Password input field
-      linkFrom: this.form.get('linkFrom').value, // Password input field
-      equals: this.form.get('equals').value // Password input field
-     
-    }
-    
+      user: this.userId,
+    };
+
     this.dataService.newThought(thought).subscribe(data => {
      if (!data.success) {
      	this.messageClass = 'alert alert-danger';
@@ -74,9 +67,9 @@ export class NewComponent implements OnInit {
     // Get profile username on page load
   	  this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; // Used when creating new blog posts and comments
+      this.userId = profile.user._id;
     });
 
     this.getAllThought(); // Get all blogs on component load
   }
 }
-  	

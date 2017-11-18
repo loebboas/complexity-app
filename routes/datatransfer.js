@@ -13,9 +13,6 @@ router.post('/newThought', (req, res) => {
 		let thought = new Thought({
 		value: req.body.value,
 		user: req.body.user,
-		linkTo: req.body.linkTo, 
-		linkFrom: req.body.linkFrom, 
-		equals: req.body.equals
 		});
 		thought.save((err) => {
 			if (err) {
