@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AuthService } from './auth.service';
-import 'rxjs/add/operator/map';
-import { tokenNotExpired } from 'angular2-jwt';
 
 
 @Injectable()
 export class DataService {
 	
 	options;
-	user;
 	domain = this.authService.domain;
 
   constructor(
@@ -29,12 +26,44 @@ export class DataService {
     });
   }
 
- // Function to get all blogs from the database
-  getAllThought() {
+    // Function to get all blogs from the database
+    getAllThought() {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(res => res.json());
   }
-  newThought(thought) {
+
+    getAllLink() {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/allLink', this.options).map(res => res.json());
+  }
+
+    // Function to edit/update blog post
+    editThought(thought) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + 'datatransfer/updateThought/', thought, this.options).map(res => res.json());
+  }
+
+    getSingleThought(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
+  }
+
+    // Function to delete a blog
+    deleteThought(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.delete(this.domain + 'datatransfer/deleteThought/' + id, this.options).map(res => res.json());
+  }
+
+    newThoughtBot(thoughtBot) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/datatransfer/newThoughtBot', thoughtBot, this.options).map(res => res.json());
+  }
+   newLinkBot(linkBot) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/datatransfer/newLinkBot', linkBot, this.options).map(res => res.json());
+  }
+
+    newThought(thought) {
   	this.createAuthenticationHeaders(); // Create headers
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
   }

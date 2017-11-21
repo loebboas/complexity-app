@@ -143,7 +143,7 @@ export class RegisterComponent implements OnInit {
      	this.message = data.message;
      	setTimeout(() => {
         this.router.navigate(['/login']); // Redirect to login view
-        }, 2000);
+        }, 500);
       }
      });
   }

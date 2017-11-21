@@ -12,41 +12,35 @@ import { DataService } from '../../services/data.service';
 export class EverythingComponent implements OnInit {
 	messageClass;
 	message;
-	form;
 	processing = false;
 	username;
+  userId;
 	value;
 	allThought;
 	user;
+  thought;
+
 
   constructor(
-	private formBuilder: FormBuilder,
-    private authService: AuthService,
+  private authService: AuthService,
 	private dataService: DataService
-  	) {
-  	 this.createNewThoughtForm(); // Create new blog form on start up
-  	 }
+  	) {}
   	   // Function to create new blog form
-  createNewThoughtForm() {
-    this.form = this.formBuilder.group({
-      // Title field
-      value: '',
-    })
-  }
 
-    getAllThought() {
-    // Function to GET all blogs from database
-    this.dataService.getAllThought().subscribe(data => {
-      this.allThought = data.thought; // Assign array to use in HTML
-    });
+
+  getAllThought() {
+  // Function to GET all blogs from database
+  this.dataService.getAllThought().subscribe(data => {
+  this.allThought = data.thought; // Assign array to use in HTML
+  });
   }
 
   ngOnInit() {
-    // Get profile username on page load
-  	  this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new blog posts and comments
-    });
-
-    this.getAllThought(); // Get all blogs on component load
+  // Get profile username on page load
+  this.authService.getProfile().subscribe(profile => {
+  this.username = profile.user.username; // Used when creating new blog posts and comments
+  this.userId = profile.user._id;
+  });
+  this.getAllThought(); // Get all blogs on component load
   }
 }

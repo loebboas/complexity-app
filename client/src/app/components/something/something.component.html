@@ -1,0 +1,39 @@
+<!-- Custom Success/Error Message -->
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+
+<!-- Check: What is chose Thought.
+	Check: What Connections exit horizontally/vertically
+	adapt Grid accordingly
+	Show Grid with changing functionality
+
+	Example:
+	First check: chosen thought = something
+	SecondCheck: 
+	-->
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="card col-md-12" *ngIf="foundThought">
+		<form [formGroup]="formBot" (ngSubmit)="onNewBot()">
+			<div class="form-group">
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+					    <li class="list-group-item"><h4 class="card-title">{{ thought.value }}{{ thought.id }}</h4></li>
+					    <li class="list-group-item"><h4 class="card-title">{{ thought.bot }}</h4></li>
+					    
+					    <li class="list-group-item">
+							<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Meaning">
+					       	<input type="text" class="form-control" name="top" formControlName="top" value="{{ thought._id }}">
+					       	/<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>--><button type="submit" class="btn btn-primary">Submit</button>
+					    </li>
+					</ul>
+				</div>
+			</div>
+		</form>
+		</div>	
+	</div>
+</div>

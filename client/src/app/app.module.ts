@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
+import { SomethingComponent } from './components/something/something.component';
 
 
 @NgModule({
@@ -27,10 +29,12 @@ import { NewComponent } from './components/new/new.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    NewComponent
+    NewComponent,
+    SomethingComponent
   ],
   imports: [
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     BrowserModule,
     HttpModule,

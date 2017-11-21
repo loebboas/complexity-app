@@ -6,8 +6,9 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     value: String,
+    media: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
-    inputTime: {type: Date, default: Date.now},
+    inputTime: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Thought', thoughtSchema);

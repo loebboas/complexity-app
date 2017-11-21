@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 import { DataService } from '../../services/data.service';
 
+
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -23,7 +24,8 @@ export class NewComponent implements OnInit {
   constructor(
   	private formBuilder: FormBuilder,
   	private authService: AuthService,
-  	private dataService: DataService
+  	private dataService: DataService,
+    private router: Router
   	) {
   	this.createForm();
   }
@@ -33,14 +35,6 @@ export class NewComponent implements OnInit {
   		value: '',
   		user: '',
   	})
-  }
-
-
-    getAllThought() {
-    // Function to GET all blogs from database
-    this.dataService.getAllThought().subscribe(data => {
-      this.allThought = data.thought; // Assign array to use in HTML
-    });
   }
 
  onNewSubmit() {
@@ -59,8 +53,10 @@ export class NewComponent implements OnInit {
      } else {
      	this.messageClass = 'alert alert-success';
      	this.message = data.message;
-     	this.getAllThought();
      	}
+       setTimeout(() => {
+        this.router.navigate(['/something']); // Redirect to login view
+        }, 2000);
      });
   }
 
@@ -70,7 +66,5 @@ export class NewComponent implements OnInit {
       this.username = profile.user.username; // Used when creating new blog posts and comments
       this.userId = profile.user._id;
     });
-
-    this.getAllThought(); // Get all blogs on component load
   }
 }
