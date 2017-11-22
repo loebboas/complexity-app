@@ -18,17 +18,13 @@ router.post('/newThought', (req, res) => {
 	} else {
 		let thought = new Thought({
 		value: req.body.value,
-		user: req.body.user,
-    top: req.body.top,
-    bot: req.body.bot, 
-    left: req.body.left,
-    right: req.body.right 
+		user: req.body.user
 		});
 		thought.save((err) => {
 			if (err) {
 				res.json({ success: false, message: 'Could not save Thought. Error: ', err });
 			} else {
-				res.json({ success: true, message: 'Thought saved!'});
+				res.json({ success: true, message: 'Thought saved ' + thought._id, newId: thought._id });
 			}
 		})
 	}
@@ -39,70 +35,37 @@ router.post('/newThought', (req, res) => {
   =============================================================== */  
 
 router.post('/newBotLink', (req, res) => {
-  if(!req.body.value) {
-    res.json({ success: false, message: 'You must input something'});
-  } else {
     let botLink = new BotLink({
     user: req.body.user,
     mid: req.body.mid,
     bot: req.body.bot 
     });
-    thought.save((err) => {
-      if (err) {
+    botLink.save((err) => {
+      if (err) {    
         res.json({ success: false, message: 'Could not save Link. Error: ', err });
       } else {
         res.json({ success: true, message: 'Link saved!'});
       }
     })
-  }
 });
 
  /* ===============================================================
-     ADD NEW BOT
+     ADD NEW TOPLINK
   =============================================================== */  
 
-router.post('/newThoughtBot', (req, res) => {
-  if(!req.body.value) {
-    res.json({ success: false, message: 'You must input something'});
-  } else {
-    let thought = new Thought({
-    value: req.body.value,
-    user: req.body.userId,
-    top: req.body.top
+router.post('/newTopLink', (req, res) => {
+    let topLink = new TopLink({
+    user: req.body.user,
+    mid: req.body.mid,
+    top: req.body.top 
     });
-    thought.save((err) => {
-      if (err) {
-        res.json({ success: false, message: 'Could not save Thought. Error: ', err });
+    topLink.save((err) => {
+      if (err) {    
+        res.json({ success: false, message: 'Could not save Link. Error: ', err });
       } else {
-        res.json({ success: true, message: 'Thought saved!' });
-
-        Thought.findOne({ _id: thought.top }, (err, thoughtMid) => {
-        // Check if id is a valid ID
-        if (err) {
-          res.json({ success: false, message: 'Not a valid thought id' }); // Return error message
-        } else {
-          // Check if id was found in the database
-          if (!thoughtMid) {
-            res.json({ success: false, message: 'thought id was not found.' }); // Return error message
-          } else {
-                    thoughtMid.bot = thoughtMid.bot + thought._id;
-                    thoughtMid.save((err) => {
-                      if (err) {
-                        if (err.errors) {
-                          res.json({ success: false, message: 'Please ensure form is filled out properly' });
-                        } else {
-                          res.json({ success: false, message: err }); // Return error message
-                        }
-                      } else {
-                        res.json({ success: true, message: 'Thought Updated!' }); // Return success message
-                      }
-                    });
-          }
-        }
-        });
+        res.json({ success: true, message: 'Link saved!'});
       }
-    });
-  }
+    })
 });
 
    /* ===============================================================
@@ -126,6 +89,71 @@ router.post('/newThoughtBot', (req, res) => {
     }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
   });
 
+
+   /* ===============================================================
+     GET BOT LINK
+  =============================================================== */
+
+  router.get('/botLink', (req, res) => {
+    // Search database for all Thoughts
+    BotLink.find({ }, (err, botLink) => {
+              // Check if error was found or not
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if blogs were found in database
+                if (!botLink) {
+                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+                } else {       
+                  res.json({ success: true, botLink: botLink }); // Return success and blogs array
+                }
+              }
+    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+  });
+
+     /* ===============================================================
+     GET BOT THOUGHT
+  =============================================================== */
+
+  router.get('/botThought/:id', (req, res) => {
+    // Search database for all Thoughts
+    BotLink.find({ mid: req.params.id }, (err, botLink) => {
+              // Check if error was found or not
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if blogs were found in database
+                if (!botLink) {
+                  res.json({ success: false, message: 'No thoughts found.', botLink: botLink }); // Return error of no blogs found
+                } else { 
+                  Thought.find({ _id: botLink.bot }, (err, botThought) => {
+                  res.json({ success: true, botThought: botThought, botLink: botLink.bot }); // Return error of no blogs found              
+                  });
+                }
+              }
+    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+  });
+
+   /* ===============================================================
+     GET TOP LINK
+  =============================================================== */
+
+  router.get('/topLink', (req, res) => {
+    // Search database for all Thoughts
+    TopLink.find({ }, (err, topLink) => {
+              // Check if error was found or not
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if blogs were found in database
+                if (!topLink) {
+                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+                } else {       
+                  res.json({ success: true, topLink: topLink }); // Return success and blogs array
+                }
+              }
+    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+  });
 
    /* ===============================================================
      GET ONE THOUGHT
@@ -200,7 +228,7 @@ router.post('/newThoughtBot', (req, res) => {
   });
 
   /* ===============================================================
-     DELETE BLOG POST
+     DELETE ONE THOUGHT
   =============================================================== */
   router.delete('/deleteThought/:id', (req, res) => {
     // Check if ID was provided in parameters

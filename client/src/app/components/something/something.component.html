@@ -5,35 +5,51 @@
   </div>
 </div>
 
-<!-- Check: What is chose Thought.
-	Check: What Connections exit horizontally/vertically
-	adapt Grid accordingly
-	Show Grid with changing functionality
-
-	Example:
-	First check: chosen thought = something
-	SecondCheck: 
-	-->
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="card col-md-12" *ngIf="foundThought">
-		<form [formGroup]="formBot" (ngSubmit)="onNewBot()">
-			<div class="form-group">
-				<div class="card-body">
-					<ul class="list-group list-group-flush">
-					    <li class="list-group-item"><h4 class="card-title">{{ thought.value }}{{ thought.id }}</h4></li>
-					    <li class="list-group-item"><h4 class="card-title">{{ thought.bot }}</h4></li>
-					    
-					    <li class="list-group-item">
-							<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Meaning">
-					       	<input type="text" class="form-control" name="top" formControlName="top" value="{{ thought._id }}">
-					       	/<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>--><button type="submit" class="btn btn-primary">Submit</button>
-					    </li>
-					</ul>
+			<div class="card-body">
+			<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
+				<div class="form-group">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<button type="submit" class="btn btn-primary btn-block">Submit</button>
+						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
+						    	<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>-->
+						    </li>
+						    <li class="list-group-item">Top Thought 1</li>
+						    <li class="list-group-item">Top Thought 2</li>
+						</ul>
 				</div>
+			</form>
 			</div>
-		</form>
-		</div>	
+
+			<div class="card-title"><strong>{{ thoughtMid.value }}</strong></div>
+			<div>{{ allBotThought2 }}{{ allBotThought }}</div>	
+			<div>{{ allBotThought }}{{ allBotThought }}</div>	
+			<div>
+			<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
+				<div class="form-group">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Bot Thought 1</li>
+							<li class="list-group-item">Bot Thought 2</li>
+						    <li class="list-group-item" *ngFor="let botThought of allBotThought">{{ thought.value }}</li>
+						    <li class="list-group-item" *ngFor="let botLink of allBotLink">{{ botLink.bot }}</li>
+							<li class="list-group-item">
+						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
+						    	<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>--><button type="submit" class="btn btn-primary btn-block">Submit</button>
+						    </li>
+						</ul>
+				</div>
+			</form>
+			</div>
+		</div>
+			
+		<div class="card col-md-12" *ngIf="!foundThought">
+			<div class="jumbotron text-center">
+				<h1>No Thought found!</h1>
+			</div> 
+		</div>
 	</div>
 </div>
