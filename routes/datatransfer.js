@@ -115,24 +115,23 @@ router.post('/newTopLink', (req, res) => {
      GET BOT THOUGHT
   =============================================================== */
 
-  router.get('/botThought/:id', (req, res) => {
-    // Search database for all Thoughts
-    BotLink.find({ mid: req.params.id }, (err, botLink) => {
-              // Check if error was found or not
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                // Check if blogs were found in database
-                if (!botLink) {
-                  res.json({ success: false, message: 'No thoughts found.', botLink: botLink }); // Return error of no blogs found
-                } else { 
-                  Thought.find({ _id: botLink.bot }, (err, botThought) => {
-                  res.json({ success: true, botThought: botThought, botLink: botLink.bot }); // Return error of no blogs found              
-                  });
+    router.get('/botThought/:id', (req, res) => {
+        // Search database for all thoughts linked to :id as bottom
+        BotLink
+            .find({mid: req.params.id})
+            .populate('bot')
+            .exec((err, links) => {
+                // Check if error was found or not
+                if (err) {
+                    res.json({success: false, message: err}); // Return error message
+                } else {
+                    const thoughts = links.map((link) => {
+                        return link.bot
+                    });
+                    res.json({success: true, thoughts: thoughts});
                 }
-              }
-    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
-  });
+            });
+    });
 
    /* ===============================================================
      GET TOP LINK
