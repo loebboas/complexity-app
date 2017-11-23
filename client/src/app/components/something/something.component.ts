@@ -42,7 +42,7 @@ export class SomethingComponent implements OnInit {
 	saveBot;
 	allThoughtArray;
 
-	
+
 
   constructor(
   	private formBuilder: FormBuilder,
@@ -86,13 +86,13 @@ export class SomethingComponent implements OnInit {
        this.saveBot = data.newId;
        }
 	});
-	
+
 	const botLink = {
 		user: this.userId,
 	    mid: this.thoughtMid._id, // E-mail input field
 	    bot: this.saveBot // E-mail input field
 	    };
-		
+
 	    this.dataService.newBotLink(botLink).subscribe(data => {
 	     if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
@@ -103,8 +103,8 @@ export class SomethingComponent implements OnInit {
 	       this.message = data.message;
 	       }
 	    });
-	    
-    	
+
+
 }
 	  // Reload blogs on current page
   	reloadBotLink() {
@@ -124,7 +124,7 @@ export class SomethingComponent implements OnInit {
 	  	 getBotThought(id) {
 	  	// Function to GET all blogs from database
 	  	this.dataService.getBotThought(id).subscribe(data => {
-	  	this.allBotThought = data.thought;
+	  	this.allBotThought = data.thoughts;
 	  	});
 	  	}
 
@@ -134,7 +134,7 @@ export class SomethingComponent implements OnInit {
 	  		this.messageClass = 'alert alert-danger'; // Set bootstrap error class
 	        this.message = 'Please Provide Something'; // Set error message
 	    } else {
-	  	
+
 	       	this.dataService.getSingleThought(this.currentUrl.id).subscribe(data => {
 	      	// Check if GET request was success or not
 		    if (!data.success) {
@@ -147,7 +147,7 @@ export class SomethingComponent implements OnInit {
 		        	} // Save blog object for use in HTML
 		        this.foundThought = true;
 		        this.dataService.getBotThought(this.thoughtMid._id).subscribe(data => {
-	  			this.allBotThought2 = data.botThought;
+	  			this.allBotThought2 = data.thoughts;
 	  			console.log(data);
 	  			});
 		    }
@@ -160,6 +160,6 @@ export class SomethingComponent implements OnInit {
 	    this.userId = profile.user._id;
 	    });
   		this.getAllThought()
-	  	this.getBotThought(this.currentUrl.id)    
-	    }	
+	  	this.getBotThought(this.currentUrl.id)
+	    }
 }
