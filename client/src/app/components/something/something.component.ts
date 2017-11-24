@@ -130,11 +130,10 @@ export class SomethingComponent implements OnInit {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMidId);
 		       }
 	    	});
 	});
-    window.location.reload();
-    this.reloadThoughts();
 }
 
 onLeftSubmit() {
@@ -164,7 +163,7 @@ onLeftSubmit() {
 	    right: this.thoughtMid._id // E-mail input field
 	    };
 
-	    this.dataService.newRightLink(rightLink).subscribe(data => {
+	    this.dataService.newLeftLink(leftLink).subscribe(data => {
 	    if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
 	       this.message = data.message;
@@ -174,7 +173,7 @@ onLeftSubmit() {
 	       this.message = data.message;
 	    }
 	    });
-	    this.dataService.newBotLink(leftLink).subscribe(data => {
+	    this.dataService.newRightLink(rightLink).subscribe(data => {
 		    if (!data.success) {
 		       this.messageClass = 'alert alert-danger';
 		       this.message = data.message;
@@ -182,11 +181,10 @@ onLeftSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
+ 			   this.reloadThoughts(this.thoughtMidId);
 		       }
 	    	});
 	});
-    window.location.reload();
-    this.reloadThoughts();
 }
 
 onRightSubmit() {
@@ -213,10 +211,10 @@ onRightSubmit() {
 	    const leftLink = {
 		user: this.userId,
 	    mid: this.saveBot, // E-mail input field
-	    left: this.thoughtMid._id // E-mail input field
+	    right: this.thoughtMid._id // E-mail input field
 	    };
 
-	    this.dataService.newLeftLink(leftLink).subscribe(data => {
+	    this.dataService.newRightLink(rightLink).subscribe(data => {
 	    if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
 	       this.message = data.message;
@@ -226,7 +224,7 @@ onRightSubmit() {
 	       this.message = data.message;
 	    }
 	    });
-	    this.dataService.newRightLink(rightLink).subscribe(data => {
+	    this.dataService.newLeftLink(leftLink).subscribe(data => {
 		    if (!data.success) {
 		       this.messageClass = 'alert alert-danger';
 		       this.message = data.message;
@@ -234,11 +232,11 @@ onRightSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
+			   this.reloadThoughts(this.thoughtMidId);
 		       }
 	    	});
 	});
-    window.location.reload();
-    this.reloadThoughts();
+
 }
 
 
@@ -289,18 +287,19 @@ onRightSubmit() {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
 		       }
+		       this.reloadThoughts(this.thoughtMidId);
 	    	});
 	});
-    window.location.reload(); // Clear all variable states
-    this.reloadThoughts();
+    
 }
 	  // Reload blogs on current page
-	   	reloadThoughts() {
+	   	reloadThoughts(id) {
 	    this.loadingLink = true; // Used to lock button
-	   	this.getBotThought(this.thoughtMid._id);
-	   	this.getTopThought(this.thoughtMid._id);
-	   	this.getLeftThought(this.thoughtMid._id);
-	   	this.getRightThought(this.thoughtMid._id);
+	    this.getMidThought(id);
+	   	this.getBotThought(id);
+	   	this.getTopThought(id);
+	   	this.getLeftThought(id);
+	   	this.getRightThought(id);
 	    setTimeout(() => {
 	    this.loadingLink = false; // Release button lock after four seconds
 	    });
@@ -353,21 +352,16 @@ onRightSubmit() {
 
 	 ngOnInit() {
 	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
-	  	if (!this.currentUrl.id) {
-	  		this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-	        this.message = 'Please Provide Something'; // Set error message
-	    } else {
-	       // Get profile username on page load
+	  	    // Get profile username on page load
 	       	this.getMidThought(this.currentUrl.id)
+	       	this.getBotThought(this.currentUrl.id)
+	  		this.getTopThought(this.currentUrl.id)	  		
+	  		this.getLeftThought(this.currentUrl.id)
+	  		this.getRightThought(this.currentUrl.id)
 	  		this.authService.getProfile().subscribe(profile => {
 		    this.username = profile.user.username; // Used when creating new blog posts and comments
 		    this.userId = profile.user._id;
-		   	}); 
-
-			this.getBotThought(this.thoughtMidId)
-	  		this.getTopThought(this.thoughtMidId)	  		
-	  		this.getLeftThought(this.thoughtMidId)
-	  		this.getRightThought(this.thoughtMidId)
-	    }
+		  	}); 
+	    
 	    }
 }

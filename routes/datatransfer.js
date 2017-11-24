@@ -37,7 +37,7 @@ router.post('/newThought', (req, res) => {
   =============================================================== */  
 
 router.post('/newTopLink', (req, res) => {
-    let topLink = new topLink({
+    let topLink = new TopLink({
     user: req.body.user,
     mid: req.body.mid,
     top: req.body.top 
@@ -245,7 +245,7 @@ router.post('/newRightLink', (req, res) => {
 
     router.get('/rightThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
-        LeftLink
+        RightLink
             .find({mid: req.params.id})
             .populate('right')
             .exec((err, links) => {

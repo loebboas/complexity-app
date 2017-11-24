@@ -17,7 +17,7 @@
 					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
 						<ul class="list-group list-group-flush">
 							
-						    <li class="list-group-item" *ngFor="let leftThoughts of allLeftThought"><a [routerLink]="['../../something', leftThoughts._id]" (click)="window.location.reload()">{{ leftThoughts.value }}</a></li>
+						    <li class="list-group-item" *ngFor="let leftThoughts of allLeftThought"><a  class="btn btn-secondary btn-block" (click)="reloadThoughts(leftThoughts._id)">{{ leftThoughts.value }}</a></li>
 						</ul>
 				</div>
 			</form>
@@ -33,7 +33,7 @@
 					<button type="submit" class="btn btn-secondary btn-block">Add</button>
 						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item" *ngFor="let topThoughts of allTopThought"><a [routerLink]="['../../something', topThoughts._id]" (click)="window.location.reload()">{{ topThoughts.value }}</a></li>
+							<li class="list-group-item" *ngFor="let topThoughts of allTopThought"><a class="btn btn-secondary btn-block" (click)="reloadThoughts(topThoughts._id)">{{ topThoughts.value }}</a></li>
 						</ul>
 				</div>
 			</form>
@@ -45,7 +45,7 @@
 			<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
 				<div class="form-group">
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item" *ngFor="let botThoughts of allBotThought"><a [routerLink]="['../../something', botThoughts._id]" (click)="window.location.reload()">{{ botThoughts.value }}</a></li>
+							<li class="list-group-item" *ngFor="let botThoughts of allBotThought"><a  class="btn btn-secondary btn-block" (click)="reloadThoughts(botThoughts._id)">{{ botThoughts.value }}</a></li>
 						    </ul>
 							<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
 						    <button type="submit" class="btn btn-secondary btn-block">Add meaning</button>
@@ -62,7 +62,7 @@
 					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
 						<ul class="list-group list-group-flush">
 							
-						    <li class="list-group-item" *ngFor="let rightThoughts of allRightThought"><a [routerLink]="['../../something', rightThoughts._id]" (click)="window.location.reload()">{{ rightThoughts.value }}</a></li>
+						    <li class="list-group-item" *ngFor="let rightThoughts of allRightThought"><a class="btn btn-secondary btn-block" (click)="reloadThoughts(rightThoughts._id)">{{ rightThoughts.value }}</a></li>
 						</ul>
 				</div>
 			</form>
