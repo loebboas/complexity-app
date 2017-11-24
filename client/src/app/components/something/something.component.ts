@@ -19,6 +19,8 @@ export class SomethingComponent implements OnInit {
 	thoughtBot;
 	formBot;
 	formTop;
+	formLeft;
+	formRight;
 	formMid;
 	processing = false;
 	username;
@@ -29,6 +31,8 @@ export class SomethingComponent implements OnInit {
 	allThought;
 	allBotLink;
 	allBotValue;
+	allLeftThought;
+	allRightThought;
 	user;
 	currentUrl;
 	foundThought = false;
@@ -38,7 +42,7 @@ export class SomethingComponent implements OnInit {
 	foundRight = false;
 	i;
 	allBotThought;
-	allBotThought2;
+	allTopThought;
 	saveBot;
 	allThoughtArray;
 
@@ -51,8 +55,10 @@ export class SomethingComponent implements OnInit {
 	private activatedRoute: ActivatedRoute,
 	private router: Router
 	) {
-	 this.createNewBotForm(); // Create new Meaning form on start up
-  	 this.createNewTopForm(); // Create new Meaning form on start up
+	 this.createNewBotForm(); // Create new  form on start up
+  	 this.createNewTopForm(); // Create new  form on start up
+	 this.createNewLeftForm(); // Create new  form on start up
+  	 this.createNewRightForm(); // Create new  form on start up
   	 }
   	   // Function to create new blog form
 
@@ -67,6 +73,174 @@ export class SomethingComponent implements OnInit {
        value: ''
      })
   }
+
+  createNewLeftForm() {
+    this.formLeft = this.formBuilder.group({
+       value: ''
+     })
+  }
+    createNewRightForm() {
+    this.formRight = this.formBuilder.group({
+       value: ''
+     })
+  }
+
+  onTopSubmit() {
+    // Create new Object (Bot) with MidId as Top
+    const thought = {
+      value: this.formTop.get('value').value, // E-mail input field
+      user: this.userId,
+    };
+    this.dataService.newThought(thought).subscribe(data => {
+     if (!data.success) {
+       this.messageClass = 'alert alert-danger';
+       this.message = data.message;
+       this.processing = false;
+     } else {
+       this.messageClass = 'alert alert-success';
+       this.message = data.message;
+       this.saveBot = data.newId;
+       }
+       const topLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    top: this.saveBot // E-mail input field
+	    };
+	    const botLink = {
+		user: this.userId,
+	    mid: this.saveBot, // E-mail input field
+	    bot: this.thoughtMid._id // E-mail input field
+	    };
+
+	    this.dataService.newBotLink(botLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newTopLink(topLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		       }
+	    	});
+	});
+    window.location.reload();
+    this.reloadThoughts();
+}
+
+onLeftSubmit() {
+    // Create new Object (Bot) with MidId as Top
+    const thought = {
+      value: this.formLeft.get('value').value, // E-mail input field
+      user: this.userId,
+    };
+    this.dataService.newThought(thought).subscribe(data => {
+     if (!data.success) {
+       this.messageClass = 'alert alert-danger';
+       this.message = data.message;
+       this.processing = false;
+     } else {
+       this.messageClass = 'alert alert-success';
+       this.message = data.message;
+       this.saveBot = data.newId;
+       }
+       const leftLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    left: this.saveBot // E-mail input field
+	    };
+	    const rightLink = {
+		user: this.userId,
+	    mid: this.saveBot, // E-mail input field
+	    right: this.thoughtMid._id // E-mail input field
+	    };
+
+	    this.dataService.newRightLink(rightLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newBotLink(leftLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		       }
+	    	});
+	});
+    window.location.reload();
+    this.reloadThoughts();
+}
+
+onRightSubmit() {
+    // Create new Object (Bot) with MidId as Top
+    const thought = {
+      value: this.formRight.get('value').value, // E-mail input field
+      user: this.userId,
+    };
+    this.dataService.newThought(thought).subscribe(data => {
+     if (!data.success) {
+       this.messageClass = 'alert alert-danger';
+       this.message = data.message;
+       this.processing = false;
+     } else {
+       this.messageClass = 'alert alert-success';
+       this.message = data.message;
+       this.saveBot = data.newId;
+       }
+       const rightLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    right: this.saveBot // E-mail input field
+	    };
+	    const leftLink = {
+		user: this.userId,
+	    mid: this.saveBot, // E-mail input field
+	    left: this.thoughtMid._id // E-mail input field
+	    };
+
+	    this.dataService.newLeftLink(leftLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newRightLink(rightLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		       }
+	    	});
+	});
+    window.location.reload();
+    this.reloadThoughts();
+}
+
 
   // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
   onBotSubmit() {
@@ -85,57 +259,83 @@ export class SomethingComponent implements OnInit {
        this.message = data.message;
        this.saveBot = data.newId;
        }
-	});
-
-	const botLink = {
+       const botLink = {
 		user: this.userId,
 	    mid: this.thoughtMid._id, // E-mail input field
 	    bot: this.saveBot // E-mail input field
 	    };
+	    const topLink = {
+		user: this.userId,
+	    mid: this.saveBot, // E-mail input field
+	    top: this.thoughtMid._id // E-mail input field
+	    };
 
 	    this.dataService.newBotLink(botLink).subscribe(data => {
-	     if (!data.success) {
+	    if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
 	       this.message = data.message;
 	       this.processing = false;
-	     } else {
+	    } else {
 	       this.messageClass = 'alert alert-success';
 	       this.message = data.message;
-	       }
+	    }
 	    });
-
-
+	    this.dataService.newTopLink(topLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		       }
+	    	});
+	});
+    window.location.reload(); // Clear all variable states
+    this.reloadThoughts();
 }
 	  // Reload blogs on current page
-  	reloadBotLink() {
-    this.loadingLink = true; // Used to lock button
-    // Add any new blogs to the page
-    setTimeout(() => {
-      this.loadingLink = false; // Release button lock after four seconds
-    }, 4000);
-  }
-	 getAllThought() {
-	  	// Function to GET all blogs from database
-	  	this.dataService.getAllThought().subscribe(data => {
-	  	this.allThought = data.thought;
-	  	});
+	   	reloadThoughts() {
+	    this.loadingLink = true; // Used to lock button
+	   	this.getBotThought(this.thoughtMid._id);
+	   	this.getTopThought(this.thoughtMid._id);
+	   	this.getLeftThought(this.thoughtMid._id);
+	   	this.getRightThought(this.thoughtMid._id);
+	    setTimeout(() => {
+	    this.loadingLink = false; // Release button lock after four seconds
+	    });
 	  	}
-
-	  	 getBotThought(id) {
+	 	
+	 	getBotThought(id) {
 	  	// Function to GET all blogs from database
 	  	this.dataService.getBotThought(id).subscribe(data => {
-	  	this.allBotThought = data.thoughts;
+	  	this.allBotThought = data.botThoughts;
 	  	});
 	  	}
 
- 	ngOnInit() {
-	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
-	  	if (!this.currentUrl.id) {
-	  		this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-	        this.message = 'Please Provide Something'; // Set error message
-	    } else {
+	  	getLeftThought(id) {
+	  	// Function to GET all blogs from database
+	  	this.dataService.getLeftThought(id).subscribe(data => {
+	  	this.allLeftThought = data.leftThoughts;
+	  	});
+	  	}
 
-	       	this.dataService.getSingleThought(this.currentUrl.id).subscribe(data => {
+	  	getRightThought(id) {
+	  	// Function to GET all blogs from database
+	  	this.dataService.getRightThought(id).subscribe(data => {
+	  	this.allRightThought = data.rightThoughts;
+	  	});
+	  	}
+
+	  	getTopThought(id) {
+	  	// Function to GET all blogs from database
+	  	this.dataService.getTopThought(id).subscribe(data => {
+	  	this.allTopThought = data.topThoughts;
+	  	});
+	  	}
+
+	  	getMidThought(id) {
+ 		 	this.dataService.getSingleThought(id).subscribe(data => {
 	      	// Check if GET request was success or not
 		    if (!data.success) {
 		        this.messageClass = 'alert alert-danger'; // Set bootstrap error class
@@ -144,22 +344,30 @@ export class SomethingComponent implements OnInit {
 		        this.thoughtMid = {
 		        	value: data.thought.value,
 		        	_id: data.thought._id,
-		        	} // Save blog object for use in HTML
+		        	}; // Save blog object for use in HTML
+		        	this.thoughtMidId = this.currentUrl.id;
 		        this.foundThought = true;
-		        this.dataService.getBotThought(this.thoughtMid._id).subscribe(data => {
-	  			this.allBotThought2 = data.thoughts;
-	  			console.log(data);
-	  			});
 		    }
 		    });
+	  	}
 
-	   			  	}
-     	// Get profile username on page load
-  		this.authService.getProfile().subscribe(profile => {
-	    this.username = profile.user.username; // Used when creating new blog posts and comments
-	    this.userId = profile.user._id;
-	    });
-  		this.getAllThought()
-	  	this.getBotThought(this.currentUrl.id)
+	 ngOnInit() {
+	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
+	  	if (!this.currentUrl.id) {
+	  		this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+	        this.message = 'Please Provide Something'; // Set error message
+	    } else {
+	       // Get profile username on page load
+	       	this.getMidThought(this.currentUrl.id)
+	  		this.authService.getProfile().subscribe(profile => {
+		    this.username = profile.user.username; // Used when creating new blog posts and comments
+		    this.userId = profile.user._id;
+		   	}); 
+
+			this.getBotThought(this.thoughtMidId)
+	  		this.getTopThought(this.thoughtMidId)	  		
+	  		this.getLeftThought(this.thoughtMidId)
+	  		this.getRightThought(this.thoughtMidId)
+	    }
 	    }
 }

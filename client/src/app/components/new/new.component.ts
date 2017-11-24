@@ -55,8 +55,8 @@ export class NewComponent implements OnInit {
      	this.message = data.message;
      	}
        setTimeout(() => {
-        this.router.navigate(['/something']); // Redirect to login view
-        }, 2000);
+        this.router.navigate(['/something', data.newId]); // Redirect to login view
+        });
      });
   }
 

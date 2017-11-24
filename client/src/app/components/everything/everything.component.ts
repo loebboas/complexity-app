@@ -19,6 +19,7 @@ export class EverythingComponent implements OnInit {
 	allThought;
 	user;
   thought;
+  everything;
 
 
   constructor(
@@ -35,12 +36,19 @@ export class EverythingComponent implements OnInit {
   });
   }
 
+  getEverything() {
+  // Function to GET all blogs from database
+  this.dataService.getEverything().subscribe(data => {
+  this.everything = data.everything; // Assign array to use in HTML
+  });
+  }
+
   ngOnInit() {
   // Get profile username on page load
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments
   this.userId = profile.user._id;
   });
-  this.getAllThought(); // Get all blogs on component load
+  this.getEverything(); // Get all blogs on component load
   }
 }

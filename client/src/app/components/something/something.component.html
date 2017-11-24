@@ -8,46 +8,67 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="card col-md-12" *ngIf="foundThought">
-			<div class="card-body">
-			<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
-				<div class="form-group">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-								<button type="submit" class="btn btn-primary btn-block">Submit</button>
-						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
-						    	<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>-->
-						    </li>
-						    <li class="list-group-item">Top Thought 1</li>
-						    <li class="list-group-item">Top Thought 2</li>
-						</ul>
-				</div>
-			</form>
-			</div>
 
-			<div class="card-title"><strong>{{ thoughtMid.value }}</strong></div>
-			<div>{{ allBotThought2 }}{{ allBotThought }}</div>	
-			<div>{{ allBotThought }}{{ allBotThought }}</div>	
-			<div>
-			<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
+		<div class="card col-md-4">
+			<div class="card-body">
+			<form [formGroup]="formLeft" (ngSubmit)="onLeftSubmit()">
 				<div class="form-group">
+					<button type="submit" class="btn btn-secondary btn-block">Add Link</button>
+					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Bot Thought 1</li>
-							<li class="list-group-item">Bot Thought 2</li>
-						    <li class="list-group-item" *ngFor="let botThought of allBotThought">{{ thought.value }}</li>
-						    <li class="list-group-item" *ngFor="let botLink of allBotLink">{{ botLink.bot }}</li>
-							<li class="list-group-item">
-						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
-						    	<!--<a [routerLink]="['/getOneThought/', thought._id]"></a>--><button type="submit" class="btn btn-primary btn-block">Submit</button>
-						    </li>
+							
+						    <li class="list-group-item" *ngFor="let leftThoughts of allLeftThought"><a [routerLink]="['../../something', leftThoughts._id]" (click)="window.location.reload()">{{ leftThoughts.value }}</a></li>
 						</ul>
 				</div>
 			</form>
 			</div>
 		</div>
-			
+
+
+		<div class="card col-md-4" *ngIf="foundThought">
+						<!-- Bot Level 1 Form/View -->
+			<div class="card-body">
+			<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
+				<div class="form-group">
+					<button type="submit" class="btn btn-secondary btn-block">Add</button>
+						    	<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" *ngFor="let topThoughts of allTopThought"><a [routerLink]="['../../something', topThoughts._id]" (click)="window.location.reload()">{{ topThoughts.value }}</a></li>
+						</ul>
+				</div>
+			</form>
+			</div>
+			<!-- Mid Form/View -->
+			<div class="card-title"><strong>{{ thoughtMid.value }}</strong></div>
+			<!-- Bot Level 1 Form/View -->
+			<div class="card-body">
+			<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
+				<div class="form-group">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" *ngFor="let botThoughts of allBotThought"><a [routerLink]="['../../something', botThoughts._id]" (click)="window.location.reload()">{{ botThoughts.value }}</a></li>
+						    </ul>
+							<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
+						    <button type="submit" class="btn btn-secondary btn-block">Add meaning</button>
+				</div>
+			</form>
+			</div>
+		</div>
+		<div class="card col-md-4">
+						<!-- Bot Level 1 Form/View -->
+			<div class="card-body">
+			<form [formGroup]="formRight" (ngSubmit)="onRightSubmit()">
+				<div class="form-group">
+					<button type="submit" class="btn btn-secondary btn-block">Add Link</button>
+					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
+						<ul class="list-group list-group-flush">
+							
+						    <li class="list-group-item" *ngFor="let rightThoughts of allRightThought"><a [routerLink]="['../../something', rightThoughts._id]" (click)="window.location.reload()">{{ rightThoughts.value }}</a></li>
+						</ul>
+				</div>
+			</form>
+			</div>
 		<div class="card col-md-12" *ngIf="!foundThought">
-			<div class="jumbotron text-center">
+			<div class="text-center">
 				<h1>No Thought found!</h1>
 			</div> 
 		</div>
