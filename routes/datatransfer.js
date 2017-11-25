@@ -114,7 +114,7 @@ router.post('/newRightLink', (req, res) => {
 
   router.get('/allThought', (req, res) => {
     // Search database for all Thoughts
-    Thought.find({}, (err, thought) => {
+    Thought.find({user: req.decoded.userId}, (err, thought) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -136,10 +136,13 @@ router.post('/newRightLink', (req, res) => {
   router.get('/everything', (req, res) => {
 
     TopLink
-      .find({})
+      .find({user: req.decoded.userId})
       .exec((err, links) => {
         const ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
-        Thought.find({ "_id": { "$nin": ids_of_thoughts_with_top_links}}, (err, everything) => {
+        Thought.find({
+          user: req.decoded.userId,
+          "_id": { "$nin": ids_of_thoughts_with_top_links},
+        }, (err, everything) => {
           res.json({success: true, everything: everything });
         });
       });
@@ -152,7 +155,7 @@ router.post('/newRightLink', (req, res) => {
 
   router.get('/botLink', (req, res) => {
     // Search database for all Thoughts
-    BotLink.find({ }, (err, botLink) => {
+    BotLink.find({user: req.decoded.userId}, (err, botLink) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -174,7 +177,7 @@ router.post('/newRightLink', (req, res) => {
     router.get('/botThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
         BotLink
-            .find({mid: req.params.id})
+            .find({user: req.decoded.userId, mid: req.params.id})
             .populate('bot')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -196,7 +199,7 @@ router.post('/newRightLink', (req, res) => {
     router.get('/topThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
         TopLink
-            .find({mid: req.params.id})
+            .find({user: req.decoded.userId, mid: req.params.id})
             .populate('top')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -218,7 +221,7 @@ router.post('/newRightLink', (req, res) => {
     router.get('/leftThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
         LeftLink
-            .find({mid: req.params.id})
+            .find({user: req.decoded.userId, mid: req.params.id})
             .populate('left')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -240,7 +243,7 @@ router.post('/newRightLink', (req, res) => {
     router.get('/rightThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
         RightLink
-            .find({mid: req.params.id})
+            .find({user: req.decoded.userId, mid: req.params.id})
             .populate('right')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -262,7 +265,7 @@ router.post('/newRightLink', (req, res) => {
 
   router.get('/topLink', (req, res) => {
     // Search database for all Thoughts
-    TopLink.find({ }, (err, topLink) => {
+    TopLink.find({user: req.decoded.userId}, (err, topLink) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -287,7 +290,7 @@ router.post('/newRightLink', (req, res) => {
               } else {
 
               // Search database for Thought
-              Thought.findOne({ _id: req.params.id}, (err, thought) => {
+              Thought.findOne({user: req.decoded.userId, _id: req.params.id}, (err, thought) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -314,7 +317,7 @@ router.post('/newRightLink', (req, res) => {
               } else {
 
               // Search database for Thought
-              Thought.findOne({ value: req.params.value}, (err, thought) => {
+              Thought.findOne({user: req.decoded.userId, value: req.params.value}, (err, thought) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -341,7 +344,7 @@ router.post('/newRightLink', (req, res) => {
       res.json({ success: false, message: 'No thought id provided' }); // Return error message
     } else {
       // Check if id exists in database
-      Thought.findOne({ _id: req.body._id }, (err, thought) => {
+      Thought.findOne({ user: req.decoded.userId, _id: req.body._id }, (err, thought) => {
         // Check if id is a valid ID
         if (err) {
           res.json({ success: false, message: 'Not a valid thought id' }); // Return error message
@@ -381,7 +384,7 @@ router.post('/newRightLink', (req, res) => {
       res.json({ success: false, message: 'No id provided' }); // Return error message
     } else {
       // Check if id is found in database
-      Thought.findOne({ _id: req.params.id }, (err, thought) => {
+      Thought.findOne({ user: req.decoded.userId, _id: req.params.id }, (err, thought) => {
         // Check if error was found
         if (err) {
           res.json({ success: false, message: 'Invalid id' }); // Return error message
