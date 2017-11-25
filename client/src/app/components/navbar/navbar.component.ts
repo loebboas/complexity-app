@@ -69,9 +69,7 @@ constructor(
   onKeyup(searchText: string) {
     this.getThoughtByName(searchText); // Get all blogs on component load
   }
-    searchSubmit() {
-  this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
-  }
+
 
 
 

@@ -617,9 +617,6 @@ var NavbarComponent = (function () {
     NavbarComponent.prototype.onKeyup = function (searchText) {
         this.getThoughtByName(searchText); // Get all blogs on component load
     };
-    NavbarComponent.prototype.searchSubmit = function () {
-        this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
-    };
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.getProfile().subscribe(function (profile) {
@@ -1080,7 +1077,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/something/something.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \t\r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }}</h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\" style=\"border-color: #ffffff\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \t\r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }}</h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1188,33 +1185,18 @@ var SomethingComponent = (function () {
     };
     SomethingComponent.prototype.onTopSubmit = function () {
         var _this = this;
-        // Create new Object (Bot) with MidId as Top
-        var thought = {
-            value: this.formTop.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveBot = data.newId;
-            }
+        if (this.thoughtByName) {
             var topLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                top: _this.saveBot // E-mail input field
+                user: this.userId,
+                mid: this.thoughtMid._id,
+                top: this.thoughtByName._id // E-mail input field
             };
             var botLink = {
-                user: _this.userId,
-                mid: _this.saveBot,
-                bot: _this.thoughtMid._id // E-mail input field
+                user: this.userId,
+                mid: this.thoughtByName._id,
+                bot: this.thoughtMid._id // E-mail input field
             };
-            _this.dataService.newBotLink(botLink).subscribe(function (data) {
+            this.dataService.newBotLink(botLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1225,7 +1207,7 @@ var SomethingComponent = (function () {
                     _this.message = data.message;
                 }
             });
-            _this.dataService.newTopLink(topLink).subscribe(function (data) {
+            this.dataService.newTopLink(topLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1237,37 +1219,75 @@ var SomethingComponent = (function () {
                     _this.reloadThoughts(_this.thoughtMidId);
                 }
             });
-        });
+        }
+        else {
+            // Create new Object (Bot) with MidId as Top
+            var thought = {
+                value: this.formTop.get('value').value,
+                user: this.userId,
+            };
+            // if value = existing value
+            this.dataService.newThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.saveBot = data.newId;
+                }
+                var topLink = {
+                    user: _this.userId,
+                    mid: _this.thoughtMid._id,
+                    top: _this.saveBot // E-mail input field
+                };
+                var botLink = {
+                    user: _this.userId,
+                    mid: _this.saveBot,
+                    bot: _this.thoughtMid._id // E-mail input field
+                };
+                _this.dataService.newBotLink(botLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                });
+                _this.dataService.newTopLink(topLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                        _this.reloadThoughts(_this.thoughtMidId);
+                    }
+                });
+            });
+        }
     };
     SomethingComponent.prototype.onLeftSubmit = function () {
         var _this = this;
-        // Create new Object (Bot) with MidId as Top
-        var thought = {
-            value: this.formLeft.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveBot = data.newId;
-            }
+        if (this.thoughtByName) {
             var leftLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                left: _this.saveBot // E-mail input field
+                user: this.userId,
+                mid: this.thoughtMid._id,
+                left: this.thoughtByName._id // E-mail input field
             };
             var rightLink = {
-                user: _this.userId,
-                mid: _this.saveBot,
-                right: _this.thoughtMid._id // E-mail input field
+                user: this.userId,
+                mid: this.thoughtByName._id,
+                right: this.thoughtMid._id // E-mail input field
             };
-            _this.dataService.newLeftLink(leftLink).subscribe(function (data) {
+            this.dataService.newLeftLink(leftLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1278,7 +1298,7 @@ var SomethingComponent = (function () {
                     _this.message = data.message;
                 }
             });
-            _this.dataService.newRightLink(rightLink).subscribe(function (data) {
+            this.dataService.newRightLink(rightLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1290,37 +1310,74 @@ var SomethingComponent = (function () {
                     _this.reloadThoughts(_this.thoughtMidId);
                 }
             });
-        });
+        }
+        else {
+            // Create new Object (Bot) with MidId as Top
+            var thought = {
+                value: this.formLeft.get('value').value,
+                user: this.userId,
+            };
+            this.dataService.newThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.saveBot = data.newId;
+                }
+                var leftLink = {
+                    user: _this.userId,
+                    mid: _this.thoughtMid._id,
+                    left: _this.saveBot // E-mail input field
+                };
+                var rightLink = {
+                    user: _this.userId,
+                    mid: _this.saveBot,
+                    right: _this.thoughtMid._id // E-mail input field
+                };
+                _this.dataService.newLeftLink(leftLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                });
+                _this.dataService.newRightLink(rightLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                        _this.reloadThoughts(_this.thoughtMidId);
+                    }
+                });
+            });
+        }
     };
     SomethingComponent.prototype.onRightSubmit = function () {
         var _this = this;
-        // Create new Object (Bot) with MidId as Top
-        var thought = {
-            value: this.formRight.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveBot = data.newId;
-            }
+        if (this.thoughtByName) {
             var rightLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                right: _this.saveBot // E-mail input field
+                user: this.userId,
+                mid: this.thoughtMid._id,
+                right: this.thoughtByName._id // E-mail input field
             };
             var leftLink = {
-                user: _this.userId,
-                mid: _this.saveBot,
-                right: _this.thoughtMid._id // E-mail input field
+                user: this.userId,
+                mid: this.thoughtByName._id,
+                left: this.thoughtMid._id // E-mail input field
             };
-            _this.dataService.newRightLink(rightLink).subscribe(function (data) {
+            this.dataService.newRightLink(rightLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1331,7 +1388,7 @@ var SomethingComponent = (function () {
                     _this.message = data.message;
                 }
             });
-            _this.dataService.newLeftLink(leftLink).subscribe(function (data) {
+            this.dataService.newLeftLink(leftLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1340,41 +1397,78 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMid._id);
+                    _this.reloadThoughts(_this.thoughtMidId);
                 }
             });
-        });
+        }
+        else {
+            // Create new Object (Bot) with MidId as Top
+            var thought = {
+                value: this.formRight.get('value').value,
+                user: this.userId,
+            };
+            this.dataService.newThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.saveBot = data.newId;
+                }
+                var rightLink = {
+                    user: _this.userId,
+                    mid: _this.thoughtMid._id,
+                    right: _this.saveBot // E-mail input field
+                };
+                var leftLink = {
+                    user: _this.userId,
+                    mid: _this.saveBot,
+                    right: _this.thoughtMid._id // E-mail input field
+                };
+                _this.dataService.newRightLink(rightLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                });
+                _this.dataService.newLeftLink(leftLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                        _this.reloadThoughts(_this.thoughtMid._id);
+                    }
+                });
+            });
+        }
     };
     // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
     SomethingComponent.prototype.onBotSubmit = function () {
         var _this = this;
-        // Create new Object (Bot) with MidId as Top
-        var thought = {
-            value: this.formBot.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveBot = data.newId;
-            }
+        if (this.thoughtByName) {
             var botLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                bot: _this.saveBot // E-mail input field
+                user: this.userId,
+                mid: this.thoughtMid._id,
+                bot: this.thoughtByName._id // E-mail input field
             };
             var topLink = {
-                user: _this.userId,
-                mid: _this.saveBot,
-                top: _this.thoughtMid._id // E-mail input field
+                user: this.userId,
+                mid: this.thoughtByName._id,
+                top: this.thoughtMid._id // E-mail input field
             };
-            _this.dataService.newBotLink(botLink).subscribe(function (data) {
+            this.dataService.newBotLink(botLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1385,7 +1479,7 @@ var SomethingComponent = (function () {
                     _this.message = data.message;
                 }
             });
-            _this.dataService.newTopLink(topLink).subscribe(function (data) {
+            this.dataService.newTopLink(topLink).subscribe(function (data) {
                 if (!data.success) {
                     _this.messageClass = 'alert alert-danger';
                     _this.message = data.message;
@@ -1394,10 +1488,62 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
+                    _this.reloadThoughts(_this.thoughtMidId);
                 }
-                _this.reloadThoughts(_this.thoughtMidId);
             });
-        });
+        }
+        else {
+            // Create new Object (Bot) with MidId as Top
+            var thought = {
+                value: this.formBot.get('value').value,
+                user: this.userId,
+            };
+            this.dataService.newThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.saveBot = data.newId;
+                }
+                var botLink = {
+                    user: _this.userId,
+                    mid: _this.thoughtMid._id,
+                    bot: _this.saveBot // E-mail input field
+                };
+                var topLink = {
+                    user: _this.userId,
+                    mid: _this.saveBot,
+                    top: _this.thoughtMid._id // E-mail input field
+                };
+                _this.dataService.newBotLink(botLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                });
+                _this.dataService.newTopLink(topLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                    _this.reloadThoughts(_this.thoughtMidId);
+                });
+            });
+        }
     };
     // Reload blogs on current page
     SomethingComponent.prototype.reloadThoughts = function (id) {
@@ -1411,6 +1557,7 @@ var SomethingComponent = (function () {
         setTimeout(function () {
             _this.loadingLink = false; // Release button lock after four seconds
         });
+        this.editMid = false;
     };
     SomethingComponent.prototype.getBotThought = function (id) {
         var _this = this;
@@ -1457,6 +1604,20 @@ var SomethingComponent = (function () {
                 _this.foundThought = true;
             }
         });
+    };
+    SomethingComponent.prototype.getThoughtByName = function (value) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getThoughtByName(value).subscribe(function (data) {
+            _this.thoughtByName =
+                {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                };
+        });
+    };
+    SomethingComponent.prototype.onKeyup = function (searchText) {
+        this.getThoughtByName(searchText); // Get all blogs on component load
     };
     SomethingComponent.prototype.ngOnInit = function () {
         var _this = this;

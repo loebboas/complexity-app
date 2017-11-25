@@ -46,6 +46,7 @@ export class SomethingComponent implements OnInit {
 	saveBot;
 	allThoughtArray;
 	editMid = false;
+	thoughtByName;
 
 
 
@@ -126,12 +127,50 @@ export class SomethingComponent implements OnInit {
     });
   }
 
+
   onTopSubmit() {
+
+
+    if(this.thoughtByName) {
+    	const topLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    top: this.thoughtByName._id // E-mail input field
+	    };
+	    const botLink = {
+		user: this.userId,
+	    mid: this.thoughtByName._id, // E-mail input field
+	    bot: this.thoughtMid._id // E-mail input field
+	    };
+	        this.dataService.newBotLink(botLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newTopLink(topLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMidId);
+		       }
+	    	});
+    } else {
     // Create new Object (Bot) with MidId as Top
     const thought = {
       value: this.formTop.get('value').value, // E-mail input field
       user: this.userId,
     };
+    // if value = existing value
+
     this.dataService.newThought(thought).subscribe(data => {
      if (!data.success) {
        this.messageClass = 'alert alert-danger';
@@ -175,9 +214,43 @@ export class SomethingComponent implements OnInit {
 		       }
 	    	});
 	});
+	}
 }
 
 onLeftSubmit() {
+	if(this.thoughtByName) {
+    	const leftLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    left: this.thoughtByName._id // E-mail input field
+	    };
+	    const rightLink = {
+		user: this.userId,
+	    mid: this.thoughtByName._id, // E-mail input field
+	    right: this.thoughtMid._id // E-mail input field
+	    };
+	        this.dataService.newLeftLink(leftLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newRightLink(rightLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMidId);
+		       }
+	    	});
+    } else {
     // Create new Object (Bot) with MidId as Top
     const thought = {
       value: this.formLeft.get('value').value, // E-mail input field
@@ -227,8 +300,42 @@ onLeftSubmit() {
 	    	});
 	});
 }
+}
 
 onRightSubmit() {
+	if(this.thoughtByName) {
+    	const rightLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    right: this.thoughtByName._id // E-mail input field
+	    };
+	    const leftLink = {
+		user: this.userId,
+	    mid: this.thoughtByName._id, // E-mail input field
+	    left: this.thoughtMid._id // E-mail input field
+	    };
+	        this.dataService.newRightLink(rightLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newLeftLink(leftLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMidId);
+		       }
+	    	});
+    } else {
     // Create new Object (Bot) with MidId as Top
     const thought = {
       value: this.formRight.get('value').value, // E-mail input field
@@ -277,12 +384,46 @@ onRightSubmit() {
 		       }
 	    	});
 	});
+}
 
 }
 
 
   // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
   onBotSubmit() {
+  	if(this.thoughtByName) {
+    	const botLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    bot: this.thoughtByName._id // E-mail input field
+	    };
+	    const topLink = {
+		user: this.userId,
+	    mid: this.thoughtByName._id, // E-mail input field
+	    top: this.thoughtMid._id // E-mail input field
+	    };
+	        this.dataService.newBotLink(botLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newTopLink(topLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMidId);
+		       }
+	    	});
+    } else {
     // Create new Object (Bot) with MidId as Top
     const thought = {
       value: this.formBot.get('value').value, // E-mail input field
@@ -331,7 +472,7 @@ onRightSubmit() {
 		       this.reloadThoughts(this.thoughtMidId);
 	    	});
 	});
-    
+    }
 }
 	  // Reload blogs on current page
 	   	reloadThoughts(id) {
@@ -344,6 +485,7 @@ onRightSubmit() {
 	    setTimeout(() => {
 	    this.loadingLink = false; // Release button lock after four seconds
 	    });
+	    this.editMid = false;
 	  	}
 	 	
 	 	getBotThought(id) {
@@ -390,6 +532,21 @@ onRightSubmit() {
 		    }
 		    });
 	  	}
+
+	  	getThoughtByName(value) {
+  		// Function to GET all blogs from database
+  		this.dataService.getThoughtByName(value).subscribe(data => {
+  		this.thoughtByName = 
+              {
+              value: data.thought.value,
+              _id: data.thought._id,
+              };
+  		});
+  		}
+  		
+  		onKeyup(searchText: string) {
+    	this.getThoughtByName(searchText); // Get all blogs on component load
+  		}
 
 	 ngOnInit() {
 	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id

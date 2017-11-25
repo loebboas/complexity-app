@@ -14,7 +14,7 @@
 			<form [formGroup]="formLeft" (ngSubmit)="onLeftSubmit()">
 				<div class="form-group">
 					
-					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
+					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
 						<ul class="list-group">
 							
 						    <li class="list-group" *ngFor="let leftThoughts of allLeftThought"><h4  class="btn btn-secondary btn-block" (click)="reloadThoughts(leftThoughts._id)">{{ leftThoughts.value }}</h4></li>
@@ -30,7 +30,7 @@
 			<div class="card-body">
 			<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
 				<div class="form-group">
-					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
+					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
 						<ul class="list-group">
 							<li class="list-group" *ngFor="let topThoughts of allTopThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(topThoughts._id)">{{ topThoughts.value }}</h4></li>
 						</ul>
@@ -56,7 +56,7 @@
 						<ul class="list-group">
 							<li class="list-group" *ngFor="let botThoughts of allBotThought"><h4  class="btn btn-secondary btn-block" (click)="reloadThoughts(botThoughts._id)">{{ botThoughts.value }}</h4></li>
 						    </ul>
-							<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
+							<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
 						  
 				</div>
 			</form>
@@ -64,10 +64,10 @@
 		</div>
 		<div class="card col-md-3 border-0">
 						<!-- Bot Level 1 Form/View -->
-			<div class="card-body" style="border-color: #ffffff">
+			<div class="card-body">
 			<form [formGroup]="formRight" (ngSubmit)="onRightSubmit()">
 				<div class="form-group">
-					<input type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
+					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
 						<ul class="list-group list-group-flush">
 							
 						    <li class="list-group-item" *ngFor="let rightThoughts of allRightThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(rightThoughts._id)">{{ rightThoughts.value }}</h4></li>
