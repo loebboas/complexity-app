@@ -309,10 +309,39 @@ router.post('/newRightLink', (req, res) => {
   }
   });
 
+
+      /* ===============================================================
+     GET THOUGHT BY NAME
+  =============================================================== */
+    router.get('/thoughtByName/:value', (req, res) => {
+
+         if (!req.params.value) {
+                res.json({ success: false, message: 'No Value was provided.' }); // Return error message
+              } else {
+
+              // Search database for Thought
+              Thought.findOne({ value: req.params.value}, (err, thought) => {
+              // Check if error was found or not
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if blogs were found in database
+                if (!thought) {
+                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+                } else {       
+                  res.json({ success: true, thought: thought }); // Return success and blogs array
+                }
+              }
+    });
+  }
+  });
+
+   
+
    /* ===============================================================
      UPDATE ONE THOUGHT
   =============================================================== */
-  router.put('/updateThought', (req, res) => {
+  router.put('/editThought', (req, res) => {
     // Check if id was provided
     if (!req.body._id) {
       res.json({ success: false, message: 'No thought id provided' }); // Return error message
@@ -328,12 +357,8 @@ router.post('/newRightLink', (req, res) => {
             res.json({ success: false, message: 'thought id was not found.' }); // Return error message
           } else {
             // Check who user is that is requesting blog update
-            User.findOne({ _id: req.decoded.userId }, (err, user) => {
-              // Check if error was found
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                    thought.value = req.body.value; // Save value
+           
+                    thought.value = req.body.edit; // Save value
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {
@@ -347,8 +372,6 @@ router.post('/newRightLink', (req, res) => {
                     });
                   
                 
-              }
-            });
           }
         }
       });

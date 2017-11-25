@@ -27,6 +27,7 @@ export class SomethingComponent implements OnInit {
  	userId;
 	thought;
 	value;
+	edit;
 	loadingLink;
 	allThought;
 	allBotLink;
@@ -40,11 +41,11 @@ export class SomethingComponent implements OnInit {
 	foundBot = false;
 	foundLeft = false;
 	foundRight = false;
-	i;
 	allBotThought;
 	allTopThought;
 	saveBot;
 	allThoughtArray;
+	editMid = false;
 
 
 
@@ -55,12 +56,19 @@ export class SomethingComponent implements OnInit {
 	private activatedRoute: ActivatedRoute,
 	private router: Router
 	) {
+
+	 this.createNewMidForm(); // Create new  form on start up
 	 this.createNewBotForm(); // Create new  form on start up
   	 this.createNewTopForm(); // Create new  form on start up
 	 this.createNewLeftForm(); // Create new  form on start up
   	 this.createNewRightForm(); // Create new  form on start up
   	 }
   	   // Function to create new blog form
+	createNewMidForm() {
+    this.formMid = this.formBuilder.group({
+       edit: ''
+     })
+  }
 
   createNewBotForm() {
     this.formBot = this.formBuilder.group({
@@ -83,6 +91,39 @@ export class SomethingComponent implements OnInit {
     this.formRight = this.formBuilder.group({
        value: ''
      })
+  }
+
+  EditMid() {
+  	if(this.editMid == false) {
+  		this.editMid = true;
+  	} else {
+  		this.editMid = false;
+  	}
+
+
+  }
+
+    updateThoughtSubmit() {
+      const thought = {
+    	edit: this.formMid.get('edit').value, // E-mail input field
+      	_id: this.thoughtMidId
+    };
+    this.processing = true; // Lock form fields	
+    // Function to send blog object to backend
+    this.dataService.editThought(thought).subscribe(data => {
+      // Check if PUT request was a success or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+        this.message = data.message; // Set error message
+        this.processing = false; // Unlock form fields
+        console.log(data.message);
+      } else {
+        this.messageClass = 'alert alert-success'; // Set success bootstrap class
+        this.message = data.message; // Set success message
+        // After two seconds, navigate back to blog page
+        console.log(data.message);
+      }
+    });
   }
 
   onTopSubmit() {
@@ -232,7 +273,7 @@ onRightSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-			   this.reloadThoughts(this.thoughtMidId);
+			   this.reloadThoughts(this.thoughtMid._id);	
 		       }
 	    	});
 	});

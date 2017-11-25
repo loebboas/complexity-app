@@ -48,7 +48,7 @@ export class EverythingComponent implements OnInit {
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments
   this.userId = profile.user._id;
-  });
   this.getEverything(); // Get all blogs on component load
+  });
   }
 }

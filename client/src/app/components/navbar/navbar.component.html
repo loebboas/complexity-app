@@ -8,7 +8,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/">Home</a><span class="sr-only">Home</span></li>
     </ul>
-    <ul class="navbar-nav justify-content-end">
+    <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/register">Register</a></li>
             <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/login">Login</a></li>
              <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a></li>
@@ -16,5 +16,15 @@
             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/new">New</a></li>
             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/everything">Everything</a></li>
     </ul>
+    <form [formGroup]="form" (ngSubmit)="searchSubmit(thoughtByName._id)">
+    <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
+      
+        <div class="search-block" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': foundThoughtByName && form.controls.search.dirty }">
+          <input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" class="form-control" formControlName="search" name="search" placeholder="Something">
+
+      </div>
+   
+    </ul>
+  </form>
   </div>
 </nav>

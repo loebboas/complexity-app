@@ -68,6 +68,12 @@ export class DataService {
     return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
   }
 
+      getThoughtByName(value) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/thoughtByName/' + value, this.options).map(res => res.json());
+  }
+
+
    /* ===============================================================
      DELETE/UPDATE DATA
   =============================================================== */
@@ -79,7 +85,7 @@ export class DataService {
    // Function to edit/update blog post
     editThought(thought) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + 'datatransfer/updateThought/', thought, this.options).map(res => res.json());
+    return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(res => res.json());
   }
 
 /* ===============================================================

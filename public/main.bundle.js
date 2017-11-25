@@ -303,8 +303,8 @@ var EverythingComponent = (function () {
         this.authService.getProfile().subscribe(function (profile) {
             _this.username = profile.user.username; // Used when creating new blog posts and comments
             _this.userId = profile.user._id;
+            _this.getEverything(); // Get all blogs on component load
         });
-        this.getEverything(); // Get all blogs on component load
     };
     EverythingComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -544,7 +544,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav justify-content-end\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit(thoughtByName._id)\">\r\n    <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n      \r\n        <div class=\"search-block\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': foundThoughtByName && form.controls.search.dirty }\">\r\n          <input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" class=\"form-control\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n\r\n      </div>\r\n   \r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -555,9 +555,11 @@ module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -571,19 +573,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var NavbarComponent = (function () {
-    function NavbarComponent(authService, router, flashMessagesService) {
+    function NavbarComponent(dataService, authService, router, flashMessagesService, formBuilder) {
+        this.dataService = dataService;
         this.authService = authService;
         this.router = router;
         this.flashMessagesService = flashMessagesService;
+        this.formBuilder = formBuilder;
+        this.fountThoughtByName = false;
+        this.createNewForm(); // Create new  form on start up
     }
+    NavbarComponent.prototype.createNewForm = function () {
+        this.form = this.formBuilder.group({
+            search: ''
+        });
+    };
+    NavbarComponent.prototype.getThoughtByName = function (value) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getThoughtByName(value).subscribe(function (data) {
+            _this.thoughtByName =
+                {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                };
+        });
+    };
+    NavbarComponent.prototype.getAllThought = function () {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getAllThought().subscribe(function (data) {
+            _this.allThought = data.thought; // Assign array to use in HTML
+        });
+    };
     // Function to logout user
     NavbarComponent.prototype.onLogoutClick = function () {
         this.authService.logout(); // Logout user
         this.flashMessagesService.show('You are logged out', { cssClass: 'alert-info' }); // Set custom flash message
         this.router.navigate(['/']); // Navigate back to home page
     };
+    NavbarComponent.prototype.onKeyup = function (searchText) {
+        this.getThoughtByName(searchText); // Get all blogs on component load
+    };
+    NavbarComponent.prototype.searchSubmit = function () {
+        this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
+    };
     NavbarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+        });
     };
     NavbarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -592,9 +634,11 @@ var NavbarComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/components/navbar/navbar.component.css")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */],
-            __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__["FlashMessagesService"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2_angular2_flash_messages__["FlashMessagesService"],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -1023,7 +1067,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".row {\r\n  margin-bottom: 20px;\r\n}\r\n.row .row {\r\n  margin-top: 10px;\r\n  margin-bottom: 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  background-color: white;\r\n}\r\n\r\nhr {\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\na {\r\n  font-size: 20px;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}", ""]);
+exports.push([module.i, ".row {\r\n  margin-bottom: 20px;\r\n}\r\n.row .row {\r\n  margin-top: 10px;\r\n  margin-bottom: 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  background-color: white;\r\n}\r\n\r\nhr {\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\nh2 {\r\n  font-size: 20px;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}", ""]);
 
 // exports
 
@@ -1036,7 +1080,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/something/something.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-4\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-secondary btn-block\">Add Link</button>\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let leftThoughts of allLeftThought\"><a  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</a></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-4\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-secondary btn-block\">Add</button>\r\n\t\t\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let topThoughts of allTopThought\"><a class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</a></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t\t<!-- Mid Form/View -->\r\n\t\t\t<div class=\"card-title\"><strong>{{ thoughtMid.value }}</strong></div>\r\n\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let botThoughts of allBotThought\"><a  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</a></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t    <button type=\"submit\" class=\"btn btn-secondary btn-block\">Add meaning</button>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-4\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-secondary btn-block\">Add Link</button>\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let rightThoughts of allRightThought\"><a class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</a></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t<div class=\"card col-md-12\" *ngIf=\"!foundThought\">\r\n\t\t\t<div class=\"text-center\">\r\n\t\t\t\t<h1>No Thought found!</h1>\r\n\t\t\t</div> \r\n\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-4\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-4\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \t\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }}</h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-4\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t<div class=\"card col-md-12\" *ngIf=\"!foundThought\">\r\n\t\t\t<div class=\"text-center\">\r\n\t\t\t\t<h1>No Thought found!</h1>\r\n\t\t\t</div> \r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1077,12 +1121,19 @@ var SomethingComponent = (function () {
         this.foundBot = false;
         this.foundLeft = false;
         this.foundRight = false;
+        this.editMid = false;
+        this.createNewMidForm(); // Create new  form on start up
         this.createNewBotForm(); // Create new  form on start up
         this.createNewTopForm(); // Create new  form on start up
         this.createNewLeftForm(); // Create new  form on start up
         this.createNewRightForm(); // Create new  form on start up
     }
     // Function to create new blog form
+    SomethingComponent.prototype.createNewMidForm = function () {
+        this.formMid = this.formBuilder.group({
+            edit: ''
+        });
+    };
     SomethingComponent.prototype.createNewBotForm = function () {
         this.formBot = this.formBuilder.group({
             value: ''
@@ -1101,6 +1152,38 @@ var SomethingComponent = (function () {
     SomethingComponent.prototype.createNewRightForm = function () {
         this.formRight = this.formBuilder.group({
             value: ''
+        });
+    };
+    SomethingComponent.prototype.EditMid = function () {
+        if (this.editMid == false) {
+            this.editMid = true;
+        }
+        else {
+            this.editMid = false;
+        }
+    };
+    SomethingComponent.prototype.updateThoughtSubmit = function () {
+        var _this = this;
+        var thought = {
+            edit: this.formMid.get('edit').value,
+            _id: this.thoughtMidId
+        };
+        this.processing = true; // Lock form fields	
+        // Function to send blog object to backend
+        this.dataService.editThought(thought).subscribe(function (data) {
+            // Check if PUT request was a success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                _this.message = data.message; // Set error message
+                _this.processing = false; // Unlock form fields
+                console.log(data.message);
+            }
+            else {
+                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                _this.message = data.message; // Set success message
+                // After two seconds, navigate back to blog page
+                console.log(data.message);
+            }
         });
     };
     SomethingComponent.prototype.onTopSubmit = function () {
@@ -1257,7 +1340,7 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 }
             });
         });
@@ -1531,7 +1614,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
@@ -1669,6 +1752,10 @@ var DataService = (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(function (res) { return res.json(); });
     };
+    DataService.prototype.getThoughtByName = function (value) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/datatransfer/thoughtByName/' + value, this.options).map(function (res) { return res.json(); });
+    };
     /* ===============================================================
       DELETE/UPDATE DATA
    =============================================================== */
@@ -1679,7 +1766,7 @@ var DataService = (function () {
     // Function to edit/update blog post
     DataService.prototype.editThought = function (thought) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.put(this.domain + 'datatransfer/updateThought/', thought, this.options).map(function (res) { return res.json(); });
+        return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(function (res) { return res.json(); });
     };
     /* ===============================================================
          ADD DATA
