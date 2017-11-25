@@ -16,14 +16,14 @@
             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/new">New</a></li>
             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/everything">Everything</a></li>
     </ul>
-    <form [formGroup]="form" (ngSubmit)="searchSubmit(thoughtByName._id)">
+    <form [formGroup]="form" (ngSubmit)="searchSubmit()">
     <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
-      
+
         <div class="search-block" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': ThoughtByName && form.controls.search.dirty }">
           <input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" class="form-control" formControlName="search" name="search" placeholder="Something">
 
       </div>
-   
+
     </ul>
   </form>
   </div>
