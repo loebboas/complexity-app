@@ -137,18 +137,12 @@ router.post('/newRightLink', (req, res) => {
 
     TopLink
       .find({})
-      .populate('mid')
       .exec((err, links) => {
-      ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
-       });
-
-    Thought
-       .find({ "_id": { "$nin": ids_of_thoughts_with_top_links}}, (err, everything) => {
-                    res.json({success: true, everything: everything });
-                    console.log(everything);
-
-     
-    });
+        const ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
+        Thought.find({ "_id": { "$nin": ids_of_thoughts_with_top_links}}, (err, everything) => {
+          res.json({success: true, everything: everything });
+        });
+      });
   });
 
 
