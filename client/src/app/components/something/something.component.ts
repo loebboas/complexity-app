@@ -116,12 +116,12 @@ export class SomethingComponent implements OnInit {
         this.messageClass = 'alert alert-danger'; // Set error bootstrap class
         this.message = data.message; // Set error message
         this.processing = false; // Unlock form fields
-        console.log(data.message);
       } else {
         this.messageClass = 'alert alert-success'; // Set success bootstrap class
         this.message = data.message; // Set success message
         // After two seconds, navigate back to blog page
-        console.log(data.message);
+        this.reloadThoughts(this.thoughtMidId);
+        this.editMid == false;
       }
     });
   }

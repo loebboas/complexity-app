@@ -19,7 +19,7 @@
     <form [formGroup]="form" (ngSubmit)="searchSubmit(thoughtByName._id)">
     <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
       
-        <div class="search-block" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': foundThoughtByName && form.controls.search.dirty }">
+        <div class="search-block" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': ThoughtByName && form.controls.search.dirty }">
           <input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" class="form-control" formControlName="search" name="search" placeholder="Something">
 
       </div>
