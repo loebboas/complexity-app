@@ -41,9 +41,10 @@
 			</div>
 			<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
 				<div class="form-group">
-										    	
+										    
 						<ul class="list-group list-group">
-							<li class="list-group"><h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()>{{ thoughtMid.value }}</h2><input *ngIf="editMid" type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}"></li>
+						
+							<li class="list-group"><h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()>{{ thoughtMid.value }} </h2><input *ngIf="editMid" type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}"></li>
 						</ul>
 				</div>
 			</form>
@@ -63,14 +64,14 @@
 			</div>
 		</div>
 		<div class="card col-md-3 border-0">
-						<!-- Bot Level 1 Form/View -->
 			<div class="card-body">
 			<form [formGroup]="formRight" (ngSubmit)="onRightSubmit()">
 				<div class="form-group">
 					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
-						<ul class="list-group list-group-flush">
+						<ul class="list-group">
 							
-						    <li class="list-group-item" *ngFor="let rightThoughts of allRightThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(rightThoughts._id)">{{ rightThoughts.value }}</h4></li>
+						    <li class="list-group" *ngFor="let rightThoughts of allRightThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(rightThoughts._id)">{{ rightThoughts.value }}</h4></li>
+
 						</ul>
 				</div>
 			</form>

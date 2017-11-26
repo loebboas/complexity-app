@@ -544,7 +544,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n    <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n\r\n        <div class=\"search-block\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': ThoughtByName && form.controls.search.dirty }\">\r\n          <input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" class=\"form-control\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n\r\n      </div>\r\n\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n    <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n\r\n        <div class=\"search-block\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\">\r\n          <input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" class=\"form-control\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n\r\n      </div>\r\n\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -616,6 +616,10 @@ var NavbarComponent = (function () {
     };
     NavbarComponent.prototype.onKeyup = function (searchText) {
         this.getThoughtByName(searchText); // Get all blogs on component load
+    };
+    NavbarComponent.prototype.searchSubmit = function () {
+        this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
+        this.form.reset();
     };
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1077,7 +1081,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/something/something.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \t\r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }}</h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group-item\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }} </h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1163,7 +1167,7 @@ var SomethingComponent = (function () {
         var _this = this;
         var thought = {
             edit: this.formMid.get('edit').value,
-            _id: this.thoughtMidId
+            _id: this.thoughtMid._id
         };
         this.processing = true; // Lock form fields	
         // Function to send blog object to backend
@@ -1178,7 +1182,7 @@ var SomethingComponent = (function () {
                 _this.messageClass = 'alert alert-success'; // Set success bootstrap class
                 _this.message = data.message; // Set success message
                 // After two seconds, navigate back to blog page
-                _this.reloadThoughts(_this.thoughtMidId);
+                _this.reloadThoughts(_this.thoughtMid._id);
                 _this.editMid == false;
             }
         });
@@ -1216,7 +1220,7 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 }
             });
         }
@@ -1268,11 +1272,12 @@ var SomethingComponent = (function () {
                     else {
                         _this.messageClass = 'alert alert-success';
                         _this.message = data.message;
-                        _this.reloadThoughts(_this.thoughtMidId);
+                        _this.reloadThoughts(_this.thoughtMid._id);
                     }
                 });
             });
         }
+        this.formTop.reset();
     };
     SomethingComponent.prototype.onLeftSubmit = function () {
         var _this = this;
@@ -1307,7 +1312,7 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 }
             });
         }
@@ -1358,11 +1363,12 @@ var SomethingComponent = (function () {
                     else {
                         _this.messageClass = 'alert alert-success';
                         _this.message = data.message;
-                        _this.reloadThoughts(_this.thoughtMidId);
+                        _this.reloadThoughts(_this.thoughtMid._id);
                     }
                 });
             });
         }
+        this.formLeft.reset();
     };
     SomethingComponent.prototype.onRightSubmit = function () {
         var _this = this;
@@ -1397,7 +1403,7 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 }
             });
         }
@@ -1426,7 +1432,7 @@ var SomethingComponent = (function () {
                 var leftLink = {
                     user: _this.userId,
                     mid: _this.saveBot,
-                    right: _this.thoughtMid._id // E-mail input field
+                    left: _this.thoughtMid._id // E-mail input field
                 };
                 _this.dataService.newRightLink(rightLink).subscribe(function (data) {
                     if (!data.success) {
@@ -1453,6 +1459,7 @@ var SomethingComponent = (function () {
                 });
             });
         }
+        this.formRight.reset();
     };
     // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
     SomethingComponent.prototype.onBotSubmit = function () {
@@ -1488,7 +1495,7 @@ var SomethingComponent = (function () {
                 else {
                     _this.messageClass = 'alert alert-success';
                     _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 }
             });
         }
@@ -1540,23 +1547,20 @@ var SomethingComponent = (function () {
                         _this.messageClass = 'alert alert-success';
                         _this.message = data.message;
                     }
-                    _this.reloadThoughts(_this.thoughtMidId);
+                    _this.reloadThoughts(_this.thoughtMid._id);
                 });
             });
         }
+        this.formBot.reset();
     };
     // Reload blogs on current page
     SomethingComponent.prototype.reloadThoughts = function (id) {
-        var _this = this;
         this.loadingLink = true; // Used to lock button
         this.getMidThought(id);
         this.getBotThought(id);
         this.getTopThought(id);
         this.getLeftThought(id);
         this.getRightThought(id);
-        setTimeout(function () {
-            _this.loadingLink = false; // Release button lock after four seconds
-        });
         this.editMid = false;
     };
     SomethingComponent.prototype.getBotThought = function (id) {
@@ -1600,7 +1604,6 @@ var SomethingComponent = (function () {
                     value: data.thought.value,
                     _id: data.thought._id,
                 }; // Save blog object for use in HTML
-                _this.thoughtMidId = _this.currentUrl.id;
                 _this.foundThought = true;
             }
         });
@@ -1775,7 +1778,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {

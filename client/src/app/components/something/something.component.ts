@@ -14,7 +14,6 @@ export class SomethingComponent implements OnInit {
 	messageClass;
 	message;
 	thoughtMid;
-	thoughtMidId;
 	thoughtTop;
 	thoughtBot;
 	formBot;
@@ -107,7 +106,7 @@ export class SomethingComponent implements OnInit {
     updateThoughtSubmit() {
       const thought = {
     	edit: this.formMid.get('edit').value, // E-mail input field
-      	_id: this.thoughtMidId
+      	_id: this.thoughtMid._id
     };
     this.processing = true; // Lock form fields	
     // Function to send blog object to backend
@@ -121,7 +120,7 @@ export class SomethingComponent implements OnInit {
         this.messageClass = 'alert alert-success'; // Set success bootstrap class
         this.message = data.message; // Set success message
         // After two seconds, navigate back to blog page
-        this.reloadThoughts(this.thoughtMidId);
+        this.reloadThoughts(this.thoughtMid._id);
         this.editMid == false;
       }
     });
@@ -160,7 +159,7 @@ export class SomethingComponent implements OnInit {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMidId);
+		 	   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
     } else {
@@ -210,11 +209,12 @@ export class SomethingComponent implements OnInit {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMidId);
+		 	   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
 	});
 	}
+	this.formTop.reset();
 }
 
 onLeftSubmit() {
@@ -247,7 +247,7 @@ onLeftSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMidId);
+		 	   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
     } else {
@@ -295,11 +295,12 @@ onLeftSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
- 			   this.reloadThoughts(this.thoughtMidId);
+ 			   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
 	});
 }
+this.formLeft.reset();
 }
 
 onRightSubmit() {
@@ -332,7 +333,7 @@ onRightSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMidId);
+		 	   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
     } else {
@@ -359,7 +360,7 @@ onRightSubmit() {
 	    const leftLink = {
 		user: this.userId,
 	    mid: this.saveBot, // E-mail input field
-	    right: this.thoughtMid._id // E-mail input field
+	    left: this.thoughtMid._id // E-mail input field
 	    };
 
 	    this.dataService.newRightLink(rightLink).subscribe(data => {
@@ -385,7 +386,7 @@ onRightSubmit() {
 	    	});
 	});
 }
-
+this.formRight.reset();
 }
 
 
@@ -420,7 +421,7 @@ onRightSubmit() {
 		    } else {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMidId);
+		 	   this.reloadThoughts(this.thoughtMid._id);
 		       }
 	    	});
     } else {
@@ -469,10 +470,11 @@ onRightSubmit() {
 		       this.messageClass = 'alert alert-success';
 		       this.message = data.message;
 		       }
-		       this.reloadThoughts(this.thoughtMidId);
+		       this.reloadThoughts(this.thoughtMid._id);
 	    	});
 	});
     }
+    this.formBot.reset();
 }
 	  // Reload blogs on current page
 	   	reloadThoughts(id) {
@@ -482,9 +484,6 @@ onRightSubmit() {
 	   	this.getTopThought(id);
 	   	this.getLeftThought(id);
 	   	this.getRightThought(id);
-	    setTimeout(() => {
-	    this.loadingLink = false; // Release button lock after four seconds
-	    });
 	    this.editMid = false;
 	  	}
 	 	
@@ -527,7 +526,6 @@ onRightSubmit() {
 		        	value: data.thought.value,
 		        	_id: data.thought._id,
 		        	}; // Save blog object for use in HTML
-		        	this.thoughtMidId = this.currentUrl.id;
 		        this.foundThought = true;
 		    }
 		    });
