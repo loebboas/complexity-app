@@ -239,7 +239,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n\r\n.btn {\r\n background-color:#5F5293;\r\n}\r\n \r\n .btn:hover {\r\n background-color:#7F559D;\r\n}\r\n \r\n", ""]);
+exports.push([module.i, "\r\n\r\n.btn {\r\n background-color:#5F5293;\r\n}\r\n \r\n .btn:hover {\r\n background-color:#7F559D;\r\n}\r\n \r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn {\r\n    color: #ffffff;\r\n}\r\n \r\n.btn:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #7F559D;\r\n}\r\n \r\n.btn:active, .btn-primary.active {\r\n    background: #5F5293;\r\n    box-shadow: none;\r\n}", ""]);
 
 // exports
 
@@ -531,7 +531,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "nav {\r\n}\r\na {\r\n\tcolor: black;\r\n}\r\na:hover {\r\n\tcolor: #805096;\r\n}", ""]);
+exports.push([module.i, "nav {\r\n}\r\na {\r\n\tcolor: black;\r\n}\r\na:hover {\r\n\tcolor: #805096;\r\n}\r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}", ""]);
 
 // exports
 
@@ -1439,7 +1439,7 @@ var SomethingComponent = (function () {
                     mid: _this.saveBot,
                     bot: _this.thoughtMid._id // E-mail input field
                 };
-                _this.dataService.newBotLink(botLink).subscribe(function (data) {
+                _this.dataService.newTopLink(topLink).subscribe(function (data) {
                     if (!data.success) {
                         _this.messageClass = 'alert alert-danger';
                         _this.message = data.message;
@@ -1450,7 +1450,7 @@ var SomethingComponent = (function () {
                         _this.message = data.message;
                     }
                 });
-                _this.dataService.newTopLink(topLink).subscribe(function (data) {
+                _this.dataService.newBotLink(botLink).subscribe(function (data) {
                     if (!data.success) {
                         _this.messageClass = 'alert alert-danger';
                         _this.message = data.message;

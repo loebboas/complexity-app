@@ -369,7 +369,7 @@ this.formRight.reset();
 	    bot: this.thoughtMid._id // E-mail input field
 	    };
 
-	    this.dataService.newBotLink(botLink).subscribe(data => {
+	    this.dataService.newTopLink(topLink).subscribe(data => {
 	    if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
 	       this.message = data.message;
@@ -379,7 +379,7 @@ this.formRight.reset();
 	       this.message = data.message;
 	    }
 	    });
-	    this.dataService.newTopLink(topLink).subscribe(data => {
+	    this.dataService.newBotLink(botLink).subscribe(data => {
 		    if (!data.success) {
 		       this.messageClass = 'alert alert-danger';
 		       this.message = data.message;
