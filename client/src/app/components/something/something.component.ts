@@ -46,6 +46,7 @@ export class SomethingComponent implements OnInit {
 	allThoughtArray;
 	editMid = false;
 	thoughtByName;
+	allTopThought1;
 
 
 
@@ -99,8 +100,11 @@ export class SomethingComponent implements OnInit {
   	} else {
   		this.editMid = false;
   	}
+  }
 
-
+    onKeyup(searchText: string) {
+    this.getThoughtByName(searchText); // Get all blogs on component load
+    console.log(this.thoughtByName.value);
   }
 
     updateThoughtSubmit() {
@@ -127,95 +131,6 @@ export class SomethingComponent implements OnInit {
   }
 
 
-  onTopSubmit() {
-
-
-    if(this.thoughtByName) {
-    	const topLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    top: this.thoughtByName._id // E-mail input field
-	    };
-	    const botLink = {
-		user: this.userId,
-	    mid: this.thoughtByName._id, // E-mail input field
-	    bot: this.thoughtMid._id // E-mail input field
-	    };
-	        this.dataService.newBotLink(botLink).subscribe(data => {
-	    if (!data.success) {
-	       this.messageClass = 'alert alert-danger';
-	       this.message = data.message;
-	       this.processing = false;
-	    } else {
-	       this.messageClass = 'alert alert-success';
-	       this.message = data.message;
-	    }
-	    });
-	    this.dataService.newTopLink(topLink).subscribe(data => {
-		    if (!data.success) {
-		       this.messageClass = 'alert alert-danger';
-		       this.message = data.message;
-		       this.processing = false;
-		    } else {
-		       this.messageClass = 'alert alert-success';
-		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMid._id);
-		       }
-	    	});
-    } else {
-    // Create new Object (Bot) with MidId as Top
-    const thought = {
-      value: this.formTop.get('value').value, // E-mail input field
-      user: this.userId,
-    };
-    // if value = existing value
-
-    this.dataService.newThought(thought).subscribe(data => {
-     if (!data.success) {
-       this.messageClass = 'alert alert-danger';
-       this.message = data.message;
-       this.processing = false;
-     } else {
-       this.messageClass = 'alert alert-success';
-       this.message = data.message;
-       this.saveBot = data.newId;
-       }
-       const topLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    top: this.saveBot // E-mail input field
-	    };
-	    const botLink = {
-		user: this.userId,
-	    mid: this.saveBot, // E-mail input field
-	    bot: this.thoughtMid._id // E-mail input field
-	    };
-
-	    this.dataService.newBotLink(botLink).subscribe(data => {
-	    if (!data.success) {
-	       this.messageClass = 'alert alert-danger';
-	       this.message = data.message;
-	       this.processing = false;
-	    } else {
-	       this.messageClass = 'alert alert-success';
-	       this.message = data.message;
-	    }
-	    });
-	    this.dataService.newTopLink(topLink).subscribe(data => {
-		    if (!data.success) {
-		       this.messageClass = 'alert alert-danger';
-		       this.message = data.message;
-		       this.processing = false;
-		    } else {
-		       this.messageClass = 'alert alert-success';
-		       this.message = data.message;
-		 	   this.reloadThoughts(this.thoughtMid._id);
-		       }
-	    	});
-	});
-	}
-	this.formTop.reset();
-}
 
 onLeftSubmit() {
 	if(this.thoughtByName) {
@@ -301,6 +216,7 @@ onLeftSubmit() {
 	});
 }
 this.formLeft.reset();
+	this.thoughtByName = '';
 }
 
 onRightSubmit() {
@@ -387,12 +303,103 @@ onRightSubmit() {
 	});
 }
 this.formRight.reset();
+	this.thoughtByName = '';
+}
+
+  onTopSubmit() {
+    if(this.thoughtByName) {
+
+    	const topLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    top: this.thoughtByName._id // E-mail input field
+	    };
+	    const botLink = {
+		user: this.userId,
+	    mid: this.thoughtByName._id, // E-mail input field
+	    bot: this.thoughtMid._id // E-mail input field
+	    };
+	        this.dataService.newTopLink(topLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newBotLink(botLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMid._id);
+		       }
+	    	});
+    } else {
+    // Create new Object (Bot) with MidId as Top
+    const thought = {
+      value: this.formTop.get('value').value, // E-mail input field
+      user: this.userId,
+    };
+    // if value = existing value
+
+    this.dataService.newThought(thought).subscribe(data => {
+     if (!data.success) {
+       this.messageClass = 'alert alert-danger';
+       this.message = data.message;
+       this.processing = false;
+     } else {
+       this.messageClass = 'alert alert-success';
+       this.message = data.message;
+       this.saveBot = data.newId;
+       }
+       const topLink = {
+		user: this.userId,
+	    mid: this.thoughtMid._id, // E-mail input field
+	    top: this.saveBot // E-mail input field
+	    };
+	    const botLink = {
+		user: this.userId,
+	    mid: this.saveBot, // E-mail input field
+	    bot: this.thoughtMid._id // E-mail input field
+	    };
+
+	    this.dataService.newBotLink(botLink).subscribe(data => {
+	    if (!data.success) {
+	       this.messageClass = 'alert alert-danger';
+	       this.message = data.message;
+	       this.processing = false;
+	    } else {
+	       this.messageClass = 'alert alert-success';
+	       this.message = data.message;
+	    }
+	    });
+	    this.dataService.newTopLink(topLink).subscribe(data => {
+		    if (!data.success) {
+		       this.messageClass = 'alert alert-danger';
+		       this.message = data.message;
+		       this.processing = false;
+		    } else {
+		       this.messageClass = 'alert alert-success';
+		       this.message = data.message;
+		 	   this.reloadThoughts(this.thoughtMid._id);
+		       }
+	    	});
+	});
+	}
+	this.formTop.reset();
+	this.thoughtByName = '';
 }
 
 
   // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
   onBotSubmit() {
-  	if(this.thoughtByName) {
+  	if(this.thoughtByName)  {
     	const botLink = {
 		user: this.userId,
 	    mid: this.thoughtMid._id, // E-mail input field
@@ -403,6 +410,7 @@ this.formRight.reset();
 	    mid: this.thoughtByName._id, // E-mail input field
 	    top: this.thoughtMid._id // E-mail input field
 	    };
+
 	        this.dataService.newBotLink(botLink).subscribe(data => {
 	    if (!data.success) {
 	       this.messageClass = 'alert alert-danger';
@@ -475,10 +483,21 @@ this.formRight.reset();
 	});
     }
     this.formBot.reset();
+    	this.thoughtByName = '';
 }
 	  // Reload blogs on current page
 	   	reloadThoughts(id) {
 	    this.loadingLink = true; // Used to lock button
+	    this.getMidThought(id);
+	   	this.getBotThought(id);
+	   	this.getTopThought(id);
+	   	this.getLeftThought(id);
+	   	this.getRightThought(id);
+	    this.editMid = false;
+	  	}
+
+	  		   	reloadThoughts1(id) {
+	    this.allTopThought1 = this.allTopThought;  
 	    this.getMidThought(id);
 	   	this.getBotThought(id);
 	   	this.getTopThought(id);
@@ -542,9 +561,6 @@ this.formRight.reset();
   		});
   		}
   		
-  		onKeyup(searchText: string) {
-    	this.getThoughtByName(searchText); // Get all blogs on component load
-  		}
 
 	 ngOnInit() {
 	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id

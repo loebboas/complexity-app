@@ -239,7 +239,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "h4 { text-align: center; }", ""]);
+exports.push([module.i, "\r\n\r\n.btn {\r\n background-color:#5F5293;\r\n}\r\n \r\n .btn:hover {\r\n background-color:#7F559D;\r\n}\r\n \r\n", ""]);
 
 // exports
 
@@ -252,7 +252,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/everything/everything.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"card col-md-4\" *ngFor=\"let thought of everything\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t\t<ul class=\"list-group list-group-flush\">\r\n\t\t\t\t    <li class=\"list-group-item\"><h4><a [routerLink]=\"['../something/', thought._id]\">{{ thought.value }}</a></h4></li>\r\n\t\t\t\t    <!--<li class=\"list-group-item\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"{{ thought.meaning }}\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"meaning\" formControlName=\"meaning\" value=\"{{ thought._id }}\">\r\n\t\t\t\t       \t<button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n\t\t\t\t    </li>-->\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t</div>\t\r\n\t</div>\r\n</div>"
+module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-4\" *ngFor=\"let thought of everything\">\r\n\t\t\r\n\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t    <li class=\"list-group\"><h4 class=\"btn btn-secondary btn-block\" [routerLink]=\"['../something/', thought._id]\"><strong>{{ thought.value }}</strong></h4></li>\r\n\t\t\t\t    <!--<li class=\"list-group-item\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"{{ thought.meaning }}\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"meaning\" formControlName=\"meaning\" value=\"{{ thought._id }}\">\r\n\t\t\t\t       \t<button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n\t\t\t\t    </li>-->\r\n\t\t\t\t</ul>\r\n\t\r\n\t\t</div>\t\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -344,7 +344,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Complexity MEAN Stack Application</h1>\r\n  <p class=\"lead\">Welcome to the Complexity MEAN Stack Application by <strong>Boas Loeb</strong><br>This site is in developement...</p>\r\n  <div>\r\n  \t<a routerLink=\"/register\" class=\"btn btn-primary\">Register</a>\r\n  \t\t<a routerLink=\"/login\" class=\"btn btn-default\">Login</a>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Complexity MEAN Stack Application</h1>\r\n  <p class=\"lead\">Welcome to the Complexity MEAN Stack Application by <strong>Boas Loeb</strong><br>This site is in developement...</p>\r\n</div>"
 
 /***/ }),
 
@@ -531,7 +531,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "nav {\r\n}\r\na {\r\n\tcolor: black;\r\n}\r\na:hover {\r\n\tcolor: #805096;\r\n}", ""]);
 
 // exports
 
@@ -544,7 +544,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n    <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n\r\n        <div class=\"search-block\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\">\r\n          <input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" class=\"form-control\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n\r\n      </div>\r\n\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n    <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n\r\n        <div class=\"search-block\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\">\r\n          <input class=\"form-control\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n\r\n      </div>\r\n\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -614,10 +614,9 @@ var NavbarComponent = (function () {
         this.flashMessagesService.show('You are logged out', { cssClass: 'alert-info' }); // Set custom flash message
         this.router.navigate(['/']); // Navigate back to home page
     };
-    NavbarComponent.prototype.onKeyup = function (searchText) {
-        this.getThoughtByName(searchText); // Get all blogs on component load
-    };
     NavbarComponent.prototype.searchSubmit = function () {
+        this.searchValue = this.form.get('search').value;
+        this.getThoughtByName(this.searchValue);
         this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
         this.form.reset();
     };
@@ -1068,7 +1067,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".row {\r\n  margin-bottom: 20px;\r\n}\r\n.row .row {\r\n  margin-top: 10px;\r\n  margin-bottom: 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  background-color: white;\r\n}\r\n\r\nhr {\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\nh2 {\r\n  font-size: 20px;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}", ""]);
+exports.push([module.i, ".row {\r\n  margin-bottom: 20px;\r\n}\r\n.row .row {\r\n  margin-top: 10px;\r\n  margin-bottom: 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  background-color: white;\r\n}\r\n\r\nhr {\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\nbackground-color:#B089C3;\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}", ""]);
 
 // exports
 
@@ -1081,7 +1080,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/something/something.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\" *ngIf=\"message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div>\r\n\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t    \r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>{{ thoughtMid.value }} </h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a Link\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\"><h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div>\r\n\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add some Context\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4></li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\r\n\r\n\t\t\t</div><div>\r\n\t\t\t  \r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t\t\t  \r\n\t\t\t\t\t\t\t<li class=\"list-group\"><h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong> </h2><input *ngIf=\"editMid\" type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\"></li>\t\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\r\n\t\t\t\t\t\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t\r\n\t\t\r\n\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t<li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h3  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h3></li>\r\n\t\t\t\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"Add a meaning\">\r\n\t\t\t\t\t\t  \r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t\t\t\t    </ul>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t  \r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<input #searchTextBox (keyup)=\"onKeyup(searchTextBox.value)\" type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let rightThoughts of allRightThought\"><h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4></li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1163,6 +1162,10 @@ var SomethingComponent = (function () {
             this.editMid = false;
         }
     };
+    SomethingComponent.prototype.onKeyup = function (searchText) {
+        this.getThoughtByName(searchText); // Get all blogs on component load
+        console.log(this.thoughtByName.value);
+    };
     SomethingComponent.prototype.updateThoughtSubmit = function () {
         var _this = this;
         var thought = {
@@ -1186,98 +1189,6 @@ var SomethingComponent = (function () {
                 _this.editMid == false;
             }
         });
-    };
-    SomethingComponent.prototype.onTopSubmit = function () {
-        var _this = this;
-        if (this.thoughtByName) {
-            var topLink = {
-                user: this.userId,
-                mid: this.thoughtMid._id,
-                top: this.thoughtByName._id // E-mail input field
-            };
-            var botLink = {
-                user: this.userId,
-                mid: this.thoughtByName._id,
-                bot: this.thoughtMid._id // E-mail input field
-            };
-            this.dataService.newBotLink(botLink).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                }
-            });
-            this.dataService.newTopLink(topLink).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                }
-            });
-        }
-        else {
-            // Create new Object (Bot) with MidId as Top
-            var thought = {
-                value: this.formTop.get('value').value,
-                user: this.userId,
-            };
-            // if value = existing value
-            this.dataService.newThought(thought).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                    _this.saveBot = data.newId;
-                }
-                var topLink = {
-                    user: _this.userId,
-                    mid: _this.thoughtMid._id,
-                    top: _this.saveBot // E-mail input field
-                };
-                var botLink = {
-                    user: _this.userId,
-                    mid: _this.saveBot,
-                    bot: _this.thoughtMid._id // E-mail input field
-                };
-                _this.dataService.newBotLink(botLink).subscribe(function (data) {
-                    if (!data.success) {
-                        _this.messageClass = 'alert alert-danger';
-                        _this.message = data.message;
-                        _this.processing = false;
-                    }
-                    else {
-                        _this.messageClass = 'alert alert-success';
-                        _this.message = data.message;
-                    }
-                });
-                _this.dataService.newTopLink(topLink).subscribe(function (data) {
-                    if (!data.success) {
-                        _this.messageClass = 'alert alert-danger';
-                        _this.message = data.message;
-                        _this.processing = false;
-                    }
-                    else {
-                        _this.messageClass = 'alert alert-success';
-                        _this.message = data.message;
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    }
-                });
-            });
-        }
-        this.formTop.reset();
     };
     SomethingComponent.prototype.onLeftSubmit = function () {
         var _this = this;
@@ -1369,6 +1280,7 @@ var SomethingComponent = (function () {
             });
         }
         this.formLeft.reset();
+        this.thoughtByName = '';
     };
     SomethingComponent.prototype.onRightSubmit = function () {
         var _this = this;
@@ -1460,6 +1372,100 @@ var SomethingComponent = (function () {
             });
         }
         this.formRight.reset();
+        this.thoughtByName = '';
+    };
+    SomethingComponent.prototype.onTopSubmit = function () {
+        var _this = this;
+        if (this.thoughtByName) {
+            var topLink = {
+                user: this.userId,
+                mid: this.thoughtMid._id,
+                top: this.thoughtByName._id // E-mail input field
+            };
+            var botLink = {
+                user: this.userId,
+                mid: this.thoughtByName._id,
+                bot: this.thoughtMid._id // E-mail input field
+            };
+            this.dataService.newTopLink(topLink).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                }
+            });
+            this.dataService.newBotLink(botLink).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.reloadThoughts(_this.thoughtMid._id);
+                }
+            });
+        }
+        else {
+            // Create new Object (Bot) with MidId as Top
+            var thought = {
+                value: this.formTop.get('value').value,
+                user: this.userId,
+            };
+            // if value = existing value
+            this.dataService.newThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.saveBot = data.newId;
+                }
+                var topLink = {
+                    user: _this.userId,
+                    mid: _this.thoughtMid._id,
+                    top: _this.saveBot // E-mail input field
+                };
+                var botLink = {
+                    user: _this.userId,
+                    mid: _this.saveBot,
+                    bot: _this.thoughtMid._id // E-mail input field
+                };
+                _this.dataService.newBotLink(botLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                    }
+                });
+                _this.dataService.newTopLink(topLink).subscribe(function (data) {
+                    if (!data.success) {
+                        _this.messageClass = 'alert alert-danger';
+                        _this.message = data.message;
+                        _this.processing = false;
+                    }
+                    else {
+                        _this.messageClass = 'alert alert-success';
+                        _this.message = data.message;
+                        _this.reloadThoughts(_this.thoughtMid._id);
+                    }
+                });
+            });
+        }
+        this.formTop.reset();
+        this.thoughtByName = '';
     };
     // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
     SomethingComponent.prototype.onBotSubmit = function () {
@@ -1552,10 +1558,20 @@ var SomethingComponent = (function () {
             });
         }
         this.formBot.reset();
+        this.thoughtByName = '';
     };
     // Reload blogs on current page
     SomethingComponent.prototype.reloadThoughts = function (id) {
         this.loadingLink = true; // Used to lock button
+        this.getMidThought(id);
+        this.getBotThought(id);
+        this.getTopThought(id);
+        this.getLeftThought(id);
+        this.getRightThought(id);
+        this.editMid = false;
+    };
+    SomethingComponent.prototype.reloadThoughts1 = function (id) {
+        this.allTopThought1 = this.allTopThought;
         this.getMidThought(id);
         this.getBotThought(id);
         this.getTopThought(id);
@@ -1618,9 +1634,6 @@ var SomethingComponent = (function () {
                     _id: data.thought._id,
                 };
         });
-    };
-    SomethingComponent.prototype.onKeyup = function (searchText) {
-        this.getThoughtByName(searchText); // Get all blogs on component load
     };
     SomethingComponent.prototype.ngOnInit = function () {
         var _this = this;

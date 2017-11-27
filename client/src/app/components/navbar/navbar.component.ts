@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   thoughtByName;
   fountThoughtByName = false;
   form;
+  searchValue;
 
 
 constructor(
@@ -66,11 +67,10 @@ constructor(
     this.router.navigate(['/']); // Navigate back to home page
   }
 
-  onKeyup(searchText: string) {
-    this.getThoughtByName(searchText); // Get all blogs on component load
-  }
 
   searchSubmit() {
+  this.searchValue = this.form.get('search').value;
+  this.getThoughtByName(this.searchValue);
   this.router.navigate(['../something/', this.thoughtByName._id]); // Navigate back to home page
   this.form.reset();
    }

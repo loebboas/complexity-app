@@ -18,7 +18,37 @@ hr {
 }
 h2 {
   font-size: 20px;
+  background-color:#805096;
+}
+h3 {
+background-color:#B089C3;
+}
+h4 {
+ background-color:#5F5293;
 }
 strong {
   font-size: 25px;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+}
+ 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-primary {
+    background: #0099cc;
+    color: #ffffff;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #33a6cc;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
 }

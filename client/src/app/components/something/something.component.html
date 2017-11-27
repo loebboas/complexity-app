@@ -1,11 +1,3 @@
-<!-- Custom Success/Error Message -->
-<div class="row show-hide-message" *ngIf="message">
-  <div [ngClass]="messageClass">
-    {{ message }}
-  </div>
-</div>
-
-
 <div class="container-fluid">
 	<div class="row">
 
@@ -14,9 +6,8 @@
 			<form [formGroup]="formLeft" (ngSubmit)="onLeftSubmit()">
 				<div class="form-group">
 					
-					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
+					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="...">
 						<ul class="list-group">
-							
 						    <li class="list-group" *ngFor="let leftThoughts of allLeftThought"><h4  class="btn btn-secondary btn-block" (click)="reloadThoughts(leftThoughts._id)">{{ leftThoughts.value }}</h4></li>
 						</ul>
 				</div>
@@ -27,47 +18,50 @@
 
 		<div class="card col-md-6" *ngIf="foundThought">
 						<!-- Bot Level 1 Form/View -->
-			<div class="card-body">
+			<div>
 			<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
 				<div class="form-group">
 					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add some Context">
 						<ul class="list-group">
 							<li class="list-group" *ngFor="let topThoughts of allTopThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(topThoughts._id)">{{ topThoughts.value }}</h4></li>
+
 						</ul>
 				</div>
 			</form>
 
 
-			</div>
-			<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
-				<div class="form-group">
-										    
+			</div><div>
+			  
 						<ul class="list-group list-group">
-						
-							<li class="list-group"><h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()>{{ thoughtMid.value }} </h2><input *ngIf="editMid" type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}"></li>
-						</ul>
+				<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
+				<div class="form-group">
+										  
+							<li class="list-group"><h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong> </h2><input *ngIf="editMid" type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}"></li>	
 				</div>
-			</form>
+				</form>
 
+					
 		
 		<!-- Bot Level 1 Form/View -->
-			<div class="card-body">
-			<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
+			
+		
+				<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
 				<div class="form-group">
-						<ul class="list-group">
-							<li class="list-group" *ngFor="let botThoughts of allBotThought"><h4  class="btn btn-secondary btn-block" (click)="reloadThoughts(botThoughts._id)">{{ botThoughts.value }}</h4></li>
-						    </ul>
-							<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
+							<li class="list-group" *ngFor="let botThoughts of allBotThought"><h3  class="btn btn-secondary btn-block" (click)="reloadThoughts(botThoughts._id)">{{ botThoughts.value }}</h3></li>
+								<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a meaning">
 						  
 				</div>
-			</form>
+				</form>
+						    </ul>
+						
+						  
 			</div>
 		</div>
 		<div class="card col-md-3 border-0">
 			<div class="card-body">
 			<form [formGroup]="formRight" (ngSubmit)="onRightSubmit()">
 				<div class="form-group">
-					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="Add a Link">
+					<input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" type="text" class="form-control" name="value" formControlName="value" placeholder="...">
 						<ul class="list-group">
 							
 						    <li class="list-group" *ngFor="let rightThoughts of allRightThought"><h4 class="btn btn-secondary btn-block" (click)="reloadThoughts(rightThoughts._id)">{{ rightThoughts.value }}</h4></li>
