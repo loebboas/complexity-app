@@ -104,8 +104,7 @@ export class SomethingComponent implements OnInit {
 
     onKeyup(searchText: string) {
     this.getThoughtByName(searchText); // Get all blogs on component load
-    console.log(this.thoughtByName.value);
-  }
+   }
 
     updateThoughtSubmit() {
       const thought = {

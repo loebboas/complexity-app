@@ -43,6 +43,12 @@ constructor(
      })
   }
 
+    onKeyupNav(searchText: string) {
+    this.getThoughtByName(searchText); // Get all blogs on component loa
+   
+  }
+
+
   getThoughtByName(value) {
   // Function to GET all blogs from database
   this.dataService.getThoughtByName(value).subscribe(data => {

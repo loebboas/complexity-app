@@ -17,13 +17,21 @@
             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/everything">Everything</a></li>
     </ul>
     <form [formGroup]="form" (ngSubmit)="searchSubmit()">
-    <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
-
-        <div class="search-block" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }">
-          <input class="form-control" formControlName="search" name="search" placeholder="Something">
-
-      </div>
-
+      <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
+     <div class="search-block input-group" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }" id="adv-search">
+               <input type="text" #searchTextBox (keyup)="onKeyupNav(searchTextBox.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="search" name="search" placeholder="Something">
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg open">
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                              <ul class="navbar-nav navbar-right">
+                                <li class="nav-item"><a class="nav-link" [routerLink]="['/something/', thoughtByName._id]">{{ thoughtByName.value }}</a></li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </ul>
   </form>
   </div>
