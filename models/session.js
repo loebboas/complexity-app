@@ -8,9 +8,8 @@ const Schema = mongoose.Schema;
 
 const sessionSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
-    name: {type: Schema.Types.ObjectId, ref: 'Thought'},
+    thought: {type: Schema.Types.ObjectId, ref: 'Thought'},
     link: {type: Schema.Types.ObjectId, ref: 'Link'},
-    name: String,
     startTime: {type: Date, default: Date.now}
 });
 

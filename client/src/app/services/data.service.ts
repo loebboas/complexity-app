@@ -56,11 +56,17 @@ export class DataService {
     return this.http.get(this.domain + '/datatransfer/rightThought/' + id, this.options).map(res => res.json());
   }
 
+    getSession() {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/session', this.options).map(res => res.json());
+  }
+
 
     getBotLink() {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/botLink', this.options).map(res => res.json());
   }
+    
   
 
     getSingleThought(id) {
@@ -92,29 +98,18 @@ export class DataService {
      ADD DATA
   =============================================================== */
 
-    newBotLink(botLink) {
+    newLink(link) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newBotLink', botLink, this.options).map(res => res.json());
+    return this.http.post(this.domain + '/datatransfer/newLink', link, this.options).map(res => res.json());
   }
-
-    newLeftLink(leftLink) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newLeftLink', leftLink, this.options).map(res => res.json());
-  }
-
-    newRightLink(rightLink) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newRightLink', rightLink, this.options).map(res => res.json());
-  }
-
-    newTopLink(topLink) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newTopLink', topLink, this.options).map(res => res.json());
-  }
-
 
     newThought(thought) {
   	this.createAuthenticationHeaders(); // Create headers
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
+  }
+ 
+    newSession(session) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/datatransfer/newSession', session, this.options).map(res => res.json());
   }
  }

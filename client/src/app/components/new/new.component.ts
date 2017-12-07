@@ -21,6 +21,12 @@ export class NewComponent implements OnInit {
   allThought;
   username = '';
   userId;
+  sessionId;
+  dateNow;
+  newId;
+  saveLink;
+
+
   constructor(
   	private formBuilder: FormBuilder,
   	private authService: AuthService,
@@ -33,16 +39,44 @@ export class NewComponent implements OnInit {
   createForm() {
   	this.form = this.formBuilder.group({
   		value: '',
-  		user: '',
   	})
   }
 
+    newLink(link) {
+          this.dataService.newLink(link).subscribe(data => {
+      if (!data.success) {
+         this.messageClass = 'alert alert-danger';
+         this.message = data.message;
+         this.processing = false;
+      } else {
+         this.messageClass = 'alert alert-success';
+         this.message = data.message;  
+         this.saveLink = data.newId;
+      }
+      });
+    }
+
  onNewSubmit() {
-  	// Create user object form user's inputs
+   this.dateNow = new Date().toUTCString();
+    // Create new Session
+      const sessionThought = {
+      value: "Session: " + this.dateNow, // input field
+      user: this.userId
+    };
+     this.dataService.newThought(sessionThought).subscribe(data => {
+     this.sessionId = data.newId;
+
+    const topLink = {
+      user: this.userId,
+      mid: this.sessionId, // input field
+      top: this.sessionId
+    }
+    this.newLink(topLink);
+    // Create user object form user's inputs
     this.processing = true;
     const thought = {
-      value: this.form.get('value').value, // E-mail input field
-      user: this.userId,
+      value: this.form.get('value').value, // input field
+      user: this.userId
     };
 
     this.dataService.newThought(thought).subscribe(data => {
@@ -53,17 +87,25 @@ export class NewComponent implements OnInit {
      } else {
      	this.messageClass = 'alert alert-success';
      	this.message = data.message;
+       this.newId = data.newId;
      	}
+        const session = {
+        user: this.userId,
+        thought: this.sessionId,
+      };
+     this.dataService.newSession(session).subscribe(data => {
        setTimeout(() => {
-        this.router.navigate(['/something', data.newId]); // Redirect to login view
+        this.router.navigate(['/something', this.newId]); // Redirect
         });
      });
+    });
+    });
   }
 
   ngOnInit() {
     // Get profile username on page load
   	  this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new blog posts and comments
+      this.username = profile.user.username; 
       this.userId = profile.user._id;
     });
   }

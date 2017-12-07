@@ -1,9 +1,7 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
-const BotLink = require('../models/bot');
-const TopLink = require('../models/top');
-const LeftLink = require('../models/left');
-const RightLink = require('../models/right');
+const Link = require('../models/link');
+const Session = require('../models/session');
 const jwt = require('jsonwebtoken'); 
 const config = require('../config/database'); // Import database configuration
 
@@ -31,82 +29,53 @@ router.post('/newThought', (req, res) => {
 		})
 	}
 });
-
  /* ===============================================================
-     ADD NEW TOPLINK
+     ADD NEW SESSION
   =============================================================== */  
 
-router.post('/newTopLink', (req, res) => {
-    let topLink = new TopLink({
+router.post('/newSession', (req, res) => {
+  if(!req.body.user) {
+    res.json({ success: false, message: 'You must input something'});
+  } else {
+    let session = new Session({
+    user: req.body.user,
+    thought: req.body.thought,
+    link: req.body.link
+    });
+    session.save((err) => {
+      if (err) {
+        res.json({ success: false, message: 'Could not save Session. Error: ', err });
+      } else {
+        res.json({ success: true, message: 'Session saved ', newId: session._id });
+      }
+    })
+  }
+});
+
+
+
+ /* ===============================================================
+     ADD NEW LINK
+  =============================================================== */  
+
+router.post('/newLink', (req, res) => {
+    let link = new Link({
     user: req.body.user,
     mid: req.body.mid,
-    top: req.body.top 
+    top: req.body.top, 
+    left: req.body.left,
+    right: req.body.right,
+    bot: req.body.bot
     });
-    topLink.save((err) => {
+    link.save((err) => {
       if (err) {    
         res.json({ success: false, message: 'Could not save Link. Error: ', err });
       } else {
-        res.json({ success: true, message: 'Link saved!', topLink: topLink });
+        res.json({ success: true, message: 'Link saved!', newId: link._id });
       }
     })
 });
 
- /* ===============================================================
-     ADD NEW BOTLINK
-  =============================================================== */  
-
-router.post('/newBotLink', (req, res) => {
-    let botLink = new BotLink({
-    user: req.body.user,
-    mid: req.body.mid,
-    bot: req.body.bot 
-    });
-    botLink.save((err) => {
-      if (err) {    
-        res.json({ success: false, message: 'Could not save Link. Error: ', err });
-      } else {
-        res.json({ success: true, message: 'Link saved!', botLink: botLink });
-      }
-    })
-});
-
- /* ===============================================================
-     ADD NEW LEFTLINK
-  =============================================================== */  
-
-router.post('/newLeftLink', (req, res) => {
-    let leftLink = new LeftLink({
-    user: req.body.user,
-    mid: req.body.mid,
-    left: req.body.left 
-    });
-    leftLink.save((err) => {
-      if (err) {    
-        res.json({ success: false, message: 'Could not save Link. Error: ', err });
-      } else {
-        res.json({ success: true, message: 'Link saved!', leftLink: leftLink });
-      }
-    })
-});
-
- /* ===============================================================
-     ADD NEW RIGHTLINK
-  =============================================================== */  
-
-router.post('/newRightLink', (req, res) => {
-    let rightLink = new RightLink({
-    user: req.body.user,
-    mid: req.body.mid,
-    right: req.body.right 
-    });
-    rightLink.save((err) => {
-      if (err) {    
-        res.json({ success: false, message: 'Could not save Link. Error: ', err });
-      } else {
-        res.json({ success: true, message: 'Link saved!', rightLink: rightLink });
-      }
-    })
-});
 
    /* ===============================================================
      GET ALL THOUGHT
@@ -114,19 +83,19 @@ router.post('/newRightLink', (req, res) => {
 
   router.get('/allThought', (req, res) => {
     // Search database for all Thoughts
-    Thought.find({user: req.decoded.userId}, (err, thought) => {
+    Thought.find({user: req.decoded.userId}, (err, allThought) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
               } else {
                 // Check if blogs were found in database
-                if (!thought) {
+                if (!allThought) {
                   res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
                 } else {       
-                  res.json({ success: true, thought: thought }); // Return success and blogs array
+                  res.json({ success: true, allThought: allThought }); // Return success and blogs array
                 }
               }
-    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+    }); // Sort blogs from newest to oldest
   });
 
      /* ===============================================================
@@ -135,10 +104,10 @@ router.post('/newRightLink', (req, res) => {
 
   router.get('/everything', (req, res) => {
 
-    TopLink
+    Link
       .find({user: req.decoded.userId})
       .exec((err, links) => {
-        const ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
+        const ids_of_thoughts_with_top_links = links.map((link) => { return link.top });
         Thought.find({
           user: req.decoded.userId,
           "_id": { "$nin": ids_of_thoughts_with_top_links},
@@ -148,36 +117,14 @@ router.post('/newRightLink', (req, res) => {
       });
   });
 
-
-   /* ===============================================================
-     GET BOT LINK
-  =============================================================== */
-
-  router.get('/botLink', (req, res) => {
-    // Search database for all Thoughts
-    BotLink.find({user: req.decoded.userId}, (err, botLink) => {
-              // Check if error was found or not
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                // Check if blogs were found in database
-                if (!botLink) {
-                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
-                } else {       
-                  res.json({ success: true, botLink: botLink }); // Return success and blogs array
-                }
-              }
-    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
-  });
-
-     /* ===============================================================
+  /* ===============================================================
      GET BOT THOUGHT
   =============================================================== */
 
     router.get('/botThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
-        BotLink
-            .find({user: req.decoded.userId, mid: req.params.id})
+        Link
+            .find({user: req.decoded.userId, mid: req.params.id, bot: { $exists: true } })
             .populate('bot')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -198,8 +145,8 @@ router.post('/newRightLink', (req, res) => {
 
     router.get('/topThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
-        TopLink
-            .find({user: req.decoded.userId, mid: req.params.id})
+        Link
+            .find({user: req.decoded.userId, mid: req.params.id, top: { $exists: true }})
             .populate('top')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -220,8 +167,8 @@ router.post('/newRightLink', (req, res) => {
 
     router.get('/leftThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
-        LeftLink
-            .find({user: req.decoded.userId, mid: req.params.id})
+       Link
+            .find({user: req.decoded.userId, mid: req.params.id, left: { $exists: true } })
             .populate('left')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -242,8 +189,8 @@ router.post('/newRightLink', (req, res) => {
 
     router.get('/rightThought/:id', (req, res) => {
         // Search database for all thoughts linked to :id as bottom
-        RightLink
-            .find({user: req.decoded.userId, mid: req.params.id})
+        Link
+            .find({user: req.decoded.userId, mid: req.params.id, right: { $exists: true } })
             .populate('right')
             .exec((err, links) => {
                 // Check if error was found or not
@@ -259,13 +206,36 @@ router.post('/newRightLink', (req, res) => {
     });
 
 
+
+         /* ===============================================================
+     GET SESSIONTHOUGHTS
+  =============================================================== */
+
+    router.get('/session', (req, res) => {
+        // Search database for all thoughts linked to :id as bottom
+       Session
+            .find({user: req.decoded.userId })
+            .populate('thought')
+            .exec((err, links) => {
+                // Check if error was found or not
+                if (err) {
+                    res.json({success: false, message: err}); // Return error message
+                } else {
+                    const sessionThoughts = links.map((link) => {
+                        return link.thought
+                    });
+                    res.json({success: true, sessionThoughts: sessionThoughts });
+                }
+            });
+    });
+
    /* ===============================================================
      GET TOP LINK
   =============================================================== */
 
   router.get('/topLink', (req, res) => {
     // Search database for all Thoughts
-    TopLink.find({user: req.decoded.userId}, (err, topLink) => {
+    Link.find({user: req.decoded.userId}, (err, topLink) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message

@@ -52,3 +52,6 @@ strong {
     background: #007299;
     box-shadow: none;
 }
+.padding {
+        padding-bottom: 20px;
+}
