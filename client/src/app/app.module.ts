@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
 import { SomethingComponent } from './components/something/something.component';
+import { SessionComponent } from './components/session/session.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SomethingComponent } from './components/something/something.component';
     LoginComponent,
     ProfileComponent,
     NewComponent,
-    SomethingComponent
+    SomethingComponent,
+    SessionComponent
   ],
   imports: [
     ReactiveFormsModule,

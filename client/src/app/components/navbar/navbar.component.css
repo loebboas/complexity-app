@@ -6,9 +6,7 @@ a {
 a:hover {
 	color: #805096;
 }
-.btn-nav:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
-}
+
 .btn-nav {
    border: 0 none;
    padding: 8px 24px;

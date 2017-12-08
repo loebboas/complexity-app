@@ -6,11 +6,12 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-something',
-  templateUrl: './something.component.html',
-  styleUrls: ['./something.component.css']
+  selector: 'app-session',
+  templateUrl: './session.component.html',
+  styleUrls: ['./session.component.css']
 })
-export class SomethingComponent implements OnInit {
+export class SessionComponent implements OnInit {
+
 	messageClass;
 	message;
 	thoughtMid;
@@ -99,29 +100,10 @@ export class SomethingComponent implements OnInit {
   }
 
   EditMid() {
-  	if(this.editMid == false) {
-  		this.editMid = true;
-  	} else {
-  		this.editMid = false;
-  	}
+  	this.editMid == !this.editMid;
   }
 
   	onKeyupLeft(searchText: string) {
-  		  console.log(searchText);
-    this.getThoughtByName(searchText); // Get all blogs on component loa
-   console.log(this.thoughtByName.value);
-  	}
-onKeyupRight(searchText: string) {
-  		  console.log(searchText);
-    this.getThoughtByName(searchText); // Get all blogs on component loa
-   console.log(this.thoughtByName.value);
-  	}
-onKeyupTop(searchText: string) {
-  		  console.log(searchText);
-    this.getThoughtByName(searchText); // Get all blogs on component loa
-   console.log(this.thoughtByName.value);
-  	}
-onKeyupBot(searchText: string) {
   		  console.log(searchText);
     this.getThoughtByName(searchText); // Get all blogs on component loa
    console.log(this.thoughtByName.value);
@@ -192,7 +174,7 @@ onLeftSubmit() {
 		       this.saveLink = data.newId;
 		        	const session = {
 					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
+					thought: this.allSessionThought.thought._id,
 				    link: this.saveLink // E-mail input field
 				    };
 				
@@ -204,233 +186,6 @@ onLeftSubmit() {
 		});
 	this.formLeft.reset();
 }
-
-newRightLink(id) {
-
-	const rightLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    right: this.thoughtByName._id // E-mail input field
-	    };
-	const leftLink = {
-		user: this.userId,
-	    mid: this.thoughtByName._id, // E-mail input field
-	    left: this.thoughtMid._id // E-mail input field
-	    };
-
-		this.dataService.newLink(leftLink).subscribe(data => {
-	    this.dataService.newLink(rightLink).subscribe(data => {
-	    	this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-					
-					this.dataService.newSession(session).subscribe(data => {
-	    
-	    this.formRight.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-		});
-}
-
-
-onRightSubmit() {
-	 	const thought = {
-	 	value: this.formRight.get('value').value, // E-mail input field
-      	user: this.userId,
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const leftLink = {
-		user: this.userId,
-	    mid: this.saveId, // E-mail input field
-	    left: this.thoughtMid._id // E-mail input field
-	    };
-
-		const rightLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    right: this.saveId // E-mail input field
-	    };
-
-
-		this.dataService.newLink(leftLink).subscribe(data => {
-			this.dataService.newLink(rightLink).subscribe(data => {
-		       this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-				
-					this.dataService.newSession(session).subscribe(data => {
-    	this.reloadThoughts(this.thoughtMid._id)
-    	});
-		});
-		});
-		});
-	this.formRight.reset();
-}
-
-
-newTopLink(id) {
-
-	const topLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    top: this.thoughtByName._id // E-mail input field
-	    };
-	const botLink = {
-		user: this.userId,
-	    mid: this.thoughtByName._id, // E-mail input field
-	    bot: this.thoughtMid._id // E-mail input field
-	    };
-
-		this.dataService.newLink(botLink).subscribe(data => {
-	    this.dataService.newLink(topLink).subscribe(data => {
-	    	this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-					
-					this.dataService.newSession(session).subscribe(data => {
-	    
-	    this.formTop.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-		});
-}
-
-
-onTopSubmit() {
-	 	const thought = {
-	 	value: this.formTop.get('value').value, // E-mail input field
-      	user: this.userId,
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const botLink = {
-		user: this.userId,
-	    mid: this.saveId, // E-mail input field
-	    bot: this.thoughtMid._id // E-mail input field
-	    };
-
-		const topLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    top: this.saveId // E-mail input field
-	    };
-
-
-		this.dataService.newLink(botLink).subscribe(data => {
-			this.dataService.newLink(topLink).subscribe(data => {
-		       this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-				
-					this.dataService.newSession(session).subscribe(data => {
-    	this.reloadThoughts(this.thoughtMid._id)
-    	});
-		});
-		});
-		});
-	this.formTop.reset();
-}
-
-newBotLink(id) {
-
-	const botLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    bot: this.thoughtByName._id // E-mail input field
-	    };
-	const topLink = {
-		user: this.userId,
-	    mid: this.thoughtByName._id, // E-mail input field
-	    top: this.thoughtMid._id // E-mail input field
-	    };
-
-		this.dataService.newLink(topLink).subscribe(data => {
-	    this.dataService.newLink(botLink).subscribe(data => {
-	    	this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-					
-					this.dataService.newSession(session).subscribe(data => {
-	    
-	    this.formBot.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-		});
-}
-
-
-onBotSubmit() {
-	 	const thought = {
-	 	value: this.formBot.get('value').value, // E-mail input field
-      	user: this.userId,
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const topLink = {
-		user: this.userId,
-	    mid: this.saveId, // E-mail input field
-	    top: this.thoughtMid._id // E-mail input field
-	    };
-
-		const botLink = {
-		user: this.userId,
-	    mid: this.thoughtMid._id, // E-mail input field
-	    bot: this.saveId // E-mail input field
-	    };
-
-
-		this.dataService.newLink(topLink).subscribe(data => {
-			this.dataService.newLink(botLink).subscribe(data => {
-		       this.saveLink = data.newId;
-		        	const session = {
-					user: this.userId, // E-mail input field
-					thought: this.activeSession._id,
-				    link: this.saveLink // E-mail input field
-				    };
-				
-					this.dataService.newSession(session).subscribe(data => {
-    	this.reloadThoughts(this.thoughtMid._id)
-    	});
-		});
-		});
-		});
-	this.formBot.reset();
-}
-
 
 
 // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
@@ -541,12 +296,8 @@ this.dataService.newThought(thought).subscribe(data => {
 
 	  // Reload blogs on current page
 	   	reloadThoughts(id) {
-	    this.loadingLink = true; // Used to lock button
-	    this.getMidThought(id);
-	   	this.getBotThought(id);
-	   	this.getTopThought(id);
-	   	this.getLeftThought(id);
-	   	this.getRightThought(id);
+	    this.getSessionThoughts(id);
+
 	    this.editMid = false;
 	  	}
 
@@ -561,6 +312,15 @@ this.dataService.newThought(thought).subscribe(data => {
 	  	}
 
 	  	 getSession() {
+	    // Function to GET all blogs from database
+	    this.dataService.getSession().subscribe(data => {
+	    this.allSessionThought = data.sessionThoughts;
+	    const last_element = this.allSessionThought[this.allSessionThought.length - 1];
+	    this.activeSession = last_element;
+	    });
+		}
+
+	  	getSessionThoughts(id) {
 	    // Function to GET all blogs from database
 	    this.dataService.getSession().subscribe(data => {
 	    this.allSessionThought = data.sessionThoughts;

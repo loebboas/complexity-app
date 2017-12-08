@@ -23,8 +23,9 @@ export class NavbarComponent implements OnInit {
   fountThoughtByName = false;
   form;
   searchValue;
+ 
   allSessionThought;
-  activeSession;
+  activeSession = { value: "no Session found", _id: undefined };
 
 constructor(
 

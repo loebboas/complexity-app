@@ -105,9 +105,9 @@ router.post('/newLink', (req, res) => {
   router.get('/everything', (req, res) => {
 
     Link
-      .find({user: req.decoded.userId})
+      .find({user: req.decoded.userId,  top: { $exists: true } })
       .exec((err, links) => {
-        const ids_of_thoughts_with_top_links = links.map((link) => { return link.top });
+        const ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
         Thought.find({
           user: req.decoded.userId,
           "_id": { "$nin": ids_of_thoughts_with_top_links},
@@ -225,6 +225,30 @@ router.post('/newLink', (req, res) => {
                         return link.thought
                     });
                     res.json({success: true, sessionThoughts: sessionThoughts });
+                }
+            });
+    });
+
+
+         /* ===============================================================
+     GET SESSIONLINKS
+  =============================================================== */
+
+    router.get('/sessionLink/:id', (req, res) => {
+        // Search database for all thoughts linked to :id as bottom
+       Session
+            .find({user: req.decoded.userId, thought: req.params.id })
+            .populate('link')
+            .exec((err, links) => {
+                // Check if error was found or not
+                if (err) {
+                    res.json({success: false, message: err}); // Return error message
+                } else {
+                    const sessionLinks = links.map((link) => {
+                        return link.link
+                    });
+                    res.json({success: true, sessionLinks: sessionLinks });
+
                 }
             });
     });
