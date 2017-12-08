@@ -625,7 +625,11 @@ this.dataService.newThought(thought).subscribe(data => {
   		});
   		}
   		
-
+  		deleteThought(id) {
+  			this.dataService.deleteThought(id).subscribe(data => {
+  				
+  			});
+  		}
 
 	 ngOnInit() {
 	  	this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id

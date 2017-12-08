@@ -80,8 +80,20 @@
 						<ul class="list-group list-group">
 				<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
 				<div class="form-group">
-										  
-							<li class="list-group"><h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong> </h2><input *ngIf="editMid" type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}"></li>	
+					<li class="list-group">
+						
+									<h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()>
+										<strong>{{ thoughtMid.value }}</strong>
+									</h2>	
+
+						<div class="input-group" *ngIf="editMid">
+								<div class="input-group">
+									<input  type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}">
+								</div>
+								<div class="input-group-addon"><h2 class="btn btn-secondary delete-btn" (click)="deleteThought(thoughtMid._id)">x</h2></div>
+						</div>
+									
+					</li>
 				</div>
 				</form>
 				</ul>	

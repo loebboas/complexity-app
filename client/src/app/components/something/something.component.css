@@ -55,3 +55,10 @@ strong {
 .padding {
         padding-bottom: 20px;
 }
+.input-group-addon {
+  padding: 0 0 0 0;
+
+}
+.delete-btn {
+  margin: 0 0 0 0;
+}

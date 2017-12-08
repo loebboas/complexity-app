@@ -369,8 +369,11 @@ router.post('/newLink', (req, res) => {
     }
   });
 
+
+
+
   /* ===============================================================
-     DELETE ONE THOUGHT
+     DELETE ONE THOUGHT, all Links
   =============================================================== */
   router.delete('/deleteThought/:id', (req, res) => {
     // Check if ID was provided in parameters
@@ -401,6 +404,21 @@ router.post('/newLink', (req, res) => {
                       } else {
                         res.json({ success: true, message: 'Thought deleted!' }); // Return success message
                       }
+                      Link.find({ $or: [ { top: req.params.id }, { left: req.params.id },  { right: req.params.id }, { mid: req.params.id }, { bot: req.params.id } ] }, (err, links) => {
+                        link.remove((err) => {
+                          if (err) {
+                        res.json({ success: false, message: err }); // Return error message
+                      } else {
+                        res.json({ success: true, message: 'links deleted!' }); // Return success message
+                      } 
+                        })                          
+                      });
+
+
+
+
+
+
                     });
               }
             });
