@@ -627,7 +627,17 @@ this.dataService.newThought(thought).subscribe(data => {
   		
   		deleteThought(id) {
   			this.dataService.deleteThought(id).subscribe(data => {
-  				
+  				     // Check if PUT request was a success or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+        this.message = data.message; // Set error message
+        this.processing = false; // Unlock form fields
+      } else {
+        this.messageClass = 'alert alert-success'; // Set success bootstrap class
+        this.message = data.message; // Set success message
+        // After two seconds, navigate back to blog page
+     
+      }
   			});
   		}
 
