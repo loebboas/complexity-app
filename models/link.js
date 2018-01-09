@@ -7,11 +7,12 @@ const Schema = mongoose.Schema;
 
 const linkSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
-    mid: {type: Schema.Types.ObjectId, ref: 'Thought'},
-    top: {type: Schema.Types.ObjectId, ref: 'Thought'},
-    left: {type: Schema.Types.ObjectId, ref: 'Thought'},
-    right: {type: Schema.Types.ObjectId, ref: 'Thought'},
-    bot: {type: Schema.Types.ObjectId, ref: 'Thought'},
+    scale: {type: Schema.Types.ObjectId, ref: 'Thought'},
+    thought: {type: Schema.Types.ObjectId, ref: 'Thought'},
+   	type: String,
+   	position: String,
+   	strength: String,
+   	privacy: String,
     inputTime: {type: Date, default: Date.now}
 });
 

@@ -21,7 +21,7 @@ module.exports = (router) => {
 			 	username: req.body.username,
 			 	password: req.body.password,
 		 	});
-			user.save((err) => {
+			user.save((err, user) => {
             // Check if error occured
             if (err) {
               // Check if error is an error indicating duplicate account
@@ -51,7 +51,7 @@ module.exports = (router) => {
                 }
               }
             } else {
-              res.json({ success: true, message: 'Acount registered!' }); // Return success
+              res.json({ success: true, message: 'Acount registered!', user: user }); // Return success
             }
           });
 		    

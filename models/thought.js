@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     value: String,
-    media: String,
+    form: String,
+    texture: String,
+    privacy: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     inputTime: {type: Date, default: Date.now}
 });

@@ -70,22 +70,6 @@ constructor(
               };
   });
   }
-
-  getSession() {
-    // Function to GET all blogs from database
-    this.dataService.getSession().subscribe(data => {
-    this.allSessionThought = data.sessionThoughts;
-    const last_element = this.allSessionThought[this.allSessionThought.length - 1];
-    this.activeSession = last_element;
-    });
-  }
-  
-  getAllThought() {
-  // Function to GET all blogs from database
-  this.dataService.getAllThought().subscribe(data => {
-  this.allThought = data.thought; // Assign array to use in HTML
-  });
-  }
   // Function to logout user
   onLogoutClick() {
     this.authService.logout(); // Logout user
@@ -103,8 +87,6 @@ constructor(
 
   ngOnInit() {
     this.form.reset();
-  this.getAllThought();
-  this.getSession();
 
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments

@@ -1,7 +1,6 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
 const Link = require('../models/link');
-const Session = require('../models/session');
 const jwt = require('jsonwebtoken'); 
 const config = require('../config/database'); // Import database configuration
 
@@ -18,7 +17,10 @@ router.post('/newThought', (req, res) => {
 	} else {
 		let thought = new Thought({
 		value: req.body.value,
-		user: req.body.user
+		user: req.body.user,
+    form: req.body.form,
+    texture: req.body.texture,
+    privacy: req.body.privacy
 		});
 		thought.save((err) => {
 			if (err) {
@@ -29,29 +31,6 @@ router.post('/newThought', (req, res) => {
 		})
 	}
 });
- /* ===============================================================
-     ADD NEW SESSION
-  =============================================================== */  
-
-router.post('/newSession', (req, res) => {
-  if(!req.body.user) {
-    res.json({ success: false, message: 'You must input something'});
-  } else {
-    let session = new Session({
-    user: req.body.user,
-    thought: req.body.thought,
-    link: req.body.link
-    });
-    session.save((err) => {
-      if (err) {
-        res.json({ success: false, message: 'Could not save Session. Error: ', err });
-      } else {
-        res.json({ success: true, message: 'Session saved ', newId: session._id });
-      }
-    })
-  }
-});
-
 
 
  /* ===============================================================
@@ -61,11 +40,12 @@ router.post('/newSession', (req, res) => {
 router.post('/newLink', (req, res) => {
     let link = new Link({
     user: req.body.user,
-    mid: req.body.mid,
-    top: req.body.top, 
-    left: req.body.left,
-    right: req.body.right,
-    bot: req.body.bot
+    scale: req.body.scale,
+    thought: req.body.thought, 
+    type: req.body.type,
+    position: req.body.position,
+    strength: req.body.strength,
+    privacy: req.body.privacy
     });
     link.save((err) => {
       if (err) {    
@@ -73,12 +53,12 @@ router.post('/newLink', (req, res) => {
       } else {
         res.json({ success: true, message: 'Link saved!', newId: link._id });
       }
-    })
+    });
 });
 
 
    /* ===============================================================
-     GET ALL THOUGHT
+     GET ALL THOUGHTS OF USER
   =============================================================== */
 
   router.get('/allThought', (req, res) => {
@@ -98,181 +78,6 @@ router.post('/newLink', (req, res) => {
     }); // Sort blogs from newest to oldest
   });
 
-     /* ===============================================================
-     GET EVERYTHING (ALL THOUGHT WITH NO LINK/ONLY BOTLINK
-  =============================================================== */
-
-  router.get('/everything', (req, res) => {
-
-    Link
-      .find({user: req.decoded.userId,  top: { $exists: true } })
-      .exec((err, links) => {
-        const ids_of_thoughts_with_top_links = links.map((link) => { return link.mid });
-        Thought.find({
-          user: req.decoded.userId,
-          "_id": { "$nin": ids_of_thoughts_with_top_links},
-        }, (err, everything) => {
-          res.json({success: true, everything: everything });
-        });
-      });
-  });
-
-  /* ===============================================================
-     GET BOT THOUGHT
-  =============================================================== */
-
-    router.get('/botThought/:id', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-        Link
-            .find({user: req.decoded.userId, mid: req.params.id, bot: { $exists: true } })
-            .populate('bot')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const botThoughts = links.map((link) => {
-                        return link.bot
-                    });
-                    res.json({success: true, botThoughts: botThoughts });
-                }
-            });
-    });
-
-         /* ===============================================================
-     GET TOP THOUGHT
-  =============================================================== */
-
-    router.get('/topThought/:id', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-        Link
-            .find({user: req.decoded.userId, mid: req.params.id, top: { $exists: true }})
-            .populate('top')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const topThoughts = links.map((link) => {
-                        return link.top
-                    });
-                    res.json({success: true, topThoughts: topThoughts });
-                }
-            });
-    });
-
-         /* ===============================================================
-     GET LEFT THOUGHT
-  =============================================================== */
-
-    router.get('/leftThought/:id', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-       Link
-            .find({user: req.decoded.userId, mid: req.params.id, left: { $exists: true } })
-            .populate('left')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const leftThoughts = links.map((link) => {
-                        return link.left
-                    });
-                    res.json({success: true, leftThoughts: leftThoughts });
-                }
-            });
-    });
-
-         /* ===============================================================
-     GET RIGHT THOUGHT
-  =============================================================== */
-
-    router.get('/rightThought/:id', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-        Link
-            .find({user: req.decoded.userId, mid: req.params.id, right: { $exists: true } })
-            .populate('right')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const rightThoughts = links.map((link) => {
-                        return link.right
-                    });
-                    res.json({success: true, rightThoughts: rightThoughts });
-                }
-            });
-    });
-
-
-
-         /* ===============================================================
-     GET SESSIONTHOUGHTS
-  =============================================================== */
-
-    router.get('/session', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-       Session
-            .find({user: req.decoded.userId })
-            .populate('thought')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const sessionThoughts = links.map((link) => {
-                        return link.thought
-                    });
-                    res.json({success: true, sessionThoughts: sessionThoughts });
-                }
-            });
-    });
-
-
-         /* ===============================================================
-     GET SESSIONLINKS
-  =============================================================== */
-
-    router.get('/sessionLink/:id', (req, res) => {
-        // Search database for all thoughts linked to :id as bottom
-       Session
-            .find({user: req.decoded.userId, thought: req.params.id })
-            .populate('link')
-            .exec((err, links) => {
-                // Check if error was found or not
-                if (err) {
-                    res.json({success: false, message: err}); // Return error message
-                } else {
-                    const sessionLinks = links.map((link) => {
-                        return link.link
-                    });
-                    res.json({success: true, sessionLinks: sessionLinks });
-
-                }
-            });
-    });
-
-   /* ===============================================================
-     GET TOP LINK
-  =============================================================== */
-
-  router.get('/topLink', (req, res) => {
-    // Search database for all Thoughts
-    Link.find({user: req.decoded.userId}, (err, topLink) => {
-              // Check if error was found or not
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                // Check if blogs were found in database
-                if (!topLink) {
-                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
-                } else {       
-                  res.json({ success: true, topLink: topLink }); // Return success and blogs array
-                }
-              }
-    }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
-  });
 
    /* ===============================================================
      GET ONE THOUGHT
@@ -327,6 +132,30 @@ router.post('/newLink', (req, res) => {
   }
   });
 
+  /* ===============================================================
+     GET POPULATED LINKS OF A THOUGHT
+  =============================================================== */
+
+    router.get('/linksOfThought/:id', (req, res) => {
+        // Search database for all thoughts linked to :id as bottom
+        Link
+            .find({user: req.decoded.userId, scale: req.params.id })
+            .populate('thought')
+            .exec((err, links) => {
+                // Check if error was found or not
+                if (err) {
+                    res.json({success: false, message: err}); // Return error message
+                } else {
+                    const allLinks = links.map((link) => {
+                    link.thought.form = link.type;
+                    link.thought.privacy = link.type;
+                        return link.thought
+                      
+                    });
+                    res.json({success: true, allLinks: allLinks });
+                }
+            });
+    });
    
 
    /* ===============================================================
@@ -349,7 +178,7 @@ router.post('/newLink', (req, res) => {
           } else {
             // Check who user is that is requesting blog update
            
-                    thought.value = req.body.edit; // Save value
+                    thought.value = req.body.editValue; // Save value
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {
@@ -369,11 +198,48 @@ router.post('/newLink', (req, res) => {
     }
   });
 
-
+     /* ===============================================================
+     UPDATE ONE Link
+  =============================================================== */
+  router.put('/editLink', (req, res) => {
+    // Check if id was provided
+    if (!req.body._id) {
+      res.json({ success: false, message: 'No Link id provided' }); // Return error message
+    } else {
+      // Check if id exists in database
+      Link.findOne({ user: req.decoded.userId, _id: req.body._id }, (err, link) => {
+        // Check if id is a valid ID
+        if (err) {
+          res.json({ success: false, message: 'Not a valid link id' }); // Return error message
+        } else {
+          // Check if id was found in the database
+          if (!link) {
+            res.json({ success: false, message: 'link id was not found.' }); // Return error message
+          } else {
+            // Check who user is that is requesting blog update
+                    link.type = req.body.editType; // Save value
+                    link.save((err) => {
+                      if (err) {
+                        if (err.errors) {
+                          res.json({ success: false, message: 'Please ensure form is filled out properly' });
+                        } else {
+                          res.json({ success: false, message: err }); // Return error message
+                        }
+                      } else {
+                        res.json({ success: true, message: 'Link Updated!' }); // Return success message
+                      }
+                    });
+                  
+                
+          }
+        }
+      });
+    }
+  });
 
 
   /* ===============================================================
-     DELETE ONE THOUGHT, all Links
+     DELETE ONE THOUGHT
   =============================================================== */
   router.delete('/deleteThought/:id', (req, res) => {
     // Check if ID was provided in parameters
@@ -404,22 +270,7 @@ router.post('/newLink', (req, res) => {
                       } else {
                         res.json({ success: true, message: 'Thought deleted!' }); // Return success message
                       }
-                      Link.find({ $or: [ { top: req.params.id }, { left: req.params.id },  { right: req.params.id }, { mid: req.params.id }, { bot: req.params.id } ] }, (err, links) => {
-                        link.remove((err) => {
-                          if (err) {
-                        res.json({ success: false, message: err }); // Return error message
-                      } else {
-                        res.json({ success: true, message: 'links deleted!' }); // Return success message
-                      } 
-                        })                          
-                      });
-
-
-
-
-
-
-                    });
+               });
               }
             });
           }
@@ -428,6 +279,47 @@ router.post('/newLink', (req, res) => {
     }
   });
 
+
+ /* ===============================================================
+     DELETE ONE LINK
+  =============================================================== */
+  router.delete('/deleteLink/:id', (req, res) => {
+    // Check if ID was provided in parameters
+    if (!req.params.id) {
+      res.json({ success: false, message: 'No id provided' }); // Return error message
+    } else {
+      // Check if id is found in database
+      Link.findOne({ user: req.decoded.userId, _id: req.params.id }, (err, link) => {
+        // Check if error was found
+        if (err) {
+          res.json({ success: false, message: 'Invalid id' }); // Return error message
+        } else {
+          // Check if blog was found in database
+          if (!link) {
+            res.json({ success: false, messasge: 'Link was not found' }); // Return error message
+          } else {
+            // Get info on user who is attempting to delete post
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              // Check if error was found
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if user's id was found in database
+                // Remove the blog from database
+                    link.remove((err) => {
+                      if (err) {
+                        res.json({ success: false, message: err }); // Return error message
+                      } else {
+                        res.json({ success: true, message: 'Link deleted!' }); // Return success message
+                      }
+               });
+              }
+            });
+          }
+        }
+      });
+    }
+  });
 
 
   return router;

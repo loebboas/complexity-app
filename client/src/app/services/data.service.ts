@@ -33,41 +33,10 @@ export class DataService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(res => res.json());
   }
-     getEverything() {
+    getLinksOfThought(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/everything', this.options).map(res => res.json());
+    return this.http.get(this.domain + '/datatransfer/linksOfThought/' + id, this.options).map(res => res.json());
   }
-
-
-    getBotThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/botThought/' + id, this.options).map(res => res.json());
-  }
-    getTopThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/topThought/' + id, this.options).map(res => res.json());
-  }
-    getLeftThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/leftThought/' + id, this.options).map(res => res.json());
-  } 
-    getRightThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/rightThought/' + id, this.options).map(res => res.json());
-  }
-
-    getSession() {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/session', this.options).map(res => res.json());
-  }
-
-
-    getBotLink() {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/botLink', this.options).map(res => res.json());
-  }
-    
-  
 
     getSingleThought(id) {
     this.createAuthenticationHeaders(); // Create headers
@@ -94,6 +63,17 @@ export class DataService {
     return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(res => res.json());
   }
 
+      deleteLink(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.delete(this.domain + 'datatransfer/deleteLink/' + id, this.options).map(res => res.json());
+  }
+
+   // Function to edit/update blog post
+    editLink(link) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + 'datatransfer/editLink/', link, this.options).map(res => res.json());
+  }
+
 /* ===============================================================
      ADD DATA
   =============================================================== */
@@ -106,10 +86,5 @@ export class DataService {
     newThought(thought) {
   	this.createAuthenticationHeaders(); // Create headers
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
-  }
- 
-    newSession(session) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newSession', session, this.options).map(res => res.json());
   }
  }

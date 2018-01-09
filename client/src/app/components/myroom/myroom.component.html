@@ -1,0 +1,198 @@
+<div class="container-fluid">
+	<div class="row">
+		 <!-- TopLeft: TimeLinks-->
+			<div class="card col-md-3 border-0">
+				<div class="card-body topleft">
+					<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='time'" (click)="reloadThoughts(link._id)">{{ link.value }}{{ link.form }}</h4>
+						    </li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- TopMid: ContextLinks -->
+			<div class="card col-md-6 border-0">
+				<div class="card-body topmid">
+					<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='context'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    </li>
+
+						</ul>
+						<form [formGroup]="formTop" (ngSubmit)="onTopSubmit()">
+							<div class="search-block input-group" id="adv-search">
+								<input type="text" #searchTextBoxTop (keyup)="onKeyupTop(searchTextBoxTop.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="value" name="value" placeholder="...">
+									 <div class="input-group-btn">
+					                    <div class="btn-group" role="group">
+					                        <div class="dropdown dropdown-lg">
+					                            <div class="dropdown-menu" role="menu">
+					                              <ul class="navbar-nav navbar-right">
+					                                <li class="nav-item"><a class="nav-link" (click)="newTopLink(thoughtByName._id)">{{ thoughtByName.value }}</a></li>
+					                              </ul>
+					                            </div>
+					                        </div>
+					                    </div>
+			                		 </div>
+							</div>
+						</form>
+
+				</div>
+
+			</div>
+
+
+			<!-- TopRight: LinkedLinks -->
+			<div class="card col-md-3 border-0">
+				<div class="card-body topright"></div>
+				<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='linked'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    </li>
+
+						</ul>
+						<form [formGroup]="formTopRight" (ngSubmit)="onTopRightSubmit()">
+							<div class="search-block input-group" id="adv-search">
+								<input type="text" #searchTextBoxTopRight (keyup)="onKeyupTopRight(searchTextBoxTopRight.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="value" name="value" placeholder="...">
+									 <div class="input-group-btn">
+					                    <div class="btn-group" role="group">
+					                        <div class="dropdown dropdown-lg">
+					                            <div class="dropdown-menu" role="menu">
+					                              <ul class="navbar-nav navbar-right">
+					                                <li class="nav-item"><a class="nav-link" (click)="newTopRightLink(thoughtByName._id)">{{ thoughtByName.value }}</a></li>
+					                              </ul>
+					                            </div>
+					                        </div>
+					                    </div>
+			                		 </div>
+							</div>
+						</form>
+			</div>
+	</div>
+
+	<div class="row">
+			<!-- MidLeft: BeforeLinks -->
+			<div class="card col-md-3 border-0">
+				<div class="card-body midleft">
+					<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='before'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    </li>
+
+						</ul>
+						<form [formGroup]="formLeft" (ngSubmit)="onLeftSubmit()">
+							<div class="search-block input-group" id="adv-search">
+								<input type="text" #searchTextBoxLeft (keyup)="onKeyupLeft(searchTextBoxLeft.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="value" name="value" placeholder="...">
+									 <div class="input-group-btn">
+					                    <div class="btn-group" role="group">
+					                        <div class="dropdown dropdown-lg">
+					                            <div class="dropdown-menu" role="menu">
+					                              <ul class="navbar-nav navbar-right">
+					                                <li class="nav-item"><a class="nav-link" (click)="newLeftLink(thoughtByName._id)">{{ thoughtByName.value }}</a></li>
+					                              </ul>
+					                            </div>
+					                        </div>
+					                    </div>
+			                		 </div>
+							</div>
+						</form>
+
+				</div>
+			</div>
+
+			<!-- MidMid: ScaleThought -->
+			<div class="card col-md-6 border-0">
+				<div class="card-body midmid">
+					<ul class="list-group list-group">
+						<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
+							<div class="form-group">
+								<li class="list-group">
+									<h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>	
+									<div class="input-group" *ngIf="editMid">
+										<div class="input-group">
+											<input  type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}{{ thoughtMid._id }}">
+										</div>
+										<div class="input-group-addon">
+											<h2 class="btn btn-secondary delete-btn" (click)="deleteThought(thoughtMid._id)">x</h2>
+										</div>
+									</div>			
+								</li>
+							</div>
+						</form>
+					</ul>	
+				</div>
+			</div>
+
+			<!-- MidRight: AfterLinks -->
+			<div class="card col-md-3 border-0">
+				<div class="card-body midright">
+					<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='after'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    </li>
+
+						</ul>
+						<form [formGroup]="formRight" (ngSubmit)="onRightSubmit()">
+							<div class="search-block input-group" id="adv-search">
+								<input type="text" #searchTextBoxRight (keyup)="onKeyupRight(searchTextBoxRight.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="value" name="value" placeholder="...">
+									 <div class="input-group-btn">
+					                    <div class="btn-group" role="group">
+					                        <div class="dropdown dropdown-lg">
+					                            <div class="dropdown-menu" role="menu">
+					                              <ul class="navbar-nav navbar-right">
+					                                <li class="nav-item"><a class="nav-link" (click)="newRightLink(thoughtByName._id)">{{ thoughtByName.value }}</a></li>
+					                              </ul>
+					                            </div>
+					                        </div>
+					                    </div>
+			                		 </div>
+							</div>
+						</form>
+				</div>
+			</div>
+	</div>
+
+
+
+	<div class="row">
+			<!-- BotLeft: Context1 -->
+			<div class="card col-md-3 border-0">
+				<div class="card-body botleft"></div>
+			</div>
+			<!-- BotMid: Context2 -->
+			<div class="card col-md-6 border-0">
+				<div class="card-body botmid">
+						<ul class="list-group">
+						    <li class="list-group" *ngFor="let link of allLinks">
+						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='meaning'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    </li>
+
+						</ul>
+						<form [formGroup]="formBot" (ngSubmit)="onBotSubmit()">
+							<div class="search-block input-group" id="adv-search">
+								<input type="text" #searchTextBoxBot (keyup)="onKeyupBot(searchTextBoxBot.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="value" name="value" placeholder="...">
+									 <div class="input-group-btn">
+					                    <div class="btn-group" role="group">
+					                        <div class="dropdown dropdown-lg">
+					                            <div class="dropdown-menu" role="menu">
+					                              <ul class="navbar-nav navbar-right">
+					                                <li class="nav-item"><a class="nav-link" (click)="newBotLink(thoughtByName._id)">{{ thoughtByName.value }}</a></li>
+					                              </ul>
+					                            </div>
+					                        </div>
+					                    </div>
+			                		 </div>
+							</div>
+						</form>
+				</div>
+			</div>
+
+			<!-- BotRight: Context3 -->
+			<div class="card col-md-3 border-0">
+				<div class="card-body botright"></div>
+			</div>
+	</div>
+
+
+</div>
+

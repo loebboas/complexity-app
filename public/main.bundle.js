@@ -25,8 +25,8 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_everything_everything_component__ = __webpack_require__("../../../../../src/app/components/everything/everything.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_something_something_component__ = __webpack_require__("../../../../../src/app/components/something/something.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_myroom_myroom_component__ = __webpack_require__("../../../../../src/app/components/myroom/myroom.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
@@ -54,9 +54,11 @@ var appRoutes = [
     {
         path: '', component: __WEBPACK_IMPORTED_MODULE_2__components_home_home_component__["a" /* HomeComponent */]
     },
-    { path: 'everything', component: __WEBPACK_IMPORTED_MODULE_3__components_everything_everything_component__["a" /* EverythingComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
+    { path: 'projects', component: __WEBPACK_IMPORTED_MODULE_4__components_projects_projects_component__["a" /* ProjectsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
     },
-    { path: 'something/:id', component: __WEBPACK_IMPORTED_MODULE_4__components_something_something_component__["a" /* SomethingComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
+    { path: 'myroom', component: __WEBPACK_IMPORTED_MODULE_3__components_myroom_myroom_component__["a" /* MyroomComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
+    },
+    { path: 'myroom/:id', component: __WEBPACK_IMPORTED_MODULE_3__components_myroom_myroom_component__["a" /* MyroomComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
     },
     { path: 'new', component: __WEBPACK_IMPORTED_MODULE_10__components_new_new_component__["a" /* NewComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_8__guards_auth_guard__["a" /* AuthGuard */]]
     },
@@ -110,7 +112,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\r\n\r\n<div class=\"container\">\r\n\t<flash-messages></flash-messages>\r\n  <router-outlet></router-outlet>\r\n</div>"
+module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n<flash-messages></flash-messages>\r\n<router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -158,26 +160,24 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_everything_everything_component__ = __webpack_require__("../../../../../src/app/components/everything/everything.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_new_new_component__ = __webpack_require__("../../../../../src/app/components/new/new.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_something_something_component__ = __webpack_require__("../../../../../src/app/components/something/something.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_session_session_component__ = __webpack_require__("../../../../../src/app/components/session/session.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_new_new_component__ = __webpack_require__("../../../../../src/app/components/new/new.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_myroom_myroom_component__ = __webpack_require__("../../../../../src/app/components/myroom/myroom.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_projects_projects_component__ = __webpack_require__("../../../../../src/app/components/projects/projects.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -207,13 +207,12 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__components_navbar_navbar_component__["a" /* NavbarComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__components_everything_everything_component__["a" /* EverythingComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__components_register_register_component__["a" /* RegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__components_profile_profile_component__["a" /* ProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__components_new_new_component__["a" /* NewComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_something_something_component__["a" /* SomethingComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_session_session_component__["a" /* SessionComponent */]
+                __WEBPACK_IMPORTED_MODULE_8__components_register_register_component__["a" /* RegisterComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__components_profile_profile_component__["a" /* ProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_new_new_component__["a" /* NewComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_myroom_myroom_component__["a" /* MyroomComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_projects_projects_component__["a" /* ProjectsComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* ReactiveFormsModule */],
@@ -221,105 +220,13 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"],
-                __WEBPACK_IMPORTED_MODULE_14_angular2_flash_messages__["FlashMessagesModule"]
+                __WEBPACK_IMPORTED_MODULE_13_angular2_flash_messages__["FlashMessagesModule"]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_16__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_11__services_data_service__["a" /* DataService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_14__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_15__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_10__services_data_service__["a" /* DataService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/everything/everything.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\r\n\r\n.btn {\r\n background-color:#5F5293;\r\n}\r\n \r\n .btn:hover {\r\n background-color:#7F559D;\r\n}\r\n \r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn {\r\n    color: #ffffff;\r\n}\r\n \r\n.btn:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #7F559D;\r\n}\r\n \r\n.btn:active, .btn-primary.active {\r\n    background: #5F5293;\r\n    box-shadow: none;\r\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/everything/everything.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-4\" *ngFor=\"let thought of everything\">\r\n\t\t\r\n\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t    <li class=\"list-group\"><h4 class=\"btn btn-secondary btn-block\" [routerLink]=\"['../something/', thought._id]\"><strong>{{ thought.value }}</strong></h4></li>\r\n\t\t\t\t    <!--<li class=\"list-group-item\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"value\" formControlName=\"value\" placeholder=\"{{ thought.meaning }}\">\r\n\t\t\t\t    \t<input type=\"text\" class=\"form-control\" name=\"meaning\" formControlName=\"meaning\" value=\"{{ thought._id }}\">\r\n\t\t\t\t       \t<button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n\t\t\t\t    </li>-->\r\n\t\t\t\t</ul>\r\n\t\r\n\t\t</div>\t\r\n\t</div>\r\n</div>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/everything/everything.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EverythingComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var EverythingComponent = (function () {
-    function EverythingComponent(authService, dataService) {
-        this.authService = authService;
-        this.dataService = dataService;
-        this.processing = false;
-    }
-    // Function to create new blog form
-    EverythingComponent.prototype.getAllThought = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getAllThought().subscribe(function (data) {
-            _this.allThought = data.thought; // Assign array to use in HTML
-        });
-    };
-    EverythingComponent.prototype.getEverything = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getEverything().subscribe(function (data) {
-            _this.everything = data.everything; // Assign array to use in HTML
-        });
-    };
-    EverythingComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        // Get profile username on page load
-        this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-            _this.getEverything(); // Get all blogs on component load
-        });
-    };
-    EverythingComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-everything',
-            template: __webpack_require__("../../../../../src/app/components/everything/everything.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/everything/everything.component.css")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */]])
-    ], EverythingComponent);
-    return EverythingComponent;
 }());
 
 
@@ -334,7 +241,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\n\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\n\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}\r\n\r\n.topleft {\r\n        background: #ffffff;\r\n\r\n      }\r\n.midmid {\r\n     \r\n      }", ""]);
 
 // exports
 
@@ -347,7 +254,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Complexity MEAN Stack Application</h1>\r\n  <p class=\"lead\">Welcome to the Complexity MEAN Stack Application by <strong>Boas Loeb</strong><br>This site is in developement...</p>\r\n</div>"
+module.exports = "<div class=\"jumbotron\">\r\n  <h1>Complexity-Application</h1><br>\r\n  \t<h3>This Site is in Developement....</h3>\r\n \t\r\n\r\n</div>"
 
 /***/ }),
 
@@ -526,6 +433,553 @@ var LoginComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/myroom/myroom.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\n\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\nbackground-color:#B089C3;\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}\r\n\r\n.topleft {\r\n        background: #ffffff;\r\n\r\n      }", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/myroom/myroom.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t <!-- TopLeft: TimeLinks-->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='time'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}{{ link.form }}</h4>\n\t\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- TopMid: ContextLinks -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body topmid\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='context'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTop (keyup)=\"onKeyupTop(searchTextBoxTop.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\n\t\t\t</div>\n\n\n\t\t\t<!-- TopRight: LinkedLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topright\"></div>\n\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='linked'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTopRight\" (ngSubmit)=\"onTopRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTopRight (keyup)=\"onKeyupTopRight(searchTextBoxTopRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t</div>\n\t</div>\n\n\t<div class=\"row\">\n\t\t\t<!-- MidLeft: BeforeLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='before'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxLeft (keyup)=\"onKeyupLeft(searchTextBoxLeft.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newLeftLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidMid: ScaleThought -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body midmid\">\n\t\t\t\t\t<ul class=\"list-group list-group\">\n\t\t\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<li class=\"list-group\">\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>\t\n\t\t\t\t\t\t\t\t\t<div class=\"input-group\" *ngIf=\"editMid\">\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t\t\t<input  type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}{{ thoughtMid._id }}\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary delete-btn\" (click)=\"deleteThought(thoughtMid._id)\">x</h2>\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</div>\t\t\t\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</ul>\t\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidRight: AfterLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midright\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='after'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxRight (keyup)=\"onKeyupRight(searchTextBoxRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\n\n\t<div class=\"row\">\n\t\t\t<!-- BotLeft: Context1 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botleft\"></div>\n\t\t\t</div>\n\t\t\t<!-- BotMid: Context2 -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body botmid\">\n\t\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='meaning'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxBot (keyup)=\"onKeyupBot(searchTextBoxBot.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newBotLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- BotRight: Context3 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botright\"></div>\n\t\t\t</div>\n\t</div>\n\n\n</div>\n\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/myroom/myroom.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyroomComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var MyroomComponent = (function () {
+    function MyroomComponent(formBuilder, authService, dataService, activatedRoute, router) {
+        this.formBuilder = formBuilder;
+        this.authService = authService;
+        this.dataService = dataService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.processing = false;
+        this.foundThought = false;
+        this.foundTop = false;
+        this.foundBot = false;
+        this.foundLeft = false;
+        this.foundRight = false;
+        this.editMid = false;
+        this.createNewMidForm(); // Create new  form on start up
+        this.createNewBotForm(); // Create new  form on start up
+        this.createNewTopForm(); // Create new  form on start up
+        this.createNewLeftForm(); // Create new  form on start up
+        this.createNewRightForm(); // Create new  form on start up
+        this.createNewTopRightForm(); // Create new  form on start up
+    }
+    // Function to create new blog form
+    MyroomComponent.prototype.createNewMidForm = function () {
+        this.formMid = this.formBuilder.group({
+            edit: ''
+        });
+    };
+    MyroomComponent.prototype.createNewBotForm = function () {
+        this.formBot = this.formBuilder.group({
+            value: ''
+        });
+    };
+    MyroomComponent.prototype.createNewTopRightForm = function () {
+        this.formTopRight = this.formBuilder.group({
+            value: ''
+        });
+    };
+    MyroomComponent.prototype.createNewTopForm = function () {
+        this.formTop = this.formBuilder.group({
+            value: ''
+        });
+    };
+    MyroomComponent.prototype.createNewLeftForm = function () {
+        this.formLeft = this.formBuilder.group({
+            value: ''
+        });
+    };
+    MyroomComponent.prototype.createNewRightForm = function () {
+        this.formRight = this.formBuilder.group({
+            value: ''
+        });
+    };
+    MyroomComponent.prototype.EditMid = function () {
+        if (this.editMid == false) {
+            this.editMid = true;
+        }
+        else {
+            this.editMid = false;
+        }
+    };
+    MyroomComponent.prototype.onKeyupLeft = function (searchText) {
+        console.log(searchText);
+        this.getThoughtByName(searchText); // Get all blogs on component loa
+        console.log(this.thoughtByName.value);
+    };
+    MyroomComponent.prototype.onKeyupRight = function (searchText) {
+        console.log(searchText);
+        this.getThoughtByName(searchText); // Get all blogs on component loa
+        console.log(this.thoughtByName.value);
+    };
+    MyroomComponent.prototype.onKeyupTop = function (searchText) {
+        console.log(searchText);
+        this.getThoughtByName(searchText); // Get all blogs on component loa
+        console.log(this.thoughtByName.value);
+    };
+    MyroomComponent.prototype.onKeyupBot = function (searchText) {
+        console.log(searchText);
+        this.getThoughtByName(searchText); // Get all blogs on component loa
+        console.log(this.thoughtByName.value);
+    };
+    MyroomComponent.prototype.onKeyupTopRight = function (searchText) {
+        console.log(searchText);
+        this.getThoughtByName(searchText); // Get all blogs on component loa
+        console.log(this.thoughtByName.value);
+    };
+    MyroomComponent.prototype.newLeftLink = function (id) {
+        var _this = this;
+        var leftLink = {
+            user: this.userId,
+            scale: this.thoughtMid._id,
+            thought: this.thoughtByName._id,
+            type: "before"
+        };
+        var rightLink = {
+            user: this.userId,
+            scale: this.thoughtByName._id,
+            thought: this.thoughtMid._id,
+            type: "after"
+        };
+        this.dataService.newLink(rightLink).subscribe(function (data) {
+            _this.dataService.newLink(leftLink).subscribe(function (data) {
+                _this.saveLink = data.newId;
+                _this.reloadThoughts(_this.thoughtMid._id);
+            });
+        });
+        this.formLeft.reset();
+        this.thoughtByName = '';
+    };
+    MyroomComponent.prototype.onLeftSubmit = function () {
+        var _this = this;
+        var thought = {
+            value: this.formLeft.get('value').value,
+            user: this.userId,
+            privacy: "private"
+        };
+        this.dataService.newThought(thought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            var rightLink = {
+                user: _this.userId,
+                scale: _this.saveId,
+                thought: _this.thoughtMid._id,
+                type: "after"
+            };
+            var leftLink = {
+                user: _this.userId,
+                scale: _this.thoughtMid._id,
+                thought: _this.saveId,
+                type: "before"
+            };
+            _this.dataService.newLink(rightLink).subscribe(function (data) {
+                _this.dataService.newLink(leftLink).subscribe(function (data) {
+                    _this.reloadThoughts(_this.thoughtMid._id);
+                });
+            });
+        });
+        this.formLeft.reset();
+    };
+    MyroomComponent.prototype.newRightLink = function (id) {
+        var _this = this;
+        var rightLink = {
+            user: this.userId,
+            scale: this.thoughtMid._id,
+            thought: this.thoughtByName._id,
+            type: "after"
+        };
+        var leftLink = {
+            user: this.userId,
+            scale: this.thoughtByName._id,
+            thought: this.thoughtMid._id,
+            type: "before"
+        };
+        this.dataService.newLink(leftLink).subscribe(function (data) {
+            _this.dataService.newLink(rightLink).subscribe(function (data) {
+                _this.reloadThoughts(_this.thoughtMid._id);
+            });
+        });
+        this.formRight.reset();
+        this.thoughtByName = '';
+    };
+    MyroomComponent.prototype.onRightSubmit = function () {
+        var _this = this;
+        var thought = {
+            value: this.formRight.get('value').value,
+            user: this.userId,
+            privacy: "private"
+        };
+        this.dataService.newThought(thought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            var leftLink = {
+                user: _this.userId,
+                scale: _this.saveId,
+                thought: _this.thoughtMid._id,
+                type: "before"
+            };
+            var rightLink = {
+                user: _this.userId,
+                scale: _this.thoughtMid._id,
+                thought: _this.saveId,
+                type: "after"
+            };
+            _this.dataService.newLink(leftLink).subscribe(function (data) {
+                _this.dataService.newLink(rightLink).subscribe(function (data) {
+                    _this.reloadThoughts(_this.thoughtMid._id);
+                });
+            });
+        });
+        this.formRight.reset();
+    };
+    MyroomComponent.prototype.newTopLink = function (id) {
+        var _this = this;
+        var topLink = {
+            user: this.userId,
+            scale: this.thoughtMid._id,
+            thought: this.thoughtByName._id,
+            type: "context"
+        };
+        var botLink = {
+            user: this.userId,
+            scale: this.thoughtByName._id,
+            thought: this.thoughtMid._id,
+            type: "meaning"
+        };
+        this.dataService.newLink(botLink).subscribe(function (data) {
+            _this.dataService.newLink(topLink).subscribe(function (data) {
+                _this.formTop.reset();
+                _this.thoughtByName = '';
+                _this.reloadThoughts(_this.thoughtMid._id);
+            });
+        });
+    };
+    MyroomComponent.prototype.onTopSubmit = function () {
+        var _this = this;
+        var thought = {
+            value: this.formTop.get('value').value,
+            user: this.userId,
+            privacy: "private"
+        };
+        this.dataService.newThought(thought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            var botLink = {
+                user: _this.userId,
+                scale: _this.saveId,
+                thought: _this.thoughtMid._id,
+                type: "meaning"
+            };
+            var topLink = {
+                user: _this.userId,
+                scale: _this.thoughtMid._id,
+                thought: _this.saveId,
+                type: "context"
+            };
+            _this.dataService.newLink(botLink).subscribe(function (data) {
+                _this.dataService.newLink(topLink).subscribe(function (data) {
+                    _this.reloadThoughts(_this.thoughtMid._id);
+                });
+            });
+        });
+        this.formTop.reset();
+    };
+    MyroomComponent.prototype.newTopRightLink = function (id) {
+        var _this = this;
+        var leftLink = {
+            user: this.userId,
+            scale: this.thoughtMid._id,
+            thought: this.thoughtByName._id,
+            type: "linked"
+        };
+        this.dataService.newLink(leftLink).subscribe(function (data) {
+            _this.saveLink = data.newId;
+            _this.formTopRight.reset();
+            _this.thoughtByName = '';
+            _this.reloadThoughts(_this.thoughtMid._id);
+        });
+    };
+    MyroomComponent.prototype.onTopRightSubmit = function () {
+        var _this = this;
+        var thought = {
+            value: this.formTopRight.get('value').value,
+            user: this.userId,
+            privacy: "private"
+        };
+        this.dataService.newThought(thought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            var leftLink = {
+                user: _this.userId,
+                scale: _this.thoughtMid._id,
+                thought: _this.saveId,
+                type: "linked"
+            };
+            _this.dataService.newLink(leftLink).subscribe(function (data) {
+                _this.reloadThoughts(_this.thoughtMid._id);
+            });
+        });
+        this.formLeft.reset();
+    };
+    MyroomComponent.prototype.newBotLink = function (id) {
+        var _this = this;
+        var botLink = {
+            user: this.userId,
+            scale: this.thoughtMid._id,
+            thought: this.thoughtByName._id,
+            type: "meaning"
+        };
+        var topLink = {
+            user: this.userId,
+            scale: this.thoughtByName._id,
+            thought: this.thoughtMid._id,
+            type: "context"
+        };
+        this.dataService.newLink(topLink).subscribe(function (data) {
+            _this.dataService.newLink(botLink).subscribe(function (data) {
+                _this.formBot.reset();
+                _this.thoughtByName = '';
+                _this.reloadThoughts(_this.thoughtMid._id);
+            });
+        });
+    };
+    MyroomComponent.prototype.onBotSubmit = function () {
+        var _this = this;
+        var thought = {
+            value: this.formBot.get('value').value,
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+        };
+        this.dataService.newThought(thought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            var topLink = {
+                user: _this.userId,
+                scale: _this.saveId,
+                thought: _this.thoughtMid._id,
+                type: "context"
+            };
+            var botLink = {
+                user: _this.userId,
+                scale: _this.thoughtMid._id,
+                thought: _this.saveId,
+                type: "meaning"
+            };
+            _this.dataService.newLink(topLink).subscribe(function (data) {
+                _this.dataService.newLink(botLink).subscribe(function (data) {
+                    _this.reloadThoughts(_this.thoughtMid._id);
+                });
+            });
+        });
+        this.formBot.reset();
+    };
+    // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
+    // Reload Thought Lvl 0
+    MyroomComponent.prototype.reloadThoughts = function (id) {
+        this.getMidThought(id);
+        this.getLinksOfThought(id);
+        console.log(this.allLinks);
+        console.log(this.thoughtMid._id);
+        this.editMid = false;
+    };
+    // Reload BotThought Lvl 1
+    MyroomComponent.prototype.reloadThoughtsBot = function (id) {
+        var _this = this;
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.activeThought = {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                }; // Save blog object for use in HTML
+                _this.foundThought = true;
+                _this.dataService.getLinksOfThought(id).subscribe(function (data) {
+                    _this.botLinks = data.allLinks;
+                });
+            }
+        });
+        console.log(this.allLinks);
+        console.log(this.thoughtMid._id);
+        this.editMid = false;
+    };
+    MyroomComponent.prototype.getLinksOfThought = function (id) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getLinksOfThought(id).subscribe(function (data) {
+            _this.allLinks = data.allLinks;
+        });
+    };
+    MyroomComponent.prototype.getMidThought = function (id) {
+        var _this = this;
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.thoughtMid = {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                }; // Save blog object for use in HTML
+                _this.foundThought = true;
+            }
+        });
+    };
+    MyroomComponent.prototype.getThoughtByName = function (value) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getThoughtByName(value).subscribe(function (data) {
+            _this.thoughtByName =
+                {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                };
+        });
+    };
+    //Update Thought
+    MyroomComponent.prototype.updateThoughtSubmit = function () {
+        var _this = this;
+        var thought = {
+            editvalue: this.formMid.get('edit').value,
+            _id: this.thoughtMid._id
+        };
+        this.processing = true; // Lock form fields	
+        // Function to send blog object to backend
+        this.dataService.editThought(thought).subscribe(function (data) {
+            // Check if PUT request was a success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                _this.message = data.message; // Set error message
+                _this.processing = false; // Unlock form fields
+            }
+            else {
+                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                _this.message = data.message; // Set success message
+                // After two seconds, navigate back to blog page
+                _this.reloadThoughts(_this.thoughtMid._id);
+                _this.editMid == false;
+            }
+        });
+    };
+    MyroomComponent.prototype.deleteThought = function (id) {
+        var _this = this;
+        this.dataService.deleteThought(id).subscribe(function (data) {
+            // Check if PUT request was a success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                _this.message = data.message; // Set error message
+                _this.processing = false; // Unlock form fields
+            }
+            else {
+                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                _this.message = data.message; // Set success message
+                // After two seconds, navigate back to blog page
+            }
+        });
+    };
+    MyroomComponent.prototype.deleteLink = function (id) {
+        var _this = this;
+        this.dataService.deleteThought(id).subscribe(function (data) {
+            // Check if PUT request was a success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                _this.message = data.message; // Set error message
+                _this.processing = false; // Unlock form fields
+            }
+            else {
+                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                _this.message = data.message; // Set success message
+                // After two seconds, navigate back to blog page
+            }
+        });
+    };
+    MyroomComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //Load Data
+        this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
+        console.log(this.currentUrl);
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+        });
+        if (!this.currentUrl.id) {
+            this.dataService.getThoughtByName("My-Room").subscribe(function (data) {
+                _this.thoughtMid =
+                    {
+                        value: data.thought.value,
+                        _id: data.thought._id,
+                    };
+                _this.dataService.getLinksOfThought(_this.thoughtMid._id).subscribe(function (data) {
+                    _this.allLinks = data.allLinks;
+                    console.log(_this.allLinks);
+                    console.log(_this.thoughtMid._id);
+                });
+            });
+        }
+        else {
+            this.reloadThoughts(this.currentUrl.id);
+        }
+    };
+    MyroomComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-myroom',
+            template: __webpack_require__("../../../../../src/app/components/myroom/myroom.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/myroom/myroom.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
+    ], MyroomComponent);
+    return MyroomComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/navbar/navbar.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -547,7 +1001,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n      <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\"><a class=\"nav-link\">{{ activeSession.value }} </a></li>\r\n      <div class=\"dropdown\" *ngIf=\"authService.loggedIn()\">\r\n  <button class=\"btn-nav dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n    Session \r\n  </button>\r\n\r\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\r\n    <a class=\"dropdown-item\" *ngFor=\"let thought of allSessionThought\" (click)=\"changeActiveSession(thought._id)\">{{ thought.value }}</a>\r\n  </div>\r\n</div>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/everything\">Everything</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n      <div class=\"search-block input-group\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\" id=\"adv-search\">\r\n               <input type=\"text\" #searchTextBox (keyup)=\"onKeyupNav(searchTextBox.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n                <div class=\"input-group-btn\">\r\n                    <div class=\"btn-group\" role=\"group\">\r\n                        <div class=\"dropdown dropdown-lg open\">\r\n                            <div class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\r\n                              <ul class=\"navbar-nav navbar-right\">\r\n                                <li class=\"nav-item\"><a class=\"nav-link\" [routerLink]=\"['/something/',searchByName._id]\">{{ searchByName.value }}</a></li>\r\n                              </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n      </div>\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n "
+module.exports = "<nav class=\"navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen\">\r\n  <a class=\"navbar-brand\" href=\"#\">Complexity-App</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/myroom\">My-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/home\">Logical-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/projects\">Projects</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n      <div class=\"search-block input-group\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\" id=\"adv-search\">\r\n               <input type=\"text\" #searchTextBox (keyup)=\"onKeyupNav(searchTextBox.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n                <div class=\"input-group-btn\">\r\n                    <div class=\"btn-group\" role=\"group\">\r\n                        <div class=\"dropdown dropdown-lg open\">\r\n                            <div class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\r\n                              <ul class=\"navbar-nav navbar-right\">\r\n                                <li class=\"nav-item\"><a class=\"nav-link\" [routerLink]=\"['/myroom/',searchByName._id]\">{{ searchByName.value }}</a></li>\r\n                              </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n      </div>\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n "
 
 /***/ }),
 
@@ -619,22 +1073,6 @@ var NavbarComponent = (function () {
                 };
         });
     };
-    NavbarComponent.prototype.getSession = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getSession().subscribe(function (data) {
-            _this.allSessionThought = data.sessionThoughts;
-            var last_element = _this.allSessionThought[_this.allSessionThought.length - 1];
-            _this.activeSession = last_element;
-        });
-    };
-    NavbarComponent.prototype.getAllThought = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getAllThought().subscribe(function (data) {
-            _this.allThought = data.thought; // Assign array to use in HTML
-        });
-    };
     // Function to logout user
     NavbarComponent.prototype.onLogoutClick = function () {
         this.authService.logout(); // Logout user
@@ -649,8 +1087,6 @@ var NavbarComponent = (function () {
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.form.reset();
-        this.getAllThought();
-        this.getSession();
         this.authService.getProfile().subscribe(function (profile) {
             _this.username = profile.user.username; // Used when creating new blog posts and comments
             _this.userId = profile.user._id;
@@ -757,47 +1193,83 @@ var NewComponent = (function () {
     };
     NewComponent.prototype.onNewSubmit = function () {
         var _this = this;
-        this.dateNow = new Date().toUTCString();
-        // Create new Session
-        var sessionThought = {
-            value: "Session: " + this.dateNow,
-            user: this.userId
+        this.processing = true;
+        // Create New Thought from user's inputs
+        var thought = {
+            value: this.form.get('value').value,
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
         };
-        this.dataService.newThought(sessionThought).subscribe(function (data) {
-            _this.sessionId = data.newId;
-            var topLink = {
-                user: _this.userId,
-                mid: _this.sessionId,
-                top: _this.sessionId
-            };
-            _this.newLink(topLink);
-            // Create user object form user's inputs
-            _this.processing = true;
-            var thought = {
-                value: _this.form.get('value').value,
-                user: _this.userId
-            };
-            _this.dataService.newThought(thought).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                    _this.newId = data.newId;
-                }
-                var session = {
+        //Save New Thought
+        this.dataService.newThought(thought).subscribe(function (data) {
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger';
+                _this.message = data.message;
+                _this.processing = false;
+            }
+            else {
+                _this.messageClass = 'alert alert-success';
+                _this.message = data.message;
+                _this.newId = data.newId;
+                //Create Session Thought
+                _this.dateNow = new Date().toUTCString();
+                // Create new Session
+                var sessionThought_1 = {
+                    value: "Session: " + _this.dateNow,
                     user: _this.userId,
-                    thought: _this.sessionId,
+                    privacy: "private",
+                    form: "sphere"
                 };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    setTimeout(function () {
-                        _this.router.navigate(['/something', _this.newId]); // Redirect
+                //Get ID of Sessions-Thought (Created OnRegisterSubmit)
+                _this.dataService.getThoughtByName("Sessions").subscribe(function (data) {
+                    _this.sessionsId = data.thought._id;
+                    //Create Session Thought, Save ID
+                    _this.dataService.newThought(sessionThought_1).subscribe(function (data) {
+                        if (!data.success) {
+                            _this.messageClass = 'alert alert-danger';
+                            _this.message = data.message;
+                            _this.processing = false;
+                        }
+                        else {
+                            _this.messageClass = 'alert alert-success';
+                            _this.message = data.message;
+                            _this.sessionId = data.newId;
+                            //Create Link between Sessions and New Session
+                            var sessionLink = {
+                                user: _this.userId,
+                                scale: _this.sessionsId,
+                                thought: _this.sessionId,
+                                type: "meaning",
+                            };
+                            _this.dataService.newLink(sessionLink).subscribe(function (data) {
+                                //Create Session Links
+                                var botLink = {
+                                    user: _this.userId,
+                                    scale: _this.sessionId,
+                                    thought: _this.newId,
+                                    type: "meaning",
+                                    position: 1
+                                };
+                                var topLink = {
+                                    user: _this.userId,
+                                    scale: _this.newId,
+                                    thought: _this.sessionId,
+                                    type: "time",
+                                    position: new Date()
+                                };
+                                _this.dataService.newLink(topLink).subscribe(function (data) {
+                                    _this.dataService.newLink(botLink).subscribe(function (data) {
+                                        setTimeout(function () {
+                                            _this.router.navigate(['/myroom', _this.newId]); // Redirect
+                                        });
+                                    });
+                                });
+                            });
+                        }
                     });
                 });
-            });
+            }
         });
     };
     NewComponent.prototype.ngOnInit = function () {
@@ -900,6 +1372,67 @@ var ProfileComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/projects/projects.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/projects/projects.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  projects works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/projects/projects.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ProjectsComponent = (function () {
+    function ProjectsComponent() {
+    }
+    ProjectsComponent.prototype.ngOnInit = function () {
+    };
+    ProjectsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-projects',
+            template: __webpack_require__("../../../../../src/app/components/projects/projects.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/projects/projects.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ProjectsComponent);
+    return ProjectsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/register/register.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -934,6 +1467,7 @@ module.exports = "<h1 class=\"page-header\">Register</h1>\r\n\r\n\r\n<!-- Custom
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -947,10 +1481,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RegisterComponent = (function () {
-    function RegisterComponent(formBuilder, authService, router) {
+    function RegisterComponent(formBuilder, authService, dataService, router) {
         this.formBuilder = formBuilder;
         this.authService = authService;
+        this.dataService = dataService;
         this.router = router;
         this.processing = false;
         this.createForm(); // Create Angular 2 Form when component loads
@@ -1067,9 +1603,120 @@ var RegisterComponent = (function () {
             else {
                 _this.messageClass = 'alert alert-success';
                 _this.message = data.message;
-                setTimeout(function () {
-                    _this.router.navigate(['/login']); // Redirect to login view
-                }, 500);
+                _this.userId = data.user._id;
+                //Login User 
+                var user_1 = {
+                    username: _this.form.get('username').value,
+                    password: _this.form.get('password').value // Password input field
+                };
+                // Function to send login data to API
+                _this.authService.login(user_1).subscribe(function (data) {
+                    _this.authService.storeUserData(data.token, data.user);
+                    var myroom = {
+                        value: "My-Room",
+                        user: _this.userId,
+                        form: "sphere",
+                        privacy: "private"
+                    };
+                    var sessions = {
+                        value: "Sessions",
+                        user: _this.userId,
+                        form: "sphere",
+                        privacy: "private"
+                    };
+                    var favorites = {
+                        value: "Favorites",
+                        user: _this.userId,
+                        form: "sphere",
+                        privacy: "private"
+                    };
+                    var todo = {
+                        value: "ToDo",
+                        user: _this.userId,
+                        form: "sphere",
+                        privacy: "private"
+                    };
+                    var projects = {
+                        value: "Projects",
+                        user: _this.userId,
+                        form: "sphere",
+                        privacy: "private"
+                    };
+                    //Save Starting Data
+                    _this.dataService.newThought(myroom).subscribe(function (data) {
+                        _this.roomId = data.newId;
+                        _this.dataService.newThought(sessions).subscribe(function (data) {
+                            _this.sessionsId = data.newId;
+                            _this.dataService.newThought(favorites).subscribe(function (data) {
+                                _this.favoritesId = data.newId;
+                                _this.dataService.newThought(todo).subscribe(function (data) {
+                                    _this.todoId = data.newId;
+                                    _this.dataService.newThought(projects).subscribe(function (data) {
+                                        _this.projectsId = data.newId;
+                                        //Create Session Links
+                                        var sessionLink = {
+                                            user: _this.userId,
+                                            scale: _this.roomId,
+                                            thought: _this.sessionsId,
+                                            type: "meaning",
+                                            position: 1
+                                        };
+                                        var favoritesLink = {
+                                            user: _this.userId,
+                                            scale: _this.roomId,
+                                            thought: _this.favoritesId,
+                                            type: "meaning",
+                                            position: 2
+                                        };
+                                        var todoLink = {
+                                            user: _this.userId,
+                                            scale: _this.roomId,
+                                            thought: _this.todoId,
+                                            type: "meaning",
+                                            position: 3
+                                        };
+                                        var sessionLinkb = {
+                                            user: _this.userId,
+                                            scale: _this.sessionsId,
+                                            thought: _this.roomId,
+                                            type: "context",
+                                            position: 1
+                                        };
+                                        var favoritesLinkb = {
+                                            user: _this.userId,
+                                            scale: _this.favoritesId,
+                                            thought: _this.roomId,
+                                            type: "context",
+                                            position: 2
+                                        };
+                                        var todoLinkb = {
+                                            user: _this.userId,
+                                            scale: _this.todoId,
+                                            thought: _this.roomId,
+                                            type: "context",
+                                            position: 3
+                                        };
+                                        _this.dataService.newLink(sessionLink).subscribe(function (data) {
+                                            _this.dataService.newLink(favoritesLink).subscribe(function (data) {
+                                                _this.dataService.newLink(todoLink).subscribe(function (data) {
+                                                    _this.dataService.newLink(sessionLinkb).subscribe(function (data) {
+                                                        _this.dataService.newLink(favoritesLinkb).subscribe(function (data) {
+                                                            _this.dataService.newLink(todoLinkb).subscribe(function (data) {
+                                                                setTimeout(function () {
+                                                                    _this.router.navigate(['/login']); // Redirect to login view
+                                                                }, 500);
+                                                            });
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
             }
         });
     };
@@ -1115,993 +1762,10 @@ var RegisterComponent = (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_data_service__["a" /* DataService */],
             __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]])
     ], RegisterComponent);
     return RegisterComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/session/session.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/session/session.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  session works!\r\n</p>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/session/session.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SessionComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var SessionComponent = (function () {
-    function SessionComponent(formBuilder, authService, dataService, activatedRoute, router) {
-        this.formBuilder = formBuilder;
-        this.authService = authService;
-        this.dataService = dataService;
-        this.activatedRoute = activatedRoute;
-        this.router = router;
-        this.processing = false;
-        this.foundThought = false;
-        this.foundTop = false;
-        this.foundBot = false;
-        this.foundLeft = false;
-        this.foundRight = false;
-        this.editMid = false;
-        this.createNewMidForm(); // Create new  form on start up
-        this.createNewBotForm(); // Create new  form on start up
-        this.createNewTopForm(); // Create new  form on start up
-        this.createNewLeftForm(); // Create new  form on start up
-        this.createNewRightForm(); // Create new  form on start up
-    }
-    // Function to create new blog form
-    SessionComponent.prototype.createNewMidForm = function () {
-        this.formMid = this.formBuilder.group({
-            edit: ''
-        });
-    };
-    SessionComponent.prototype.createNewBotForm = function () {
-        this.formBot = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SessionComponent.prototype.createNewTopForm = function () {
-        this.formTop = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SessionComponent.prototype.createNewLeftForm = function () {
-        this.formLeft = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SessionComponent.prototype.createNewRightForm = function () {
-        this.formRight = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SessionComponent.prototype.EditMid = function () {
-        this.editMid == !this.editMid;
-    };
-    SessionComponent.prototype.onKeyupLeft = function (searchText) {
-        console.log(searchText);
-        this.getThoughtByName(searchText); // Get all blogs on component loa
-        console.log(this.thoughtByName.value);
-    };
-    SessionComponent.prototype.newLeftLink = function (id) {
-        var _this = this;
-        var leftLink = {
-            user: this.userId,
-            mid: this.thoughtMid._id,
-            left: this.thoughtByName._id // E-mail input field
-        };
-        var rightLink = {
-            user: this.userId,
-            mid: this.thoughtByName._id,
-            right: this.thoughtMid._id // E-mail input field
-        };
-        this.dataService.newLink(rightLink).subscribe(function (data) {
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                var session = {
-                    user: _this.userId,
-                    thought: _this.activeSession._id,
-                    link: _this.saveLink // E-mail input field
-                };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    _this.formLeft.reset();
-                    _this.thoughtByName = '';
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-    };
-    SessionComponent.prototype.onLeftSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formLeft.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var rightLink = {
-                user: _this.userId,
-                mid: _this.saveId,
-                right: _this.thoughtMid._id // E-mail input field
-            };
-            var leftLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                left: _this.saveId // E-mail input field
-            };
-            _this.dataService.newLink(rightLink).subscribe(function (data) {
-                _this.dataService.newLink(leftLink).subscribe(function (data) {
-                    _this.saveLink = data.newId;
-                    var session = {
-                        user: _this.userId,
-                        thought: _this.allSessionThought.thought._id,
-                        link: _this.saveLink // E-mail input field
-                    };
-                    _this.dataService.newSession(session).subscribe(function (data) {
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    });
-                });
-            });
-        });
-        this.formLeft.reset();
-    };
-    // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
-    SessionComponent.prototype.newLink = function (link) {
-        var _this = this;
-        this.dataService.newLink(link).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveLink = data.newId;
-            }
-        });
-    };
-    SessionComponent.prototype.newSessionLink = function (link) {
-        var _this = this;
-        this.dataService.newLink(link).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveLink = data.newId;
-            }
-            var session = {
-                user: _this.userId,
-                thought: _this.allSessionThought._id,
-                link: _this.saveLink // E-mail input field
-            };
-            console.log(session);
-            _this.dataService.newSession(session).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                }
-            });
-        });
-    };
-    SessionComponent.prototype.newSession = function (session) {
-        var _this = this;
-        this.dataService.newSession(session).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-            }
-        });
-    };
-    SessionComponent.prototype.newThought = function (thought) {
-        var _this = this;
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveId = data.newId;
-            }
-        });
-    };
-    //Update Thought
-    SessionComponent.prototype.updateThoughtSubmit = function () {
-        var _this = this;
-        var thought = {
-            edit: this.formMid.get('edit').value,
-            _id: this.thoughtMid._id
-        };
-        this.processing = true; // Lock form fields	
-        // Function to send blog object to backend
-        this.dataService.editThought(thought).subscribe(function (data) {
-            // Check if PUT request was a success or not
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                _this.message = data.message; // Set error message
-                _this.processing = false; // Unlock form fields
-            }
-            else {
-                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                _this.message = data.message; // Set success message
-                // After two seconds, navigate back to blog page
-                _this.reloadThoughts(_this.thoughtMid._id);
-                _this.editMid == false;
-            }
-        });
-    };
-    // Reload blogs on current page
-    SessionComponent.prototype.reloadThoughts = function (id) {
-        this.getSessionThoughts(id);
-        this.editMid = false;
-    };
-    SessionComponent.prototype.reloadThoughts1 = function (id) {
-        this.allTopThought1 = this.allTopThought;
-        this.getMidThought(id);
-        this.getBotThought(id);
-        this.getTopThought(id);
-        this.getLeftThought(id);
-        this.getRightThought(id);
-        this.editMid = false;
-    };
-    SessionComponent.prototype.getSession = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getSession().subscribe(function (data) {
-            _this.allSessionThought = data.sessionThoughts;
-            var last_element = _this.allSessionThought[_this.allSessionThought.length - 1];
-            _this.activeSession = last_element;
-        });
-    };
-    SessionComponent.prototype.getSessionThoughts = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getSession().subscribe(function (data) {
-            _this.allSessionThought = data.sessionThoughts;
-            var last_element = _this.allSessionThought[_this.allSessionThought.length - 1];
-            _this.activeSession = last_element;
-        });
-    };
-    SessionComponent.prototype.getBotThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getBotThought(id).subscribe(function (data) {
-            _this.allBotThought = data.botThoughts;
-        });
-    };
-    SessionComponent.prototype.getLeftThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getLeftThought(id).subscribe(function (data) {
-            _this.allLeftThought = data.leftThoughts;
-        });
-    };
-    SessionComponent.prototype.getRightThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getRightThought(id).subscribe(function (data) {
-            _this.allRightThought = data.rightThoughts;
-        });
-    };
-    SessionComponent.prototype.getTopThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getTopThought(id).subscribe(function (data) {
-            _this.allTopThought = data.topThoughts;
-        });
-    };
-    SessionComponent.prototype.getMidThought = function (id) {
-        var _this = this;
-        this.dataService.getSingleThought(id).subscribe(function (data) {
-            // Check if GET request was success or not
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-                _this.message = data.message; // Set error message
-            }
-            else {
-                _this.thoughtMid = {
-                    value: data.thought.value,
-                    _id: data.thought._id,
-                }; // Save blog object for use in HTML
-                _this.foundThought = true;
-            }
-        });
-    };
-    SessionComponent.prototype.getThoughtByName = function (value) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getThoughtByName(value).subscribe(function (data) {
-            _this.thoughtByName =
-                {
-                    value: data.thought.value,
-                    _id: data.thought._id,
-                };
-        });
-    };
-    SessionComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
-        // Get profile username on page load
-        this.getMidThought(this.currentUrl.id);
-        this.getBotThought(this.currentUrl.id);
-        this.getTopThought(this.currentUrl.id);
-        this.getLeftThought(this.currentUrl.id);
-        this.getRightThought(this.currentUrl.id);
-        this.getSession();
-        this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-        });
-    };
-    SessionComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-session',
-            template: __webpack_require__("../../../../../src/app/components/session/session.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/session/session.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
-    ], SessionComponent);
-    return SessionComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/something/something.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".row {\r\n  margin-bottom: 20px;\r\n}\r\n.row .row {\r\n  margin-top: 10px;\r\n  margin-bottom: 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  background-color: white;\r\n}\r\n\r\nhr {\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\nbackground-color:#B089C3;\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n        padding-bottom: 20px;\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/something/something.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t</div>\r\n\r\n<div class=\"card col-md-6\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let topThoughts of allTopThought\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(topThoughts._id)\">{{ topThoughts.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTop (keyup)=\"onKeyupTop(searchTextBoxTop.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t                              </ul>\r\n\t\t                            </div>\r\n\t\t                        </div>\r\n\t\t                    </div>\r\n                \t\t </div>\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t\t\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t\t\t<div class=\"card-body\"></div>\r\n\t\t\t</div>\t\t\t\t\t\t\t\t\r\n\t</div>\t\r\n</div>\r\n<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let leftThoughts of allLeftThought\">\r\n\t\t\t\t\t\t    \t<h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(leftThoughts._id)\">{{ leftThoughts.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<input type=\"text\" #searchTextBoxLeft (keyup)=\"onKeyupLeft(searchTextBoxLeft.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newLeftLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t                              </ul>\r\n\t\t                            </div>\r\n\t\t                        </div>\r\n\t\t                    </div>\r\n                \t\t </div>\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n\t\t<div class=\"card col-md-6\" *ngIf=\"foundThought\">\r\n\t\t\t\t\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\t<div class=\"padding\">\r\n\t\t\t  \r\n\t\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<li class=\"list-group\">\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()>\r\n\t\t\t\t\t\t\t\t\t\t<strong>{{ thoughtMid.value }}</strong>\r\n\t\t\t\t\t\t\t\t\t</h2>\t\r\n\r\n\t\t\t\t\t\t<div class=\"input-group\" *ngIf=\"editMid\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input  type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}\">\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"input-group-addon\"><h2 class=\"btn btn-secondary delete-btn\" (click)=\"deleteThought(thoughtMid._id)\">x</h2></div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t\t</ul>\t\r\n\t\t\t\r\n\t\t\r\n\t\t<!-- Bot Level 1 Form/View -->\r\n\t\t\r\n\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let botThoughts of allBotThought\"><h3  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(botThoughts._id)\">{{ botThoughts.value }}</h3></li>\r\n\t\t\t\t\t\t</ul>\r\n\r\n\r\n\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<input type=\"text\" #searchTextBoxBot (keyup)=\"onKeyupBot(searchTextBoxBot.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newBotLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t                              </ul>\r\n\t\t                            </div>\r\n\t\t                        </div>\r\n\t\t                    </div>\r\n                \t\t </div>\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t  \r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t<div class=\"card-body\">\r\n\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let rightThoughts of allRightThought\">\r\n\r\n\t\t\t\t\t\t    \t<h4  class=\"btn btn-secondary btn-block\" (click)=\"reloadThoughts(rightThoughts._id)\">{{ rightThoughts.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<input type=\"text\" #searchTextBoxRight (keyup)=\"onKeyupRight(searchTextBoxRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t                              </ul>\r\n\t\t                            </div>\r\n\t\t                        </div>\r\n\t\t                    </div>\r\n                \t\t </div>\r\n\t\t\t\t</div>\r\n\t\t\t\t</form>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\r\n</div>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/something/something.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SomethingComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var SomethingComponent = (function () {
-    function SomethingComponent(formBuilder, authService, dataService, activatedRoute, router) {
-        this.formBuilder = formBuilder;
-        this.authService = authService;
-        this.dataService = dataService;
-        this.activatedRoute = activatedRoute;
-        this.router = router;
-        this.processing = false;
-        this.foundThought = false;
-        this.foundTop = false;
-        this.foundBot = false;
-        this.foundLeft = false;
-        this.foundRight = false;
-        this.editMid = false;
-        this.createNewMidForm(); // Create new  form on start up
-        this.createNewBotForm(); // Create new  form on start up
-        this.createNewTopForm(); // Create new  form on start up
-        this.createNewLeftForm(); // Create new  form on start up
-        this.createNewRightForm(); // Create new  form on start up
-    }
-    // Function to create new blog form
-    SomethingComponent.prototype.createNewMidForm = function () {
-        this.formMid = this.formBuilder.group({
-            edit: ''
-        });
-    };
-    SomethingComponent.prototype.createNewBotForm = function () {
-        this.formBot = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SomethingComponent.prototype.createNewTopForm = function () {
-        this.formTop = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SomethingComponent.prototype.createNewLeftForm = function () {
-        this.formLeft = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SomethingComponent.prototype.createNewRightForm = function () {
-        this.formRight = this.formBuilder.group({
-            value: ''
-        });
-    };
-    SomethingComponent.prototype.EditMid = function () {
-        if (this.editMid == false) {
-            this.editMid = true;
-        }
-        else {
-            this.editMid = false;
-        }
-    };
-    SomethingComponent.prototype.onKeyupLeft = function (searchText) {
-        console.log(searchText);
-        this.getThoughtByName(searchText); // Get all blogs on component loa
-        console.log(this.thoughtByName.value);
-    };
-    SomethingComponent.prototype.onKeyupRight = function (searchText) {
-        console.log(searchText);
-        this.getThoughtByName(searchText); // Get all blogs on component loa
-        console.log(this.thoughtByName.value);
-    };
-    SomethingComponent.prototype.onKeyupTop = function (searchText) {
-        console.log(searchText);
-        this.getThoughtByName(searchText); // Get all blogs on component loa
-        console.log(this.thoughtByName.value);
-    };
-    SomethingComponent.prototype.onKeyupBot = function (searchText) {
-        console.log(searchText);
-        this.getThoughtByName(searchText); // Get all blogs on component loa
-        console.log(this.thoughtByName.value);
-    };
-    SomethingComponent.prototype.newLeftLink = function (id) {
-        var _this = this;
-        var leftLink = {
-            user: this.userId,
-            mid: this.thoughtMid._id,
-            left: this.thoughtByName._id // E-mail input field
-        };
-        var rightLink = {
-            user: this.userId,
-            mid: this.thoughtByName._id,
-            right: this.thoughtMid._id // E-mail input field
-        };
-        this.dataService.newLink(rightLink).subscribe(function (data) {
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                var session = {
-                    user: _this.userId,
-                    thought: _this.activeSession._id,
-                    link: _this.saveLink // E-mail input field
-                };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    _this.formLeft.reset();
-                    _this.thoughtByName = '';
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-    };
-    SomethingComponent.prototype.onLeftSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formLeft.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var rightLink = {
-                user: _this.userId,
-                mid: _this.saveId,
-                right: _this.thoughtMid._id // E-mail input field
-            };
-            var leftLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                left: _this.saveId // E-mail input field
-            };
-            _this.dataService.newLink(rightLink).subscribe(function (data) {
-                _this.dataService.newLink(leftLink).subscribe(function (data) {
-                    _this.saveLink = data.newId;
-                    var session = {
-                        user: _this.userId,
-                        thought: _this.activeSession._id,
-                        link: _this.saveLink // E-mail input field
-                    };
-                    _this.dataService.newSession(session).subscribe(function (data) {
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    });
-                });
-            });
-        });
-        this.formLeft.reset();
-    };
-    SomethingComponent.prototype.newRightLink = function (id) {
-        var _this = this;
-        var rightLink = {
-            user: this.userId,
-            mid: this.thoughtMid._id,
-            right: this.thoughtByName._id // E-mail input field
-        };
-        var leftLink = {
-            user: this.userId,
-            mid: this.thoughtByName._id,
-            left: this.thoughtMid._id // E-mail input field
-        };
-        this.dataService.newLink(leftLink).subscribe(function (data) {
-            _this.dataService.newLink(rightLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                var session = {
-                    user: _this.userId,
-                    thought: _this.activeSession._id,
-                    link: _this.saveLink // E-mail input field
-                };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    _this.formRight.reset();
-                    _this.thoughtByName = '';
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-    };
-    SomethingComponent.prototype.onRightSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formRight.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var leftLink = {
-                user: _this.userId,
-                mid: _this.saveId,
-                left: _this.thoughtMid._id // E-mail input field
-            };
-            var rightLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                right: _this.saveId // E-mail input field
-            };
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.dataService.newLink(rightLink).subscribe(function (data) {
-                    _this.saveLink = data.newId;
-                    var session = {
-                        user: _this.userId,
-                        thought: _this.activeSession._id,
-                        link: _this.saveLink // E-mail input field
-                    };
-                    _this.dataService.newSession(session).subscribe(function (data) {
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    });
-                });
-            });
-        });
-        this.formRight.reset();
-    };
-    SomethingComponent.prototype.newTopLink = function (id) {
-        var _this = this;
-        var topLink = {
-            user: this.userId,
-            mid: this.thoughtMid._id,
-            top: this.thoughtByName._id // E-mail input field
-        };
-        var botLink = {
-            user: this.userId,
-            mid: this.thoughtByName._id,
-            bot: this.thoughtMid._id // E-mail input field
-        };
-        this.dataService.newLink(botLink).subscribe(function (data) {
-            _this.dataService.newLink(topLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                var session = {
-                    user: _this.userId,
-                    thought: _this.activeSession._id,
-                    link: _this.saveLink // E-mail input field
-                };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    _this.formTop.reset();
-                    _this.thoughtByName = '';
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-    };
-    SomethingComponent.prototype.onTopSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formTop.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var botLink = {
-                user: _this.userId,
-                mid: _this.saveId,
-                bot: _this.thoughtMid._id // E-mail input field
-            };
-            var topLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                top: _this.saveId // E-mail input field
-            };
-            _this.dataService.newLink(botLink).subscribe(function (data) {
-                _this.dataService.newLink(topLink).subscribe(function (data) {
-                    _this.saveLink = data.newId;
-                    var session = {
-                        user: _this.userId,
-                        thought: _this.activeSession._id,
-                        link: _this.saveLink // E-mail input field
-                    };
-                    _this.dataService.newSession(session).subscribe(function (data) {
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    });
-                });
-            });
-        });
-        this.formTop.reset();
-    };
-    SomethingComponent.prototype.newBotLink = function (id) {
-        var _this = this;
-        var botLink = {
-            user: this.userId,
-            mid: this.thoughtMid._id,
-            bot: this.thoughtByName._id // E-mail input field
-        };
-        var topLink = {
-            user: this.userId,
-            mid: this.thoughtByName._id,
-            top: this.thoughtMid._id // E-mail input field
-        };
-        this.dataService.newLink(topLink).subscribe(function (data) {
-            _this.dataService.newLink(botLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                var session = {
-                    user: _this.userId,
-                    thought: _this.activeSession._id,
-                    link: _this.saveLink // E-mail input field
-                };
-                _this.dataService.newSession(session).subscribe(function (data) {
-                    _this.formBot.reset();
-                    _this.thoughtByName = '';
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-    };
-    SomethingComponent.prototype.onBotSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formBot.get('value').value,
-            user: this.userId,
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var topLink = {
-                user: _this.userId,
-                mid: _this.saveId,
-                top: _this.thoughtMid._id // E-mail input field
-            };
-            var botLink = {
-                user: _this.userId,
-                mid: _this.thoughtMid._id,
-                bot: _this.saveId // E-mail input field
-            };
-            _this.dataService.newLink(topLink).subscribe(function (data) {
-                _this.dataService.newLink(botLink).subscribe(function (data) {
-                    _this.saveLink = data.newId;
-                    var session = {
-                        user: _this.userId,
-                        thought: _this.activeSession._id,
-                        link: _this.saveLink // E-mail input field
-                    };
-                    _this.dataService.newSession(session).subscribe(function (data) {
-                        _this.reloadThoughts(_this.thoughtMid._id);
-                    });
-                });
-            });
-        });
-        this.formBot.reset();
-    };
-    // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
-    SomethingComponent.prototype.newLink = function (link) {
-        var _this = this;
-        this.dataService.newLink(link).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveLink = data.newId;
-            }
-        });
-    };
-    SomethingComponent.prototype.newSessionLink = function (link) {
-        var _this = this;
-        this.dataService.newLink(link).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveLink = data.newId;
-            }
-            var session = {
-                user: _this.userId,
-                thought: _this.allSessionThought._id,
-                link: _this.saveLink // E-mail input field
-            };
-            console.log(session);
-            _this.dataService.newSession(session).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                }
-            });
-        });
-    };
-    SomethingComponent.prototype.newSession = function (session) {
-        var _this = this;
-        this.dataService.newSession(session).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-            }
-        });
-    };
-    SomethingComponent.prototype.newThought = function (thought) {
-        var _this = this;
-        this.dataService.newThought(thought).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveId = data.newId;
-            }
-        });
-    };
-    //Update Thought
-    SomethingComponent.prototype.updateThoughtSubmit = function () {
-        var _this = this;
-        var thought = {
-            edit: this.formMid.get('edit').value,
-            _id: this.thoughtMid._id
-        };
-        this.processing = true; // Lock form fields	
-        // Function to send blog object to backend
-        this.dataService.editThought(thought).subscribe(function (data) {
-            // Check if PUT request was a success or not
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                _this.message = data.message; // Set error message
-                _this.processing = false; // Unlock form fields
-            }
-            else {
-                _this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                _this.message = data.message; // Set success message
-                // After two seconds, navigate back to blog page
-                _this.reloadThoughts(_this.thoughtMid._id);
-                _this.editMid == false;
-            }
-        });
-    };
-    // Reload blogs on current page
-    SomethingComponent.prototype.reloadThoughts = function (id) {
-        this.loadingLink = true; // Used to lock button
-        this.getMidThought(id);
-        this.getBotThought(id);
-        this.getTopThought(id);
-        this.getLeftThought(id);
-        this.getRightThought(id);
-        this.editMid = false;
-    };
-    SomethingComponent.prototype.reloadThoughts1 = function (id) {
-        this.allTopThought1 = this.allTopThought;
-        this.getMidThought(id);
-        this.getBotThought(id);
-        this.getTopThought(id);
-        this.getLeftThought(id);
-        this.getRightThought(id);
-        this.editMid = false;
-    };
-    SomethingComponent.prototype.getSession = function () {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getSession().subscribe(function (data) {
-            _this.allSessionThought = data.sessionThoughts;
-            var last_element = _this.allSessionThought[_this.allSessionThought.length - 1];
-            _this.activeSession = last_element;
-        });
-    };
-    SomethingComponent.prototype.getBotThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getBotThought(id).subscribe(function (data) {
-            _this.allBotThought = data.botThoughts;
-        });
-    };
-    SomethingComponent.prototype.getLeftThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getLeftThought(id).subscribe(function (data) {
-            _this.allLeftThought = data.leftThoughts;
-        });
-    };
-    SomethingComponent.prototype.getRightThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getRightThought(id).subscribe(function (data) {
-            _this.allRightThought = data.rightThoughts;
-        });
-    };
-    SomethingComponent.prototype.getTopThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getTopThought(id).subscribe(function (data) {
-            _this.allTopThought = data.topThoughts;
-        });
-    };
-    SomethingComponent.prototype.getMidThought = function (id) {
-        var _this = this;
-        this.dataService.getSingleThought(id).subscribe(function (data) {
-            // Check if GET request was success or not
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-                _this.message = data.message; // Set error message
-            }
-            else {
-                _this.thoughtMid = {
-                    value: data.thought.value,
-                    _id: data.thought._id,
-                }; // Save blog object for use in HTML
-                _this.foundThought = true;
-            }
-        });
-    };
-    SomethingComponent.prototype.getThoughtByName = function (value) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getThoughtByName(value).subscribe(function (data) {
-            _this.thoughtByName =
-                {
-                    value: data.thought.value,
-                    _id: data.thought._id,
-                };
-        });
-    };
-    SomethingComponent.prototype.deleteThought = function (id) {
-        this.dataService.deleteThought(id).subscribe(function (data) {
-        });
-    };
-    SomethingComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
-        // Get profile username on page load
-        this.getMidThought(this.currentUrl.id);
-        this.getBotThought(this.currentUrl.id);
-        this.getTopThought(this.currentUrl.id);
-        this.getLeftThought(this.currentUrl.id);
-        this.getRightThought(this.currentUrl.id);
-        this.getSession();
-        this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-        });
-    };
-    SomethingComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-something',
-            template: __webpack_require__("../../../../../src/app/components/something/something.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/something/something.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
-    ], SomethingComponent);
-    return SomethingComponent;
 }());
 
 
@@ -2231,7 +1895,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
@@ -2341,33 +2005,9 @@ var DataService = (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(function (res) { return res.json(); });
     };
-    DataService.prototype.getEverything = function () {
+    DataService.prototype.getLinksOfThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/everything', this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getBotThought = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/botThought/' + id, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getTopThought = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/topThought/' + id, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getLeftThought = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/leftThought/' + id, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getRightThought = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/rightThought/' + id, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getSession = function () {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/session', this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.getBotLink = function () {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/botLink', this.options).map(function (res) { return res.json(); });
+        return this.http.get(this.domain + '/datatransfer/linksOfThought/' + id, this.options).map(function (res) { return res.json(); });
     };
     DataService.prototype.getSingleThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
@@ -2389,6 +2029,15 @@ var DataService = (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(function (res) { return res.json(); });
     };
+    DataService.prototype.deleteLink = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.delete(this.domain + 'datatransfer/deleteLink/' + id, this.options).map(function (res) { return res.json(); });
+    };
+    // Function to edit/update blog post
+    DataService.prototype.editLink = function (link) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.put(this.domain + 'datatransfer/editLink/', link, this.options).map(function (res) { return res.json(); });
+    };
     /* ===============================================================
          ADD DATA
       =============================================================== */
@@ -2399,10 +2048,6 @@ var DataService = (function () {
     DataService.prototype.newThought = function (thought) {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.newSession = function (session) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.post(this.domain + '/datatransfer/newSession', session, this.options).map(function (res) { return res.json(); });
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

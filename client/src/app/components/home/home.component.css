@@ -1,0 +1,62 @@
+.row {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+[class*="col-"] {
+  text-align: center;
+  background-color: white;
+}
+
+h2 {
+  font-size: 20px;
+  background-color:#805096;
+}
+h3 {
+
+}
+h4 {
+ background-color:#5F5293;
+}
+strong {
+  font-size: 25px;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+}
+ 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-primary {
+    background: #0099cc;
+    color: #ffffff;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #33a6cc;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+.padding {
+}
+.input-group-addon {
+  padding: 0 0 0 0;
+
+}
+.delete-btn {
+  margin: 0 0 0 0;
+}
+
+.topleft {
+        background: #ffffff;
+
+      }
+.midmid {
+     
+      }

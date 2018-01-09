@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-register',
@@ -18,10 +19,17 @@ export class RegisterComponent implements OnInit {
   emailMessage;
   usernameValid;
   usernameMessage;
+  userId;
+  projectsId;
+  sessionsId;
+  favoritesId;
+  todoId;
+  roomId;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private dataService: DataService,
     private router: Router
    ) {
     this.createForm(); // Create Angular 2 Form when component loads
@@ -141,11 +149,138 @@ export class RegisterComponent implements OnInit {
      } else {
      	this.messageClass = 'alert alert-success';
      	this.message = data.message;
-     	setTimeout(() => {
-        this.router.navigate(['/login']); // Redirect to login view
-        }, 500);
-      }
+      this.userId = data.user._id;
+
+      //Login User 
+      const user = {
+      username: this.form.get('username').value, // Username input field
+      password: this.form.get('password').value // Password input field
+    }
+
+    // Function to send login data to API
+    this.authService.login(user).subscribe(data => {
+          this.authService.storeUserData(data.token, data.user)
+          const myroom = {
+            value: "My-Room", // input field
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+          };
+    
+          const sessions = {
+            value: "Sessions", // input field
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+          };
+
+          const favorites = {
+            value: "Favorites", // input field
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+          };
+
+            const todo = {
+            value: "ToDo", // input field
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+          };
+
+            const projects = {
+            value: "Projects", // input field
+            user: this.userId,
+            form: "sphere",
+            privacy: "private"
+          };
+
+
+
+          //Save Starting Data
+        this.dataService.newThought(myroom).subscribe(data => {
+            this.roomId = data.newId;
+          this.dataService.newThought(sessions).subscribe(data => {
+            this.sessionsId = data.newId;
+                   this.dataService.newThought(favorites).subscribe(data => {
+                     this.favoritesId = data.newId;
+                        this.dataService.newThought(todo).subscribe(data => {
+                          this.todoId = data.newId;
+                          this.dataService.newThought(projects).subscribe(data => {
+                            this.projectsId = data.newId;
+
+                              //Create Session Links
+                                      const sessionLink = {
+                                      user: this.userId,
+                                      scale: this.roomId,
+                                      thought: this.sessionsId, 
+                                      type: "meaning",
+                                      position: 1
+                                    };
+
+                                      const favoritesLink = {
+                                      user: this.userId,
+                                      scale: this.roomId,
+                                      thought: this.favoritesId, 
+                                      type: "meaning",
+                                      position: 2
+                                    };
+                                     const todoLink = {
+                                      user: this.userId,
+                                      scale: this.roomId,
+                                      thought: this.todoId, 
+                                      type: "meaning",
+                                      position: 3
+                                    };
+                                    const sessionLinkb = {
+                                      user: this.userId,
+                                      scale: this.sessionsId,
+                                      thought: this.roomId, 
+                                      type: "context",
+                                      position: 1
+                                    };
+
+                                      const favoritesLinkb = {
+                                      user: this.userId,
+                                      scale: this.favoritesId,
+                                      thought: this.roomId, 
+                                      type: "context",
+                                      position: 2
+                                    };
+                                     const todoLinkb = {
+                                      user: this.userId,
+                                      scale: this.todoId,
+                                      thought: this.roomId, 
+                                      type: "context",
+                                      position: 3
+                                    };
+                                      this.dataService.newLink(sessionLink).subscribe(data => {
+                                        this.dataService.newLink(favoritesLink).subscribe(data => {
+                                           this.dataService.newLink(todoLink).subscribe(data => {
+                                             this.dataService.newLink(sessionLinkb).subscribe(data => {
+                                                        this.dataService.newLink(favoritesLinkb).subscribe(data => {
+                                                           this.dataService.newLink(todoLinkb).subscribe(data => {
+                         
+                                    setTimeout(() => {
+                                    this.router.navigate(['/login']); // Redirect to login view
+                                    }, 500);
+                                
+                                 });
+                                                           
+                              });
+                            });
+                          });
+                      });
+                    });
+                  });
+                });
+              }); 
+            });
+        });
      });
+          }
+    });
+
   }
 
   // Function to check if e-mail is taken
