@@ -527,7 +527,7 @@ onBotSubmit() {
   		//Update Thought
 	    updateThoughtSubmit() {
 	      const thought = {
-	    	editvalue: this.formMid.get('edit').value, // E-mail input field
+	    	editValue: this.formMid.get('edit').value, // E-mail input field
 	      	_id: this.thoughtMid._id
 	    };
 	    this.processing = true; // Lock form fields	
