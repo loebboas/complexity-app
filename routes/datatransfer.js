@@ -116,7 +116,7 @@ router.post('/newLink', (req, res) => {
               } else {
 
               // Search database for Thought
-              Thought.findOne({user: req.decoded.userId, value: req.params.value}, (err, thought) => {
+              Thought.findOne({user: req.decoded.userId, value: new RegExp('^'+req.params.value+'$', "i")}, (err, thought) => {
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
