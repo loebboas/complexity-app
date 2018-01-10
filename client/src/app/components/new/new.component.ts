@@ -83,7 +83,7 @@ export class NewComponent implements OnInit {
              this.dateNow = new Date().toUTCString();
               // Create new Session
                 const sessionThought = {
-                value: "Session: " + this.dateNow, // input field
+                value: this.dateNow, // input field
                 user: this.userId,
                 privacy: "private",
                 form: "sphere"

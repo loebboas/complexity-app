@@ -254,20 +254,37 @@ export class RegisterComponent implements OnInit {
                                       type: "context",
                                       position: 3
                                     };
+                                      const projectLink = {
+                                      user: this.userId,
+                                      scale: this.projectsId,
+                                      thought: this.roomId, 
+                                      type: "before",
+                                      position: 1
+                                    };
+                                      const projectLinkb = {
+                                      user: this.userId,
+                                      scale: this.roomId,
+                                      thought: this.projectsId, 
+                                      type: "after",
+                                      position: 1
+                                    };
                                       this.dataService.newLink(sessionLink).subscribe(data => {
                                         this.dataService.newLink(favoritesLink).subscribe(data => {
                                            this.dataService.newLink(todoLink).subscribe(data => {
                                              this.dataService.newLink(sessionLinkb).subscribe(data => {
                                                         this.dataService.newLink(favoritesLinkb).subscribe(data => {
                                                            this.dataService.newLink(todoLinkb).subscribe(data => {
-                         
+                                                             this.dataService.newLink(projectLinkb).subscribe(data => {
+                                                               this.dataService.newLink(projectLink).subscribe(data => {
                                     setTimeout(() => {
                                     this.router.navigate(['/login']); // Redirect to login view
                                     }, 500);
                                 
-                                 });
-                                                           
-                              });
+                                       });
+                                                                 
+                                    });
+                                  });
+                                });
                             });
                           });
                       });

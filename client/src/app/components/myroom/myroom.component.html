@@ -5,7 +5,7 @@
 				<div class="card-body topleft">
 					<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='time'" (click)="reloadThoughts(link._id)">{{ link.value }}{{ link.form }}</h4>
+						    	<h4 class="btn topleft-links btn-secondary btn-block" *ngIf="link.form=='time'" (click)="reloadThoughts(link._id)">{{ link.value }}{{ link.form }}</h4>
 						    </li>
 					</ul>
 				</div>
@@ -16,7 +16,7 @@
 				<div class="card-body topmid">
 					<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='context'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	<h4 class="btn  top-links btn-secondary btn-block" *ngIf="link.form=='context'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
 						    </li>
 
 						</ul>
@@ -44,10 +44,10 @@
 
 			<!-- TopRight: LinkedLinks -->
 			<div class="card col-md-3 border-0">
-				<div class="card-body topright"></div>
+				<div class="card-body topright">
 				<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='linked'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	<h4 class="btn  topright-links btn-secondary btn-block" *ngIf="link.form=='linked'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
 						    </li>
 
 						</ul>
@@ -67,6 +67,7 @@
 			                		 </div>
 							</div>
 						</form>
+				</div>
 			</div>
 	</div>
 
@@ -76,7 +77,7 @@
 				<div class="card-body midleft">
 					<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='before'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	<h4 class="btn left-links btn-secondary btn-block" *ngIf="link.form=='before'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
 						    </li>
 
 						</ul>
@@ -107,7 +108,7 @@
 						<form [formGroup]="formMid" (ngSubmit)="updateThoughtSubmit()">
 							<div class="form-group">
 								<li class="list-group">
-									<h2 class="btn btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>	
+									<h2 class="btn mid-links btn-secondary btn-block" *ngIf="!editMid" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>	
 									<div class="input-group" *ngIf="editMid">
 										<div class="input-group">
 											<input  type="text" class="form-control" name="edit" formControlName="edit" placeholder="{{ thoughtMid.value }}{{ thoughtMid._id }}">
@@ -128,7 +129,7 @@
 				<div class="card-body midright">
 					<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='after'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	<h4 class="btn right-links btn-secondary btn-block" *ngIf="link.form=='after'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
 						    </li>
 
 						</ul>
@@ -164,7 +165,8 @@
 				<div class="card-body botmid">
 						<ul class="list-group">
 						    <li class="list-group" *ngFor="let link of allLinks">
-						    	<h4 class="btn btn-secondary btn-block" *ngIf="link.form=='meaning'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	<h4 class="btn bot-links btn-secondary btn-block" *ngIf="link.form=='meaning'" (click)="reloadThoughts(link._id)">{{ link.value }}</h4>
+						    	
 						    </li>
 
 						</ul>

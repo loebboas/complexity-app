@@ -1,0 +1,49 @@
+.mid-links {
+background-color: #3C4A81;
+}
+
+.left-links {
+background-color: #3A4F7F;
+}
+
+
+.right-links {
+background-color: #3F4284;
+}
+
+.bot-links {
+background-color: #616B99;
+}
+
+.top-links {
+background-color: #23306B;
+}
+
+.topleft-links {
+background-color: #5E6F97;
+}
+
+.topright-links {
+background-color: #64679C;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+}
+ 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn:hover, .btn:focus, .btn:active, .btn.active, .open > .dropdown-toggle.btn {
+    background: #74779C;
+}
+ 
+.btn:active, .btn.active {
+    background: #74779C;
+    box-shadow: none;
+}
+strong {
+  font-size: 25px;
+}

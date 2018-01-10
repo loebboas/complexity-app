@@ -241,7 +241,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\n\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\n\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}\r\n\r\n.topleft {\r\n        background: #ffffff;\r\n\r\n      }\r\n.midmid {\r\n     \r\n      }", ""]);
+exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}\r\n\r\n.topleft {\r\n        background: #ffffff;\r\n\r\n      }\r\n.midmid {\r\n     \r\n      }", ""]);
 
 // exports
 
@@ -881,7 +881,7 @@ var MyroomComponent = (function () {
     MyroomComponent.prototype.updateThoughtSubmit = function () {
         var _this = this;
         var thought = {
-            editvalue: this.formMid.get('edit').value,
+            editValue: this.formMid.get('edit').value,
             _id: this.thoughtMid._id
         };
         this.processing = true; // Lock form fields	
