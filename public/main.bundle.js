@@ -441,7 +441,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\n\r\nh2 {\r\n  font-size: 20px;\r\n  background-color:#805096;\r\n}\r\nh3 {\r\nbackground-color:#B089C3;\r\n}\r\nh4 {\r\n background-color:#5F5293;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn-primary {\r\n    background: #0099cc;\r\n    color: #ffffff;\r\n}\r\n \r\n.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {\r\n    background: #33a6cc;\r\n}\r\n \r\n.btn-primary:active, .btn-primary.active {\r\n    background: #007299;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}\r\n\r\n.topleft {\r\n        background: #ffffff;\r\n\r\n      }", ""]);
+exports.push([module.i, ".row {\r\n  margin: 0 0 0 0;\r\n  padding: 0 0 0 0;\r\n}\r\n[class*=\"col-\"] {\r\n  text-align: center;\r\n  background-color: white;\r\n}\r\n.mid-links {\r\nbackground-color: #306875;\r\n}\r\n\r\n.left-links {\r\nbackground-color: #2E746F;\r\n}\r\n\r\n\r\n.right-links {\r\nbackground-color: #336078;\r\n}\r\n\r\n.bot-links {\r\nbackground-color: #52808B;\r\n}\r\n\r\n.top-links {\r\nbackground-color: #185361;\r\n}\r\n\r\n.topleft-links {\r\nbackground-color: #508A86;\r\n}\r\n\r\n.topright-links {\r\nbackground-color: #567B8F;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn:hover, .btn:focus, .btn:active, .btn.active, .open > .dropdown-toggle.btn {\r\n    background: #77979E;\r\n}\r\n \r\n.btn:active, .btn.active {\r\n    background: #77979E;\r\n    box-shadow: none;\r\n}\r\n.padding {\r\n}\r\n.input-group-addon {\r\n  padding: 0 0 0 0;\r\n\r\n}\r\n.delete-btn {\r\n  margin: 0 0 0 0;\r\n}", ""]);
 
 // exports
 
@@ -454,7 +454,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/myroom/myroom.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t <!-- TopLeft: TimeLinks-->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='time'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}{{ link.form }}</h4>\n\t\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- TopMid: ContextLinks -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body topmid\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='context'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTop (keyup)=\"onKeyupTop(searchTextBoxTop.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\n\t\t\t</div>\n\n\n\t\t\t<!-- TopRight: LinkedLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topright\"></div>\n\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='linked'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTopRight\" (ngSubmit)=\"onTopRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTopRight (keyup)=\"onKeyupTopRight(searchTextBoxTopRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t</div>\n\t</div>\n\n\t<div class=\"row\">\n\t\t\t<!-- MidLeft: BeforeLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='before'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxLeft (keyup)=\"onKeyupLeft(searchTextBoxLeft.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newLeftLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidMid: ScaleThought -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body midmid\">\n\t\t\t\t\t<ul class=\"list-group list-group\">\n\t\t\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<li class=\"list-group\">\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>\t\n\t\t\t\t\t\t\t\t\t<div class=\"input-group\" *ngIf=\"editMid\">\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t\t\t<input  type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}{{ thoughtMid._id }}\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary delete-btn\" (click)=\"deleteThought(thoughtMid._id)\">x</h2>\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</div>\t\t\t\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</ul>\t\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidRight: AfterLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midright\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='after'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxRight (keyup)=\"onKeyupRight(searchTextBoxRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\n\n\t<div class=\"row\">\n\t\t\t<!-- BotLeft: Context1 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botleft\"></div>\n\t\t\t</div>\n\t\t\t<!-- BotMid: Context2 -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body botmid\">\n\t\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary btn-block\" *ngIf=\"link.form=='meaning'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxBot (keyup)=\"onKeyupBot(searchTextBoxBot.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newBotLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- BotRight: Context3 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botright\"></div>\n\t\t\t</div>\n\t</div>\n\n\n</div>\n\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t <!-- TopLeft: TimeLinks-->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn topleft-links btn-secondary btn-block\" *ngIf=\"link.form=='time'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}{{ link.form }}</h4>\n\t\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- TopMid: ContextLinks -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body topmid\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn  top-links btn-secondary btn-block\" *ngIf=\"link.form=='context'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTop (keyup)=\"onKeyupTop(searchTextBoxTop.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\n\t\t\t</div>\n\n\n\t\t\t<!-- TopRight: LinkedLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topright\">\n\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn  topright-links btn-secondary btn-block\" *ngIf=\"link.form=='linked'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formTopRight\" (ngSubmit)=\"onTopRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTopRight (keyup)=\"onKeyupTopRight(searchTextBoxTopRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\t<div class=\"row\">\n\t\t\t<!-- MidLeft: BeforeLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn left-links btn-secondary btn-block\" *ngIf=\"link.form=='before'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxLeft (keyup)=\"onKeyupLeft(searchTextBoxLeft.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newLeftLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidMid: ScaleThought -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body midmid\">\n\t\t\t\t\t<ul class=\"list-group list-group\">\n\t\t\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<li class=\"list-group\">\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn mid-links btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>\t\n\t\t\t\t\t\t\t\t\t<div class=\"input-group\" *ngIf=\"editMid\">\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t\t\t<input  type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}{{ thoughtMid._id }}\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary delete-btn\" (click)=\"deleteThought(thoughtMid._id)\">x</h2>\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</div>\t\t\t\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</ul>\t\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidRight: AfterLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midright\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn right-links btn-secondary btn-block\" *ngIf=\"link.form=='after'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxRight (keyup)=\"onKeyupRight(searchTextBoxRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\n\n\t<div class=\"row\">\n\t\t\t<!-- BotLeft: Context1 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botleft\"></div>\n\t\t\t</div>\n\t\t\t<!-- BotMid: Context2 -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body botmid\">\n\t\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn bot-links btn-secondary btn-block\" *ngIf=\"link.form=='meaning'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    \t\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxBot (keyup)=\"onKeyupBot(searchTextBoxBot.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newBotLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\n\t\t\t\t\t                              </ul>\n\t\t\t\t\t                            </div>\n\t\t\t\t\t                        </div>\n\t\t\t\t\t                    </div>\n\t\t\t                \t\t </div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- BotRight: Context3 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botright\"></div>\n\t\t\t</div>\n\t</div>\n\n\n</div>\n\n"
 
 /***/ }),
 
@@ -1216,7 +1216,7 @@ var NewComponent = (function () {
                 _this.dateNow = new Date().toUTCString();
                 // Create new Session
                 var sessionThought_1 = {
-                    value: "Session: " + _this.dateNow,
+                    value: _this.dateNow,
                     user: _this.userId,
                     privacy: "private",
                     form: "sphere"
@@ -1380,7 +1380,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".mid-links {\r\nbackground-color: #3C4A81;\r\n}\r\n\r\n.left-links {\r\nbackground-color: #3A4F7F;\r\n}\r\n\r\n\r\n.right-links {\r\nbackground-color: #3F4284;\r\n}\r\n\r\n.bot-links {\r\nbackground-color: #616B99;\r\n}\r\n\r\n.top-links {\r\nbackground-color: #23306B;\r\n}\r\n\r\n.topleft-links {\r\nbackground-color: #5E6F97;\r\n}\r\n\r\n.topright-links {\r\nbackground-color: #64679C;\r\n}\r\n\r\n.btn {\r\n    padding: 14px 24px;\r\n    border: 0 none;\r\n}\r\n \r\n.btn:focus, .btn:active:focus, .btn.active:focus {\r\n    outline: 0 none;\r\n}\r\n \r\n.btn:hover, .btn:focus, .btn:active, .btn.active, .open > .dropdown-toggle.btn {\r\n    background: #74779C;\r\n}\r\n \r\n.btn:active, .btn.active {\r\n    background: #74779C;\r\n    box-shadow: none;\r\n}\r\nstrong {\r\n  font-size: 25px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1393,7 +1393,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/projects/projects.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  projects works!\n</p>\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t <!-- TopLeft: TimeLinks-->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn topleft-links btn-secondary btn-block\" *ngIf=\"link.form=='time'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}{{ link.form }}</h4>\n\t\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- TopMid: ContextLinks -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body topmid\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn top-links btn-secondary btn-block\" *ngIf=\"link.form=='context'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\n\t\t\t<!-- TopRight: LinkedLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body topright\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t    \t<h4 class=\"btn topright-links btn-secondary btn-block\" *ngIf=\"link.form=='linked'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t    </li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\t<div class=\"row\">\n\t\t\t<!-- MidLeft: BeforeLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midleft\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary left-links btn-block\" *ngIf=\"link.form=='before'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidMid: ScaleThought -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body\">\n\t\t\t\t\t<ul class=\"list-group list-group\">\n\t\t\t\t\t\t\t\t<li class=\"list-group\">\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary mid-links btn-block\"><strong>{{ thoughtMid.value }}</strong></h2>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\t\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- MidRight: AfterLinks -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body midright\">\n\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary right-links btn-block\" *ngIf=\"link.form=='after'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n\n\n\t<div class=\"row\">\n\t\t\t<!-- BotLeft: Context1 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botleft\"></div>\n\t\t\t</div>\n\t\t\t<!-- BotMid: Context2 -->\n\t\t\t<div class=\"card col-md-6 border-0\">\n\t\t\t\t<div class=\"card-body botmid\">\n\t\t\t\t\t\t<ul class=\"list-group\">\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\n\t\t\t\t\t\t    \t<h4 class=\"btn btn-secondary bot-links btn-block\" *ngIf=\"link.form=='meaning'\" (click)=\"reloadThoughts(link._id)\">{{ link.value }}</h4>\n\t\t\t\t\t\n\t\t\t\t\t\t    </li>\n\n\t\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<!-- BotRight: Context3 -->\n\t\t\t<div class=\"card col-md-3 border-0\">\n\t\t\t\t<div class=\"card-body botright\"></div>\n\t\t\t</div>\n\t</div>\n\n\n</div>\n\n"
 
 /***/ }),
 
@@ -1403,6 +1403,10 @@ module.exports = "<p>\n  projects works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1413,10 +1417,119 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var ProjectsComponent = (function () {
-    function ProjectsComponent() {
+    function ProjectsComponent(formBuilder, authService, dataService, activatedRoute, router) {
+        this.formBuilder = formBuilder;
+        this.authService = authService;
+        this.dataService = dataService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.processing = false;
+        this.foundThought = false;
+        this.foundTop = false;
+        this.foundBot = false;
+        this.foundLeft = false;
+        this.foundRight = false;
+        this.editMid = false;
     }
+    // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
+    // Reload Thought Lvl 0
+    ProjectsComponent.prototype.reloadThoughts = function (id) {
+        this.getMidThought(id);
+        this.getLinksOfThought(id);
+        console.log(this.allLinks);
+        console.log(this.thoughtMid._id);
+        this.editMid = false;
+    };
+    // Reload BotThought Lvl 1
+    ProjectsComponent.prototype.reloadThoughtsBot = function (id) {
+        var _this = this;
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.activeThought = {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                }; // Save blog object for use in HTML
+                _this.foundThought = true;
+                _this.dataService.getLinksOfThought(id).subscribe(function (data) {
+                    _this.botLinks = data.allLinks;
+                });
+            }
+        });
+        console.log(this.allLinks);
+        console.log(this.thoughtMid._id);
+        this.editMid = false;
+    };
+    ProjectsComponent.prototype.getLinksOfThought = function (id) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getLinksOfThought(id).subscribe(function (data) {
+            _this.allLinks = data.allLinks;
+        });
+    };
+    ProjectsComponent.prototype.getMidThought = function (id) {
+        var _this = this;
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            // Check if GET request was success or not
+            if (!data.success) {
+                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
+                _this.message = data.message; // Set error message
+            }
+            else {
+                _this.thoughtMid = {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                }; // Save blog object for use in HTML
+                _this.foundThought = true;
+            }
+        });
+    };
+    ProjectsComponent.prototype.getThoughtByName = function (value) {
+        var _this = this;
+        // Function to GET all blogs from database
+        this.dataService.getThoughtByName(value).subscribe(function (data) {
+            _this.thoughtByName =
+                {
+                    value: data.thought.value,
+                    _id: data.thought._id,
+                };
+        });
+    };
     ProjectsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //Load Data
+        this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
+        console.log(this.currentUrl);
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+        });
+        if (!this.currentUrl.id) {
+            this.dataService.getThoughtByName("Projects").subscribe(function (data) {
+                _this.thoughtMid =
+                    {
+                        value: data.thought.value,
+                        _id: data.thought._id,
+                    };
+                _this.dataService.getLinksOfThought(_this.thoughtMid._id).subscribe(function (data) {
+                    _this.allLinks = data.allLinks;
+                    console.log(_this.allLinks);
+                    console.log(_this.thoughtMid._id);
+                });
+            });
+        }
+        else {
+            this.reloadThoughts(this.currentUrl.id);
+        }
     };
     ProjectsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1424,7 +1537,11 @@ var ProjectsComponent = (function () {
             template: __webpack_require__("../../../../../src/app/components/projects/projects.component.html"),
             styles: [__webpack_require__("../../../../../src/app/components/projects/projects.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
     ], ProjectsComponent);
     return ProjectsComponent;
 }());
@@ -1696,15 +1813,33 @@ var RegisterComponent = (function () {
                                             type: "context",
                                             position: 3
                                         };
+                                        var projectLink = {
+                                            user: _this.userId,
+                                            scale: _this.projectsId,
+                                            thought: _this.roomId,
+                                            type: "before",
+                                            position: 1
+                                        };
+                                        var projectLinkb = {
+                                            user: _this.userId,
+                                            scale: _this.roomId,
+                                            thought: _this.projectsId,
+                                            type: "after",
+                                            position: 1
+                                        };
                                         _this.dataService.newLink(sessionLink).subscribe(function (data) {
                                             _this.dataService.newLink(favoritesLink).subscribe(function (data) {
                                                 _this.dataService.newLink(todoLink).subscribe(function (data) {
                                                     _this.dataService.newLink(sessionLinkb).subscribe(function (data) {
                                                         _this.dataService.newLink(favoritesLinkb).subscribe(function (data) {
                                                             _this.dataService.newLink(todoLinkb).subscribe(function (data) {
-                                                                setTimeout(function () {
-                                                                    _this.router.navigate(['/login']); // Redirect to login view
-                                                                }, 500);
+                                                                _this.dataService.newLink(projectLinkb).subscribe(function (data) {
+                                                                    _this.dataService.newLink(projectLink).subscribe(function (data) {
+                                                                        setTimeout(function () {
+                                                                            _this.router.navigate(['/login']); // Redirect to login view
+                                                                        }, 500);
+                                                                    });
+                                                                });
                                                             });
                                                         });
                                                     });
@@ -1895,7 +2030,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
