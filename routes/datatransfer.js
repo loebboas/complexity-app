@@ -146,13 +146,7 @@ router.post('/newLink', (req, res) => {
                 if (err) {
                     res.json({success: false, message: err}); // Return error message
                 } else {
-                    const allLinks = links.map((link) => {
-                    link.thought.form = link.type;
-                    link.thought.privacy = link.type;
-                        return link.thought
-                      
-                    });
-                    res.json({success: true, allLinks: allLinks });
+                    res.json({success: true, allLinks: links });
                 }
             });
     });
