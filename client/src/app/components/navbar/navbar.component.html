@@ -1,5 +1,16 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-green bg-darkgreen">
-  <a class="navbar-brand" href="#">Complexity-App</a>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Complexity-App</span>
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<!--
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -38,4 +49,5 @@
   </form>
   </div>
 </nav>
+-->
  

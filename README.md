@@ -9,25 +9,36 @@ I. BACKEND
 
 ///////////////////////// A. SCHEMAS 
 
-const thoughtSchema = new Schema({				  // Thought defined as a Combination of different structural entities, e.g. Objects/Scales/Information
-    label: String,                                                // Name of the Thought
+const wordSchema = new Schema({                                   // Unique Word 
+    language: String,                                             // English, German, etc. (Later: Autodetect)
+    user: {type: Schema.Types.ObjectId, ref: 'User'},             // User
+    type: String,                                                 // Sentence
+    child: 
+    label: String,                                                // Word 
+    usesThisMonth: number,                                        // Number of Uses 
+    clicks: number,                                               // Number of Clicks
+});
+    
+
+const thoughtSchema = new Schema({				                        // Thought defined as a different set of values in a given set of Dimensions (=ThoughtLanguage)
+    label: {type: Schema.Types.ObjectId, ref: 'Word'},                                                // Name of the Thought
+    value: number,                                                // Numerical Value
+    type: String,                                                 // Question, Page, !Expression!, Word, Date, Person
     form: String,                                                 // Add Later: 3D Representation form, standard = small sphere 
-    texture: String,                                              // Add Later: Texture of the 3D Representation, standard = black
-    user: {type: Schema.Types.ObjectId, ref: 'User'},		  // User
-    timestamp:{type: Date, default: Date.now}                     // Format = tyyyymmddhhmmssms /*
+    texture: String,                                              // Add Later: Texture of the 3D Representation, standard = white
+    user: {type: Schema.Types.ObjectId, ref: 'User'},		          // User
+    context: {type: Schema.Types.ObjectId, ref: 'Thought'},
+    posX: 0, 
+    posY: 0,
+    posZ: 0,
+    process: {type: Schema.Types.ObjectId, ref: 'User'},          // Different Thoughts (in the same context) can be part of the same process
+    group: {type: Schema.Types.ObjectId, ref: 'User'},            // Different Thoughts (in the same context) can be grouped
+    inputTime: {type: Date, default: Date.now}                    // Format = tyyyymmddhhmmssms /*
+    likes: number,                                                // Number of Likes (1 Star = -1, 2 Stars = +1, 3 Start = +3) 
+    clicks: number,
     privacy: String,						  // Add Later: Level of Privacy, standard: private
 });
 
-const linkSchema = new Schema({
-    user: {type: Schema.Types.ObjectId, ref: 'User'},		  // User
-    scale: {type: Schema.Types.ObjectId, ref: 'Thought'},         // Refers to ObjectID of the Thought, which is the Main/Scale/Object for this Link 
-    thought: {type: Schema.Types.ObjectId, ref: 'Thought'},       // Refers to ObjectID of the Though,  which is related to the scale/object
-    type: String,                                                 // Type of Relationship, standard = meaning /*  
-    position: number,                                             // NumberValue describing the position of the linked Object on the ScaleObject
-    strength: number,                                             // Add Later: NumberValue which describes the Strength of the Relationship
-    inputTime: {type: Date, default: Date.now}			  // Format = tyyyymmddhhmmssms /*
-    privacy: String,						  // Add Later: Level of Privacy, standard: private
-});
 
 /* Date Format & Timestamps (Only Somehow relevant yet)
 Date Format:

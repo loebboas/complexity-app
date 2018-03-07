@@ -12,12 +12,13 @@ import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
 import { MyroomComponent } from './components/myroom/myroom.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { MaterialModule } from './material.module';
+import { ContextComponent } from './components/context/context.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     ProfileComponent,
     NewComponent,
     MyroomComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ContextComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -38,7 +40,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     AppRoutingModule,
     BrowserModule,
     HttpModule,
-    FlashMessagesModule
+    MaterialModule
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, DataService],
   bootstrap: [AppComponent]

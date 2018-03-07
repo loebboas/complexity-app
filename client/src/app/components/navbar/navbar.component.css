@@ -1,28 +1,10 @@
-nav {
-}
-a {
-	color: black;
-}
-a:hover {
-	color: #805096;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  text-align: right;
 }
 
-.btn-nav {
-   border: 0 none;
-   padding: 8px 24px;
-   
-}
- 
-.btn-nav {
-    background: #ffffff;
-    color: #805096;
-}
- 
-.btn-nav:hover, .btn-nav:focus, .btn-nav:active, .btn-nav.active, .open > .dropdown-toggle.btn-nav {
-    background: #F0F0FF;
-}
- 
-.btn-nav:active, .btn-nav.active {
-    background: #E0E0EF;
-    box-shadow: none;
+.example-full-width {
+  width: 100%;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { Location } from '@angular/common';
@@ -32,7 +31,6 @@ constructor(
     public dataService: DataService,
     public authService: AuthService,
     private router: Router,
-    private flashMessagesService: FlashMessagesService,
     private formBuilder: FormBuilder
 
   ) {
@@ -73,7 +71,6 @@ constructor(
   // Function to logout user
   onLogoutClick() {
     this.authService.logout(); // Logout user
-    this.flashMessagesService.show('You are logged out', { cssClass: 'alert-info' }); // Set custom flash message
     this.router.navigate(['/']); // Navigate back to home page
   }
 
