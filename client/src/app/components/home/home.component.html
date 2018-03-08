@@ -1,29 +1,23 @@
 
-<!-- 
+<!-- Sidebar -->
+<mat-drawer-container class="sidenav-container" autosize>
+		<mat-drawer #drawer class="sidenav" mode="side">
+				<button type="button" mat-button *ngFor="let context of allContexts">{{ context.label }}</button>
+		</mat-drawer>	 
 
-	Perspective Card With:
-A. Context-Button (opens Sidenav with other Context)
-B. Perspective Tabs
-C. Meaning (shows Meaning for chosen Context/Perspective)
--->
+		 
 
-<mat-card class="one-card">
+	
+<!-- Main Card -->
+<mat-card class="main-card">
+	<mat-card-title>
+		<button type="button" mat-button (click)="drawer.toggle()"> {{ chosenContext.label }}</button>
+	</mat-card-title>
+
     <mat-tab-group>
-  		<mat-tab label="Welcome">
-  				<br>
-  				<mat-card-title>Welcome to the Complexity - Application</mat-card-title>
-			  
-			    <button mat-button>Login</button>
-			    <button mat-button>Register</button>
-			 
+  		<mat-tab *ngFor="let perspective of allPerspectives" label="{{ perspective.label }}">
+				<mat-card class="one-card" *ngFor="let meaning of allMeanings">{{ meaning.label }}</mat-card>
 		</mat-tab>
-  		
-  		<mat-tab label="What's this?">
-  				<br>
-  				<mat-card-title>It's about Complexity</mat-card-title>
-			  	<mat-card-content>This app should help you visualise and structure your thought. We are a young, interdisciplinary Team of people, aiming at something totally cracy, but we'll have to try! </mat-card-content>
-			    <button mat-button>Get Involved</button>
-			    
-  		</mat-tab>
 	</mat-tab-group>
 </mat-card>
+</mat-drawer-container>
