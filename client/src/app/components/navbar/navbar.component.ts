@@ -83,8 +83,7 @@ constructor(
 
 
   ngOnInit() {
-    this.form.reset();
-
+  this.form.reset();
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments
   this.userId = profile.user._id;

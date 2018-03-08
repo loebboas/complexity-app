@@ -16,9 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
 import { MyroomComponent } from './components/myroom/myroom.component';
-import { ProjectsComponent } from './components/projects/projects.component';
 import { MaterialModule } from './material.module';
-import { ContextComponent } from './components/context/context.component';
 
 
 @NgModule({
@@ -31,8 +29,6 @@ import { ContextComponent } from './components/context/context.component';
     ProfileComponent,
     NewComponent,
     MyroomComponent,
-    ProjectsComponent,
-    ContextComponent
   ],
   imports: [
     ReactiveFormsModule,

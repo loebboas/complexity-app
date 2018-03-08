@@ -1,4 +1,29 @@
-<mat-tab-group>
-  <mat-tab label="Tab 1">Content 1</mat-tab>
-  <mat-tab label="Tab 2">Content 2</mat-tab>
-</mat-tab-group>
+
+<!-- 
+
+	Perspective Card With:
+A. Context-Button (opens Sidenav with other Context)
+B. Perspective Tabs
+C. Meaning (shows Meaning for chosen Context/Perspective)
+-->
+
+<mat-card class="one-card">
+    <mat-tab-group>
+  		<mat-tab label="Welcome">
+  				<br>
+  				<mat-card-title>Welcome to the Complexity - Application</mat-card-title>
+			  
+			    <button mat-button>Login</button>
+			    <button mat-button>Register</button>
+			 
+		</mat-tab>
+  		
+  		<mat-tab label="What's this?">
+  				<br>
+  				<mat-card-title>It's about Complexity</mat-card-title>
+			  	<mat-card-content>This app should help you visualise and structure your thought. We are a young, interdisciplinary Team of people, aiming at something totally cracy, but we'll have to try! </mat-card-content>
+			    <button mat-button>Get Involved</button>
+			    
+  		</mat-tab>
+	</mat-tab-group>
+</mat-card>

@@ -6,6 +6,11 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     value: String,
+    context: {{type: Schema.Types.ObjectId, ref: 'Thought'}},
+    perspective: {{type: Schema.Types.ObjectId, ref: 'Thought'}},
+    meaning: {{type: Schema.Types.ObjectId, ref: 'Thought'}},
+    position: String,
+    time: String,
     form: String,
     texture: String,
     privacy: String,
