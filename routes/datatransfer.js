@@ -1,6 +1,5 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
-const Link = require('../models/link');
 const jwt = require('jsonwebtoken'); 
 const config = require('../config/database'); // Import database configuration
 
