@@ -1,23 +1,7 @@
 
-<!-- Sidebar -->
-<mat-drawer-container class="sidenav-container" autosize>
-	<mat-drawer #drawer class="sidenav" mode="side">
-			<button type="button" mat-button *ngFor="let context of contexts">{{ context.label }}</button>
-	</mat-drawer>	 
 
-	 
+<mat-card class="3-cards"><button mat-button *ngIf="authService.loggedIn()" routerLink="/memories">Memories</button></mat-card>
+<mat-card class="3-cards"><button mat-button *ngIf="authService.loggedIn()" routerLink="/favorites">Favorites</button></mat-card>
+<mat-card class="3-cards"><button mat-button *ngIf="authService.loggedIn()" routerLink="/plans">Plans</button></mat-card>
 
 
-<!-- Main Card -->
-<mat-card class="main-card">
-<mat-card-title>
-	<button type="button" class="context" mat-button (click)="drawer.toggle()"> {{ chosenThought.label }}</button>
-</mat-card-title>
-
-<mat-tab-group>
-	  <mat-tab *ngFor="let perspective of perspectives" label="{{ perspective.label }}">
-			<mat-card class="one-card" *ngFor="let meaning of meanings">{{ meaning.label }}</mat-card>
-	</mat-tab>
-</mat-tab-group>
-</mat-card>
-</mat-drawer-container>

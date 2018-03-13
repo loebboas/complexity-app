@@ -1,0 +1,25 @@
+<!-- Sidebar -->
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+      <button type="button" mat-button>{{ chosenThought.label }}</button>
+  </mat-drawer>	 
+
+   
+
+
+<!-- Main Card -->
+<mat-card class="main-card">
+<mat-card-title>
+  <button type="button" class="context" mat-button>{{ chosenThought.label }}</button>
+</mat-card-title>
+<mat-list>
+  perspectives
+  <mat-list-item *ngFor="let perspective of perspectives"> {{ perspective.label }} </mat-list-item>
+  contexts
+  <mat-list-item *ngFor="let context of contexts"> {{ context.label }} </mat-list-item>
+  meanings
+  <mat-list-item *ngFor="let meaning of meanings"> {{ meaning.label }} </mat-list-item>
+</mat-list>
+ 
+</mat-card>
+</mat-drawer-container>

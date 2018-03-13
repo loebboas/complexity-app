@@ -17,6 +17,9 @@ import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
 import { MyroomComponent } from './components/myroom/myroom.component';
 import { MaterialModule } from './material.module';
+import { MemoriesComponent } from './components/memories/memories.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { PlansComponent } from './components/plans/plans.component';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { MaterialModule } from './material.module';
     ProfileComponent,
     NewComponent,
     MyroomComponent,
+    MemoriesComponent,
+    FavoritesComponent,
+    PlansComponent,
   ],
   imports: [
     ReactiveFormsModule,

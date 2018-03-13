@@ -39,7 +39,7 @@ export class NewComponent implements OnInit {
 
   createForm() {
   	this.form = this.formBuilder.group({
-  		value: '',
+  		label: '',
   	})
   }
 
@@ -47,32 +47,35 @@ export class NewComponent implements OnInit {
    this.processing = true;
      // Create New Thought from user's inputs
      const thought = {
-            label: this.form.get('value').value, // input field
+            label: this.form.get('label').value, // input field
             user: this.userId,
             form: "sphere",
             privacy: "private"
       };
       //Save New Thought
       this.dataService.newThought(thought).subscribe(data => {
+        this.newId = data.newId;
            if (!data.success) {
              this.messageClass = 'alert alert-danger';
              this.message = data.message;
              this.processing = false;
            } else {
              this.messageClass = 'alert alert-success';
-             this.message = data.message;
-             this.newId = data.newId;
-             const thought = {
-              label: this.form.get('value').value, // input field
-              context: [this.newId],
-              perspective: [this.newId],
+             this.message = data.message;          
+             }
+             //Update New Thought
+             const editThought = {
+              _id: this.newId,
+              editLabel: this.form.get('label').value, // input field
+              editContexts: [{ _id: this.newId, count: 0, label: this.form.get('label').value }], 
+              editPerspectives: [{ _id: this.newId, count: 0, label: this.form.get('label').value }],
+              editMeanings: [{ _id: this.newId, count: 0, label: this.form.get('label').value }],
               user: this.userId,
               form: "sphere",
               privacy: "private"
-             }
-        };
-            //Update New Thought
-            this.dataService.editThought(thought).subscribe(data => {
+            };
+         
+            this.dataService.editThought(editThought).subscribe(data => {
               if (!data.success) {
                 this.messageClass = 'alert alert-danger';
                 this.message = data.message;
@@ -80,8 +83,8 @@ export class NewComponent implements OnInit {
               } else {
                 this.messageClass = 'alert alert-success';
                 this.message = data.message;
-                this.newId = data.newId;
-
+               
+              
            };
          
 
@@ -90,7 +93,8 @@ export class NewComponent implements OnInit {
                               
                              
           setTimeout(() => {
-          this.router.navigate(['/myroom', this.newId]); // Redirect        
+            //IF PLAN GOTO PLAN, ELSE GOTO FAVORITES
+          this.router.navigate(['/favorites', this.newId]); // Redirect        
           });
         });
       });

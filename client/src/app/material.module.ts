@@ -9,11 +9,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
-	imports: [MatButtonModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
-	exports: [MatButtonModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
+	imports: [MatButtonModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
+	exports: [MatButtonModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
 	})
 
 export class MaterialModule {}
