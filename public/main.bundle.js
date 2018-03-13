@@ -233,7 +233,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".example-container {\r\n }  \r\n\r\n.example-sidenav-content {\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  height: 100%;\r\n  -ms-flex-align: center;\r\n      align-items: center;\r\n  -ms-flex-pack: center;\r\n      justify-content: center;\r\n}\r\n\r\n.example-sidenav {\r\n  padding: 20px;\r\n}\r\n\r\n.one-card {\r\n  \r\n}\r\n\r\n.example-header-image {\r\n  background-image: url('');\r\n  background-size: cover;\r\n}", ""]);
+exports.push([module.i, ".context {\r\n    font-size: 25px;\r\n\r\n}", ""]);
 
 // exports
 
@@ -246,7 +246,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<!-- \r\n\r\n\tPerspective Card With:\r\nA. Context-Button (opens Sidenav with other Context)\r\nB. Perspective Tabs\r\nC. Meaning (shows Meaning for chosen Context/Perspective)\r\n-->\r\n\r\n<mat-card class=\"one-card\">\r\n    <mat-tab-group>\r\n  \t\t<mat-tab label=\"Welcome\">\r\n  \t\t\t\t<br>\r\n  \t\t\t\t<mat-card-title>Welcome to the Complexity - Application</mat-card-title>\r\n\t\t\t  \r\n\t\t\t    <button mat-button>Login</button>\r\n\t\t\t    <button mat-button>Register</button>\r\n\t\t\t \r\n\t\t</mat-tab>\r\n  \t\t\r\n  \t\t<mat-tab label=\"What's this?\">\r\n  \t\t\t\t<br>\r\n  \t\t\t\t<mat-card-title>It's about Complexity</mat-card-title>\r\n\t\t\t  \t<mat-card-content>This app should help you visualise and structure your thought. We are a young, interdisciplinary Team of people, aiming at something totally cracy, but we'll have to try! </mat-card-content>\r\n\t\t\t    <button mat-button>Get Involved</button>\r\n\t\t\t    \r\n  \t\t</mat-tab>\r\n\t</mat-tab-group>\r\n</mat-card>\r\n"
+module.exports = "\r\n<!-- Sidebar -->\r\n<mat-drawer-container class=\"sidenav-container\" autosize>\r\n\t\t<mat-drawer #drawer class=\"sidenav\" mode=\"side\">\r\n\t\t\t\t<button type=\"button\" mat-button *ngFor=\"let context of allContexts\">{{ context.label }}</button>\r\n\t\t</mat-drawer>\t \r\n\r\n\t\t \r\n\r\n\t\r\n<!-- Main Card -->\r\n<mat-card class=\"main-card\">\r\n\t<mat-card-title>\r\n\t\t<button type=\"button\" class=\"context\" mat-button (click)=\"drawer.toggle()\"> {{ chosenContext.label }}</button>\r\n\t</mat-card-title>\r\n\r\n    <mat-tab-group>\r\n  \t\t<mat-tab *ngFor=\"let perspective of allPerspectives\" label=\"{{ perspective.label }}\">\r\n\t\t\t\t<mat-card class=\"one-card\" *ngFor=\"let meaning of allMeanings\">{{ meaning.label }}</mat-card>\r\n\t\t</mat-tab>\r\n\t</mat-tab-group>\r\n</mat-card>\r\n</mat-drawer-container>\r\n"
 
 /***/ }),
 
@@ -268,7 +268,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var HomeComponent = (function () {
     function HomeComponent() {
-        this.hardThoughts = [
+        this.chosenThought = { id: 2, label: 'Welcome', context: [{ id: 1 }], perspective: [{ id: 2 }], meaning: [{ id: 5 }, { id: 6 }] };
+        this.chosenPerspective = { id: 2, label: 'Welcome', context: [{ id: 1 }], perspective: [{ id: 2 }], meaning: [{ id: 5 }, { id: 6 }] };
+        this.chosenContext = { id: 1, label: 'Complexity-App', context: [{ id: 1 }], perspective: [{ id: 2 }, { id: 3 }, { id: 4 }], meaning: [] };
+        this.allContexts = [{ id: 1, label: 'Complexity-App', context: [{ id: 1 }], perspective: [{ id: 2 }, { id: 3 }, { id: 4 }], meaning: [] }];
+        this.allPerspectives = [
+            { id: 2, label: 'Welcome', context: [{ id: 1 }], perspective: [{ id: 2 }], meaning: [{ id: 5 }, { id: 6 }] },
+            { id: 3, label: 'Public', context: [{ id: 1 }], perspective: [{ id: 3 }], meaning: [{ id: 7 }] },
+            { id: 4, label: 'About', context: [{ id: 1 }], perspective: [{ id: 4 }], meaning: [{ id: 8 }] }
+        ];
+        //2. Lade alle Objekte für die gilt: Context = ChosenContext && Perspective = ChosenPerspective
+        this.allMeanings = [
+            { id: 5, label: 'Login', context: [{ id: 2 }, { id: 1 }], perspective: [{ id: 2 }], meaning: [] },
+            { id: 6, label: 'Register', context: [{ id: 2 }, { id: 1 }], perspective: [{ id: 2 }], meaning: [] }
+        ];
+        this.hardThought = [
             { id: 1, label: 'Complexity-App', context: [{ id: 1 }], perspective: [{ id: 2 }, { id: 3 }, { id: 4 }], meaning: [] },
             { id: 2, label: 'Welcome', context: [{ id: 1 }], perspective: [{ id: 2 }], meaning: [{ id: 5 }, { id: 6 }] },
             { id: 3, label: 'Public', context: [{ id: 1 }], perspective: [{ id: 3 }], meaning: [{ id: 7 }] },
@@ -278,13 +292,20 @@ var HomeComponent = (function () {
             { id: 7, label: 'Public Thoughts', context: [{ id: 2 }, { id: 1 }], perspective: [{ id: 2 }], meaning: [] },
             { id: 8, label: 'Text about this Homepage', context: [{ id: 1 }, { id: 1 }], perspective: [{ id: 2 }], meaning: [] },
         ];
+        //1. Lade Objekt: Complexity-App + alle Objekte in Context in Array Contexte, alle Perspectiven in Array Perspectives etc.
         this.showFiller = false;
     }
+    HomeComponent.prototype.EditMid = function () {
+        if (this.editMid == false) {
+            this.editMid = true;
+        }
+        else {
+            this.editMid = false;
+        }
+    };
     HomeComponent.prototype.ngOnInit = function () {
-        //1. Check URL for Perspective
-        //2. If no URL: Check if LoggedIn
-        //2.a If LoggedIn --> Load "My-Room"
-        //2.b If not LoggedIn --> Load "hardThought"
+        //1. Check URL for ObjectID
+        //2. If LoggedOut: CheckIfObjectID == Public If Private: "Can't show you this", Else: Load Object: Complexity-App
     };
     HomeComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -461,7 +482,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/myroom/myroom.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t <!-- TopLeft: TimeLinks-->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body topleft\">\r\n\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn topleft-links btn-secondary btn-block\" *ngIf=\"link.type=='time'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<!-- TopMid: ContextLinks -->\r\n\t\t\t<div class=\"card col-md-6 border-0\">\r\n\t\t\t\t<div class=\"card-body topmid\">\r\n\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn  top-links btn-secondary btn-block\" *ngIf=\"link.type=='context'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t<form [formGroup]=\"formTop\" (ngSubmit)=\"onTopSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTop (keyup)=\"onKeyupTop(searchTextBoxTop.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t\t\t\t                              </ul>\r\n\t\t\t\t\t                            </div>\r\n\t\t\t\t\t                        </div>\r\n\t\t\t\t\t                    </div>\r\n\t\t\t                \t\t </div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\r\n\r\n\t\t\t<!-- TopRight: LinkedLinks -->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body topright\">\r\n\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn  topright-links btn-secondary btn-block\" *ngIf=\"link.type=='linked'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t<form [formGroup]=\"formTopRight\" (ngSubmit)=\"onTopRightSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxTopRight (keyup)=\"onKeyupTopRight(searchTextBoxTopRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newTopRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t\t\t\t                              </ul>\r\n\t\t\t\t\t                            </div>\r\n\t\t\t\t\t                        </div>\r\n\t\t\t\t\t                    </div>\r\n\t\t\t                \t\t </div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t</div>\r\n\r\n\t<div class=\"row\">\r\n\t\t\t<!-- MidLeft: BeforeLinks -->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body midleft\">\r\n\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn left-links btn-secondary btn-block\" *ngIf=\"link.type=='before'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t<form [formGroup]=\"formLeft\" (ngSubmit)=\"onLeftSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxLeft (keyup)=\"onKeyupLeft(searchTextBoxLeft.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newLeftLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t\t\t\t                              </ul>\r\n\t\t\t\t\t                            </div>\r\n\t\t\t\t\t                        </div>\r\n\t\t\t\t\t                    </div>\r\n\t\t\t                \t\t </div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<!-- MidMid: ScaleThought -->\r\n\t\t\t<div class=\"card col-md-6 border-0\">\r\n\t\t\t\t<div class=\"card-body midmid\">\r\n\t\t\t\t\t<ul class=\"list-group list-group\">\r\n\t\t\t\t\t\t<form [formGroup]=\"formMid\" (ngSubmit)=\"updateThoughtSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t\t\t<li class=\"list-group\">\r\n\t\t\t\t\t\t\t\t\t<h2 class=\"btn mid-links btn-secondary btn-block\" *ngIf=\"!editMid\" (click)=EditMid()><strong>{{ thoughtMid.value }}</strong></h2>\r\n\t\t\t\t\t\t\t\t\t<div class=\"input-group\" *ngIf=\"editMid\">\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t\t\t<input  type=\"text\" class=\"form-control\" name=\"edit\" formControlName=\"edit\" placeholder=\"{{ thoughtMid.value }}{{ thoughtMid._id }}\">\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group-addon\">\r\n\t\t\t\t\t\t\t\t\t\t\t<h2 class=\"btn btn-secondary delete-btn\" (click)=\"deleteThought(thoughtMid._id)\">x</h2>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<!-- MidRight: AfterLinks -->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body midright\">\r\n\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn right-links btn-secondary btn-block\" *ngIf=\"link.type=='after'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t<form [formGroup]=\"formRight\" (ngSubmit)=\"onRightSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxRight (keyup)=\"onKeyupRight(searchTextBoxRight.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newRightLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t\t\t\t                              </ul>\r\n\t\t\t\t\t                            </div>\r\n\t\t\t\t\t                        </div>\r\n\t\t\t\t\t                    </div>\r\n\t\t\t                \t\t </div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t</div>\r\n\r\n\r\n\r\n\t<div class=\"row\">\r\n\t\t\t<!-- BotLeft: Context1 -->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body botleft\"></div>\r\n\t\t\t</div>\r\n\t\t\t<!-- BotMid: Context2 -->\r\n\t\t\t<div class=\"card col-md-6 border-0\">\r\n\t\t\t\t<div class=\"card-body botmid\">\r\n\t\t\t\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t\t\t    <li class=\"list-group\" *ngFor=\"let link of allLinks\">\r\n\t\t\t\t\t\t    \t<h4 class=\"btn bot-links btn-secondary btn-block\" *ngIf=\"link.type=='meaning'\" (click)=\"reloadThoughts(link.thought._id)\">{{ link.thought.value }}</h4>\r\n\r\n\t\t\t\t\t\t    </li>\r\n\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t<form [formGroup]=\"formBot\" (ngSubmit)=\"onBotSubmit()\">\r\n\t\t\t\t\t\t\t<div class=\"search-block input-group\" id=\"adv-search\">\r\n\t\t\t\t\t\t\t\t<input type=\"text\" #searchTextBoxBot (keyup)=\"onKeyupBot(searchTextBoxBot.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"value\" name=\"value\" placeholder=\"...\">\r\n\t\t\t\t\t\t\t\t\t <div class=\"input-group-btn\">\r\n\t\t\t\t\t                    <div class=\"btn-group\" role=\"group\">\r\n\t\t\t\t\t                        <div class=\"dropdown dropdown-lg\">\r\n\t\t\t\t\t                            <div class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t                              <ul class=\"navbar-nav navbar-right\">\r\n\t\t\t\t\t                                <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"newBotLink(thoughtByName._id)\">{{ thoughtByName.value }}</a></li>\r\n\t\t\t\t\t                              </ul>\r\n\t\t\t\t\t                            </div>\r\n\t\t\t\t\t                        </div>\r\n\t\t\t\t\t                    </div>\r\n\t\t\t                \t\t </div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<!-- BotRight: Context3 -->\r\n\t\t\t<div class=\"card col-md-3 border-0\">\r\n\t\t\t\t<div class=\"card-body botright\"></div>\r\n\t\t\t</div>\r\n\t</div>\r\n\r\n\r\n</div>\r\n\r\n"
+module.exports = "\r\n<!-- Sidebar -->\r\n<mat-drawer-container class=\"sidenav-container\" autosize>\r\n\t<mat-drawer #drawer class=\"sidenav\" mode=\"side\">\r\n\t\t\t<button type=\"button\" mat-button *ngFor=\"let context of contexts\">{{ context.label }}</button>\r\n\t</mat-drawer>\t \r\n\r\n\t \r\n\r\n\r\n<!-- Main Card -->\r\n<mat-card class=\"main-card\">\r\n<mat-card-title>\r\n\t<button type=\"button\" class=\"context\" mat-button (click)=\"drawer.toggle()\"> {{ chosenThought.label }}</button>\r\n</mat-card-title>\r\n\r\n<mat-tab-group>\r\n\t  <mat-tab *ngFor=\"let perspective of perspectives\" label=\"{{ perspective.label }}\">\r\n\t\t\t<mat-card class=\"one-card\" *ngFor=\"let meaning of meanings\">{{ meaning.label }}</mat-card>\r\n\t</mat-tab>\r\n</mat-tab-group>\r\n</mat-card>\r\n</mat-drawer-container>\r\n"
 
 /***/ }),
 
@@ -574,287 +595,15 @@ var MyroomComponent = (function () {
         this.getThoughtByName(searchText); // Get all blogs on component loa
         console.log(this.thoughtByName.value);
     };
-    MyroomComponent.prototype.newLeftLink = function (id) {
-        var _this = this;
-        var leftLink = {
-            user: this.userId,
-            scale: this.thoughtMid._id,
-            thought: this.thoughtByName._id,
-            type: "before"
-        };
-        var rightLink = {
-            user: this.userId,
-            scale: this.thoughtByName._id,
-            thought: this.thoughtMid._id,
-            type: "after"
-        };
-        this.dataService.newLink(rightLink).subscribe(function (data) {
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.saveLink = data.newId;
-                _this.reloadThoughts(_this.thoughtMid._id);
-            });
-        });
-        this.formLeft.reset();
-        this.thoughtByName = '';
-    };
-    MyroomComponent.prototype.onLeftSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formLeft.get('value').value,
-            user: this.userId,
-            privacy: "private"
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var rightLink = {
-                user: _this.userId,
-                scale: _this.saveId,
-                thought: _this.thoughtMid._id,
-                type: "after"
-            };
-            var leftLink = {
-                user: _this.userId,
-                scale: _this.thoughtMid._id,
-                thought: _this.saveId,
-                type: "before"
-            };
-            _this.dataService.newLink(rightLink).subscribe(function (data) {
-                _this.dataService.newLink(leftLink).subscribe(function (data) {
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-        this.formLeft.reset();
-    };
-    MyroomComponent.prototype.newRightLink = function (id) {
-        var _this = this;
-        var rightLink = {
-            user: this.userId,
-            scale: this.thoughtMid._id,
-            thought: this.thoughtByName._id,
-            type: "after"
-        };
-        var leftLink = {
-            user: this.userId,
-            scale: this.thoughtByName._id,
-            thought: this.thoughtMid._id,
-            type: "before"
-        };
-        this.dataService.newLink(leftLink).subscribe(function (data) {
-            _this.dataService.newLink(rightLink).subscribe(function (data) {
-                _this.reloadThoughts(_this.thoughtMid._id);
-            });
-        });
-        this.formRight.reset();
-        this.thoughtByName = '';
-    };
-    MyroomComponent.prototype.onRightSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formRight.get('value').value,
-            user: this.userId,
-            privacy: "private"
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var leftLink = {
-                user: _this.userId,
-                scale: _this.saveId,
-                thought: _this.thoughtMid._id,
-                type: "before"
-            };
-            var rightLink = {
-                user: _this.userId,
-                scale: _this.thoughtMid._id,
-                thought: _this.saveId,
-                type: "after"
-            };
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.dataService.newLink(rightLink).subscribe(function (data) {
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-        this.formRight.reset();
-    };
-    MyroomComponent.prototype.newTopLink = function (id) {
-        var _this = this;
-        var topLink = {
-            user: this.userId,
-            scale: this.thoughtMid._id,
-            thought: this.thoughtByName._id,
-            type: "context"
-        };
-        var botLink = {
-            user: this.userId,
-            scale: this.thoughtByName._id,
-            thought: this.thoughtMid._id,
-            type: "meaning"
-        };
-        this.dataService.newLink(botLink).subscribe(function (data) {
-            _this.dataService.newLink(topLink).subscribe(function (data) {
-                _this.formTop.reset();
-                _this.thoughtByName = '';
-                _this.reloadThoughts(_this.thoughtMid._id);
-            });
-        });
-    };
-    MyroomComponent.prototype.onTopSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formTop.get('value').value,
-            user: this.userId,
-            privacy: "private"
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var botLink = {
-                user: _this.userId,
-                scale: _this.saveId,
-                thought: _this.thoughtMid._id,
-                type: "meaning"
-            };
-            var topLink = {
-                user: _this.userId,
-                scale: _this.thoughtMid._id,
-                thought: _this.saveId,
-                type: "context"
-            };
-            _this.dataService.newLink(botLink).subscribe(function (data) {
-                _this.dataService.newLink(topLink).subscribe(function (data) {
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
-        this.formTop.reset();
-    };
-    MyroomComponent.prototype.newTopRightLink = function (id) {
-        var _this = this;
-        var leftLink = {
-            user: this.userId,
-            scale: this.thoughtMid._id,
-            thought: this.thoughtByName._id,
-            type: "linked"
-        };
-        this.dataService.newLink(leftLink).subscribe(function (data) {
-            _this.saveLink = data.newId;
-            _this.formTopRight.reset();
-            _this.thoughtByName = '';
-            _this.reloadThoughts(_this.thoughtMid._id);
-        });
-    };
-    MyroomComponent.prototype.onTopRightSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formTopRight.get('value').value,
-            user: this.userId,
-            privacy: "private"
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var leftLink = {
-                user: _this.userId,
-                scale: _this.thoughtMid._id,
-                thought: _this.saveId,
-                type: "linked"
-            };
-            _this.dataService.newLink(leftLink).subscribe(function (data) {
-                _this.reloadThoughts(_this.thoughtMid._id);
-            });
-        });
-        this.formLeft.reset();
-    };
-    MyroomComponent.prototype.newBotLink = function (id) {
-        var _this = this;
-        var botLink = {
-            user: this.userId,
-            scale: this.thoughtMid._id,
-            thought: this.thoughtByName._id,
-            type: "meaning"
-        };
-        var topLink = {
-            user: this.userId,
-            scale: this.thoughtByName._id,
-            thought: this.thoughtMid._id,
-            type: "context"
-        };
-        this.dataService.newLink(topLink).subscribe(function (data) {
-            _this.dataService.newLink(botLink).subscribe(function (data) {
-                _this.formBot.reset();
-                _this.thoughtByName = '';
-                _this.reloadThoughts(_this.thoughtMid._id);
-            });
-        });
-    };
     MyroomComponent.prototype.onBotSubmit = function () {
-        var _this = this;
-        var thought = {
-            value: this.formBot.get('value').value,
-            user: this.userId,
-            form: "sphere",
-            privacy: "private"
-        };
-        this.dataService.newThought(thought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            var topLink = {
-                user: _this.userId,
-                scale: _this.saveId,
-                thought: _this.thoughtMid._id,
-                type: "context"
-            };
-            var botLink = {
-                user: _this.userId,
-                scale: _this.thoughtMid._id,
-                thought: _this.saveId,
-                type: "meaning"
-            };
-            _this.dataService.newLink(topLink).subscribe(function (data) {
-                _this.dataService.newLink(botLink).subscribe(function (data) {
-                    _this.reloadThoughts(_this.thoughtMid._id);
-                });
-            });
-        });
         this.formBot.reset();
     };
     // Functionality: NewThought(Bot/Top), NotAddLink(Both/One//Top/Bot), EditThought(Bot/Mid/Top), NotDeleteSingleLink(Bot/Top), DeleteBothLink, DeleteThought(Top/Mid/Bot)
     // Reload Thought Lvl 0
     MyroomComponent.prototype.reloadThoughts = function (id) {
         this.getMidThought(id);
-        this.getLinksOfThought(id);
-        console.log(this.allLinks);
         console.log(this.thoughtMid._id);
         this.editMid = false;
-    };
-    // Reload BotThought Lvl 1
-    MyroomComponent.prototype.reloadThoughtsBot = function (id) {
-        var _this = this;
-        this.dataService.getSingleThought(id).subscribe(function (data) {
-            // Check if GET request was success or not
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-                _this.message = data.message; // Set error message
-            }
-            else {
-                _this.activeThought = {
-                    value: data.thought.value,
-                    _id: data.thought._id,
-                }; // Save blog object for use in HTML
-                _this.foundThought = true;
-                _this.dataService.getLinksOfThought(id).subscribe(function (data) {
-                    _this.botLinks = data.allLinks;
-                });
-            }
-        });
-        console.log(this.allLinks);
-        console.log(this.thoughtMid._id);
-        this.editMid = false;
-    };
-    MyroomComponent.prototype.getLinksOfThought = function (id) {
-        var _this = this;
-        // Function to GET all blogs from database
-        this.dataService.getLinksOfThought(id).subscribe(function (data) {
-            _this.allLinks = data.allLinks;
-        });
     };
     MyroomComponent.prototype.getMidThought = function (id) {
         var _this = this;
@@ -952,16 +701,16 @@ var MyroomComponent = (function () {
         });
         if (!this.currentUrl.id) {
             this.dataService.getThoughtByName("My-Room").subscribe(function (data) {
-                _this.thoughtMid =
-                    {
-                        value: data.thought.value,
-                        _id: data.thought._id,
-                    };
-                _this.dataService.getLinksOfThought(_this.thoughtMid._id).subscribe(function (data) {
-                    _this.allLinks = data.allLinks;
-                    console.log(_this.allLinks);
-                    console.log(_this.thoughtMid._id);
-                });
+                _this.chosenThought = data.thought;
+                _this.chosenPerspective = data.thought;
+                _this.contexts = data.thought.contexts;
+                _this.perspectives = data.thought.perspectives;
+                _this.meanings = data.thought.meanings;
+                console.log(_this.chosenThought);
+                console.log(_this.contexts);
+                console.log(_this.perspectives);
+                console.log(_this.meanings);
+                // Load 
             });
         }
         else {
@@ -1008,7 +757,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n  <mat-toolbar-row>\r\n    <span class=\"toolbar-spacer\">Complexity-App</span>\r\n    <!-- If not Logged In -->\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"home\">Home</button>\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"login\">Login</button>\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"register\">Register</button>\r\n\r\n    <!-- If Logged In -->\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" routerLink=\"my-room\">My-Room</button>\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" routerLink=\"profile\">Profile</button>\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\">LogOut</button>\r\n    <form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n    <input matInput placeholder=\"Search All\">\r\n    </mat-form-field>\r\n    </form>\r\n  </mat-toolbar-row>\r\n</mat-toolbar>\r\n\r\n\r\n<!--\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/myroom\">My-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/home\">Logical-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/projects\">Projects</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n      <div class=\"search-block input-group\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\" id=\"adv-search\">\r\n               <input type=\"text\" #searchTextBox (keyup)=\"onKeyupNav(searchTextBox.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n                <div class=\"input-group-btn\">\r\n                    <div class=\"btn-group\" role=\"group\">\r\n                        <div class=\"dropdown dropdown-lg open\">\r\n                            <div class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\r\n                              <ul class=\"navbar-nav navbar-right\">\r\n                                <li class=\"nav-item\"><a class=\"nav-link\" [routerLink]=\"['/myroom/',searchByName._id]\">{{ searchByName.value }}</a></li>\r\n                              </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n      </div>\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n-->\r\n "
+module.exports = "<mat-toolbar color=\"primary\">\r\n  <mat-toolbar-row>\r\n    <span class=\"toolbar-spacer\">Complexity-App</span>\r\n    <!-- If not Logged In -->\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"home\">Home</button>\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"login\">Login</button>\r\n    <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"register\">Register</button>\r\n\r\n    <!-- If Logged In -->\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" routerLink=\"myroom\">My-Room</button>\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" routerLink=\"new\">New</button>\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" routerLink=\"profile\">Profile</button>\r\n    <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\">LogOut</button>\r\n    <form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n    <input matInput placeholder=\"Search All\">\r\n    </mat-form-field>\r\n    </form>\r\n  </mat-toolbar-row>\r\n</mat-toolbar>\r\n\r\n\r\n<!--\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/\">Home</a><span class=\"sr-only\">Home</span></li>\r\n    </ul>\r\n    <ul class=\"navbar-nav navbar-right\">\r\n      <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/register\">Register</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/login\">Login</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" href=\"#\" (click)=\"onLogoutClick()\">Logout</a></li>\r\n             <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/profile\">Profile</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/new\">New</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/myroom\">My-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/home\">Logical-Room</a></li>\r\n            <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\"><a class=\"nav-link\" routerLink=\"/projects\">Projects</a></li>\r\n    </ul>\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searchSubmit()\">\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"authService.loggedIn()\">\r\n      <div class=\"search-block input-group\" [ngClass]=\"{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }\" id=\"adv-search\">\r\n               <input type=\"text\" #searchTextBox (keyup)=\"onKeyupNav(searchTextBox.value)\" class=\"form-control dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" formControlName=\"search\" name=\"search\" placeholder=\"Something\">\r\n                <div class=\"input-group-btn\">\r\n                    <div class=\"btn-group\" role=\"group\">\r\n                        <div class=\"dropdown dropdown-lg open\">\r\n                            <div class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\r\n                              <ul class=\"navbar-nav navbar-right\">\r\n                                <li class=\"nav-item\"><a class=\"nav-link\" [routerLink]=\"['/myroom/',searchByName._id]\">{{ searchByName.value }}</a></li>\r\n                              </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n      </div>\r\n    </ul>\r\n  </form>\r\n  </div>\r\n</nav>\r\n-->\r\n "
 
 /***/ }),
 
@@ -1177,27 +926,12 @@ var NewComponent = (function () {
             value: '',
         });
     };
-    NewComponent.prototype.newLink = function (link) {
-        var _this = this;
-        this.dataService.newLink(link).subscribe(function (data) {
-            if (!data.success) {
-                _this.messageClass = 'alert alert-danger';
-                _this.message = data.message;
-                _this.processing = false;
-            }
-            else {
-                _this.messageClass = 'alert alert-success';
-                _this.message = data.message;
-                _this.saveLink = data.newId;
-            }
-        });
-    };
     NewComponent.prototype.onNewSubmit = function () {
         var _this = this;
         this.processing = true;
         // Create New Thought from user's inputs
         var thought = {
-            value: this.form.get('value').value,
+            label: this.form.get('value').value,
             user: this.userId,
             form: "sphere",
             privacy: "private"
@@ -1213,64 +947,33 @@ var NewComponent = (function () {
                 _this.messageClass = 'alert alert-success';
                 _this.message = data.message;
                 _this.newId = data.newId;
-                //Create Session Thought
-                _this.dateNow = new Date().toUTCString();
-                // Create new Session
-                var sessionThought_1 = {
-                    value: _this.dateNow,
+                var thought_1 = {
+                    label: _this.form.get('value').value,
+                    context: [_this.newId],
+                    perspective: [_this.newId],
                     user: _this.userId,
-                    privacy: "private",
-                    form: "sphere"
+                    form: "sphere",
+                    privacy: "private"
                 };
-                //Get ID of Sessions-Thought (Created OnRegisterSubmit)
-                _this.dataService.getThoughtByName("Sessions").subscribe(function (data) {
-                    _this.sessionsId = data.thought._id;
-                    //Create Session Thought, Save ID
-                    _this.dataService.newThought(sessionThought_1).subscribe(function (data) {
-                        if (!data.success) {
-                            _this.messageClass = 'alert alert-danger';
-                            _this.message = data.message;
-                            _this.processing = false;
-                        }
-                        else {
-                            _this.messageClass = 'alert alert-success';
-                            _this.message = data.message;
-                            _this.sessionId = data.newId;
-                            //Create Link between Sessions and New Session
-                            var sessionLink = {
-                                user: _this.userId,
-                                scale: _this.sessionsId,
-                                thought: _this.sessionId,
-                                type: "meaning",
-                            };
-                            _this.dataService.newLink(sessionLink).subscribe(function (data) {
-                                //Create Session Links
-                                var botLink = {
-                                    user: _this.userId,
-                                    scale: _this.sessionId,
-                                    thought: _this.newId,
-                                    type: "meaning",
-                                    position: 1
-                                };
-                                var topLink = {
-                                    user: _this.userId,
-                                    scale: _this.newId,
-                                    thought: _this.sessionId,
-                                    type: "time",
-                                    position: new Date()
-                                };
-                                _this.dataService.newLink(topLink).subscribe(function (data) {
-                                    _this.dataService.newLink(botLink).subscribe(function (data) {
-                                        setTimeout(function () {
-                                            _this.router.navigate(['/myroom', _this.newId]); // Redirect
-                                        });
-                                    });
-                                });
-                            });
-                        }
-                    });
-                });
             }
+            ;
+            //Update New Thought
+            _this.dataService.editThought(thought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                    _this.processing = false;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                    _this.newId = data.newId;
+                }
+                ;
+                setTimeout(function () {
+                    _this.router.navigate(['/myroom', _this.newId]); // Redirect        
+                });
+            });
         });
     };
     NewComponent.prototype.ngOnInit = function () {
@@ -1552,32 +1255,9 @@ var RegisterComponent = (function () {
                 // Function to send login data to API
                 _this.authService.login(user_1).subscribe(function (data) {
                     _this.authService.storeUserData(data.token, data.user);
+                    //Create Starter Objects: My-Room, Memories (TimeLine, Diary, Language), Favorites, Plans (Today, This Week, This Month, This Year)
                     var myroom = {
-                        value: "My-Room",
-                        user: _this.userId,
-                        form: "sphere",
-                        privacy: "private"
-                    };
-                    var sessions = {
-                        value: "Sessions",
-                        user: _this.userId,
-                        form: "sphere",
-                        privacy: "private"
-                    };
-                    var favorites = {
-                        value: "Favorites",
-                        user: _this.userId,
-                        form: "sphere",
-                        privacy: "private"
-                    };
-                    var todo = {
-                        value: "ToDo",
-                        user: _this.userId,
-                        form: "sphere",
-                        privacy: "private"
-                    };
-                    var projects = {
-                        value: "Projects",
+                        label: "My-Room",
                         user: _this.userId,
                         form: "sphere",
                         privacy: "private"
@@ -1585,91 +1265,65 @@ var RegisterComponent = (function () {
                     //Save Starting Data
                     _this.dataService.newThought(myroom).subscribe(function (data) {
                         _this.roomId = data.newId;
-                        _this.dataService.newThought(sessions).subscribe(function (data) {
+                        var memories = {
+                            label: "Memories",
+                            user: _this.userId,
+                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            form: "sphere",
+                            privacy: "private"
+                        };
+                        var favorites = {
+                            label: "Favorites",
+                            user: _this.userId,
+                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            form: "sphere",
+                            privacy: "private"
+                        };
+                        var todo = {
+                            label: "Plans",
+                            user: _this.userId,
+                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            form: "sphere",
+                            privacy: "private"
+                        };
+                        _this.dataService.newThought(memories).subscribe(function (data) {
                             _this.sessionsId = data.newId;
                             _this.dataService.newThought(favorites).subscribe(function (data) {
                                 _this.favoritesId = data.newId;
                                 _this.dataService.newThought(todo).subscribe(function (data) {
                                     _this.todoId = data.newId;
-                                    _this.dataService.newThought(projects).subscribe(function (data) {
-                                        _this.projectsId = data.newId;
-                                        //Create Session Links
-                                        var sessionLink = {
-                                            user: _this.userId,
-                                            scale: _this.roomId,
-                                            thought: _this.sessionsId,
-                                            type: "meaning",
-                                            position: 1
-                                        };
-                                        var favoritesLink = {
-                                            user: _this.userId,
-                                            scale: _this.roomId,
-                                            thought: _this.favoritesId,
-                                            type: "meaning",
-                                            position: 2
-                                        };
-                                        var todoLink = {
-                                            user: _this.userId,
-                                            scale: _this.roomId,
-                                            thought: _this.todoId,
-                                            type: "meaning",
-                                            position: 3
-                                        };
-                                        var sessionLinkb = {
-                                            user: _this.userId,
-                                            scale: _this.sessionsId,
-                                            thought: _this.roomId,
-                                            type: "context",
-                                            position: 1
-                                        };
-                                        var favoritesLinkb = {
-                                            user: _this.userId,
-                                            scale: _this.favoritesId,
-                                            thought: _this.roomId,
-                                            type: "context",
-                                            position: 2
-                                        };
-                                        var todoLinkb = {
-                                            user: _this.userId,
-                                            scale: _this.todoId,
-                                            thought: _this.roomId,
-                                            type: "context",
-                                            position: 3
-                                        };
-                                        var projectLink = {
-                                            user: _this.userId,
-                                            scale: _this.projectsId,
-                                            thought: _this.roomId,
-                                            type: "before",
-                                            position: 1
-                                        };
-                                        var projectLinkb = {
-                                            user: _this.userId,
-                                            scale: _this.roomId,
-                                            thought: _this.projectsId,
-                                            type: "after",
-                                            position: 1
-                                        };
-                                        _this.dataService.newLink(sessionLink).subscribe(function (data) {
-                                            _this.dataService.newLink(favoritesLink).subscribe(function (data) {
-                                                _this.dataService.newLink(todoLink).subscribe(function (data) {
-                                                    _this.dataService.newLink(sessionLinkb).subscribe(function (data) {
-                                                        _this.dataService.newLink(favoritesLinkb).subscribe(function (data) {
-                                                            _this.dataService.newLink(todoLinkb).subscribe(function (data) {
-                                                                _this.dataService.newLink(projectLinkb).subscribe(function (data) {
-                                                                    _this.dataService.newLink(projectLink).subscribe(function (data) {
-                                                                        setTimeout(function () {
-                                                                            _this.router.navigate(['/login']); // Redirect to login view
-                                                                        }, 500);
-                                                                    });
-                                                                });
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
+                                    var editroom = {
+                                        _id: _this.roomId,
+                                        editLabel: "My-Room",
+                                        editContexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                                        editPerspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                                        editMeanings: [{ _id: _this.sessionsId, count: 0, label: "Memories" }, { _id: _this.favoritesId, count: 0, label: "Favorites" }, { _id: _this.todoId, count: 0, label: "Plans" }],
+                                        user: _this.userId,
+                                        form: "sphere",
+                                        privacy: "private"
+                                    };
+                                    _this.processing = true; // Lock form fields	
+                                    // Function to send blog object to backend
+                                    _this.dataService.editThought(editroom).subscribe(function (data) {
+                                        // Check if PUT request was a success or not
+                                        if (!data.success) {
+                                            _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                                            _this.message = data.message; // Set error message
+                                            _this.processing = false; // Unlock form fields
+                                        }
+                                        else {
+                                            _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                                            _this.message = data.message; // Set success message
+                                            // After two seconds, navigate back to blog page
+                                        }
                                     });
+                                    console.log(_this.messageClass);
+                                    setTimeout(function () {
+                                        _this.router.navigate(['/login']); // Redirect to login view
+                                    }, 5000);
                                 });
                             });
                         });
@@ -1900,7 +1554,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
@@ -2004,55 +1658,42 @@ var DataService = (function () {
         });
     };
     /* ===============================================================
+       ADD DATA
+    =============================================================== */
+    DataService.prototype.newThought = function (thought) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(function (res) { return res.json(); });
+    };
+    /* ===============================================================
        GET DATA
     =============================================================== */
     DataService.prototype.getAllThought = function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(function (res) { return res.json(); });
     };
-    DataService.prototype.getLinksOfThought = function (id) {
+    DataService.prototype.getSomeThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/linksOfThought/' + id, this.options).map(function (res) { return res.json(); });
+        return this.http.get(this.domain + '/datatransfer/someThought/' + id, this.options).map(function (res) { return res.json(); });
     };
     DataService.prototype.getSingleThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(function (res) { return res.json(); });
     };
-    DataService.prototype.getThoughtByName = function (value) {
+    DataService.prototype.getThoughtByName = function (label) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/datatransfer/thoughtByName/' + value, this.options).map(function (res) { return res.json(); });
+        return this.http.get(this.domain + '/datatransfer/thoughtByName/' + label, this.options).map(function (res) { return res.json(); });
     };
     /* ===============================================================
       DELETE/UPDATE DATA
    =============================================================== */
     DataService.prototype.deleteThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.delete(this.domain + 'datatransfer/deleteThought/' + id, this.options).map(function (res) { return res.json(); });
+        return this.http.delete(this.domain + '/datatransfer/deleteThought/' + id, this.options).map(function (res) { return res.json(); });
     };
-    // Function to edit/update blog post
+    // Function to edit/update Label
     DataService.prototype.editThought = function (thought) {
         this.createAuthenticationHeaders(); // Create headers
-        return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.deleteLink = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.delete(this.domain + 'datatransfer/deleteLink/' + id, this.options).map(function (res) { return res.json(); });
-    };
-    // Function to edit/update blog post
-    DataService.prototype.editLink = function (link) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.put(this.domain + 'datatransfer/editLink/', link, this.options).map(function (res) { return res.json(); });
-    };
-    /* ===============================================================
-         ADD DATA
-      =============================================================== */
-    DataService.prototype.newLink = function (link) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.post(this.domain + '/datatransfer/newLink', link, this.options).map(function (res) { return res.json(); });
-    };
-    DataService.prototype.newThought = function (thought) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(function (res) { return res.json(); });
+        return this.http.put(this.domain + '/datatransfer/editThought/', thought, this.options).map(function (res) { return res.json(); });
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

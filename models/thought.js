@@ -5,10 +5,19 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
-    value: String,
-    context: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-    perspective: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-    meaning: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+    label: String,
+    contexts: [{
+        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
+        count: Number,
+        label: String }],
+    perspectives: [{
+        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
+        count: Number,
+        label: String }],
+    meanings: [{
+        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
+        count: Number,
+        label: String }],
     position: String,
     time: String,
     form: String,

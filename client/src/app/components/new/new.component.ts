@@ -43,25 +43,11 @@ export class NewComponent implements OnInit {
   	})
   }
 
-    newLink(link) {
-          this.dataService.newLink(link).subscribe(data => {
-      if (!data.success) {
-         this.messageClass = 'alert alert-danger';
-         this.message = data.message;
-         this.processing = false;
-      } else {
-         this.messageClass = 'alert alert-success';
-         this.message = data.message;  
-         this.saveLink = data.newId;
-      }
-      });
-    }
-
  onNewSubmit() {
    this.processing = true;
      // Create New Thought from user's inputs
      const thought = {
-            value: this.form.get('value').value, // input field
+            label: this.form.get('value').value, // input field
             user: this.userId,
             form: "sphere",
             privacy: "private"
@@ -76,75 +62,37 @@ export class NewComponent implements OnInit {
              this.messageClass = 'alert alert-success';
              this.message = data.message;
              this.newId = data.newId;
-             
+             const thought = {
+              label: this.form.get('value').value, // input field
+              context: [this.newId],
+              perspective: [this.newId],
+              user: this.userId,
+              form: "sphere",
+              privacy: "private"
+             }
+        };
+            //Update New Thought
+            this.dataService.editThought(thought).subscribe(data => {
+              if (!data.success) {
+                this.messageClass = 'alert alert-danger';
+                this.message = data.message;
+                this.processing = false;
+              } else {
+                this.messageClass = 'alert alert-success';
+                this.message = data.message;
+                this.newId = data.newId;
 
+           };
+         
 
-             //Create Session Thought
-             this.dateNow = new Date().toUTCString();
-              // Create new Session
-                const sessionThought = {
-                value: this.dateNow, // input field
-                user: this.userId,
-                privacy: "private",
-                form: "sphere"
-                };
-
-              //Get ID of Sessions-Thought (Created OnRegisterSubmit)
-              this.dataService.getThoughtByName("Sessions").subscribe(data => {
-              this.sessionsId = data.thought._id;
-           
-             //Create Session Thought, Save ID
-             this.dataService.newThought(sessionThought).subscribe(data => {
-                    if (!data.success) {
-                       this.messageClass = 'alert alert-danger';
-                       this.message = data.message;
-                       this.processing = false;
-                     } else {
-                       this.messageClass = 'alert alert-success';
-                       this.message = data.message;
-                       this.sessionId = data.newId;
-     
 
                                
                               
-                              //Create Link between Sessions and New Session
-                              const sessionLink = {
-                                user: this.userId,
-                                scale: this.sessionsId, 
-                                thought: this.sessionId,
-                                type: "meaning",
-                                }
-                                this.dataService.newLink(sessionLink).subscribe(data => {
-                              
-                                         //Create Session Links
-                                      const botLink = {
-                                      user: this.userId,
-                                      scale: this.sessionId,
-                                      thought: this.newId, 
-                                      type: "meaning",
-                                      position: 1
-                                    };
-
-                                      const topLink = {
-                                      user: this.userId,
-                                      scale: this.newId,
-                                      thought: this.sessionId, 
-                                      type: "time",
-                                      position: new Date()
-                                    };
-                                      this.dataService.newLink(topLink).subscribe(data => {
-                                        this.dataService.newLink(botLink).subscribe(data => {
-                                            setTimeout(() => {
-                                            this.router.navigate(['/myroom', this.newId]); // Redirect
-                                            });
-                                        });
-                                      });
-                      
-                              });    
-                      }
-                });
-           });
-      }
+                             
+          setTimeout(() => {
+          this.router.navigate(['/myroom', this.newId]); // Redirect        
+          });
+        });
       });
  }
 

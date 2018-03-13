@@ -13,6 +13,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MyroomComponent implements OnInit {
 	messageClass;
 	message;
+	chosenThought;
+	chosenPerspective;
+	meanings;
+	contexts;
+	perspectives;
+
+
 	thoughtMid;
 	thoughtTop;
 	thoughtBot;
@@ -142,313 +149,9 @@ onKeyupBot(searchText: string) {
 
   	
 
-newLeftLink(id) {
-
-	const leftLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.thoughtByName._id, // E-mail input field
-	    type: "before"
-	    };
-	const rightLink = {
-		user: this.userId,
-	    scale: this.thoughtByName._id,
-	    thought: this.thoughtMid._id,
-	    type: "after"
-	    };
-
-		this.dataService.newLink(rightLink).subscribe(data => {
-	    this.dataService.newLink(leftLink).subscribe(data => {
-	    	this.saveLink = data.newId;
-		        
-	    
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-		this.formLeft.reset();
-	    this.thoughtByName = ''
-}
-
-
-onLeftSubmit() {
-	 	const thought = {
-	 	value: this.formLeft.get('value').value, // E-mail input field
-      	user: this.userId,
-      	privacy: "private"
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const rightLink = {
-		user: this.userId,
-	    scale: this.saveId,
-	    thought: this.thoughtMid._id,
-	    type: "after"
-	    };
-
-		const leftLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.saveId, // E-mail input field
-	    type: "before"
-	    };
-
-
-		this.dataService.newLink(rightLink).subscribe(data => {
-			this.dataService.newLink(leftLink).subscribe(data => {
-		       
-    	this.reloadThoughts(this.thoughtMid._id)
-    	});
-		});
-		});
-	this.formLeft.reset();
-}
-
-newRightLink(id) {
-
-	const rightLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.thoughtByName._id, // E-mail input field
-	    type: "after"
-	    };
-	const leftLink = {
-		user: this.userId,
-	    scale: this.thoughtByName._id, // E-mail input field
-	    thought: this.thoughtMid._id, // E-mail input field
-	    type: "before"
-	    };
-
-		this.dataService.newLink(leftLink).subscribe(data => {
-	    this.dataService.newLink(rightLink).subscribe(data => {
-	   
-	    
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-		this.formRight.reset();
-	    this.thoughtByName = ''
-}
-
-
-onRightSubmit() {
-	 	const thought = {
-	 	value: this.formRight.get('value').value, // E-mail input field
-      	user: this.userId,
-      	privacy: "private"
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const leftLink = {
-		user: this.userId,
-	    scale: this.saveId, // E-mail input field
-	    thought: this.thoughtMid._id, 
-	    type: "before"
-	    };
-
-		const rightLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.saveId, // E-mail input field
-	    type: "after"
-	    };
-
-
-		this.dataService.newLink(leftLink).subscribe(data => {
-			this.dataService.newLink(rightLink).subscribe(data => {
-		       
-    	this.reloadThoughts(this.thoughtMid._id)
-    	});
-		});
-		});
-	this.formRight.reset();
-}
-
-
-newTopLink(id) {
-
-	const topLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, 
-	    thought: this.thoughtByName._id,
-	    type: "context"
-	    };
-	const botLink = {
-		user: this.userId,
-	    scale: this.thoughtByName._id, // E-mail input field
-	    thought: this.thoughtMid._id, // E-mail input field
-	    type: "meaning"
-	    };
-
-		this.dataService.newLink(botLink).subscribe(data => {
-	    this.dataService.newLink(topLink).subscribe(data => {
-	    	
-	    this.formTop.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		
-		});
-		});
-}
-
-
-onTopSubmit() {
-	 	const thought = {
-	 	value: this.formTop.get('value').value, // E-mail input field
-      	user: this.userId,
-      	privacy: "private"
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const botLink = {
-		user: this.userId,
-	    scale: this.saveId, // E-mail input field
-	    thought: this.thoughtMid._id, // E-mail input field
-	    type: "meaning"
-	    };
-
-		const topLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.saveId,
-	    type: "context"
-	    };
-
-
-		this.dataService.newLink(botLink).subscribe(data => {
-			this.dataService.newLink(topLink).subscribe(data => {
-		       
-    	this.reloadThoughts(this.thoughtMid._id)
-    	
-		});
-		});
-		});
-	this.formTop.reset();
-}
-
-newTopRightLink(id) {
-
-	const leftLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.thoughtByName._id, // E-mail input field
-	    type: "linked"
-	    };
-
-
-		this.dataService.newLink(leftLink).subscribe(data => {
-	    	this.saveLink = data.newId;
-		        
-	    this.formTopRight.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-}
-
-
-onTopRightSubmit() {
-	 	const thought = {
-	 	value: this.formTopRight.get('value').value, // E-mail input field
-      	user: this.userId,
-      	privacy: "private"
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	 
-
-		const leftLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.saveId, // E-mail input field
-	    type: "linked"
-	    };
-
-
-		
-			this.dataService.newLink(leftLink).subscribe(data => {
-		       
-    	this.reloadThoughts(this.thoughtMid._id)
-    	
-		});
-		});
-	this.formLeft.reset();
-}
-
-
-newBotLink(id) {
-
-	const botLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id, // E-mail input field
-	    thought: this.thoughtByName._id,
-	    type: "meaning"
-	    };
-	const topLink = {
-		user: this.userId,
-	    scale: this.thoughtByName._id, // E-mail input field
-	    thought: this.thoughtMid._id,
-	    type: "context"
-	    };
-
-		this.dataService.newLink(topLink).subscribe(data => {
-	    this.dataService.newLink(botLink).subscribe(data => {
-	    	
-	    this.formBot.reset();
-	    this.thoughtByName = ''
-
-	    this.reloadThoughts(this.thoughtMid._id)
-		});
-		});
-}
-
 
 onBotSubmit() {
-	 	const thought = {
-	 	value: this.formBot.get('value').value, 
-      	user: this.userId,
-      	form: "sphere",
-      	privacy: "private"
-    	};
-	    
-	    this.dataService.newThought(thought).subscribe(data => {
-       	this.saveId = data.newId;
-
-	    
-	    const topLink = {
-		user: this.userId,
-	    scale: this.saveId, 
-	    thought: this.thoughtMid._id,
-	    type: "context"
-	    };
-
-		const botLink = {
-		user: this.userId,
-	    scale: this.thoughtMid._id,
-	    thought: this.saveId, 
-	    type: "meaning"
-	    };
-
-
-		this.dataService.newLink(topLink).subscribe(data => {
-			this.dataService.newLink(botLink).subscribe(data => {
-		       
-    	this.reloadThoughts(this.thoughtMid._id)
-    	
-		});
-		});
-		});
+	 	
 	this.formBot.reset();
 }
 
@@ -460,42 +163,14 @@ onBotSubmit() {
 	  	// Reload Thought Lvl 0
 	  	reloadThoughts(id) {
 		this.getMidThought(id)
-	   	this.getLinksOfThought(id)
-	   	 	console.log(this.allLinks);
+	   
+	   	
 					  	console.log(this.thoughtMid._id);
 	    this.editMid = false;
 	  	}
 
-	  	  	// Reload BotThought Lvl 1
-	  	reloadThoughtsBot(id) {
-	  	this.dataService.getSingleThought(id).subscribe(data => {
-	      	// Check if GET request was success or not
-		    if (!data.success) {
-		        this.messageClass = 'alert alert-danger'; // Set bootstrap error class
-		        this.message = data.message; // Set error message
-		    } else {
-		        this.activeThought = {
-		        	value: data.thought.value,
-		        	_id: data.thought._id,
-		        	}; // Save blog object for use in HTML
-		        this.foundThought = true;
-		        	this.dataService.getLinksOfThought(id).subscribe(data => {
-	  				this.botLinks = data.allLinks;
-	  			});
-		    }
-		    });
-	   	
-	   	console.log(this.allLinks);
-		console.log(this.thoughtMid._id);
-	    this.editMid = false;
-	  	}
+	  
 
-		getLinksOfThought(id) {
-	  	// Function to GET all blogs from database
-	  	this.dataService.getLinksOfThought(id).subscribe(data => {
-	  	this.allLinks = data.allLinks;
-	  	});
-	  	}
 
 	  	getMidThought(id) {
  		 	this.dataService.getSingleThought(id).subscribe(data => {
@@ -593,16 +268,18 @@ onBotSubmit() {
 
 	  		if(!this.currentUrl.id) { 
 				this.dataService.getThoughtByName("My-Room").subscribe(data => {
-	  				this.thoughtMid = 
-			              {
-			              value: data.thought.value,
-			              _id: data.thought._id,
-			              };
-	  				this.dataService.getLinksOfThought(this.thoughtMid._id).subscribe(data => {
-					  	this.allLinks = data.allLinks;
-					  	console.log(this.allLinks);
-					  	console.log(this.thoughtMid._id);
-					  	});
+	  				this.chosenThought = data.thought;
+					  this.chosenPerspective = data.thought;      
+					  this.contexts = data.thought.contexts;
+					  this.perspectives = data.thought.perspectives; 
+					  this.meanings = data.thought.meanings;
+
+						  console.log(this.chosenThought);
+						  console.log(this.contexts);
+						  console.log(this.perspectives);
+						  console.log(this.meanings);
+
+					// Load 
 
 	  			});
 	  		} else {

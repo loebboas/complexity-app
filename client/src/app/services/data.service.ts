@@ -27,15 +27,24 @@ export class DataService {
   }
 
   /* ===============================================================
+     ADD DATA
+  =============================================================== */
+
+  newThought(thought) {
+  	this.createAuthenticationHeaders(); // Create headers
+  	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
+  }
+
+  /* ===============================================================
      GET DATA
   =============================================================== */
     getAllThought() {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(res => res.json());
   }
-    getLinksOfThought(id) {
+    getSomeThought(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/linksOfThought/' + id, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/datatransfer/someThought/' + id, this.options).map(res => res.json());
   }
 
     getSingleThought(id) {
@@ -43,9 +52,9 @@ export class DataService {
     return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
   }
 
-      getThoughtByName(value) {
+      getThoughtByName(label) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/thoughtByName/' + value, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/datatransfer/thoughtByName/' + label, this.options).map(res => res.json());
   }
 
 
@@ -54,37 +63,13 @@ export class DataService {
   =============================================================== */
     deleteThought(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.delete(this.domain + 'datatransfer/deleteThought/' + id, this.options).map(res => res.json());
+    return this.http.delete(this.domain + '/datatransfer/deleteThought/' + id, this.options).map(res => res.json());
   }
 
-   // Function to edit/update blog post
+    // Function to edit/update Label
     editThought(thought) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + 'datatransfer/editThought/', thought, this.options).map(res => res.json());
+    return this.http.put(this.domain + '/datatransfer/editThought/', thought, this.options).map(res => res.json());
   }
+}
 
-      deleteLink(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.delete(this.domain + 'datatransfer/deleteLink/' + id, this.options).map(res => res.json());
-  }
-
-   // Function to edit/update blog post
-    editLink(link) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + 'datatransfer/editLink/', link, this.options).map(res => res.json());
-  }
-
-/* ===============================================================
-     ADD DATA
-  =============================================================== */
-
-    newLink(link) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/datatransfer/newLink', link, this.options).map(res => res.json());
-  }
-
-    newThought(thought) {
-  	this.createAuthenticationHeaders(); // Create headers
-  	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
-  }
- }

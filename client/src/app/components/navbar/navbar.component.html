@@ -7,7 +7,8 @@
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
 
     <!-- If Logged In -->
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="my-room">My-Room</button>
+    <button mat-button *ngIf="authService.loggedIn()" routerLink="myroom">My-Room</button>
+    <button mat-button *ngIf="authService.loggedIn()" routerLink="new">New</button>
     <button mat-button *ngIf="authService.loggedIn()" routerLink="profile">Profile</button>
     <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">LogOut</button>
     <form class="searchbar-form">

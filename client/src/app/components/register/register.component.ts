@@ -160,136 +160,91 @@ export class RegisterComponent implements OnInit {
     // Function to send login data to API
     this.authService.login(user).subscribe(data => {
           this.authService.storeUserData(data.token, data.user)
+
+
+
+          //Create Starter Objects: My-Room, Memories (TimeLine, Diary, Language), Favorites, Plans (Today, This Week, This Month, This Year)
           const myroom = {
-            value: "My-Room", // input field
+            label: "My-Room", // input field
             user: this.userId,
             form: "sphere",
             privacy: "private"
           };
     
-          const sessions = {
-            value: "Sessions", // input field
-            user: this.userId,
-            form: "sphere",
-            privacy: "private"
-          };
-
-          const favorites = {
-            value: "Favorites", // input field
-            user: this.userId,
-            form: "sphere",
-            privacy: "private"
-          };
-
-            const todo = {
-            value: "ToDo", // input field
-            user: this.userId,
-            form: "sphere",
-            privacy: "private"
-          };
-
-            const projects = {
-            value: "Projects", // input field
-            user: this.userId,
-            form: "sphere",
-            privacy: "private"
-          };
+      
+     
 
 
 
           //Save Starting Data
         this.dataService.newThought(myroom).subscribe(data => {
             this.roomId = data.newId;
-          this.dataService.newThought(sessions).subscribe(data => {
+
+            const memories = {
+              label: "Memories", // input field
+              user: this.userId,
+              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              form: "sphere",
+              privacy: "private"
+            };
+  
+            const favorites = {
+              label: "Favorites", // input field
+              user: this.userId,
+              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              form: "sphere",
+              privacy: "private"
+            };
+  
+              const todo = {
+              label: "Plans", // input field
+              user: this.userId,
+              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              form: "sphere",
+              privacy: "private"
+            };
+  
+          this.dataService.newThought(memories).subscribe(data => {
             this.sessionsId = data.newId;
                    this.dataService.newThought(favorites).subscribe(data => {
                      this.favoritesId = data.newId;
                         this.dataService.newThought(todo).subscribe(data => {
                           this.todoId = data.newId;
-                          this.dataService.newThought(projects).subscribe(data => {
-                            this.projectsId = data.newId;
-
-                              //Create Session Links
-                                      const sessionLink = {
-                                      user: this.userId,
-                                      scale: this.roomId,
-                                      thought: this.sessionsId, 
-                                      type: "meaning",
-                                      position: 1
-                                    };
-
-                                      const favoritesLink = {
-                                      user: this.userId,
-                                      scale: this.roomId,
-                                      thought: this.favoritesId, 
-                                      type: "meaning",
-                                      position: 2
-                                    };
-                                     const todoLink = {
-                                      user: this.userId,
-                                      scale: this.roomId,
-                                      thought: this.todoId, 
-                                      type: "meaning",
-                                      position: 3
-                                    };
-                                    const sessionLinkb = {
-                                      user: this.userId,
-                                      scale: this.sessionsId,
-                                      thought: this.roomId, 
-                                      type: "context",
-                                      position: 1
-                                    };
-
-                                      const favoritesLinkb = {
-                                      user: this.userId,
-                                      scale: this.favoritesId,
-                                      thought: this.roomId, 
-                                      type: "context",
-                                      position: 2
-                                    };
-                                     const todoLinkb = {
-                                      user: this.userId,
-                                      scale: this.todoId,
-                                      thought: this.roomId, 
-                                      type: "context",
-                                      position: 3
-                                    };
-                                      const projectLink = {
-                                      user: this.userId,
-                                      scale: this.projectsId,
-                                      thought: this.roomId, 
-                                      type: "before",
-                                      position: 1
-                                    };
-                                      const projectLinkb = {
-                                      user: this.userId,
-                                      scale: this.roomId,
-                                      thought: this.projectsId, 
-                                      type: "after",
-                                      position: 1
-                                    };
-                                      this.dataService.newLink(sessionLink).subscribe(data => {
-                                        this.dataService.newLink(favoritesLink).subscribe(data => {
-                                           this.dataService.newLink(todoLink).subscribe(data => {
-                                             this.dataService.newLink(sessionLinkb).subscribe(data => {
-                                                        this.dataService.newLink(favoritesLinkb).subscribe(data => {
-                                                           this.dataService.newLink(todoLinkb).subscribe(data => {
-                                                             this.dataService.newLink(projectLinkb).subscribe(data => {
-                                                               this.dataService.newLink(projectLink).subscribe(data => {
+                          
+                          const editroom = {
+                           
+                                _id: this.roomId,
+                                editLabel: "My-Room", // input field
+                                editContexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+                                editPerspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+                                editMeanings: [{ _id: this.sessionsId, count: 0, label: "Memories"}, { _id: this.favoritesId, count: 0, label: "Favorites" }, { _id: this.todoId, count: 0, label: "Plans" }],
+                                user: this.userId,
+                                form: "sphere",
+                                privacy: "private"
+                          };
+                          this.processing = true; // Lock form fields	
+                          // Function to send blog object to backend
+                          this.dataService.editThought(editroom).subscribe(data => {
+                            // Check if PUT request was a success or not
+                            if (!data.success) {
+                              this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                              this.message = data.message; // Set error message
+                              this.processing = false; // Unlock form fields
+                            } else {
+                              this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                              this.message = data.message; // Set success message
+                              // After two seconds, navigate back to blog page
+                            }
+                          });
+                          console.log(this.messageClass)
                                     setTimeout(() => {
                                     this.router.navigate(['/login']); // Redirect to login view
-                                    }, 500);
+                                    }, 5000);
                                 
-                                       });
-                                                                 
-                                    });
-                                  });
-                                });
-                            });
-                          });
-                      });
-                    });
-                  });
+                                      
                 });
               }); 
             });
