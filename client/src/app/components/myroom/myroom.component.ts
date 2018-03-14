@@ -15,8 +15,8 @@ export class MyroomComponent implements OnInit {
 
 
   constructor(
-  	private formBuilder: FormBuilder,
-    private authService: AuthService,
+  private formBuilder: FormBuilder,
+  public  authService: AuthService,
 	private dataService: DataService,
 	private activatedRoute: ActivatedRoute,
 	private router: Router

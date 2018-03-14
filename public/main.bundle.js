@@ -320,6 +320,10 @@ var FavoritesComponent = (function () {
                 _this.contexts = data.thought.contexts;
                 _this.perspectives = data.thought.perspectives;
                 _this.meanings = data.thought.meanings;
+                console.log(_this.chosenThought);
+                console.log(_this.contexts);
+                console.log(_this.perspectives);
+                console.log(_this.meanings);
             });
         }
         else {
@@ -332,11 +336,11 @@ var FavoritesComponent = (function () {
                 _this.contexts = data.thought.contexts;
                 _this.perspectives = data.thought.perspectives;
                 _this.meanings = data.thought.meanings;
+                console.log(_this.chosenThought);
+                console.log(_this.contexts);
+                console.log(_this.perspectives);
+                console.log(_this.meanings);
             });
-            console.log(this.chosenThought);
-            console.log(this.contexts);
-            console.log(this.perspectives);
-            console.log(this.meanings);
         }
     };
     FavoritesComponent = __decorate([
@@ -615,7 +619,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/memories/memories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Sidebar -->\n<mat-drawer-container class=\"sidenav-container\" autosize>\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\n      <button type=\"button\" mat-button>Context of Memories</button>\n  </mat-drawer>\t \n\n   \n\n\n<!-- Main Card -->\n<mat-card class=\"main-card\">\n<mat-card-title>\n  <button type=\"button\" class=\"context\" mat-button>Memories</button>\n</mat-card-title>\n<mat-list>\n  <mat-list-item *ngFor=\"let thought of thoughts\"> {{ thought.label }} </mat-list-item>\n</mat-list>\n \n</mat-card>\n</mat-drawer-container>\n"
+module.exports = "<!-- Sidebar -->\n<mat-drawer-container class=\"sidenav-container\" autosize>\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\n      <button type=\"button\" mat-button>Context of Memories</button>\n  </mat-drawer>\t \n\n   \n\n\n<!-- Main Card -->\n<mat-card class=\"main-card\">\n<mat-card-title>\n  <button type=\"button\" class=\"context\" mat-button>Memories</button>\n</mat-card-title>\n<mat-list>\n  <mat-list-item *ngFor=\"let thought of thoughts\" routerLink=\"/favorites/{{thought._id}}\"> {{ thought.label }} </mat-list-item>\n</mat-list>\n \n</mat-card>\n</mat-drawer-container>\n"
 
 /***/ }),
 

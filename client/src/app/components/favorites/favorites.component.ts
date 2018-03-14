@@ -44,6 +44,10 @@ export class FavoritesComponent implements OnInit {
       this.contexts = data.thought.contexts;
       this.perspectives = data.thought.perspectives;
       this.meanings = data.thought.meanings;
+      console.log(this.chosenThought);
+      console.log(this.contexts);
+      console.log(this.perspectives);
+      console.log(this.meanings);
     }); 
     } else {
 
@@ -54,12 +58,13 @@ export class FavoritesComponent implements OnInit {
           label: data.thought.label };
         this.contexts = data.thought.contexts;
         this.perspectives = data.thought.perspectives;
-        this.meanings = data.thought.meanings;
-      });
+        this.meanings = data.thought.meanings; 
       console.log(this.chosenThought);
       console.log(this.contexts);
       console.log(this.perspectives);
       console.log(this.meanings);
+      });
+     
     }
 
 
