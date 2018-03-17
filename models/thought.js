@@ -6,19 +6,10 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     label: String,
-    contexts: [{
+    links: [{
         _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
-        count: Number,
+        linktype: String,
         label: String }],
-    perspectives: [{
-        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
-        count: Number,
-        label: String }],
-    meanings: [{
-        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
-        count: Number,
-        label: String }],
-    position: String,
     time: String,
     form: String,
     texture: String,

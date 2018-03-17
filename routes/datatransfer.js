@@ -17,9 +17,7 @@ router.post('/newThought', (req, res) => {
 		let thought = new Thought({
     label: req.body.label,
     user: req.body.user,
-    contexts: req.body.contexts,
-    perspectives: req.body.perspectives,
-    meanings: req.body.meanings,
+    links: req.body.links,
     form: req.body.form,
     texture: req.body.texture,
     privacy: req.body.privacy
@@ -156,9 +154,7 @@ router.post('/newThought', (req, res) => {
             // Check who user is that is requesting blog update
                   
                     thought.label = req.body.editLabel; // Save value
-                    thought.contexts = req.body.editContexts; // Save value
-                    thought.perspectives = req.body.editPerspectives; // Save value
-                    thought.meanings = req.body.editMeanings; // Save value
+                    thought.links = req.body.editLinks; // Save value
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {

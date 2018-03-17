@@ -48,18 +48,8 @@ constructor(
     console.log(this.searchByName.value);
     }
 
-    changeActiveSession(id) {
-      this.dataService.getSingleThought(id).subscribe(data => {
-      this.activeSession = {
-         _id: data.thought._id,
-         value: data.thought.value
-      }
-    });
-      console.log(this.activeSession.value);
-    }
-
-    getThoughtByName(value) {
-  // Function to GET all blogs from database
+ 
+  getThoughtByName(value) {
   this.dataService.getThoughtByName(value).subscribe(data => {
   this.searchByName = 
               {
@@ -78,12 +68,11 @@ constructor(
   searchSubmit() {
   this.searchValue = this.form.get('search').value;
   this.getThoughtByName(this.searchValue);
-  this.router.navigate(['../something/', this.searchByName._id]); // Navigate back to home page
+  this.router.navigate(['../favorites/', this.searchByName._id]); // Navigate back to home page
    }
 
 
   ngOnInit() {
-  this.form.reset();
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments
   this.userId = profile.user._id;
