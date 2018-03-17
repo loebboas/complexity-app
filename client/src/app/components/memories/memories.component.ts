@@ -21,9 +21,7 @@ constructor(
 	private dataService: DataService,
 	private activatedRoute: ActivatedRoute,
   private router: Router
-) {
-    
-   }
+) {  }
 
   ngOnInit() {
 

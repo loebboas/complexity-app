@@ -183,8 +183,7 @@ export class RegisterComponent implements OnInit {
             const memories = {
               label: "Memories", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
-              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -192,8 +191,7 @@ export class RegisterComponent implements OnInit {
             const favorites = {
               label: "Favorites", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
-              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -201,8 +199,7 @@ export class RegisterComponent implements OnInit {
               const todo = {
               label: "Plans", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
-              perspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
+              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -218,9 +215,7 @@ export class RegisterComponent implements OnInit {
                            
                                 _id: this.roomId,
                                 editLabel: "My-Room", // input field
-                                editContexts: [{ _id: this.roomId, count: 0, label: "My-Room" }],
-                                editPerspectives: [{ _id: this.roomId, count: 0, label: "My-Room" }],
-                                editMeanings: [{ _id: this.sessionsId, count: 0, label: "Memories"}, { _id: this.favoritesId, count: 0, label: "Favorites" }, { _id: this.todoId, count: 0, label: "Plans" }],
+                                editLinks: [{ _id: this.sessionsId, linktype: "meaning", label: "Memories"}, { _id: this.favoritesId, linktype: "meaning", label: "Favorites" }, { _id: this.todoId, linktype: "meaning", label: "Plans" }],
                                 user: this.userId,
                                 form: "sphere",
                                 privacy: "private"

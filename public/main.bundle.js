@@ -267,7 +267,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/favorites/favorites.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Sidebar -->\n<mat-drawer-container class=\"sidenav-container\" autosize>\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\n      <button type=\"button\" mat-button>{{ chosenThought.label }}</button>\n  </mat-drawer>\t \n\n   \n\n\n<!-- Main Card -->\n<mat-card class=\"main-card\">\n<mat-card-title>\n  <button type=\"button\" class=\"context\" mat-button>{{ chosenThought.label }}</button>\n</mat-card-title>\n<mat-list>\n  perspectives\n  <mat-list-item *ngFor=\"let perspective of perspectives\"> {{ perspective.label }} </mat-list-item>\n  contexts\n  <mat-list-item *ngFor=\"let context of contexts\"> {{ context.label }} </mat-list-item>\n  meanings\n  <mat-list-item *ngFor=\"let meaning of meanings\"> {{ meaning.label }} </mat-list-item>\n</mat-list>\n \n</mat-card>\n</mat-drawer-container>\n"
+module.exports = "<!-- Sidebar -->\n<mat-drawer-container class=\"sidenav-container\" autosize>\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\n    <mat-list>\n      <mat-list-item *ngFor=\"let link of links\"><button type=\"button\" *ngIf=\"link.linktype == 'context'\" mat-button (click)=\"reloadThoughts(link._id)\">{{ link.label }}</button></mat-list-item>\n    </mat-list>\n  </mat-drawer>\t \n\n   \n\n\n<!-- Main Card -->\n<mat-card class=\"main-card\">\n<mat-card-title>\n  <button type=\"button\" class=\"context\" mat-button (click)=\"drawer.toggle()\">{{ chosenThought.label }}</button>\n</mat-card-title>\n<mat-list *ngFor=\"let link of links\">\n  <mat-list-item *ngIf=\"link.linktype == 'meaning'\"><button type=\"button\" mat-button (click)=\"reloadThoughts(link._id)\">{{ link.label }}</button></mat-list-item>\n</mat-list>\n\n<form [formGroup]=\"formMeaning\" (ngSubmit)=\"onMeaningSubmit()\">\n<mat-form-field>\n  <input matInput placeholder=\"Add a Link\" formControlName=\"label\">\n</mat-form-field>\n</form>\n \n</mat-card>\n</mat-drawer-container>\n"
 
 /***/ }),
 
@@ -302,7 +302,65 @@ var FavoritesComponent = (function () {
         this.dataService = dataService;
         this.activatedRoute = activatedRoute;
         this.router = router;
+        this.createNewMeaningForm(); // Create new  form on start up
     }
+    FavoritesComponent.prototype.createNewMeaningForm = function () {
+        this.formMeaning = this.formBuilder.group({
+            label: ''
+        });
+    };
+    // Reload Thought Lvl 0
+    FavoritesComponent.prototype.reloadThoughts = function (id) {
+        var _this = this;
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            _this.chosenThought = {
+                _id: data.thought._id,
+                label: data.thought.label,
+                links: data.thought.links
+            };
+            _this.links = data.thought.links;
+            console.log(_this.chosenThought);
+            console.log(_this.links);
+        });
+    };
+    FavoritesComponent.prototype.onMeaningSubmit = function () {
+        var _this = this;
+        var newThought = {
+            label: this.formMeaning.get('label').value,
+            user: this.userId,
+            links: [{ _id: this.chosenThought._id, linktype: "context", label: this.chosenThought.label }],
+            privacy: "private"
+        };
+        this.dataService.newThought(newThought).subscribe(function (data) {
+            _this.saveId = data.newId;
+            _this.newLink = {
+                _id: _this.saveId, linktype: "meaning", label: _this.formMeaning.get('label').value
+            };
+            //UPDATE ChosenThought
+            var editThought = {
+                _id: _this.chosenThought._id,
+                editLabel: _this.chosenThought.label,
+                editLinks: _this.chosenThought.links,
+                user: _this.userId,
+                form: "sphere",
+                privacy: "private"
+            };
+            editThought.editLinks.push(_this.newLink);
+            console.log(_this.editLinks);
+            console.log(_this.chosenThought);
+            _this.dataService.editThought(editThought).subscribe(function (data) {
+                if (!data.success) {
+                    _this.messageClass = 'alert alert-danger';
+                    _this.message = data.message;
+                }
+                else {
+                    _this.messageClass = 'alert alert-success';
+                    _this.message = data.message;
+                }
+                ;
+            });
+        });
+    };
     FavoritesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
@@ -317,13 +375,9 @@ var FavoritesComponent = (function () {
                     _id: data.thought._id,
                     label: data.thought.label
                 };
-                _this.contexts = data.thought.contexts;
-                _this.perspectives = data.thought.perspectives;
-                _this.meanings = data.thought.meanings;
+                _this.links = data.thought.links;
                 console.log(_this.chosenThought);
-                console.log(_this.contexts);
-                console.log(_this.perspectives);
-                console.log(_this.meanings);
+                console.log(_this.links);
             });
         }
         else {
@@ -331,15 +385,12 @@ var FavoritesComponent = (function () {
             this.dataService.getSingleThought(this.currentUrl.id).subscribe(function (data) {
                 _this.chosenThought = {
                     _id: data.thought._id,
-                    label: data.thought.label
+                    label: data.thought.label,
+                    links: data.thought.links
                 };
-                _this.contexts = data.thought.contexts;
-                _this.perspectives = data.thought.perspectives;
-                _this.meanings = data.thought.meanings;
+                _this.links = data.thought.links;
                 console.log(_this.chosenThought);
-                console.log(_this.contexts);
-                console.log(_this.perspectives);
-                console.log(_this.meanings);
+                console.log(_this.links);
             });
         }
     };
@@ -619,7 +670,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/memories/memories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Sidebar -->\n<mat-drawer-container class=\"sidenav-container\" autosize>\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\n      <button type=\"button\" mat-button>Context of Memories</button>\n  </mat-drawer>\t \n\n   \n\n\n<!-- Main Card -->\n<mat-card class=\"main-card\">\n<mat-card-title>\n  <button type=\"button\" class=\"context\" mat-button>Memories</button>\n</mat-card-title>\n<mat-list>\n  <mat-list-item *ngFor=\"let thought of thoughts\" routerLink=\"/favorites/{{thought._id}}\"> {{ thought.label }} </mat-list-item>\n</mat-list>\n \n</mat-card>\n</mat-drawer-container>\n"
+module.exports = "<!-- Sidebar -->\r\n<mat-drawer-container class=\"sidenav-container\" autosize>\r\n  <mat-drawer #drawer class=\"sidenav\" mode=\"side\">\r\n      <button type=\"button\" mat-button>Context of Memories</button>\r\n  </mat-drawer>\t \r\n\r\n   \r\n\r\n\r\n<!-- Main Card -->\r\n<mat-card class=\"main-card\">\r\n<mat-card-title>\r\n  <button type=\"button\" class=\"context\" mat-button>Memories</button>\r\n</mat-card-title>\r\n<mat-list>\r\n  <mat-list-item *ngFor=\"let thought of thoughts\"><button type=\"button\" mat-button routerLink=\"/favorites/{{thought._id}}\">{{ thought.label }}</button></mat-list-item>\r\n</mat-list>\r\n \r\n</mat-card>\r\n</mat-drawer-container>\r\n"
 
 /***/ }),
 
@@ -827,19 +878,8 @@ var NavbarComponent = (function () {
         this.getThoughtByName(searchText); // Get all blogs on component loa
         console.log(this.searchByName.value);
     };
-    NavbarComponent.prototype.changeActiveSession = function (id) {
-        var _this = this;
-        this.dataService.getSingleThought(id).subscribe(function (data) {
-            _this.activeSession = {
-                _id: data.thought._id,
-                value: data.thought.value
-            };
-        });
-        console.log(this.activeSession.value);
-    };
     NavbarComponent.prototype.getThoughtByName = function (value) {
         var _this = this;
-        // Function to GET all blogs from database
         this.dataService.getThoughtByName(value).subscribe(function (data) {
             _this.searchByName =
                 {
@@ -856,11 +896,10 @@ var NavbarComponent = (function () {
     NavbarComponent.prototype.searchSubmit = function () {
         this.searchValue = this.form.get('search').value;
         this.getThoughtByName(this.searchValue);
-        this.router.navigate(['../something/', this.searchByName._id]); // Navigate back to home page
+        this.router.navigate(['../favorites/', this.searchByName._id]); // Navigate back to home page
     };
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.form.reset();
         this.authService.getProfile().subscribe(function (profile) {
             _this.username = profile.user.username; // Used when creating new blog posts and comments
             _this.userId = profile.user._id;
@@ -972,31 +1011,9 @@ var NewComponent = (function () {
                 _this.message = data.message;
             }
             //Update New Thought
-            var editThought = {
-                _id: _this.newId,
-                editLabel: _this.form.get('label').value,
-                editContexts: [{ _id: _this.newId, count: 0, label: _this.form.get('label').value }],
-                editPerspectives: [{ _id: _this.newId, count: 0, label: _this.form.get('label').value }],
-                editMeanings: [{ _id: _this.newId, count: 0, label: _this.form.get('label').value }],
-                user: _this.userId,
-                form: "sphere",
-                privacy: "private"
-            };
-            _this.dataService.editThought(editThought).subscribe(function (data) {
-                if (!data.success) {
-                    _this.messageClass = 'alert alert-danger';
-                    _this.message = data.message;
-                    _this.processing = false;
-                }
-                else {
-                    _this.messageClass = 'alert alert-success';
-                    _this.message = data.message;
-                }
-                ;
-                setTimeout(function () {
-                    //IF PLAN GOTO PLAN, ELSE GOTO FAVORITES
-                    _this.router.navigate(['/favorites', _this.newId]); // Redirect        
-                });
+            setTimeout(function () {
+                //IF PLAN GOTO PLAN, ELSE GOTO FAVORITES
+                _this.router.navigate(['/favorites', _this.newId]); // Redirect        
             });
         });
     };
@@ -1353,24 +1370,21 @@ var RegisterComponent = (function () {
                         var memories = {
                             label: "Memories",
                             user: _this.userId,
-                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
-                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            links: [{ _id: _this.roomId, linktype: "context", label: "My-Room" }],
                             form: "sphere",
                             privacy: "private"
                         };
                         var favorites = {
                             label: "Favorites",
                             user: _this.userId,
-                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
-                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            links: [{ _id: _this.roomId, linktype: "context", label: "My-Room" }],
                             form: "sphere",
                             privacy: "private"
                         };
                         var todo = {
                             label: "Plans",
                             user: _this.userId,
-                            contexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
-                            perspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
+                            links: [{ _id: _this.roomId, linktype: "context", label: "My-Room" }],
                             form: "sphere",
                             privacy: "private"
                         };
@@ -1383,9 +1397,7 @@ var RegisterComponent = (function () {
                                     var editroom = {
                                         _id: _this.roomId,
                                         editLabel: "My-Room",
-                                        editContexts: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
-                                        editPerspectives: [{ _id: _this.roomId, count: 0, label: "My-Room" }],
-                                        editMeanings: [{ _id: _this.sessionsId, count: 0, label: "Memories" }, { _id: _this.favoritesId, count: 0, label: "Favorites" }, { _id: _this.todoId, count: 0, label: "Plans" }],
+                                        editLinks: [{ _id: _this.sessionsId, linktype: "meaning", label: "Memories" }, { _id: _this.favoritesId, linktype: "meaning", label: "Favorites" }, { _id: _this.todoId, linktype: "meaning", label: "Plans" }],
                                         user: _this.userId,
                                         form: "sphere",
                                         privacy: "private"

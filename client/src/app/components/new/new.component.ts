@@ -64,38 +64,14 @@ export class NewComponent implements OnInit {
              this.message = data.message;          
              }
              //Update New Thought
-             const editThought = {
-              _id: this.newId,
-              editLabel: this.form.get('label').value, // input field
-              editContexts: [{ _id: this.newId, count: 0, label: this.form.get('label').value }], 
-              editPerspectives: [{ _id: this.newId, count: 0, label: this.form.get('label').value }],
-              editMeanings: [{ _id: this.newId, count: 0, label: this.form.get('label').value }],
-              user: this.userId,
-              form: "sphere",
-              privacy: "private"
-            };
-         
-            this.dataService.editThought(editThought).subscribe(data => {
-              if (!data.success) {
-                this.messageClass = 'alert alert-danger';
-                this.message = data.message;
-                this.processing = false;
-              } else {
-                this.messageClass = 'alert alert-success';
-                this.message = data.message;
-               
-              
-           };
-         
-
-
+             
                                
                               
                              
           setTimeout(() => {
             //IF PLAN GOTO PLAN, ELSE GOTO FAVORITES
           this.router.navigate(['/favorites', this.newId]); // Redirect        
-          });
+        
         });
       });
  }
