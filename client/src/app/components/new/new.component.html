@@ -6,16 +6,15 @@
   </div>
 </div>
 
-<!-- Login Form -->
-<form [formGroup]="form" (submit)="onNewSubmit()">
+<!-- Form -->
 
-  <!-- Username Field -->
-  <div class="form-group">
-    <label for="new">New Thought</label>
-    <div>
-      <input class="form-control" type="text" name="label" formControlName="label" />
-      <!-- Validation -->
-     </div>
-  </div>
-  <input class="btn btn-primary" type="submit" value="Submit" />
-</form>
+<form class="searchbar-form" (submit)="onNewSubmit()">
+  <mat-form-field class="searchbar-full-width">
+  <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linktoThought(thought._id)">
+      <span>{{ thought.label }}</span> |  <small *ngFor="let context of thought.links">{{context.label}}</small>
+    </mat-option>
+  </mat-autocomplete>
+  </mat-form-field>
+  </form>

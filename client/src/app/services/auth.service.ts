@@ -28,7 +28,8 @@ options;
       })
     });
   }
-
+ 
+ 
   	  // Function to get token from client local storage
   	loadToken() {
     this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
@@ -36,6 +37,10 @@ options;
 
   registerUser(user) {
     return this.http.post(this.domain + '/authentication/register', user).map(res => res.json());
+  }
+  editUser(user) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + '/authentication/edit', user).map(res => res.json());
   }
   // Function to check if username is taken
   checkUsername(username) {
@@ -65,6 +70,7 @@ options;
     this.authToken = token; // Assign token to be used elsewhere
     this.user = user; // Set user to be used elsewhere
   }
+  
 
   // Function to get user's profile data
   getProfile() {

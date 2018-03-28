@@ -4,6 +4,13 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { DataService } from '../../services/data.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
+import { Thought } from '../../thought';
+import { User } from '../../user';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,20 +19,17 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
+  thoughtCtrl: FormControl;
+  filteredThoughts: Observable<any[]>;
+  thoughts = [{"_id":"65654654","label":"Enter Something","user":"5aaaa481a298bf3510fcd0ad","privacy":"private","__v":1,"inputTime":"2018-03-15T16:55:04.222Z","links":[{"_id":"5aaaa4fea298bf3510fcd0b9","linktype":"context","label":"Context"}]}];
+  user: User;
+
   messageClass;
   message;
   username;
   userId;
   allThought;
-  searchTerm;
-  searchByName;
-  fountThoughtByName = false;
-  form;
-  searchValue;
- 
-  allSessionThought;
-  activeSession = { value: "no Session found", _id: undefined };
-
+  
 constructor(
 
     public dataService: DataService,
@@ -34,30 +38,29 @@ constructor(
     private formBuilder: FormBuilder
 
   ) {
-  this.createNewForm(); // Create new  form on start up
+    this.thoughtCtrl = new FormControl();
+    this.filteredThoughts = this.thoughtCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(thought => thought ? this.filterThoughts(thought) : this.thoughts.slice())
+      );
+
   }
 
-    createNewForm() {
-    this.form = this.formBuilder.group({
-       search: ''
-     })
-  }
-
-  onKeyupNav(searchText: string) {
-    this.getThoughtByName(searchText); // Get all blogs on component loa
-    console.log(this.searchByName.value);
+  filterThoughts(label: string) {
+    return this.thoughts.filter(thought =>
+      thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
     }
-
- 
-  getThoughtByName(value) {
-  this.dataService.getThoughtByName(value).subscribe(data => {
-  this.searchByName = 
-              {
-              value: data.thought.value,
-              _id: data.thought._id,
-              };
-  });
+  
+  
+    gotoThought(id){
+      this.router.navigate(['../favorites/', id]);
+      this.dataService.getAllThought().subscribe(data => {
+      this.thoughts = data.allThought;
+      console.log(this.thoughts);
+    });
   }
+
   // Function to logout user
   onLogoutClick() {
     this.authService.logout(); // Logout user
@@ -65,17 +68,16 @@ constructor(
   }
 
 
-  searchSubmit() {
-  this.searchValue = this.form.get('search').value;
-  this.getThoughtByName(this.searchValue);
-  this.router.navigate(['../favorites/', this.searchByName._id]); // Navigate back to home page
-   }
-
 
   ngOnInit() {
   this.authService.getProfile().subscribe(profile => {
   this.username = profile.user.username; // Used when creating new blog posts and comments
   this.userId = profile.user._id;
+  });
+
+  this.dataService.getAllThought().subscribe(data => {
+    this.thoughts = data.allThought;
+    console.log(this.thoughts);
   });
 }
 

@@ -59,7 +59,26 @@ module.exports = (router) => {
 		    }
 	  	  }
 		}
+  });
+  
+//EDIT USERDATA
+  router.put('/edit', (req, res) => {
+	
+      User.findOne({ _id: req.body._id }, (err, user) => {
+		 	user.starter = req.body.starter; 
+			user.save((err, user) => {
+            // Check if error occured
+            if (err) {
+                  res.json({ success: false, message: 'Could not update user. Error: ', err }); // Return error if not related to validation
+             
+            } else {
+              res.json({ success: true, message: 'Acount Updated!!', user: user }); // Return success
+            }
+    
+	          });
+          });		
 	});
+
 
 	router.get('/checkEmail/:email', (req, res) => {
     // Check if email was provided in paramaters

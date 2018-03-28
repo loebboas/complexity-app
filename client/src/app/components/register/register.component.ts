@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   favoritesId;
   todoId;
   roomId;
+  userData;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -163,6 +164,7 @@ export class RegisterComponent implements OnInit {
 
 
 
+
           //Create Starter Objects: My-Room, Memories (TimeLine, Diary, Language), Favorites, Plans (Today, This Week, This Month, This Year)
           const myroom = {
             label: "My-Room", // input field
@@ -180,10 +182,15 @@ export class RegisterComponent implements OnInit {
         this.dataService.newThought(myroom).subscribe(data => {
             this.roomId = data.newId;
 
+
+            
+           
+
+
             const memories = {
               label: "Memories", // input field
               user: this.userId,
-              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
+              contexts: [{ _id: this.roomId, label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -191,7 +198,7 @@ export class RegisterComponent implements OnInit {
             const favorites = {
               label: "Favorites", // input field
               user: this.userId,
-              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
+              contexts: [{ _id: this.roomId, label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -199,7 +206,7 @@ export class RegisterComponent implements OnInit {
               const todo = {
               label: "Plans", // input field
               user: this.userId,
-              links: [{ _id: this.roomId, linktype: "context", label: "My-Room" }],
+              contexts: [{ _id: this.roomId, label: "My-Room" }],
               form: "sphere",
               privacy: "private"
             };
@@ -215,7 +222,7 @@ export class RegisterComponent implements OnInit {
                            
                                 _id: this.roomId,
                                 editLabel: "My-Room", // input field
-                                editLinks: [{ _id: this.sessionsId, linktype: "meaning", label: "Memories"}, { _id: this.favoritesId, linktype: "meaning", label: "Favorites" }, { _id: this.todoId, linktype: "meaning", label: "Plans" }],
+                                editContents: [{ _id: this.sessionsId, label: "Memories", showAs: "card"}, { _id: this.favoritesId, label: "Favorites", showAs: "card"}, { _id: this.todoId, label: "Plans", showAs: "card"}],
                                 user: this.userId,
                                 form: "sphere",
                                 privacy: "private"
@@ -231,12 +238,20 @@ export class RegisterComponent implements OnInit {
                             } else {
                               this.messageClass = 'alert alert-success'; // Set success bootstrap class
                               this.message = data.message; // Set success message
-                              // After two seconds, navigate back to blog page
-                            }
-                          });
+                              // After two seconds, navigate back to blog page 
+                              const editUser = {
+                              _id: this.userId,
+                              username: this.form.get('username').value, // Username input field
+                              password: this.form.get('password').value, // Password input field
+                              starter: this.roomId
+                            };
+                            this.authService.editUser(editUser).subscribe(data => {
+                            });
+                          }
+                        });
                           console.log(this.messageClass)
                                     setTimeout(() => {
-                                    this.router.navigate(['/login']); // Redirect to login view
+                                    this.router.navigate(['/memories']); // Redirect to login view
                                     }, 5000);
                                 
                                       

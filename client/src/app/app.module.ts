@@ -20,6 +20,7 @@ import { MaterialModule } from './material.module';
 import { MemoriesComponent } from './components/memories/memories.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlansComponent } from './components/plans/plans.component';
+import { DraggableModule } from './draggable/draggable.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PlansComponent } from './components/plans/plans.component';
     AppRoutingModule,
     BrowserModule,
     HttpModule,
-    MaterialModule
+    MaterialModule,
+    DraggableModule
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, DataService],
   bootstrap: [AppComponent]

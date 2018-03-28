@@ -17,7 +17,8 @@ router.post('/newThought', (req, res) => {
 		let thought = new Thought({
     label: req.body.label,
     user: req.body.user,
-    links: req.body.links,
+    contexts: req.body.contexts,
+    contents: req.body.contents,
     form: req.body.form,
     texture: req.body.texture,
     privacy: req.body.privacy
@@ -31,6 +32,8 @@ router.post('/newThought', (req, res) => {
 		})
 	}
 });
+
+
 
 
    /* ===============================================================
@@ -54,27 +57,8 @@ router.post('/newThought', (req, res) => {
     }); // Sort blogs from newest to oldest
   });
 
-
-     /* ===============================================================
-     GET SOME THOUGHTS OF USER
-  =============================================================== */
-
-  router.get('/someThought', (req, res) => {
-    // Search database for all Thoughts
-    Thought.find({user: req.decoded.userId}, (err, someThought) => {
-              // Check if error was found or not
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                // Check if blogs were found in database
-                if (!someThought) {
-                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
-                } else {       
-                  res.json({ success: true, someThought: someThought }); // Return success and blogs array
-                }
-              }
-    }); // Sort blogs from newest to oldest
-  });
+  
+  
 
 
    /* ===============================================================
@@ -103,6 +87,7 @@ router.post('/newThought', (req, res) => {
   }
   });
 
+  
 
       /* ===============================================================
      GET THOUGHT BY NAME
@@ -130,8 +115,7 @@ router.post('/newThought', (req, res) => {
     });
   }
   });
-
-
+ 
 
    /* ===============================================================
      UPDATE ONE THOUGHT
@@ -152,9 +136,9 @@ router.post('/newThought', (req, res) => {
             res.json({ success: false, message: 'thought id was not found.' }); // Return error message
           } else {
             // Check who user is that is requesting blog update
-                  
                     thought.label = req.body.editLabel; // Save value
-                    thought.links = req.body.editLinks; // Save value
+                    thought.contexts = req.body.editContexts; // Save value
+                    thought.contents = req.body.editContents; // Save value
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {
@@ -174,8 +158,7 @@ router.post('/newThought', (req, res) => {
     }
   });
 
- 
-
+  
   /* ===============================================================
      DELETE ONE THOUGHT
   =============================================================== */
@@ -216,6 +199,8 @@ router.post('/newThought', (req, res) => {
       });
     }
   });
+
+  
 
 
  
