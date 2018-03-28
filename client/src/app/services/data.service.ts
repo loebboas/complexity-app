@@ -27,7 +27,7 @@ export class DataService {
   }
 
   /* ===============================================================
-     ADD DATA
+     ADD THOUGHT
   =============================================================== */
 
   newThought(thought) {
@@ -35,6 +35,7 @@ export class DataService {
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
   }
 
+   
   /* ===============================================================
      GET DATA
   =============================================================== */
@@ -42,12 +43,8 @@ export class DataService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(res => res.json());
   }
-    getSomeThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/someThought/' + id, this.options).map(res => res.json());
-  }
 
-    getSingleThought(id) {
+      getSingleThought(id) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
   }
@@ -71,5 +68,6 @@ export class DataService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.put(this.domain + '/datatransfer/editThought/', thought, this.options).map(res => res.json());
   }
+
 }
 

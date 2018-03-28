@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { AuthGuard } from '../../guards/auth.guard';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
+import { Thought } from '../../thought';
+import { User } from '../../user';
 
 
 @Component({
@@ -13,19 +18,23 @@ import { DataService } from '../../services/data.service';
   encapsulation: ViewEncapsulation.None
 })
 export class NewComponent implements OnInit {
-
+  thoughtCtrl: FormControl;
+  filteredThoughts: Observable<any[]>;
+  thoughts = [{"_id":"65654654","label":"Enter Something","user":"5aaaa481a298bf3510fcd0ad","privacy":"private","__v":1,"inputTime":"2018-03-15T16:55:04.222Z","links":[{"_id":"5aaaa4fea298bf3510fcd0b9","linktype":"context","label":"Context"}]}];
+  user: User;
   form;
-  message;
   messageClass;
-  processing = false;
-  allThought;
-  username = '';
+  message;
+  username;
   userId;
+  allThought;
+  processing = false;
   sessionId;
   dateNow;
   newId;
   saveLink;
   sessionsId;
+  lastInput;
 
 
   constructor(
@@ -34,20 +43,36 @@ export class NewComponent implements OnInit {
   	private dataService: DataService,
     private router: Router
   	) {
-  	this.createForm();
+      this.thoughtCtrl = new FormControl();
+      this.filteredThoughts = this.thoughtCtrl.valueChanges
+        .pipe(
+          startWith(''),
+          map(thought => thought ? this.filterThoughts(thought) : this.thoughts.slice())
+        );
   }
 
-  createForm() {
-  	this.form = this.formBuilder.group({
-  		label: '',
-  	})
+
+filterThoughts(label: string) {
+  this.lastInput = label;
+  return this.thoughts.filter(thought =>
+    thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
+    
   }
+
+
+  gotoThought(id){
+    this.router.navigate(['../favorites/', id]);
+    this.dataService.getAllThought().subscribe(data => {
+    this.thoughts = data.allThought;
+    console.log(this.thoughts);
+  });
+}
 
  onNewSubmit() {
    this.processing = true;
      // Create New Thought from user's inputs
      const thought = {
-            label: this.form.get('label').value, // input field
+            label: this.lastInput, // input field
             user: this.userId,
             form: "sphere",
             privacy: "private"
@@ -63,11 +88,7 @@ export class NewComponent implements OnInit {
              this.messageClass = 'alert alert-success';
              this.message = data.message;          
              }
-             //Update New Thought
-             
-                               
-                              
-                             
+             //Update New Thought                        
           setTimeout(() => {
             //IF PLAN GOTO PLAN, ELSE GOTO FAVORITES
           this.router.navigate(['/favorites', this.newId]); // Redirect        
@@ -76,11 +97,17 @@ export class NewComponent implements OnInit {
       });
  }
 
+
   ngOnInit() {
     // Get profile username on page load
   	  this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; 
       this.userId = profile.user._id;
+    });
+
+    this.dataService.getAllThought().subscribe(data => {
+      this.thoughts = data.allThought;
+      console.log(this.thoughts);
     });
   }
 }

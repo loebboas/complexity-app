@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="toolbar-spacer">Complexity-App</span>
+    <span class="toolbar-spacer">Complexity-App</span><button mat-button (click)="buttonclick()">Refresh</button>
     <!-- If not Logged In -->
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
@@ -13,7 +13,12 @@
     <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">LogOut</button>
     <form class="searchbar-form">
     <mat-form-field class="searchbar-full-width">
-    <input matInput placeholder="Search All">
+    <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="gotoThought(thought._id)">
+        <span>{{ thought.label }}</span> |  <small *ngFor="let context of thought.links">{{context.label}}</small>
+      </mat-option>
+    </mat-autocomplete>
     </mat-form-field>
     </form>
   </mat-toolbar-row>
