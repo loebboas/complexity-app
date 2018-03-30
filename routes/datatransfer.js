@@ -101,8 +101,12 @@ router.post('/newThought', (req, res) => {
               } else {
 
               // Search database for Thought
+<<<<<<< HEAD
               
               Thought.findOne({user: req.decoded.userId, label: new RegExp('^'+req.params.label+'$', "i")}, (err, thought) => {
+=======
+              Thought.findOne({user: req.decoded.userId, value: new RegExp('^'+req.params.value+'$', "i")}, (err, thought) => {
+>>>>>>> f38978721a373bd3369cdc22d088000788acd595
               // Check if error was found or not
               if (err) {
                 res.json({ success: false, message: err }); // Return error message
@@ -117,7 +121,30 @@ router.post('/newThought', (req, res) => {
     });
   }
   });
+<<<<<<< HEAD
  
+=======
+
+  /* ===============================================================
+     GET POPULATED LINKS OF A THOUGHT
+  =============================================================== */
+
+    router.get('/linksOfThought/:id', (req, res) => {
+        // Search database for all thoughts linked to :id as bottom
+        Link
+            .find({user: req.decoded.userId, scale: req.params.id })
+            .populate('thought')
+            .exec((err, links) => {
+                // Check if error was found or not
+                if (err) {
+                    res.json({success: false, message: err}); // Return error message
+                } else {
+                    res.json({success: true, allLinks: links });
+                }
+            });
+    });
+   
+>>>>>>> f38978721a373bd3369cdc22d088000788acd595
 
    /* ===============================================================
      UPDATE ONE THOUGHT
