@@ -77,7 +77,6 @@ constructor(
 
   this.dataService.getAllThought().subscribe(data => {
     this.thoughts = data.allThought;
-    console.log(this.thoughts);
   });
 }
 

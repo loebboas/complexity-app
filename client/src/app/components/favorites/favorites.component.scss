@@ -1,11 +1,30 @@
 .box {
-    background: #BADA55;
-    border: 1px solid black;
-
-    &.dragging {
-      background: coral;
-    }
+  border: 1px solid black;
+  
+  &.dragging {
+    background: coral;
   }
-.area {
-  background: #EEFF33
+
+  &.sortable.dragging {
+    background: none;
+    border: 1px dashed black;
+    color: transparent;
+  }
 }
+
+button {
+  margin-top: 20px;
+}
+
+mat-list {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+
+  &.horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+

@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="toolbar-spacer">Complexity-App</span><button mat-button (click)="buttonclick()">Refresh</button>
+    <span class="toolbar-spacer">Complexity-App</span>
     <!-- If not Logged In -->
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
@@ -8,7 +8,6 @@
 
     <!-- If Logged In -->
     <button mat-button *ngIf="authService.loggedIn()" routerLink="myroom">My-Room</button>
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="new">New</button>
     <button mat-button *ngIf="authService.loggedIn()" routerLink="profile">Profile</button>
     <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">LogOut</button>
     <form class="searchbar-form">
@@ -16,7 +15,7 @@
     <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="gotoThought(thought._id)">
-        <span>{{ thought.label }}</span> |  <small *ngFor="let context of thought.links">{{context.label}}</small>
+        <span>{{ thought.label }}</span><small *ngFor="let context of thought.contexts"> | {{context.label}}</small>
       </mat-option>
     </mat-autocomplete>
     </mat-form-field>

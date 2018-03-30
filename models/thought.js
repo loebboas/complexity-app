@@ -6,6 +6,9 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     label: String,
+    value: String,
+    dimension: String,
+    showAs: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     contexts: [{
         _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
@@ -13,12 +16,10 @@ const thoughtSchema = new Schema({
     contents: [{
             _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
             label: String,
-            xPos: Number,
-            yPos: Number,
-            zPos: Number,
+            value: String,
+            dimension: String,
             showAs: String  
         }],
-    form: String,
     texture: String,
     privacy: String,
     inputTime: {type: Date, default: Date.now}

@@ -12,11 +12,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
-	imports: [MatButtonModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
-	exports: [MatButtonModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
+	imports: [MatButtonModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
+	exports: [MatButtonModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
 	})
 
 export class MaterialModule {}

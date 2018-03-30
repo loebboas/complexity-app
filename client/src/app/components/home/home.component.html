@@ -1,23 +1,30 @@
 
-<!-- Sidebar -->
-<mat-drawer-container class="sidenav-container" autosize>
-		<mat-drawer #drawer class="sidenav" mode="side">
-				<button type="button" mat-button *ngFor="let context of allContexts">{{ context.label }}</button>
-		</mat-drawer>	 
-
-		 
 
 	
 <!-- Main Card -->
 <mat-card class="main-card">
-	<mat-card-title>
-		<button type="button" class="context" mat-button (click)="drawer.toggle()"> {{ chosenContext.label }}</button>
-	</mat-card-title>
-
-    <mat-tab-group>
-  		<mat-tab *ngFor="let perspective of allPerspectives" label="{{ perspective.label }}">
-				
-		</mat-tab>
+	<mat-tab-group>
+  		<mat-tab  label="Welcome">
+			  <br><br>
+			  <h1> Welcome to the Complexity-App</h1>
+			  <p> The Complexity-App is a Tool which should someday help you visualise and express complex thoughts. At the moment this site is still in developement.</p>
+			<br><br>
+			</mat-tab>
+		<mat-tab  label="About">
+			<br><br>
+				<h1> About this Site</h1>
+				<p> The Complexity-App is a Project of the Complexity Association. It should someday help you visualise and express complex thoughts. At the moment this site is still in developement.</p>
+				<br><br>
+			</mat-tab>
+		  <mat-tab  label="Complexity">
+			  <br><br>
+				<h1> The Complexity Association</h1>
+				<p> The Complexity-App is a project of the Complexity Association. Check out a different Site which does not yet exist for more information.</p>
+				<br><br>
+			</mat-tab>
+		
 	</mat-tab-group>
+	<mat-card-actions>
+		<button mat-button routerLink="login">Login</button>		<button mat-button routerLink="register">Register</button>
+	</mat-card-actions>
 </mat-card>
-</mat-drawer-container>

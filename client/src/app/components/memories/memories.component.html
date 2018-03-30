@@ -10,10 +10,10 @@
 <!-- Main Card -->
 <mat-card class="main-card">
 <mat-card-title>
-  <button type="button" class="context" mat-button>Memories</button>
+  <button type="button" class="context" mat-raised-button>Memories</button>
 </mat-card-title>
 <mat-list>
-  <mat-list-item *ngFor="let thought of thoughts"><button type="button" mat-button routerLink="/favorites/{{thought._id}}">{{ thought.label }}</button></mat-list-item>
+  <mat-list-item *ngFor="let thought of thoughts"><button type="button" mat-raised-button routerLink="/favorites/{{thought._id}}">{{ thought.label }} | {{ thought.inputTime | date }}</button></mat-list-item>
 </mat-list>
  
 </mat-card>

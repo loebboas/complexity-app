@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
+import { SortEvent } from '../../draggable/sortable-list.directive';
 
 @Component({
   selector: 'app-favorites',
@@ -15,24 +16,19 @@ import { map } from 'rxjs/operators/map';
 })
 export class FavoritesComponent implements OnInit {
 
-  trappedBoxes = ['Trapped 1', 'Trapped 2'];
+  sortableList = [];
 
-  add(): void {
-    this.trappedBoxes.push('New trapped');
+   sort(event: SortEvent) {
+    const current = this.sortableList[event.currentIndex];
+    const swapWith = this.sortableList[event.newIndex];
+
+    this.sortableList[event.newIndex] = current;
+    this.sortableList[event.currentIndex] = swapWith;
+    this.updateThought(this.sortableList)
+    
+
   }
 
-onDragStart(): void {
-  console.log('got Drag Start!');
-}
-
-
-  onDragMove(event: PointerEvent): void {
-    console.log(`got drag move ${Math.round(event.clientX)} ${Math.round(event.clientY)}`);
-  }
-
-onDragEnd(): void {
-  console.log('got Drag Ende!');
-}
   thoughtCtrl: FormControl;
   filteredThoughts: Observable<any[]>;
   thoughts = [{
@@ -41,8 +37,8 @@ onDragEnd(): void {
   "privacy":"",
   "__v":1,
   "inputTime":"2018-03-15T16:55:04.222Z",
-  "contexts":[{"_id":"","label":"","showAs":""}], 
-  "contents": [{"_id":"","label":"","showAs":""}] }];
+  "contexts":[{_id:"", label:""}], 
+  "contents": [{_id:"",label:"",showAs:""}] }];
   message;
   messageClass;
   currentUrl;
@@ -82,92 +78,88 @@ onDragEnd(): void {
       );
 }
 
-
-
 filterThoughts(label: string) {
   this.lastInput = label;
   return this.thoughts.filter(thought =>
     thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
     
+
   }
-
-
-  linktoThought(thought){
- 
-      //UPDATE ChosenThought
-      console.log(thought);
-      const addMeaning = {
-        _id: this.chosenThought._id,
-        editLabel: this.chosenThought.label,
-        editContents: this.chosenThought.contents,
-        user: this.userId,
-        form: "sphere",
-        privacy: "private"
-  };
- 
-    this.newLink = {
-      _id: thought._id, label: thought.label, showAs: "card"
+ updateThought(sortableList) {
+  //UPDATE CONTENT OF CHOSENTHOUGHT
+  const editContent = {
+    _id: this.chosenThought._id,
+   editContents: this.sortableList,
     };
-      addMeaning.editContents.push(this.newLink);
-      console.log(addMeaning);
-   
-      this.dataService.editThought(addMeaning).subscribe(data => {
-        if (!data.success) {
-          this.messageClass = 'alert alert-danger';
-          this.message = data.message;
-        } else {
-          this.messageClass = 'alert alert-success';
-          this.message = data.message;    
-     };
-      //UPDATE NewMeaning
-     const addContext = {
-      _id: thought._id,
-      editLabel: thought.label,
-      editContexts: thought.contexts,
-      editContents: thought.contents,
-      user: this.userId,
-      form: "sphere",
-      privacy: "private"
-};
-      this.newContext = {
-        _id: this.chosenThought._id,label: this.chosenThought.label
-      };
-        addContext.editContexts.unshift(this.newContext);
-        console.log(addContext);
-        console.log(this.chosenThought);
-        this.dataService.editThought(addContext).subscribe(data => {
+
+  this.dataService.editThought(editContent).subscribe(data => {
+    if (!data.success) {
+      this.messageClass = 'alert alert-danger';
+      this.message = data.message;
+    } else {
+      this.messageClass = 'alert alert-success';
+      this.message = data.message;    
+ };
+});
+ }
+
+  copyThought(thought){
+    //CREATE COPIED THOUGHT WITH NEW CONTEXT
+    this.dataService.getSingleThought(thought._id).subscribe(data => {
+      var copyThought = {
+        _id: data.thought._id,
+        label: data.thought.label,
+        user: this.userId,  
+        contexts: this.contexts,
+        contents: data.thought.contents,
+        privacy: "private" };
+         
+        copyThought.contexts.unshift({ _id: this.chosenThought._id, label: this.chosenThought.label });
+        
+       
+        //SAVE COPY AS NEW THOUGHT
+        this.dataService.newThought(copyThought).subscribe(data => {
+          this.saveId = data.newId;
+        
+          this.newLink = {
+            _id: this.saveId, label: thought.label, showAs: "card"
+            };
+     
+        //UPDATE CHOSENTHOUGHT
+        const editThought = {
+          _id: this.chosenThought._id,
+          editContents: this.chosenThought.contents,
+    };
+      
+        editThought.editContents.push(this.newLink);
+       
+        this.dataService.editThought(editThought).subscribe(data => {
           if (!data.success) {
             this.messageClass = 'alert alert-danger';
             this.message = data.message;
           } else {
             this.messageClass = 'alert alert-success';
             this.message = data.message;    
-      };
-    });
-  });
-}
-    	// Reload Thought Lvl 0
-	  	reloadThoughts(id) {
-        this.dataService.getSingleThought(id).subscribe(data => {
-          this.chosenThought = {
-            _id: data.thought._id,
-            label: data.thought.label,
-            contexts: data.thought.contexts,
-            contents: data.thought.contents };
-          this.contexts = data.thought.contexts;
-          this.contents = data.thought.contents;
-        console.log(this.chosenThought);
-        console.log(this.contents);
+       };
+       copyThought.contexts.shift();
+  
+          });
         });
-          }
+      });
+      this.reloadThoughts(this.chosenThought._id);
+}
+    
 
   onMeaningSubmit() { 
     const newThought = {
-      label: this.lastInput, // E-mail input field
+      label: this.lastInput,
       user: this.userId,
-      contexts: [{ _id: this.chosenThought._id, label: this.chosenThought.label }],
+      contexts: this.contexts,
       privacy: "private"
        };
+    
+      newThought.contexts.unshift({ _id: this.chosenThought._id, label: this.chosenThought.label });
+
        this.dataService.newThought(newThought).subscribe(data => {
           this.saveId = data.newId;
           this.newLink = {
@@ -177,8 +169,6 @@ filterThoughts(label: string) {
 
       const editThought = {
         _id: this.chosenThought._id,
-        editLabel: this.chosenThought.label,
-        editContexts: this.chosenThought.contexts,
         editContents: this.chosenThought.contents,
         user: this.userId,
         form: "sphere",
@@ -186,9 +176,7 @@ filterThoughts(label: string) {
   };
     
       editThought.editContents.push(this.newLink);
-      console.log(this.editLinks);
-      console.log(this.chosenThought);
-   
+     
       this.dataService.editThought(editThought).subscribe(data => {
         if (!data.success) {
           this.messageClass = 'alert alert-danger';
@@ -197,22 +185,36 @@ filterThoughts(label: string) {
           this.messageClass = 'alert alert-success';
           this.message = data.message;    
      };
-   
+     newThought.contexts.shift();
 
     });
   });
-
-  
   }
 
+  	// Reload Thoughts
+    reloadThoughts(id) {
+      this.dataService.getSingleThought(id).subscribe(data => {
+        this.chosenThought = {
+          _id: data.thought._id,
+          label: data.thought.label,
+          contexts: data.thought.contexts,
+          contents: data.thought.contents };
+        this.contexts = data.thought.contexts;
+        this.contents = data.thought.contents;
+        this.sortableList = data.thought.contents;
+      });
+        }
+
+
   ngOnInit() {
+    //GET URL-ID AND PROFILE DATA
     this.currentUrl = this.activatedRoute.snapshot.params; // When component loads, grab the id
-    console.log(this.currentUrl)
     this.authService.getProfile().subscribe(profile => {
     this.username = profile.user.username; // Used when creating new blog posts and comments
     this.userId = profile.user._id;
       });   
 
+    //LOAD STARTER THOUGHT
     if(!this.currentUrl.id) { 
     this.dataService.getThoughtByName("My-Room").subscribe(data => {
       this.chosenThought = {
@@ -223,32 +225,26 @@ filterThoughts(label: string) {
         this.contexts = data.thought.contexts;
         this.contents = data.thought.contents;
    
-      console.log(this.chosenThought);
-      console.log(this.contents);
-   
     }); 
     } else {
 
-      //Get Thought
+      //LOAD URL-ID THOUGHT
       this.dataService.getSingleThought(this.currentUrl.id).subscribe(data => {
         this.chosenThought = {
           _id: data.thought._id,
           label: data.thought.label,
           contexts: data.thought.contexts,
-          contents: data.thought.content };
+          contents: data.thought.contents };
           this.contexts = data.thought.contexts;
           this.contents = data.thought.contents;
-      console.log(this.chosenThought);
-      console.log(this.contents);
-      });
+          this.sortableList = data.thought.contents;
+                          
       this.dataService.getAllThought().subscribe(data => {
-        this.thoughts = data.allThought;
-        console.log(this.thoughts);
+        this.thoughts = data.allThought; 
+       });;
+    
       });
-     
     }
-
-
   }
     
 

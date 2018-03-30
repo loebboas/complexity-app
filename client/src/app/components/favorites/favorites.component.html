@@ -1,38 +1,31 @@
-<!-- Sidebar -->
-<mat-drawer-container class="sidenav-container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
-    <mat-list>
-      <mat-list-item *ngFor="let context of contexts"><button type="button" mat-button (click)="reloadThoughts(link._id)">{{ link.label }}</button></mat-list-item>
-    </mat-list>
-  </mat-drawer>	 
-
 
 
 
 <!-- Main Card -->
 <div>
-<mat-card class="main-card"appMovable>
+<mat-card class="main-card">
  
     <mat-card-title>
-      <button type="button" class="context" mat-button (dblclick)="drawer.toggle()">{{ chosenThought.label }}</button>
+     <button mat-raised-button color="primary"> {{ chosenThought.label }} </button><small *ngFor="let context of contexts" (dblclick)="reloadThoughts(context._id)"><button mat-button>{{ context.label }} </button></small> 
     </mat-card-title>
-    
-    <mat-card-content appMovableArea class="area">
-      <div *ngFor="let content of contents">
-        <button type="button" class="box" appMovable mat-button 
-        (dblclick)="reloadThoughts(content._id)">
-        {{ content.label }}
-      </button>
-      </div>
+  <mat-card-content>
+    <mat-list appSortableList (sort)="sort($event)">
+        <button mat-raised-button color="primary" *ngFor="let content of sortableList" class="box" appSortable (dblclick)="reloadThoughts(content._id)">
+          {{ content.label }}
+          <button mat-raised-button color="accent" class="box" *appDraggableHelper>{{ content.label }}</button>
+        </button>
+    </mat-list>
+
     </mat-card-content>
+
 
     <mat-card-actions>
     <form (ngSubmit)="onMeaningSubmit()">
       <mat-form-field>
         <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linktoThought(thought)">
-            <span>{{ thought.label }}</span> |  <small *ngFor="let context of thought.contexts">{{context.label}}</small>
+          <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="copyThought(thought)">
+            <span>{{ thought.label }}</span><small *ngFor="let context of thought.contexts"> | {{context.label}}</small>
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -41,8 +34,6 @@
   
 </mat-card>
 </div>
-
-</mat-drawer-container>
 
 
     

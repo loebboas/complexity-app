@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/cdk/overlay";
+
+@include cdk-overlay();
 
 .draggable {
-    cursor: move;
-    user-select: none;
+  cursor: move;
+  user-select: none;
 }
 
 .movable:not(.dragging) {
-    transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
 }

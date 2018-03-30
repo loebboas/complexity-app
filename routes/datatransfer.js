@@ -12,14 +12,16 @@ module.exports = (router) => {
 
 router.post('/newThought', (req, res) => {
 	if(!req.body.label) {
-		res.json({ success: false, message: 'You must input something'});
+		res.json({ success: false, message: 'You must input a Label'});
 	} else {
 		let thought = new Thought({
     label: req.body.label,
+    value: req.body.value,
+    dimension: req.body.dimension,
+    showAs: req.body.showAs,
     user: req.body.user,
     contexts: req.body.contexts,
     contents: req.body.contents,
-    form: req.body.form,
     texture: req.body.texture,
     privacy: req.body.privacy
 		});
@@ -136,9 +138,9 @@ router.post('/newThought', (req, res) => {
             res.json({ success: false, message: 'thought id was not found.' }); // Return error message
           } else {
             // Check who user is that is requesting blog update
-                    thought.label = req.body.editLabel; // Save value
-                    thought.contexts = req.body.editContexts; // Save value
-                    thought.contents = req.body.editContents; // Save value
+            if(req.body.editLabel)    { thought.label = req.body.editLabel; }
+            if(req.body.editContexts) { thought.contexts = req.body.editContexts; }
+            if(req.body.editContents) { thought.contents = req.body.editContents; }
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {
