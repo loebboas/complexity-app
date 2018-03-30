@@ -224,6 +224,7 @@ filterThoughts(label: string) {
         contents: data.thought.contents };
         this.contexts = data.thought.contexts;
         this.contents = data.thought.contents;
+        this.sortableList = data.thought.contents;
    
     }); 
     } else {

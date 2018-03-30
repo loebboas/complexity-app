@@ -1,13 +1,14 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="toolbar-spacer">Complexity-App</span><small>v0.0.4</small>
+    <span class="toolbar-spacer">Complexity-App<small>v0.0.4</small></span>
     <!-- If not Logged In -->
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
     <button mat-button *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
 
     <!-- If Logged In -->
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="myroom">My-Room</button>
+    <button mat-button *ngIf="authService.loggedIn()" routerLink="memories">All Thoughts</button>
+    <button mat-button *ngIf="authService.loggedIn()" routerLink="favorites">My-Room</button>
     <button mat-button *ngIf="authService.loggedIn()" routerLink="profile">Profile</button>
     <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">LogOut</button>
     <form class="searchbar-form">
