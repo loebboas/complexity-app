@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const bcrypt = require('bcrypt-nodejs');
-const Thought = require('./thought.js');
+
 
 // Validate Function to check e-mail length
 let emailLengthChecker = (email) => {
@@ -134,7 +134,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  starter: {type: Schema.Types.ObjectId, ref: 'Thought'}
+  starter: String,
 });
 
 // Schema Middleware to Encrypt Password

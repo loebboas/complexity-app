@@ -15,12 +15,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { NewComponent } from './components/new/new.component';
-import { MyroomComponent } from './components/myroom/myroom.component';
 import { MaterialModule } from './material.module';
-import { MemoriesComponent } from './components/memories/memories.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { PlansComponent } from './components/plans/plans.component';
 import { DraggableModule } from './draggable/draggable.module';
+import { ViewerComponent } from './components/viewer/viewer.component';
+import { InternalService } from './services/internal.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -32,10 +31,8 @@ import { DraggableModule } from './draggable/draggable.module';
     LoginComponent,
     ProfileComponent,
     NewComponent,
-    MyroomComponent,
-    MemoriesComponent,
-    FavoritesComponent,
-    PlansComponent,
+    ViewerComponent,
+    FooterComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -46,7 +43,7 @@ import { DraggableModule } from './draggable/draggable.module';
     MaterialModule,
     DraggableModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, DataService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

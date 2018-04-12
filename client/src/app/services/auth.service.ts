@@ -7,7 +7,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-domain = "";
+domain = "http://localhost:8080";
 authToken;
 user;
 options;
@@ -68,7 +68,7 @@ options;
     localStorage.setItem('token', token); // Set token in local storage
     localStorage.setItem('user', JSON.stringify(user)); // Set user in local storage as string
     this.authToken = token; // Assign token to be used elsewhere
-    this.user = user; // Set user to be used elsewhere
+    this.user = user;       // Set user to be used elsewhere
   }
   
 

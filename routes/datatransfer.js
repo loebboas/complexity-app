@@ -16,8 +16,7 @@ router.post('/newThought', (req, res) => {
 	} else {
 		let thought = new Thought({
     label: req.body.label,
-    value: req.body.value,
-    dimension: req.body.dimension,
+    dimensions: req.body.dimensions,
     showAs: req.body.showAs,
     user: req.body.user,
     contexts: req.body.contexts,
@@ -44,10 +43,12 @@ router.post('/newThought', (req, res) => {
 
   router.get('/allThought', (req, res) => {
     // Search database for all Thoughts
-    Thought.find({user: req.decoded.userId}, (err, allThought) => {
+    Thought.find({user: req.decoded.userId})
+      .populate({ path: 'contexts', select: 'label' })
+      .exec((err, allThought) => {
               // Check if error was found or not
               if (err) {
-                res.json({ success: false, message: err }); // Return error message
+                res.json({ suik,ccess: false, message: err }); // Return error message
               } else {
                 // Check if blogs were found in database
                 if (!allThought) {
@@ -61,6 +62,46 @@ router.post('/newThought', (req, res) => {
 
   
   
+     /* ===============================================================
+     GET Content
+  =============================================================== */
+  router.get('/getThought/:id', (req, res) => {
+    // Search database for all thoughts linked to :id as bottom
+    Thought
+        .findOne({user: req.decoded.userId, _id: req.params.id })
+        .populate({ path: 'contexts' })
+        .populate({
+          path: 'contents',
+          // Get friends of friends - populate the 'friends' array for every friend
+          populate: { path: 'contents' }
+        })
+        .exec((err, thought) => {
+            // Check if error was found or not
+            if (err) {
+                res.json({success: false, message: err}); // Return error message
+            } else {
+                res.json({success: true, thought: thought });
+            }
+        });
+});  
+
+     /* ===============================================================
+     GET Context
+  =============================================================== */
+  router.get('/getContext/:id', (req, res) => {
+    // Search database for all thoughts linked to :id as bottom
+    Thought
+        .findOne({user: req.decoded.userId, _id: req.params.id })
+        .populate({path: 'contexts'})
+        .exec((err, thought) => {
+            // Check if error was found or not
+            if (err) {
+                res.json({success: false, message: err}); // Return error message
+            } else {
+                res.json({success: true, thought: thought });
+            }
+        });
+});  
 
 
    /* ===============================================================
@@ -141,6 +182,7 @@ router.post('/newThought', (req, res) => {
             if(req.body.editLabel)    { thought.label = req.body.editLabel; }
             if(req.body.editContexts) { thought.contexts = req.body.editContexts; }
             if(req.body.editContents) { thought.contents = req.body.editContents; }
+            if(req.body.editDimensions) { thought.contents = req.body.editDimensions; }
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {

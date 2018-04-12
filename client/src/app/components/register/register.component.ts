@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
+import { Thought } from '../../models/thought';
+import { InternalService } from '../../services/internal.service';
 
 @Component({
   selector: 'app-register',
@@ -24,14 +26,18 @@ export class RegisterComponent implements OnInit {
   sessionsId;
   favoritesId;
   todoId;
-  roomId;
+  startId;
   userData;
+  timeline; goals; projects; diary;
+  today; week; month; year; life; 
+  memory; feeling; all;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private internalService: InternalService
    ) {
     this.createForm(); // Create Angular 2 Form when component loads
   }
@@ -130,15 +136,18 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to submit form
- // Function to submit form
   onRegisterSubmit() {
   	this.processing = true;
-  	this.disableForm();
+    this.disableForm();
+    
+  //Create Starter Object
+
   	// Create user object form user's inputs
     const user = {
       email: this.form.get('email').value, // E-mail input field
       username: this.form.get('username').value, // Username input field
       password: this.form.get('password').value // Password input field
+     
     }
     
     this.authService.registerUser(user).subscribe(data => {
@@ -162,107 +171,269 @@ export class RegisterComponent implements OnInit {
     this.authService.login(user).subscribe(data => {
           this.authService.storeUserData(data.token, data.user)
 
+       
 
-
-
-          //Create Starter Objects: My-Room, Memories (TimeLine, Diary, Language), Favorites, Plans (Today, This Week, This Month, This Year)
-          const myroom = {
-            label: "My-Room", // input field
+          const compApp = {
+            label: "Complexity-App", // input field
             user: this.userId,
-            form: "sphere",
-            privacy: "private"
+            dimensions: [{ dim: "compApp", val: "0" }],
+            showAs: "grid",
+            privacy: "locked"
           };
-    
-      
-     
-
-
-
+        
           //Save Starting Data
-        this.dataService.newThought(myroom).subscribe(data => {
-            this.roomId = data.newId;
+          this.dataService.newThought(compApp).subscribe(data => {
+            this.startId = data.newId;  
+        
 
-
-            
-           
-
-
-            const memories = {
+          const memories = {
               label: "Memories", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, label: "My-Room" }],
-              form: "sphere",
-              privacy: "private"
+              showAs: "grid",
+              dimensions: [{ dim: "compApp", val: "1" }],
+              contexts: [],
+              privacy: "locked"
             };
   
-            const favorites = {
-              label: "Favorites", // input field
+            const myroom = {
+              label: "My Room", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, label: "My-Room" }],
-              form: "sphere",
-              privacy: "private"
+              showAs: "card",
+              dimensions: [{ dim: "compApp", val: "1" }],
+              contexts: [],
+              privacy: "locked"
             };
   
               const todo = {
               label: "Plans", // input field
               user: this.userId,
-              contexts: [{ _id: this.roomId, label: "My-Room" }],
-              form: "sphere",
-              privacy: "private"
+              showAs: "grid",
+              dimensions: [{ dim: "compApp", val: "1" }],
+              contexts: [],
+              privacy: "locked"
             };
   
           this.dataService.newThought(memories).subscribe(data => {
             this.sessionsId = data.newId;
-                   this.dataService.newThought(favorites).subscribe(data => {
+                   this.dataService.newThought(myroom).subscribe(data => {
                      this.favoritesId = data.newId;
                         this.dataService.newThought(todo).subscribe(data => {
                           this.todoId = data.newId;
                           
-                          const editroom = {
-                           
-                                _id: this.roomId,
-                                editLabel: "My-Room", // input field
-                                editContents: [{ _id: this.sessionsId, label: "Memories", showAs: "card"}, { _id: this.favoritesId, label: "Favorites", showAs: "card"}, { _id: this.todoId, label: "Plans", showAs: "card"}],
-                                user: this.userId,
-                                form: "sphere",
-                                privacy: "private"
-                          };
-                          this.processing = true; // Lock form fields	
-                          // Function to send blog object to backend
-                          this.dataService.editThought(editroom).subscribe(data => {
-                            // Check if PUT request was a success or not
-                            if (!data.success) {
-                              this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                              this.message = data.message; // Set error message
-                              this.processing = false; // Unlock form fields
-                            } else {
-                              this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                              this.message = data.message; // Set success message
-                              // After two seconds, navigate back to blog page 
-                              const editUser = {
-                              _id: this.userId,
-                              username: this.form.get('username').value, // Username input field
-                              password: this.form.get('password').value, // Password input field
-                              starter: this.roomId
+           
+                        
+
+                          //Write Level 2
+                        
+          const diary = {
+            label: "Diary", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "2" }],
+            contexts: [{ _id: this.sessionsId }],
+            privacy: "locked"
+          };
+
+          const timeline = {
+            label: "Unstructured", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "2" }],
+            contexts: [{ _id: this.sessionsId }],
+            privacy: "locked"
+          };
+
+          const goals = {
+            label: "Goals", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "2"}],
+            contexts: [{ _id: this.todoId }],
+            privacy: "locked"
+          };
+
+          const projects = {
+            label: "Projects", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "2"}],
+            contexts: [{ _id: this.todoId }],
+            privacy: "locked"
+          };
+          this.dataService.newThought(timeline).subscribe(data => {
+            this.timeline = data.newId;
+                   this.dataService.newThought(diary).subscribe(data => {
+                     this.diary = data.newId;
+                        this.dataService.newThought(goals).subscribe(data => {
+                          this.goals = data.newId;
+                          this.dataService.newThought(projects).subscribe(data => {
+                            this.projects = data.newId;
+
+                            const editThought = {
+                              _id: this.startId,
+                              editContents: [{ _id: this.sessionsId }, { _id: this.favoritesId }, { _id: this.todoId }]
                             };
-                            this.authService.editUser(editUser).subscribe(data => {
-                            });
-                          }
-                        });
-                          console.log(this.messageClass)
-                                    setTimeout(() => {
-                                    this.router.navigate(['/memories']); // Redirect to login view
-                                    }, 5000);
+                            this.dataService.editThought(editThought).subscribe(data => {
+
+                            const editPlans = {
+                              _id: this.todoId,
+                              editContents: [{ _id: this.goals }, { _id: this.projects }]
+                             };
+                             const editMemories = {
+                              _id: this.sessionsId,
+                              editContents: [{ _id: this.timeline }, { _id: this.diary }]
+                             };
+                        this.dataService.editThought(editPlans).subscribe(data => {
+                          this.dataService.editThought(editMemories).subscribe(data => {
+
+
+                            //LEVEL 3: GOALS
+
+            const today = {
+            label: "Today", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };
+
+          const week = {
+            label: "This Week", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };
+          const month = {
+            label: "This Month", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };
+
+          const year = {
+            label: "This Year", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };
+          const life = {
+            label: "Lifetime", // input field
+            user: this.userId,
+            showAs: "card",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };    
+          const all = {
+            label: "All Goals", // input field
+            user: this.userId,
+            showAs: "longlist",
+            dimensions: [{ dim: "compApp", val: "3"}],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            privacy: "locked"
+          };    
+                  this.dataService.newThought(today).subscribe(data => {
+                  this.today = data.newId;
+                    this.dataService.newThought(week).subscribe(data => {
+                    this.week = data.newId;
+                      this.dataService.newThought(month).subscribe(data => {
+                        this.month = data.newId;
+                          this.dataService.newThought(year).subscribe(data => {
+                          this.year = data.newId;
+                            this.dataService.newThought(life).subscribe(data => {
+                            this.life = data.newId;
+                            this.dataService.newThought(all).subscribe(data => {
+                              this.all = data.newId;
+                            const editGoals = {
+                              _id: this.goals,
+                              editContents: [{ _id: this.today }, { _id: this.week }, { _id: this.month }, { _id: this.year }, { _id: this.life }, { _id: this.all }]                          
+                             };
+                            this.dataService.editThought(editGoals).subscribe(data => {
+                 
+                     //LEVEL 3: Diary
+
+                     const feelings = {
+                      label: "Feelings", // input field
+                      user: this.userId,
+                      showAs: "card",
+                      dimensions: [{ dim: "compApp", val: "3"}, { dim: "statistics", val: "rate"}],
+                      contexts: [{ _id: this.diary }],
+                      privacy: "locked"
+                    };
+          
+                    const memory = {
+                      label: "Memories", // input field
+                      user: this.userId,
+                      showAs: "longlist",
+                      dimensions: [{ dim: "compApp", val: "3"}, { dim: "array", val: this.startId }],
+                      contexts: [{ _id: this.diary }],
+                      privacy: "locked"
+                    };
+
+                    this.dataService.newThought(feelings).subscribe(data => {
+                      this.feeling = data.newId;
+                        this.dataService.newThought(memory).subscribe(data => {
+                        this.memory = data.newId;
+
+                        const editDiary = {
+                          _id: this.diary,
+                          editContents: [{ _id: this.feeling }, { _id: this.memory }]
+                         };
+                        this.dataService.editThought(editDiary).subscribe(data => {
+                     
+                              this.processing = true; // Lock form fields	
+                              // Function to send blog object to backend
                                 
-                                      
-                });
+                              // Check if PUT request was a success or not
+                              if (!data.success) {
+                                this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                                this.message = data.message; // Set error message
+                                this.processing = false; // Unlock form fields
+                              } else {
+                                this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                                this.message = data.message; // Set success message
+                                // After two seconds, navigate back to blog page 
+                            } 
+                        
+                            this.internalService.loadThoughts();
+                            console.log(this.messageClass)
+                            setTimeout(() => {
+                            this.router.navigate(['/viewer']); // Redirect to viewer
+                            
+                                    }, 1500);
+                                        });
+                                      });
+                                    });
+                                  });
+                                }); 
+                              });
+                            });
+                          });
+                        }); 
+                      });
+                    });  
+                  });       
+                }); 
               }); 
             });
-        });
-     });
-          }
-    });
+          });  
+        });          
+      });   
+    });   
+  });   
+});  
+}); 
 
+          }  
+      });
+    
   }
 
   // Function to check if e-mail is taken

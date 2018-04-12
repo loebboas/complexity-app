@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AuthService } from './auth.service';
+import { Thought } from '../models/thought';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -35,6 +37,7 @@ export class DataService {
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
   }
 
+
    
   /* ===============================================================
      GET DATA
@@ -54,6 +57,13 @@ export class DataService {
     return this.http.get(this.domain + '/datatransfer/thoughtByName/' + label, this.options).map(res => res.json());
   }
 
+  
+    getThought(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/getThought/' + id, this.options).map(res => res.json());
+  }
+
+ 
 
    /* ===============================================================
      DELETE/UPDATE DATA
@@ -64,9 +74,9 @@ export class DataService {
   }
 
     // Function to edit/update Label
-    editThought(thought) {
+    editThought(editthought) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/datatransfer/editThought/', thought, this.options).map(res => res.json());
+    return this.http.put(this.domain + '/datatransfer/editThought/', editthought, this.options).map(res => res.json());
   }
 
 }

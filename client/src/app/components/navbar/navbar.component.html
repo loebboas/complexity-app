@@ -1,26 +1,46 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="toolbar-spacer">Complexity-App<small>v0.0.4</small></span>
-    <!-- If not Logged In -->
-    <button mat-button *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
-    <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
-    <button mat-button *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
+      <div *ngIf="contexts.length">
+        <button mat-button *ngFor="let context of contexts" (click)="selectThought(context)">{{ context.label}}</button>
+        
+      </div>
+      <button mat-button (click)="selectThought(compApp)">Complexity-App</button>
+      <span class="toolbar-spacer"></span>
+        <form class="searchbar-form">
+          <mat-form-field class="searchbar-full-width">
+            <input matInput placeholder="Search" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="selectThought(thought)">
+                  <span>{{ thought.label }} </span><small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+                </mat-option>
+              </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        
+            <button mat-button *ngIf="!authService.loggedIn()" [matMenuTriggerFor]="complexity">Login or Register</button>
+            <button mat-button *ngIf="authService.loggedIn()" [matMenuTriggerFor]="complexity">{{ username | uppercase }}</button>
+        <mat-menu #complexity="matMenu" xPosition="after" [overlapTrigger]="false">
+          <!-- If LoggedOut -->
+         
+          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
+          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
+          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
 
-    <!-- If Logged In -->
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="memories">All Thoughts</button>
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="favorites">My-Room</button>
-    <button mat-button *ngIf="authService.loggedIn()" routerLink="profile">Profile</button>
-    <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">LogOut</button>
-    <form class="searchbar-form">
-    <mat-form-field class="searchbar-full-width">
-    <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="gotoThought(thought._id)">
-        <span>{{ thought.label }}</span><small *ngFor="let context of thought.contexts"> | {{context.label}}</small>
-      </mat-option>
-    </mat-autocomplete>
-    </mat-form-field>
-    </form>
+          <!-- If LoggedIn -->
+             
+          <button mat-menu-item *ngIf="authService.loggedIn()"  routerLink="profile">Profile</button>
+          <button mat-menu-item *ngIf="authService.loggedIn()"  (click)="onLogoutClick()">Logout</button>
+        </mat-menu>
+        
+      
+        <small class="smaller"> Complexity-App v0.0.4</small>
+       
+  
+  </mat-toolbar-row>
+  <!-- Context Row -->
+  <mat-toolbar-row *ngIf="selectedThought.label != 'Complexity-App'">
+      <button mat-button (click)="selectThought(selectedThought)">{{ selectedThought.label }}</button>
+     
   </mat-toolbar-row>
 </mat-toolbar>
 

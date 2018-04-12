@@ -6,20 +6,11 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     label: String,
-    value: String,
-    dimension: String,
+    dimensions: { compApp: String, dat: Date, val: Number },
     showAs: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
-    contexts: [{
-        _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
-        label: String }],
-    contents: [{
-            _id: {type: Schema.Types.ObjectId, ref: 'Thought'},
-            label: String,
-            value: String,
-            dimension: String,
-            showAs: String  
-        }],
+    contexts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+    contents: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
     texture: String,
     privacy: String,
     inputTime: {type: Date, default: Date.now}

@@ -1,20 +1,29 @@
 
-<!-- Custom Success/Error Message -->
-<div class="row show-hide-message">
-  <div [ngClass]="messageClass">
-    {{ message }}
-  </div>
-</div>
+<mat-card>
 
-<!-- Form -->
+  <mat-card-title>
+      <form class="searchbar-form"(ngSubmit)="onNewSubmit()">
+        <mat-form-field class="searchbar-full-width">
+          <input matInput placeholder="Add or Copy a Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="copyThought(thought)">
+                <span>{{ thought.label }}</span><small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+              </mat-option>
+            </mat-autocomplete>
+          
+          </mat-form-field>
 
-<form class="searchbar-form" (submit)="onNewSubmit()">
-  <mat-form-field class="searchbar-full-width">
-  <input matInput placeholder="Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linktoThought(thought._id)">
-      <span>{{ thought.label }}</span> |  <small *ngFor="let context of thought.links">{{context.label}}</small>
-    </mat-option>
-  </mat-autocomplete>
-  </mat-form-field>
-  </form>
+      </form>
+    </mat-card-title>
+    <mat-card-content> 
+      <button mat-button *ngIf="!selectedThought || selectedThought.label == 'Complexity-App'"> No Context </button>
+      <button mat-raised-button *ngIf="selectedThought.label != 'Complexity-App'">{{ selectedThought.label }} </button>
+      <button mat-button *ngFor="let context of contexts" (click)="selectThought(thought)">{{ context.label }}</button>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      
+      <button mat-button><i class="material-icons">insert_invitation</i>Save as Goals</button>
+      <button mat-button><i class="material-icons">note</i>Save as Diary Entry</button>
+  </mat-card-actions>
+</mat-card>

@@ -19,7 +19,8 @@ module.exports = (router) => {
 		 	let user = new User({
 			 	email: req.body.email.toLowerCase(),
 			 	username: req.body.username,
-			 	password: req.body.password,
+        password: req.body.password,
+        starter: req.body.starter
 		 	});
 			user.save((err, user) => {
             // Check if error occured
@@ -65,8 +66,7 @@ module.exports = (router) => {
   router.put('/edit', (req, res) => {
 	
       User.findOne({ _id: req.body._id }, (err, user) => {
-		 	user.starter = req.body.starter; 
-			user.save((err, user) => {
+		  user.save((err, user) => {
             // Check if error occured
             if (err) {
                   res.json({ success: false, message: 'Could not update user. Error: ', err }); // Return error if not related to validation

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
+import { InternalService } from '../../services/internal.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private authGuard: AuthGuard    
+    private authGuard: AuthGuard,
+    private internalService: InternalService    
   ) {
     this.createForm(); // Create Login Form when component is constructed
   }
@@ -73,8 +75,9 @@ export class LoginComponent implements OnInit {
           if (this.previousUrl) {
             this.router.navigate([this.previousUrl]); // Redirect to page they were trying to view before
           } else {
-            this.router.navigate(['/everything']); // Navigate to dashboard view
+            this.router.navigate(['/viewer']); // Navigate to dashboard view
           }
+          this.internalService.loadThoughts();
         }, 500);
       }
     });

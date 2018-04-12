@@ -9,10 +9,10 @@ const datatransfer = require('./routes/datatransfer')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 8080;
-
+const options = { useMongoClient: true }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.uri, (err) => {
+mongoose.connect(config.uri, options, (err) => {
 	if (err) {
 		console.log('Could Not connect to database: ', err);
 	} else {

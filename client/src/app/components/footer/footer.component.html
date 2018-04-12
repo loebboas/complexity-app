@@ -1,0 +1,10 @@
+<mat-toolbar class="bot" color='primary'>
+    <span class='spacer'></span>
+      <button mat-button *ngIf="authService.loggedIn()" routerLink="new">Add a Thought</button>
+      <button mat-button *ngIf="authService.loggedIn()"   (click)="onChangeView()">Change View</button>
+      <button mat-button *ngIf="authService.loggedIn()"  (click)="onLogoutClick()">Logout</button>
+
+      <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
+      <button mat-button *ngIf="!authService.loggedIn()"   routerLink="register">Register</button>
+    <span class='spacer'></span>
+  </mat-toolbar>

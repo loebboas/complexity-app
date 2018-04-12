@@ -1,0 +1,29 @@
+<div>
+<div *ngIf="selectedThought.showAs == 'grid'">
+    <mat-grid-list [cols]="contents.length" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let content of contents"
+                    [colspan]="1"
+                    [rowspan]="1">
+            <mat-card>
+                <mat-card-title (click)="selectThought(content)">{{ content.label }}</mat-card-title>
+                <mat-card-content *ngIf="content.contents.length">
+                    <mat-list>
+                        <mat-list-item *ngFor="let thought of content.contents" (click)="selectThought(thought)">{{ thought.label }} </mat-list-item>
+                    </mat-list>
+                </mat-card-content>   
+            </mat-card> 
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div *ngIf="selectedThought.showAs == 'card'">
+        <mat-card *ngFor="let content of contents">
+            <mat-card-title (click)="selectThought(content)">{{ content.label }}</mat-card-title>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let thought of content.contents" (click)="selectThought(thought)">{{ thought.label }} </mat-list-item>
+                </mat-list>
+            </mat-card-content>                       
+        </mat-card> 
+</div>
+</div>
+
