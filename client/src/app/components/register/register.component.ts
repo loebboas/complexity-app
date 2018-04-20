@@ -31,6 +31,11 @@ export class RegisterComponent implements OnInit {
   timeline; goals; projects; diary;
   today; week; month; year; life; 
   memory; feeling; all;
+  infcl; publ; rooms; ptho;
+  dauser;
+
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,52 +44,25 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private internalService: InternalService
    ) {
-    this.createForm(); // Create Angular 2 Form when component loads
   }
 
   // Function to create registration form
-  createForm() {
-    this.form = this.formBuilder.group({
-      // Email Input
-      email: ['', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(5), // Minimum length is 5 characters
-        Validators.maxLength(30), // Maximum length is 30 characters
-        this.validateEmail // Custom validation
-      ])],
-      // Username Input
-      username: ['', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15), // Maximum length is 15 characters
-        this.validateUsername // Custom validation
-      ])],
-      // Password Input
-      password: ['', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(8), // Minimum length is 8 characters
-        Validators.maxLength(35), // Maximum length is 35 characters
-        this.validatePassword // Custom validation
-      ])],
-      // Confirm Password Input
-      confirm: ['', Validators.required] // Field is required
-    }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
-  }
+  
 
   // Function to disable the registration form
   disableForm() {
-    this.form.controls['email'].disable();
-    this.form.controls['username'].disable();
-    this.form.controls['password'].disable();
-    this.form.controls['confirm'].disable();
+    this.firstFormGroup.controls['email'].disable();
+    this.firstFormGroup.controls['username'].disable();
+    this.firstFormGroup.controls['password'].disable();
+    this.firstFormGroup.controls['confirm'].disable();
   }
 
   // Function to enable the registration form
   enableForm() {
-    this.form.controls['email'].enable();
-    this.form.controls['username'].enable();
-    this.form.controls['password'].enable();
-    this.form.controls['confirm'].enable();
+    this.firstFormGroup.controls['email'].enable();
+    this.firstFormGroup.controls['username'].enable();
+    this.firstFormGroup.controls['password'].enable();
+    this.firstFormGroup.controls['confirm'].enable();
   }
 
   // Function to validate e-mail is proper format
@@ -144,9 +122,9 @@ export class RegisterComponent implements OnInit {
 
   	// Create user object form user's inputs
     const user = {
-      email: this.form.get('email').value, // E-mail input field
-      username: this.form.get('username').value, // Username input field
-      password: this.form.get('password').value // Password input field
+      email: this.firstFormGroup.get('email').value, // E-mail input field
+      username: this.firstFormGroup.get('username').value, // Username input field
+      password: this.firstFormGroup.get('password').value // Password input field
      
     }
     
@@ -163,53 +141,134 @@ export class RegisterComponent implements OnInit {
 
       //Login User 
       const user = {
-      username: this.form.get('username').value, // Username input field
-      password: this.form.get('password').value // Password input field
+      username: this.firstFormGroup.get('username').value, // Username input field
+      password: this.firstFormGroup.get('password').value // Password input field
     }
 
     // Function to send login data to API
     this.authService.login(user).subscribe(data => {
           this.authService.storeUserData(data.token, data.user)
+     
+        });
+      }
+    });
+    
+  }
+    
+   onPersonaSubmit() { 
+      //CREATE APP OBJECTS LVL -2
+    
+    const infcl = {
+      label: "Infinity Cloud", 
+      level: -2,
+      user: this.userId,
+      dimensions: [],
+      showAs: "grid",
+      privacy: "locked"
+    };
+    
+    this.dataService.newThought(infcl).subscribe(data => {
+      this.infcl = data.newId;
+          //CREATE APP OBJECTS LVL -1
 
-       
-
-          const compApp = {
-            label: "Complexity-App", // input field
+          const dauser = {
+            label: this.firstFormGroup.get('username').value, 
+            level: -1,
             user: this.userId,
-            dimensions: [{ dim: "compApp", val: "0" }],
+            dimensions: [],
+            contexts: [{ _id: this.infcl }],
             showAs: "grid",
             privacy: "locked"
           };
         
-          //Save Starting Data
-          this.dataService.newThought(compApp).subscribe(data => {
-            this.startId = data.newId;  
+          this.dataService.newThought(dauser).subscribe(data => {
+            this.dauser = data.newId;
+
         
+          const rooms = {
+            label: "Public Rooms", 
+            level: -1,
+            user: this.userId,
+            showAs: "grid",
+            dimensions: [],
+            contexts: [{ _id: this.infcl }],
+            privacy: "locked"
+          };
+
+          const ptho = {
+            label: "Popular Thoughts", // input field
+            level: -1,
+            user: this.userId,
+            showAs: "grid",
+            dimensions: [],
+            contexts: [{ _id: this.infcl }],
+            privacy: "locked"
+          };
+
+          
+             //CREATE APP OBJECTS LVL 0
+
+             const compApp = {
+              label: this.secondFormGroup.get('persona').value, 
+              level: 0,
+              user: this.userId,
+              dimensions: [],
+              contexts: [{ _id: this.dauser }, { _id: this.infcl }],
+              showAs: "grid",
+              privacy: "locked"
+            };
+
+         
+                   this.dataService.newThought(rooms).subscribe(data => {
+                     this.rooms = data.newId;
+                        this.dataService.newThought(ptho).subscribe(data => {
+                          this.ptho = data.newId;
+                          this.dataService.newThought(compApp).subscribe(data => {
+                            this.startId = data.newId;  
+                        
+                            const editInf = {
+                              _id: this.infcl,
+                              editContexts: [{_id: this.infcl }],
+                              editContents: [{ _id: this.dauser }, { _id: this.rooms }, { _id: this.ptho }]
+                            };
+                            this.dataService.editThought(editInf).subscribe(data => {
+        
+                              const editdauser = {
+                                _id: this.dauser,
+                                editContents: [{ _id: this.startId }]
+                              };
+                              this.dataService.editThought(editdauser).subscribe(data => {
+
+                                
+        //LEVEL 1
 
           const memories = {
-              label: "Memories", // input field
+              label: "Memories", 
+              level: 1,
               user: this.userId,
               showAs: "grid",
-              dimensions: [{ dim: "compApp", val: "1" }],
-              contexts: [],
+              dimensions: [],
+              contexts: [{ _id: this.startId }],
               privacy: "locked"
             };
   
             const myroom = {
-              label: "My Room", // input field
+              label: "My Room",  
+              level: 1,
               user: this.userId,
-              showAs: "card",
-              dimensions: [{ dim: "compApp", val: "1" }],
-              contexts: [],
+              showAs: "grid",
+              dimensions: [],
+              contexts: [{ _id: this.startId }],
               privacy: "locked"
             };
   
               const todo = {
-              label: "Plans", // input field
+              label: "Plans",  
+              level: 1,
               user: this.userId,
               showAs: "grid",
-              dimensions: [{ dim: "compApp", val: "1" }],
-              contexts: [],
+              dimensions: [],
+              contexts: [{ _id: this.startId }],
               privacy: "locked"
             };
   
@@ -223,41 +282,45 @@ export class RegisterComponent implements OnInit {
            
                         
 
-                          //Write Level 2
+                          //LEVEL 2
                         
           const diary = {
-            label: "Diary", // input field
+            label: "Diary",  
+            level: 2,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "2" }],
-            contexts: [{ _id: this.sessionsId }],
+            showAs: "grid",
+            dimensions: [],
+            contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
             privacy: "locked"
           };
 
           const timeline = {
-            label: "Unstructured", // input field
+            label: "Unstructured",   
+            level: 2,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "2" }],
-            contexts: [{ _id: this.sessionsId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
             privacy: "locked"
           };
 
           const goals = {
-            label: "Goals", // input field
+            label: "Goals",   
+            level: 2,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "2"}],
-            contexts: [{ _id: this.todoId }],
+            showAs: "grid",
+            dimensions: [],
+            contexts: [{ _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
 
           const projects = {
-            label: "Projects", // input field
+            label: "Projects",  
+            level: 2,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "2"}],
-            contexts: [{ _id: this.todoId }],
+            showAs: "grid",
+            dimensions: [],
+            contexts: [{ _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
           this.dataService.newThought(timeline).subscribe(data => {
@@ -290,53 +353,59 @@ export class RegisterComponent implements OnInit {
                             //LEVEL 3: GOALS
 
             const today = {
-            label: "Today", // input field
+            label: "Today",   
+            level: 3,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
 
           const week = {
-            label: "This Week", // input field
+            label: "This Week",    
+            level: 3,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
           const month = {
-            label: "This Month", // input field
+            label: "This Month",    
+            level: 3,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
 
           const year = {
-            label: "This Year", // input field
+            label: "This Year",    
+            level: 3,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };
           const life = {
-            label: "Lifetime", // input field
+            label: "Lifetime",    
+            level: 3,
             user: this.userId,
-            showAs: "card",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "list",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
             privacy: "locked"
           };    
           const all = {
-            label: "All Goals", // input field
+            label: "Goals - Timeline",   
+            level: 3,
             user: this.userId,
-            showAs: "longlist",
-            dimensions: [{ dim: "compApp", val: "3"}],
-            contexts: [{ _id: this.goals }, { _id: this.todoId }],
+            showAs: "timeline",
+            dimensions: [],
+            contexts: [{ _id: this.goals }, { _id: this.todoId },{ _id: this.startId }],
             privacy: "locked"
           };    
                   this.dataService.newThought(today).subscribe(data => {
@@ -360,20 +429,22 @@ export class RegisterComponent implements OnInit {
                      //LEVEL 3: Diary
 
                      const feelings = {
-                      label: "Feelings", // input field
+                      label: "Feelings", 
+                      level: 3,
                       user: this.userId,
-                      showAs: "card",
-                      dimensions: [{ dim: "compApp", val: "3"}, { dim: "statistics", val: "rate"}],
-                      contexts: [{ _id: this.diary }],
+                      showAs: "list",
+                      dimensions: [],
+                      contexts: [{ _id: this.diary }, { _id: this.sessionsId },{ _id: this.startId }],
                       privacy: "locked"
                     };
           
                     const memory = {
-                      label: "Memories", // input field
+                      label: "Happenings", // input field
+                      level: 3,
                       user: this.userId,
-                      showAs: "longlist",
-                      dimensions: [{ dim: "compApp", val: "3"}, { dim: "array", val: this.startId }],
-                      contexts: [{ _id: this.diary }],
+                      showAs: "list",
+                      dimensions: [],
+                      contexts: [{ _id: this.diary }, { _id: this.sessionsId },{ _id: this.startId }],
                       privacy: "locked"
                     };
 
@@ -387,7 +458,16 @@ export class RegisterComponent implements OnInit {
                           editContents: [{ _id: this.feeling }, { _id: this.memory }]
                          };
                         this.dataService.editThought(editDiary).subscribe(data => {
-                     
+                          const editUser = {
+                            _id: this.userId,
+                            editStarter: this.startId,
+                            editUnstructured: this.timeline,
+                            editGoals: this.all,
+                            editFeelings: this.feeling,
+                            editHappenings: this.memory
+                           };
+                           console.log(editUser);
+                           this.authService.editUser(editUser).subscribe(data => {
                               this.processing = true; // Lock form fields	
                               // Function to send blog object to backend
                                 
@@ -403,15 +483,23 @@ export class RegisterComponent implements OnInit {
                             } 
                         
                             this.internalService.loadThoughts();
+                            this.internalService.changeThought(this.startId);
                             console.log(this.messageClass)
                             setTimeout(() => {
                             this.router.navigate(['/viewer']); // Redirect to viewer
                             
                                     }, 1500);
-                                        });
+                                 
+                                  });
+                                });
                                       });
                                     });
                                   });
+                                  
+                                });
+                              });
+                            });
+                          });
                                 }); 
                               });
                             });
@@ -429,9 +517,7 @@ export class RegisterComponent implements OnInit {
     });   
   });   
 });  
-}); 
-
-          }  
+});   
       });
     
   }
@@ -439,7 +525,7 @@ export class RegisterComponent implements OnInit {
   // Function to check if e-mail is taken
   checkEmail() {
     // Function from authentication file to check if e-mail is taken
-    this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
+    this.authService.checkEmail(this.firstFormGroup.get('email').value).subscribe(data => {
       // Check if success true or false was returned from API
       if (!data.success) {
         this.emailValid = false; // Return email as invalid
@@ -454,7 +540,7 @@ export class RegisterComponent implements OnInit {
   // Function to check if username is available
   checkUsername() {
     // Function from authentication file to check if username is taken
-    this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
+    this.authService.checkUsername(this.firstFormGroup.get('username').value).subscribe(data => {
       // Check if success true or success false was returned from API
       if (!data.success) {
         this.usernameValid = false; // Return username as invalid
@@ -468,6 +554,31 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+    this.firstFormGroup = this.formBuilder.group({
+      email: ['', Validators.compose([
+        Validators.required, // Field is required
+        Validators.minLength(5), // Minimum length is 5 characters
+        Validators.maxLength(30), // Maximum length is 30 characters
+        this.validateEmail // Custom validation
+      ])],
+      // Username Input
+      username: ['', Validators.compose([
+        Validators.required, // Field is required
+        Validators.minLength(3), // Minimum length is 3 characters
+        Validators.maxLength(15), // Maximum length is 15 characters
+        this.validateUsername // Custom validation
+      ])],
+      // Password Input
+      password: ['', Validators.compose([
+        Validators.required, // Field is required
+      ])],
+      // Confirm Password Input
+      confirm: ['', Validators.required] // Field is required
+    }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
+
+    this.secondFormGroup = this.formBuilder.group({
+      persona: ['', Validators.required]
+    });
   }
 
 }

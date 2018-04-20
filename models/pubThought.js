@@ -4,9 +4,10 @@ const User = require('./user.js');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
-const thoughtSchema = new Schema({
+const pubThoughtSchema = new Schema({
     label: String,
     level: Number,
+    likes: Number,
     dimensions: { dim: String, val: String },
     showAs: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -17,4 +18,4 @@ const thoughtSchema = new Schema({
     inputTime: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Thought', thoughtSchema);
+module.exports = mongoose.model('PubThought', pubThoughtSchema);

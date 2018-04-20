@@ -114,16 +114,6 @@ let validPassword = (password) => {
 
 // Array of Password validators
 const passwordValidators = [
-  // First password validator
-  {
-    validator: passwordLengthChecker,
-    message: 'Password must be at least 8 characters but no more than 35'
-  },
-  // Second password validator
-  {
-    validator: validPassword,
-    message: 'Must have at least one uppercase, lowercase, special character, and number'
-  }
 ];
 
 
@@ -135,6 +125,10 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
   starter: String,
+  unstructured: String,
+  goals: String,
+  feelings: String,
+  happenings: String
 });
 
 // Schema Middleware to Encrypt Password

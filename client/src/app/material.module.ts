@@ -17,10 +17,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-	imports: [MatButtonModule, MatTableModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
-	exports: [MatButtonModule, MatTableModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
+	imports: [MatButtonModule, MatSnackBarModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
+	exports: [MatButtonModule, MatSnackBarModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
 	})
 
 export class MaterialModule {}

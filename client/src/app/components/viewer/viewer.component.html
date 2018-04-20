@@ -1,29 +1,36 @@
-<div>
-<div *ngIf="selectedThought.showAs == 'grid'">
-    <mat-grid-list [cols]="contents.length" rowHeight="2:1">
-        <mat-grid-tile *ngFor="let content of contents"
-                    [colspan]="1"
-                    [rowspan]="1">
-            <mat-card>
-                <mat-card-title (click)="selectThought(content)">{{ content.label }}</mat-card-title>
-                <mat-card-content *ngIf="content.contents.length">
-                    <mat-list>
-                        <mat-list-item *ngFor="let thought of content.contents" (click)="selectThought(thought)">{{ thought.label }} </mat-list-item>
-                    </mat-list>
-                </mat-card-content>   
-            </mat-card> 
-        </mat-grid-tile>
-    </mat-grid-list>
-</div>
-<div *ngIf="selectedThought.showAs == 'card'">
-        <mat-card *ngFor="let content of contents">
-            <mat-card-title (click)="selectThought(content)">{{ content.label }}</mat-card-title>
-            <mat-card-content>
-                <mat-list>
-                    <mat-list-item *ngFor="let thought of content.contents" (click)="selectThought(thought)">{{ thought.label }} </mat-list-item>
-                </mat-list>
-            </mat-card-content>                       
-        </mat-card> 
-</div>
-</div>
 
+
+<!-- Contexts -->
+<mat-toolbar>
+        <div *ngFor="let context of contexts"><button mat-button (click)="selectThought(context)">{{ context.label }}</button></div>
+     <div><button mat-raised-button (click)="selectThought(context)">{{ context.label }}</button></div>
+    
+</mat-toolbar>
+
+<mat-toolbar>
+        <!-- Siblings -->
+<div *ngFor="let sibling of siblings">
+    <div *ngIf="selectedThought.label != sibling.label"><button mat-button (click)="selectThought(sibling)">{{ sibling.label}}</button></div>
+    <div *ngIf="selectedThought.label == sibling.label"><button mat-raised-button (click)="selectThought(sibling)">{{ sibling.label}}</button></div>
+</div>
+</mat-toolbar>
+
+        <mat-grid-list [cols]="contents.length || 1" rowHeight="2:1">
+                <mat-grid-tile *ngFor="let content of contents"
+                            [colspan]="1"
+                            [rowspan]="1">
+                    <mat-card>
+                        <mat-card-title><button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button></mat-card-title>
+                        <mat-card-content>
+                                <div *ngIf="content.contents.length">
+                                    <mat-list>
+                                            <mat-list-item *ngFor="let thought of content.contents" ><button mat-button (click)="selectThought(thought)">{{ thought.label }}</button> </mat-list-item>
+                                    </mat-list>
+                                </div>   
+                        </mat-card-content>   
+                    </mat-card>
+                </mat-grid-tile>
+        </mat-grid-list>
+             
+
+<app-footer></app-footer>

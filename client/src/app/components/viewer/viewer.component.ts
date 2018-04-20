@@ -3,35 +3,54 @@ import { Thought } from '../../models/thought';
 import { DataService } from '../../services/data.service';
 import { InternalService } from '../../services/internal.service';
 import { Router } from '@angular/router';
-import { Content } from '../../models/Content';
+import { AuthService } from '../../services/auth.service';
+
+
 
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.css']
 })
-export class ViewerComponent implements AfterContentInit {
+export class ViewerComponent implements OnInit {
   selectedThought: Thought;
-  contents: Content[];
+  contexts: Thought[];
+  contents: Thought[];
+  context: Thought;
+  siblings: Thought[];
+  username;
+  userId;
+  starterId;
+  
+
    constructor(private dataService: DataService,
                private internalService: InternalService,
-               private router: Router) { }
+               private router: Router,
+              private authService: AuthService) { }
+
+
+           
+
 
    selectThought(thought): void {
-    this.router.navigate(['../viewer/', thought._id]);
-      this.internalService.changeThought(thought);  
-    
+    this.router.navigate(['viewer/', thought._id]);
+      this.internalService.changeThought(thought._id);  
   }
 
-   ngAfterContentInit() {
-    this.internalService.loadThoughts();
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selContentObs.subscribe(res => this.contents = res);
-   
-   
-
+   ngOnInit() {
+    this.authService.getProfile().subscribe(profile => {
+      this.username = profile.user.username; // Used when creating new blog posts and comments
+      this.userId = profile.user._id;
+      this.starterId = profile.user.starter;
     
-
+      //GET THOUGHTS
+      this.internalService.changeThought(this.starterId); 
+     });
+    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
+    this.internalService.selContentsObs.subscribe(res => this.contents = res);
+    this.internalService.selContextObs.subscribe(res => this.context = res);
+    this.internalService.selContextsObs.subscribe(res => this.contexts = res);
+    this.internalService.selSiblingsObs.subscribe(res => this.siblings = res);
     }
     
 }

@@ -37,6 +37,11 @@ export class DataService {
   	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
   }
 
+  newPubThought(thought) {
+  	this.createAuthenticationHeaders(); // Create headers
+  	return this.http.post(this.domain + '/datatransfer/newPubThought', thought, this.options).map(res => res.json());
+  }
+
 
    
   /* ===============================================================
@@ -63,6 +68,10 @@ export class DataService {
     return this.http.get(this.domain + '/datatransfer/getThought/' + id, this.options).map(res => res.json());
   }
 
+  getContent(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/getContent/' + id, this.options).map(res => res.json());
+  }
  
 
    /* ===============================================================

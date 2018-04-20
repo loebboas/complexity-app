@@ -20,6 +20,7 @@ import { DraggableModule } from './draggable/draggable.module';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { InternalService } from './services/internal.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
     NewComponent,
     ViewerComponent,
     FooterComponent,
+    SearchComponent
   ],
   imports: [
     ReactiveFormsModule,

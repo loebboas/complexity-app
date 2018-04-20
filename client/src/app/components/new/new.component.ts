@@ -9,7 +9,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
-import { Dimension } from '../../models/Dimension';
+import { Dimension } from '../../models/dimension';
 
 
 @Component({
@@ -21,9 +21,10 @@ import { Dimension } from '../../models/Dimension';
 export class NewComponent implements OnInit {
 thoughts: Thought[];
 selectedThought: Thought;
-contexts: Thought[]
+context: Thought;
+contexts: Thought[];
 lastInput: String;
-dimensions: any[];
+dimensions: Dimension[];
 newContexts: String[] = [];
 newContents: String[] = [];
 contextContent: String[] = [];
@@ -37,12 +38,13 @@ newCompApp;
 addDimensions = false;
 username;
 userId;
-
+unstructured;
     constructor(private dataService: DataService,
       private formBuilder: FormBuilder,
       private internalService: InternalService,
       private authService: AuthService,
-      private router: Router) {
+      private router: Router
+     ) {
         //Autocomplete
         this.thoughtCtrl = new FormControl();
         this.filteredThoughts = this.thoughtCtrl.valueChanges
@@ -59,37 +61,36 @@ userId;
           thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
         }
         
-    
+
+
+      saveGoal(){
+        const newGoal = new Dimension;
+        newGoal.dim = "goals";
+        const date = Date.now;
+        newGoal.val = date.toString();
+        this.dimensions.push(newGoal);
+        }
         
         copyThought(thought)  { 
-          this.dataService.getThoughtByName("Unstructured").subscribe(data => {
-            
-            //CREATE NEW CONTEXT
-            if(this.selectedThought && this.selectedThought.label != "Complexity-App"){
-              this.newContexts.unshift(this.selectedThought._id);
-             this.selectedThought.dimensions.filter(dimension => {
-             if(dimension.dim == "compApp") { this.newCompApp = Number(dimension.val)}
-            })
-              this.contexts.forEach(thought => this.newContexts.push(thought._id));
-            } else {  
-                this.newContexts.unshift(data.thought._id);
-                this.newContexts.push(data.thought.contexts[0]);
-              //  data.thought.dimensions.filter(dimension => {
-                //  if(dimension.dim == "compApp") { this.newCompApp = dimension.val}
-               // });
-            };
-                      //CREATE DIMENSIONS
-          this.dimensions = [{ dim: "compApp", val: this.newCompApp++ }];
+          //CREATE CONTEXT
+          this.newContexts.unshift(this.selectedThought._id);                     // Add selected Thought as Context
+          this.contexts.forEach(thought => this.newContexts.push(thought._id));   // Add Contexts of Selected Element
+          this.newContexts.push(this.context._id);                                // Add Main Context
+          
+          //CREATE DIMENSIONS
 
-
+          thought.level = this.selectedThought.level;                             //Load Level of Selected Thought
+          thought.level++;                                                        // Add a Level
+          
           //Resave Thought with New Context
           const copyThought = {
             label: thought.label,
+            level: thought.level,
             user: this.userId,
             contexts: this.newContexts,
             contents: thought.contents,
             dimensions: this.dimensions,
-            showAs: "card",
+            showAs: "grid",
             privacy: "private"
             };
           
@@ -105,39 +106,27 @@ userId;
             editContents: this.contextContent
             };
     
-          this.dataService.editThought(editThought).subscribe(data => {
-            this.router.navigate(['/viewer/', this.newContexts[0]]);
-            this.internalService.changeThought(this.selectedThought); 
-          });
+          this.dataService.editThought(editThought).subscribe(data => { 
         });
+        this.router.navigate(['/viewer/', this.newContexts[0]]);
+        this.internalService.changeThought(this.newContexts[0]);     
        });  
       });  
       }
 
       
         onNewSubmit()  { 
-          //Get Unstructured Context
-          this.dataService.getThoughtByName("Unstructured").subscribe(data => {
-            
-            //CREATE NEW CONTEXT
-            if(this.selectedThought && this.selectedThought.label != "Complexity-App"){
-              this.newContexts.unshift(this.selectedThought._id);
-             // this.selectedThought.dimensions.filter(dimension => {
-               // if(dimension.dim == "compApp") { this.newCompApp = dimension.val}
-              //})
-              this.contexts.forEach(thought => this.newContexts.push(thought._id));
-            } else {  
-                this.newContexts.unshift(data.thought._id);
-                this.newContexts.push(data.thought.contexts[0]);
-              //  data.thought.dimensions.filter(dimension => {
-                //  if(dimension.dim == "compApp") { this.newCompApp = dimension.val}
-               // });
-            };
-                      //CREATE DIMENSIONS
-          this.dimensions = [{ dim: "compApp", val: this.newCompApp }];
+
+         //CREATE CONTEXT
+         this.newContexts.unshift(this.selectedThought._id);                     // Add selected Thought as Context
+         this.contexts.forEach(thought => this.newContexts.push(thought._id));   // Add Contexts of Selected Element
+         this.newContexts.push(this.context._id);                                // Add Main Context
+
+         this.newContents = [];
 
           const newThought = {
             label: this.lastInput,
+            level: this.selectedThought.level,
             user: this.userId,
             contexts: this.newContexts,
             contents: this.newContents,
@@ -145,7 +134,6 @@ userId;
             showAs: "card",
             privacy: "private"
             };
-          
 
              this.dataService.newThought(newThought).subscribe(data => {
                 this.saveId = data.newId;
@@ -167,11 +155,11 @@ userId;
                 this.messageClass = 'alert alert-success';
                 this.message = data.message;    
            };
-
-           this.router.navigate(['/viewer/', this.newContexts[0]]);
-           this.internalService.changeThought(this.selectedThought);    
-          }); 
-          });  
+          this.newContexts = [];
+         
+          this.router.navigate(['/viewer/', this.newContexts[0]]);
+          this.internalService.changeThought(this.newContexts[0]); 
+          });   
       });  
     });
       }
@@ -185,13 +173,14 @@ userId;
     this.authService.getProfile().subscribe(profile => {
     this.username = profile.user.username; // Used when creating new blog posts and comments
     this.userId = profile.user._id;
+    this.unstructured = profile.user.unstructured;
     });
     
     this.internalService.loadThoughts();
     this.internalService.thoughtObs.subscribe(res => this.thoughts = res);
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selContextObs.subscribe(res => this.contexts = res);
-
+    this.internalService.selContextObs.subscribe(res => this.context = res);
+    this.internalService.selContextsObs.subscribe(res => this.contexts = res);
   
   }
 }

@@ -16,14 +16,11 @@
       </form>
     </mat-card-title>
     <mat-card-content> 
-      <button mat-button *ngIf="!selectedThought || selectedThought.label == 'Complexity-App'"> No Context </button>
-      <button mat-raised-button *ngIf="selectedThought.label != 'Complexity-App'">{{ selectedThought.label }} </button>
-      <button mat-button *ngFor="let context of contexts" (click)="selectThought(thought)">{{ context.label }}</button>
+      <button mat-raised-button *ngIf="selectedThought.label">Add to Context: {{ selectedThought.label }} </button>
     </mat-card-content>
     
     <mat-card-actions>
-      
-      <button mat-button><i class="material-icons">insert_invitation</i>Save as Goals</button>
+      <button mat-button (click)=saveGoal()><i class="material-icons">insert_invitation</i>Save as Goals</button>
       <button mat-button><i class="material-icons">note</i>Save as Diary Entry</button>
   </mat-card-actions>
 </mat-card>

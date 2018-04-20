@@ -6,3 +6,8 @@
     margin-right: 20px;
     margin-left: 20px;
 }
+
+.mat-success {
+    background-color: white;
+    color: #fff;
+}

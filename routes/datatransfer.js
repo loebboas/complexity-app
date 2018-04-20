@@ -1,5 +1,6 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
+const PubThought = require('../models/pubThought');
 const jwt = require('jsonwebtoken'); 
 const config = require('../config/database'); // Import database configuration
 
@@ -63,7 +64,7 @@ router.post('/newThought', (req, res) => {
   
   
      /* ===============================================================
-     GET Content
+     GET THOUGHT
   =============================================================== */
   router.get('/getThought/:id', (req, res) => {
     // Search database for all thoughts linked to :id as bottom
@@ -72,7 +73,6 @@ router.post('/newThought', (req, res) => {
         .populate({ path: 'contexts' })
         .populate({
           path: 'contents',
-          // Get friends of friends - populate the 'friends' array for every friend
           populate: { path: 'contents' }
         })
         .exec((err, thought) => {
@@ -86,13 +86,13 @@ router.post('/newThought', (req, res) => {
 });  
 
      /* ===============================================================
-     GET Context
+     GET CONTENT
   =============================================================== */
-  router.get('/getContext/:id', (req, res) => {
+  router.get('/getContent/:id', (req, res) => {
     // Search database for all thoughts linked to :id as bottom
     Thought
         .findOne({user: req.decoded.userId, _id: req.params.id })
-        .populate({path: 'contexts'})
+        .populate({ path: 'contents'})
         .exec((err, thought) => {
             // Check if error was found or not
             if (err) {
@@ -102,7 +102,6 @@ router.post('/newThought', (req, res) => {
             }
         });
 });  
-
 
    /* ===============================================================
      GET ONE THOUGHT
@@ -130,6 +129,62 @@ router.post('/newThought', (req, res) => {
   }
   });
 
+   /* ===============================================================
+     ADD NEW PUBLIC THOUGHT
+  =============================================================== */  
+
+router.post('/newPubThought', (req, res) => {
+	if(!req.body.label) {
+		res.json({ success: false, message: 'You must input a Label'});
+	} else {
+		let thought = new PubThought({
+    label: req.body.label,
+    likes: 0,
+    level: req.body.level,
+    dimensions: req.body.dimensions,
+    showAs: req.body.showAs,
+    user: req.body.user,
+    contexts: req.body.contexts,
+    contents: req.body.contents,
+    texture: req.body.texture,
+    privacy: req.body.privacy
+		});
+		thought.save((err) => {
+			if (err) {
+				res.json({ success: false, message: 'Could not save public Thought. Error: ', err });
+			} else {
+				res.json({ success: true, message: 'Public Thought saved ', newId: thought._id });
+			}
+		})
+	}
+});
+
+   /* ===============================================================
+     ADD NEW PUBLIC ROOM
+  =============================================================== */  
+
+  router.post('/newPubRoom', (req, res) => {
+    if(!req.body.label) {
+      res.json({ success: false, message: 'You must input a Label'});
+    } else {
+      let room = new PubRoom({
+      label: req.body.label,
+      level: req.body.level,
+      likes: 0,
+      admin: req.body.user,
+      members: [req.body.user],
+      contents: req.body.contents,
+      
+      });
+      pubRoom.save((err) => {
+        if (err) {
+          res.json({ success: false, message: 'Could not save Room. Error: ', err });
+        } else {
+          res.json({ success: true, message: 'Room saved ', newId: thought._id });
+        }
+      })
+    }
+  });
   
 
       /* ===============================================================

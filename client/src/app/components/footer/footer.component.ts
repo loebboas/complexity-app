@@ -10,7 +10,11 @@ import { InternalService } from '../../services/internal.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  username; userId; starterId;
   selectedThought: Thought;
+  //Tools
+  addNew = false;
+  
   constructor(private router: Router,
     public authService: AuthService,
   public internalService: InternalService) { }
@@ -28,6 +32,11 @@ export class FooterComponent implements OnInit {
     }
     
   ngOnInit() {
+    this.authService.getProfile().subscribe(profile => {
+      this.username = profile.user.username; // Used when creating new blog posts and comments
+      this.userId = profile.user._id;
+      this.starterId = profile.user.starter;
+      });
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
   }
 

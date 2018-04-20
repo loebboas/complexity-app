@@ -1,25 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <mat-toolbar-row>
-      <div *ngIf="contexts.length">
-        <button mat-button *ngFor="let context of contexts" (click)="selectThought(context)">{{ context.label}}</button>
-        
-      </div>
-      <button mat-button (click)="selectThought(compApp)">Complexity-App</button>
       <span class="toolbar-spacer"></span>
-        <form class="searchbar-form">
-          <mat-form-field class="searchbar-full-width">
-            <input matInput placeholder="Search" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="selectThought(thought)">
-                  <span>{{ thought.label }} </span><small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
-                </mat-option>
-              </mat-autocomplete>
-          </mat-form-field>
-        </form>
+            <app-search></app-search>
         
             <button mat-button *ngIf="!authService.loggedIn()" [matMenuTriggerFor]="complexity">Login or Register</button>
             <button mat-button *ngIf="authService.loggedIn()" [matMenuTriggerFor]="complexity">{{ username | uppercase }}</button>
-        <mat-menu #complexity="matMenu" xPosition="after" [overlapTrigger]="false">
+            <mat-menu #complexity="matMenu" xPosition="after" [overlapTrigger]="false">
           <!-- If LoggedOut -->
          
           <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
@@ -37,52 +23,4 @@
        
   
   </mat-toolbar-row>
-  <!-- Context Row -->
-  <mat-toolbar-row *ngIf="selectedThought.label != 'Complexity-App'">
-      <button mat-button (click)="selectThought(selectedThought)">{{ selectedThought.label }}</button>
-     
-  </mat-toolbar-row>
 </mat-toolbar>
-
-
-<!--
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/">Home</a><span class="sr-only">Home</span></li>
-    </ul>
-    <ul class="navbar-nav navbar-right">
-      <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/register">Register</a></li>
-            <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/login">Login</a></li>
-             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a></li>
-             <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/profile">Profile</a></li>
-            <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/new">New</a></li>
-            <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/myroom">My-Room</a></li>
-            <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/home">Logical-Room</a></li>
-            <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/projects">Projects</a></li>
-    </ul>
-    <form [formGroup]="form" (ngSubmit)="searchSubmit()">
-      <ul class="nav navbar-nav navbar-right" *ngIf="authService.loggedIn()">
-      <div class="search-block input-group" [ngClass]="{ 'has-error': form.controls.search.dirty, 'has-success': thoughtByName && form.controls.search.dirty }" id="adv-search">
-               <input type="text" #searchTextBox (keyup)="onKeyupNav(searchTextBox.value)" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" formControlName="search" name="search" placeholder="Something">
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg open">
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                              <ul class="navbar-nav navbar-right">
-                                <li class="nav-item"><a class="nav-link" [routerLink]="['/myroom/',searchByName._id]">{{ searchByName.value }}</a></li>
-                              </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-      </div>
-    </ul>
-  </form>
-  </div>
-</nav>
--->
- 

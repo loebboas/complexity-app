@@ -17,3 +17,11 @@
 					</mat-card> 
 				</mat-grid-tile>
 		</mat-grid-list>
+		<mat-grid-list [cols]="2" rowHeight="4:1">
+			<mat-grid-tile>
+				<button mat-fab [color]="'success'" routerLink="login">Login</button>
+			</mat-grid-tile>
+			<mat-grid-tile>
+					<button mat-fab [color]="'success'" routerLink="register"> Register</button>
+				</mat-grid-tile>
+		</mat-grid-list>
