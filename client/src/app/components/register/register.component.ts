@@ -33,6 +33,8 @@ export class RegisterComponent implements OnInit {
   memory; feeling; all;
   infcl; publ; rooms; ptho;
   dauser;
+  privateArray: any[];
+  privateObj;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -161,11 +163,12 @@ export class RegisterComponent implements OnInit {
       label: "Infinity Cloud",
       level: -2,
       color: "FFFFFF",
-      form: "circle",
+      clicks: 0,
       user: this.userId,
       dimensions: [],
       showAs: "grid",
-
+      texture: "",
+      form: "circle",
       privacy: "locked"
     };
 
@@ -176,10 +179,14 @@ export class RegisterComponent implements OnInit {
       const dauser = {
         label: this.firstFormGroup.get('username').value,
         level: -1,
-        user: this.userId,
-        dimensions: [],
-        contexts: [{ _id: this.infcl }],
+        color: "FFFFFF",
+        clicks: 0,
         showAs: "grid",
+        user: this.userId,
+        contexts: [{ _id: this.infcl }],
+        dimensions: [],
+        texture: "",
+        form: "circle",
         privacy: "locked"
       };
 
@@ -187,36 +194,48 @@ export class RegisterComponent implements OnInit {
         this.dauser = data.newId;
 
 
-        const rooms = {
+        const rooms = { // rename as "Other Users"
           label: "Other User",
           level: -1,
-          user: this.userId,
+          color: "FFFFFF",
+          clicks: 0,
           showAs: "grid",
-          dimensions: [],
+          user: this.userId,
           contexts: [{ _id: this.infcl }],
+          dimensions: [],
+          texture: "",
+          form: "circle",
           privacy: "locked"
         };
 
-        const ptho = {
+        const ptho = {  // rename as "Trending"
           label: "Trending", // input field
           level: -1,
-          user: this.userId,
+          color: "FFFFFF",
+          clicks: 0,
           showAs: "grid",
-          dimensions: [],
+          user: this.userId,
           contexts: [{ _id: this.infcl }],
+          dimensions: [],
+          texture: "",
+          form: "circle",
           privacy: "locked"
         };
 
 
         //CREATE APP OBJECTS LVL 0
 
-        const compApp = {
+        const compApp = {  // rename as "User/Username or Persona"
           label: this.secondFormGroup.get('persona').value,
           level: 0,
-          user: this.userId,
-          dimensions: [],
-          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
+          color: "FFFFFF",
+          clicks: 0,
           showAs: "grid",
+          user: this.userId,
+          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
+          dimensions: [],
+          texture: "",
+          form: "circle",
           privacy: "locked"
         };
 
@@ -244,33 +263,45 @@ export class RegisterComponent implements OnInit {
 
                   //LEVEL 1
 
-                  const memories = {
-                    label: "Memories",
+                  const memories = { // rename as "Diary"
+                    label: "Diary",
                     level: 1,
-                    user: this.userId,
+                    color: "FFFFFF",
+                    clicks: 0,
                     showAs: "grid",
-                    dimensions: [],
+                    user: this.userId,
                     contexts: [{ _id: this.startId }],
+                    dimensions: [],
+                    texture: "",
+                    form: "circle",
                     privacy: "locked"
                   };
 
-                  const myroom = {
+                  const myroom = { // rename as "Thoughts"
                     label: "other Thoughts",
                     level: 1,
-                    user: this.userId,
+                    color: "FFFFFF",
+                    clicks: 0,
                     showAs: "grid",
-                    dimensions: [],
+                    user: this.userId,
                     contexts: [{ _id: this.startId }],
+                    dimensions: [],
+                    texture: "",
+                    form: "circle",
                     privacy: "locked"
                   };
 
                   const todo = {
                     label: "Plans",
                     level: 1,
-                    user: this.userId,
+                    color: "FFFFFF",
+                    clicks: 0,
                     showAs: "grid",
-                    dimensions: [],
+                    user: this.userId,
                     contexts: [{ _id: this.startId }],
+                    dimensions: [],
+                    texture: "",
+                    form: "circle",
                     privacy: "locked"
                   };
 
@@ -286,43 +317,59 @@ export class RegisterComponent implements OnInit {
 
                         //LEVEL 2
 
-                        const diary = {
-                          label: "Diary",
+                        const diary = { //Rename as "Feelings"
+                          label: "Feelings",
                           level: 2,
-                          user: this.userId,
+                          color: "FFFFFF",
+                          clicks: 0,
                           showAs: "grid",
-                          dimensions: [],
+                          user: this.userId,
                           contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
+                          dimensions: [],
+                          texture: "",
+                          form: "circle",
                           privacy: "locked"
                         };
 
                         const timeline = {
-                          label: "Unstructured",
+                          label: "Memories",
                           level: 2,
+                          color: "FFFFFF",
+                          clicks: 0,
+                          showAs: "timeArray",
                           user: this.userId,
-                          showAs: "list",
-                          dimensions: [],
                           contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
+                          dimensions: [],
+                          texture: "",
+                          form: "circle",
                           privacy: "locked"
                         };
 
                         const goals = {
                           label: "Goals",
                           level: 2,
+                          color: "FFFFFF",
+                          clicks: 0,
+                          showAs: "timeArray",
                           user: this.userId,
-                          showAs: "grid",
-                          dimensions: [],
                           contexts: [{ _id: this.todoId }, { _id: this.startId }],
+                          dimensions: [],
+                          texture: "",
+                          form: "circle",
                           privacy: "locked"
                         };
 
                         const projects = {
                           label: "Projects",
                           level: 2,
-                          user: this.userId,
+                          color: "FFFFFF",
+                          clicks: 0,
                           showAs: "grid",
-                          dimensions: [],
+                          user: this.userId,
                           contexts: [{ _id: this.todoId }, { _id: this.startId }],
+                          dimensions: [],
+                          texture: "",
+                          form: "circle",
                           privacy: "locked"
                         };
                         this.dataService.newThought(timeline).subscribe(data => {
@@ -339,135 +386,16 @@ export class RegisterComponent implements OnInit {
                                   editContents: [{ _id: this.sessionsId }, { _id: this.favoritesId }, { _id: this.todoId }]
                                 };
                                 this.dataService.editThought(editThought).subscribe(data => {
+this.privateObj = {
+  persona: this.startId,
+  apps: [{ app: "Diary"}, { app: "Thoughts"},{ app: "Plans"}],
+  dimensions: [{starter: this.sessionsId, app: "Diary", type: "Date" }, {starter: this.diary, app: "Diary", type: "Number" }, {starter: this.goals, app: "Plans", type: "Date" }]
+}
+this.privateArray.push(this.privateObj);
 
-                                  const editPlans = {
-                                    _id: this.todoId,
-                                    editContents: [{ _id: this.goals }, { _id: this.projects }]
-                                  };
-                                  const editMemories = {
-                                    _id: this.sessionsId,
-                                    editContents: [{ _id: this.timeline }, { _id: this.diary }]
-                                  };
-                                  this.dataService.editThought(editPlans).subscribe(data => {
-                                    this.dataService.editThought(editMemories).subscribe(data => {
-
-
-                                      //LEVEL 3: GOALS
-
-                                      const today = {
-                                        label: "Today",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "list",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-
-                                      const week = {
-                                        label: "This Week",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "list",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-                                      const month = {
-                                        label: "This Month",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "list",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-
-                                      const year = {
-                                        label: "This Year",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "list",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-                                      const life = {
-                                        label: "Lifetime",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "list",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-                                      const all = {
-                                        label: "Goals - Timeline",
-                                        level: 3,
-                                        user: this.userId,
-                                        showAs: "timeline",
-                                        dimensions: [],
-                                        contexts: [{ _id: this.goals }, { _id: this.todoId }, { _id: this.startId }],
-                                        privacy: "locked"
-                                      };
-                                      this.dataService.newThought(today).subscribe(data => {
-                                        this.today = data.newId;
-                                        this.dataService.newThought(week).subscribe(data => {
-                                          this.week = data.newId;
-                                          this.dataService.newThought(month).subscribe(data => {
-                                            this.month = data.newId;
-                                            this.dataService.newThought(year).subscribe(data => {
-                                              this.year = data.newId;
-                                              this.dataService.newThought(life).subscribe(data => {
-                                                this.life = data.newId;
-                                                this.dataService.newThought(all).subscribe(data => {
-                                                  this.all = data.newId;
-                                                  const editGoals = {
-                                                    _id: this.goals,
-                                                    editContents: [{ _id: this.today }, { _id: this.week }, { _id: this.month }, { _id: this.year }, { _id: this.life }, { _id: this.all }]
-                                                  };
-                                                  this.dataService.editThought(editGoals).subscribe(data => {
-
-                                                    //LEVEL 3: Diary
-
-                                                    const feelings = {
-                                                      label: "Feelings",
-                                                      level: 3,
-                                                      user: this.userId,
-                                                      showAs: "list",
-                                                      dimensions: [],
-                                                      contexts: [{ _id: this.diary }, { _id: this.sessionsId }, { _id: this.startId }],
-                                                      privacy: "locked"
-                                                    };
-
-                                                    const memory = {
-                                                      label: "Happenings", // input field
-                                                      level: 3,
-                                                      user: this.userId,
-                                                      showAs: "list",
-                                                      dimensions: [],
-                                                      contexts: [{ _id: this.diary }, { _id: this.sessionsId }, { _id: this.startId }],
-                                                      privacy: "locked"
-                                                    };
-
-                                                    this.dataService.newThought(feelings).subscribe(data => {
-                                                      this.feeling = data.newId;
-                                                      this.dataService.newThought(memory).subscribe(data => {
-                                                        this.memory = data.newId;
-
-                                                        const editDiary = {
-                                                          _id: this.diary,
-                                                          editContents: [{ _id: this.feeling }, { _id: this.memory }]
-                                                        };
-                                                        this.dataService.editThought(editDiary).subscribe(data => {
-                                                          
                                                           const editUser = {
                                                             _id: this.userId,
-                                                            editStarter: this.startId,
-                                                            editUnstructured: this.timeline,
-                                                            editGoals: this.all,
-                                                            editFeelings: this.feeling,
-                                                            editHappenings: this.memory
+                                                            private: this.privateArray
                                                           };
 
                                                           this.authService.editUser(editUser).subscribe(data => {
@@ -498,7 +426,6 @@ export class RegisterComponent implements OnInit {
                                                       });
                                                     });
                                                   });
-
                                                 });
                                               });
                                             });
@@ -510,18 +437,7 @@ export class RegisterComponent implements OnInit {
                                 });
                               });
                             });
-                          });
-                        });
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+
 
   }
 

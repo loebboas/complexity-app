@@ -4,15 +4,16 @@ export class Thought {
         _id: String;
         level: Number;
         label: String;
-        compApp: Number;
+        color: String;
+        clicks: Number;
         dimensions: Dimension[];
         showAs: String;
         user: String;
         contexts: any[];
-        contents: any[];
-        privacy: String; 
+        contents: any[]; 
         __v: Number;
-        inputTime: String;
+        texture: String;
+        privacy: String;
 }
 
 
