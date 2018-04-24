@@ -27,7 +27,7 @@
 
 <!-- Content  -->
 <!-- Short Content  -->
-<div *ngIf=´contents.length <= 5´>
+<div *ngIf="contents.length <= 5">
         <mat-grid-list [cols]="contents.length || 1" rowHeight="1:2">
                 <mat-grid-tile *ngFor="let content of contents" [colspan]="1" [rowspan]="1">
                         <mat-card>
@@ -48,7 +48,7 @@
         </mat-grid-list>
 </div>
 <!-- Long Content  -->
-<div *ngIf=´contents.length > 5´>
+<div *ngIf="contents.length > 5">
         <mat-list>
                 <mat-list-item *ngFor="let content of contents">
                         <button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button>

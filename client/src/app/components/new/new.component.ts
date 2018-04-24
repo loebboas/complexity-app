@@ -30,6 +30,7 @@ export class NewComponent implements OnInit {
   contextContent: String[] = [];
   //Autocomplete
   thoughtCtrl: FormControl;
+  newThought: FormControl;
   filteredThoughts: Observable<Thought[]>;
   saveId;
   messageClass;
@@ -39,6 +40,14 @@ export class NewComponent implements OnInit {
   username;
   userId;
   unstructured;
+  addDiary = false;
+  addGoal = false;
+  memoriesId;
+  showCopyThought = false;
+  showNewThought = true;
+  showLinkThought = false;
+
+
   constructor(private dataService: DataService,
     private formBuilder: FormBuilder,
     private internalService: InternalService,
@@ -61,13 +70,12 @@ export class NewComponent implements OnInit {
       thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
   }
 
-
-
-  saveGoal() {
-  const timeArray = [{
-    timeline: this.selectedThought._id,
-    timevalue: Date.now
-  }]
+  addToDiary() {
+    const dimension = new Dimension;
+    dimension.dim = this.memoriesId;
+    const date = Date.now;
+    dimension.val = date.toString();
+    this.dimensions.push(dimension);
   }
 
   copyThought(thought) {
@@ -98,7 +106,7 @@ export class NewComponent implements OnInit {
 
 
       this.dataService.getSingleThought(this.newContexts[0]).subscribe(data => {
-      this.contextContent = data.thought.contents;
+        this.contextContent = data.thought.contents;
         this.contextContent.push(this.saveId);
 
         const editThought = {
@@ -108,7 +116,7 @@ export class NewComponent implements OnInit {
 
         this.dataService.editThought(editThought).subscribe(data => {
         });
-        
+
         this.internalService.changeThought(this.newContexts[1]);
         this.router.navigate(['/viewer/', this.newContexts[0]]);
         this.internalService.changeThought(this.newContexts[0]);
@@ -143,7 +151,7 @@ export class NewComponent implements OnInit {
 
       //Get Thought to Update
       this.dataService.getSingleThought(this.newContexts[0]).subscribe(data => {
-      this.contextContent = data.thought.contents;
+        this.contextContent = data.thought.contents;
         this.contextContent.push(this.saveId);
 
         const editThought = {
