@@ -56,7 +56,11 @@ export class DataService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
   }
-
+  
+  getTimeArray(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/datatransfer/timeArray/' + id, this.options).map(res => res.json());
+  }
       getThoughtByName(label) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/datatransfer/thoughtByName/' + label, this.options).map(res => res.json());

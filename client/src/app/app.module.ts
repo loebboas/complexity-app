@@ -21,6 +21,7 @@ import { ViewerComponent } from './components/viewer/viewer.component';
 import { InternalService } from './services/internal.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
+import { EditComponent } from './components/edit/edit.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SearchComponent } from './components/search/search.component';
     NewComponent,
     ViewerComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    EditComponent
   ],
   imports: [
     ReactiveFormsModule,

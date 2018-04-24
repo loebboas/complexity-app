@@ -34,15 +34,21 @@ export class InternalService {
 
   changeThought(id) {
     this.dataService.getThought(id).subscribe(data => {  //Load Populated Thought
-    this.selThought.next(data.thought);    
+    this.selThought.next(data.thought);    //Save Selected Thought
 
-    this.dataService.getContent(data.thought.contexts[0]._id).subscribe(data => {
-      this.selSiblings.next(data.thought.contents);              //Save Selected Thought
+    this.dataService.getContent(data.thought.contexts[0]._id).subscribe(data => { //Get content of the first Context
+      this.selSiblings.next(data.thought.contents);              //Save as Siblings
     });
       this.selContext.next(data.thought.contexts.pop());   //Remove Last Context as Main Context
     this.selContexts.next(data.thought.contexts);       // Save Rest of Contexts
+
+    if(data.thought.showAs == "timearray") { // If Timearray
+      this.dataService.getTimeArray(data.thought._id).subscribe(res => {
+        this.selContents.next(res.timeArray);
+      })
+    } else {
     this.selContents.next(data.thought.contents);
-  
+  }
 
  
   })

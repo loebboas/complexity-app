@@ -49,18 +49,39 @@ router.post('/newThought', (req, res) => {
       .exec((err, allThought) => {
               // Check if error was found or not
               if (err) {
-                res.json({ suik,ccess: false, message: err }); // Return error message
+                res.json({ suiccess: false, message: err }); // Return error message
               } else {
-                // Check if blogs were found in database
+                // Check if thoughts were found in database
                 if (!allThought) {
-                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+                  res.json({ success: false, message: 'No thoughts found.' }); // Return error of no thoughts found
                 } else {       
-                  res.json({ success: true, allThought: allThought }); // Return success and blogs array
+                  res.json({ success: true, allThought: allThought }); // Return success and array
                 }
               }
     }); // Sort blogs from newest to oldest
   });
 
+   /* ===============================================================
+     GET TIMEARRAY OF USER
+  =============================================================== */
+
+  router.get('/timeArray', (req, res) => {
+    // Search database for all Thoughts
+    Thought.find({ user: req.decoded.userId, 'dimensions.dim': req.body._id })
+      .exec((err, timeArray) => {
+              // Check if error was found or not
+              if (err) {
+                res.json({ success: false, message: err }); // Return error message
+              } else {
+                // Check if timearray entries were found in database
+                if (!allThought) {
+                  res.json({ success: false, message: 'No Entries in TimeArray found.' }); // Return error
+                } else {       
+                  res.json({ success: true, timeArray: timeArray }); // Return success and array
+                }
+              }
+    }); 
+  });
   
   
      /* ===============================================================

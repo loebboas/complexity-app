@@ -14,29 +14,30 @@ export class FooterComponent implements OnInit {
   selectedThought: Thought;
   //Tools
   addNew = false;
-  
+  addEdit = false;
+
   constructor(private router: Router,
     public authService: AuthService,
-  public internalService: InternalService) { }
+    public internalService: InternalService) { }
 
-    onChangeView() {
-      if(this.selectedThought.showAs == "grid") { this.selectedThought.showAs = "card" }
-      else {this.selectedThought.showAs = "grid"};
-      
-      this.internalService.changeShowAs(this.selectedThought);
-    }
+  onChangeView() {
+    if (this.selectedThought.showAs == "grid") { this.selectedThought.showAs = "card" }
+    else { this.selectedThought.showAs = "grid" };
 
-    onLogoutClick() {
-      this.authService.logout(); // Logout user
-      this.router.navigate(['/']); // Navigate back to home page
-    }
-    
+    this.internalService.changeShowAs(this.selectedThought);
+  }
+
+  onLogoutClick() {
+    this.authService.logout(); // Logout user
+    this.router.navigate(['/']); // Navigate back to home page
+  }
+
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; // Used when creating new blog posts and comments
       this.userId = profile.user._id;
       this.starterId = profile.user.starter;
-      });
+    });
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
   }
 

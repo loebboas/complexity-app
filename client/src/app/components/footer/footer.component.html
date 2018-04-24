@@ -1,14 +1,19 @@
 <div *ngIf="addNew">
-<app-new></app-new>
+  <app-new></app-new>
+</div>
+<div *ngIf="addEdit">
+  <app-new></app-new>
 </div>
 
 <mat-toolbar>
-    <span class='spacer'></span>
-      <button mat-button *ngIf="authService.loggedIn()" (click)="addNew = !addNew">Add a Thought</button>
-      <button mat-button *ngIf="authService.loggedIn()"  (click)="onLogoutClick()">Logout</button>
+  <span class='spacer'></span>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="addNew = !addNew">New</button>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="addEdit = !addEdit">Edit</button>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="deleteThought()">Delete</button>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">Logout</button>
 
-      <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
-      <button mat-button *ngIf="!authService.loggedIn()"   routerLink="register">Register</button>
-    <span class='spacer'></span>
-    <button mat-button>Complexity-App v.0.0.55</button>
-  </mat-toolbar>
+  <button mat-button *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
+  <button mat-button *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
+  <span class='spacer'></span>
+  <button mat-button>Complexity-App v.0.0.6</button>
+</mat-toolbar>

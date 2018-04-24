@@ -1,36 +1,59 @@
-
-
 <!-- Contexts -->
 <mat-toolbar>
-        <div *ngFor="let context of contexts"><button mat-button (click)="selectThought(context)">{{ context.label }}</button></div>
-     <div><button mat-raised-button (click)="selectThought(context)">{{ context.label }}</button></div>
-    
+        <div>
+                <button mat-raised-button (click)="selectThought(context)">{{ context.label }}</button>
+        </div>
+        <!-- Der ausgewählte Chararakter -->
 </mat-toolbar>
+<mat-card>
+        <mat-list>
+                <mat-list-item *ngFor="let context of contexts">
+                        <button mat-button (click)="selectThought(context)">{{ context.label }}</button>
+                </mat-list-item>
+        </mat-list>
+</mat-card>
 
 <mat-toolbar>
         <!-- Siblings -->
-<div *ngFor="let sibling of siblings">
-    <div *ngIf="selectedThought.label != sibling.label"><button mat-button (click)="selectThought(sibling)">{{ sibling.label}}</button></div>
-    <div *ngIf="selectedThought.label == sibling.label"><button mat-raised-button (click)="selectThought(sibling)">{{ sibling.label}}</button></div>
-</div>
+        <div *ngFor="let sibling of siblings">
+                <div *ngIf="selectedThought.label != sibling.label">
+                        <button mat-button (click)="selectThought(sibling)">{{ sibling.label}}</button>
+                </div>
+                <div *ngIf="selectedThought.label == sibling.label">
+                        <button mat-raised-button (click)="selectThought(sibling)">{{ sibling.label}}</button>
+                </div>
+        </div>
 </mat-toolbar>
 
-        <mat-grid-list [cols]="contents.length || 1" rowHeight="2:1">
-                <mat-grid-tile *ngFor="let content of contents"
-                            [colspan]="1"
-                            [rowspan]="1">
-                    <mat-card>
-                        <mat-card-title><button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button></mat-card-title>
-                        <mat-card-content>
-                                <div *ngIf="content.contents.length">
-                                    <mat-list>
-                                            <mat-list-item *ngFor="let thought of content.contents" ><button mat-button (click)="selectThought(thought)">{{ thought.label }}</button> </mat-list-item>
-                                    </mat-list>
-                                </div>   
-                        </mat-card-content>   
-                    </mat-card>
+<!-- Content  -->
+<!-- Short Content  -->
+<div *ngIf=´contents.length <= 5´>
+        <mat-grid-list [cols]="contents.length || 1" rowHeight="1:2">
+                <mat-grid-tile *ngFor="let content of contents" [colspan]="1" [rowspan]="1">
+                        <mat-card>
+                                <mat-card-title>
+                                        <button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button>
+                                </mat-card-title>
+                                <mat-card-content>
+                                        <div *ngIf="content.contents.length">
+                                                <mat-list>
+                                                        <mat-list-item *ngFor="let thought of content.contents">
+                                                                <button mat-button (click)="selectThought(thought)">{{ thought.label }}</button>
+                                                        </mat-list-item>
+                                                </mat-list>
+                                        </div>
+                                </mat-card-content>
+                        </mat-card>
                 </mat-grid-tile>
         </mat-grid-list>
-             
+</div>
+<!-- Long Content  -->
+<div *ngIf=´contents.length > 5´>
+        <mat-list>
+                <mat-list-item *ngFor="let content of contents">
+                        <button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button>
+                </mat-list-item>
+        </mat-list>
+</div>
 
 <app-footer></app-footer>
