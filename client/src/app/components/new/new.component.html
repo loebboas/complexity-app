@@ -24,10 +24,8 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-button><i class="material-icons">note</i>Add to TimeLine</button>
-    <button mat-button><i class="material-icons">alarm</i>Add to Goals</button>
-    <button mat-button><i class="material-icons">account circle</i>Add to People</button>
-    <button mat-button><i class="material-icons">favorite</i>Add to Feeling</button>
+    <button mat-button (click)="addDiary()"><i class="material-icons">note</i>Add to Diary</button>
+    <button mat-button (click)="addGoal()"><i class="material-icons">alarm</i>Add to Goals</button>
 
     <button mat-raised-button *ngIf="selectedThought.label" (click)="onNewSubmit()">Add to Context: {{ selectedThought.label }} </button>
   </mat-card-actions>
@@ -38,5 +36,5 @@
 </mat-card>
 
 <mat-card *ngIf="selectedThought.level == 0">
- Add a Character
+ You will be able to add a Persona on this level
   </mat-card>

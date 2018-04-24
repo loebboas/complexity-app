@@ -64,11 +64,10 @@ export class NewComponent implements OnInit {
 
 
   saveGoal() {
-    const newGoal = new Dimension;
-    newGoal.dim = "goals";
-    const date = Date.now;
-    newGoal.val = date.toString();
-    this.dimensions.push(newGoal);
+  const timeArray = [{
+    timeline: this.selectedThought._id,
+    timevalue: Date.now
+  }]
   }
 
   copyThought(thought) {
@@ -77,7 +76,7 @@ export class NewComponent implements OnInit {
     this.contexts.forEach(thought => this.newContexts.push(thought._id));   // Add Contexts of Selected Element
     this.newContexts.push(this.context._id);                                // Add Main Context
 
-    //CREATE DIMENSIONS
+    //LEVEL
 
     thought.level = this.selectedThought.level;                             //Load Level of Selected Thought
     thought.level++;                                                        // Add a Level
@@ -137,6 +136,7 @@ export class NewComponent implements OnInit {
       showAs: "card",
       privacy: "private"
     };
+
 
     this.dataService.newThought(newThought).subscribe(data => {
       this.saveId = data.newId;

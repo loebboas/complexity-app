@@ -125,7 +125,6 @@ export class RegisterComponent implements OnInit {
       email: this.firstFormGroup.get('email').value, // E-mail input field
       username: this.firstFormGroup.get('username').value, // Username input field
       password: this.firstFormGroup.get('password').value // Password input field
-
     }
 
     this.authService.registerUser(user).subscribe(data => {
@@ -166,7 +165,7 @@ export class RegisterComponent implements OnInit {
       user: this.userId,
       dimensions: [],
       showAs: "grid",
-      
+
       privacy: "locked"
     };
 
@@ -461,6 +460,7 @@ export class RegisterComponent implements OnInit {
                                                           editContents: [{ _id: this.feeling }, { _id: this.memory }]
                                                         };
                                                         this.dataService.editThought(editDiary).subscribe(data => {
+                                                          
                                                           const editUser = {
                                                             _id: this.userId,
                                                             editStarter: this.startId,
@@ -469,7 +469,7 @@ export class RegisterComponent implements OnInit {
                                                             editFeelings: this.feeling,
                                                             editHappenings: this.memory
                                                           };
-                                                          console.log(editUser);
+
                                                           this.authService.editUser(editUser).subscribe(data => {
                                                             this.processing = true; // Lock form fields	
                                                             // Function to send blog object to backend
