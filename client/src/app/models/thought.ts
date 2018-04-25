@@ -13,6 +13,7 @@ export class Thought {
         contents: any[]; 
         __v: Number;
         texture: String;
+        form: String;
         privacy: String;
 }
 

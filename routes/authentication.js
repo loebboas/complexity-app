@@ -66,11 +66,8 @@ module.exports = (router) => {
   router.put('/edit', (req, res) => {
 	
       User.findOne({ _id: req.body._id }, (err, user) => {
-        if (req.body.editStarter) { user.starter = req.body.editStarter };
-        if (req.body.editUnstructured) { user.unstructured = req.body.editUnstructured };
-        if (req.body.editGoals) { user.goals = req.body.editGoals };
-        if (req.body.editFeelings) { user.feelings = req.body.editFeelings };
-        if (req.body.editHappenings) { user.happenings = req.body.editHappenings };
+        if (req.body.private) { user.private = req.body.private };
+        if (req.body.friends) { user.friends = req.body.friends };
 		  user.save((err, user) => {
             // Check if error occured
             if (err) {
@@ -193,7 +190,7 @@ module.exports = (router) => {
   =============================================================== */
   router.get('/profile', (req, res) => {
     // Search for user in database
-    User.findOne({ _id: req.decoded.userId }).select('username email starter').exec((err, user) => {
+    User.findOne({ _id: req.decoded.userId }).select('username email private public friends').exec((err, user) => {
       // Check if error connecting
       if (err) {
         res.json({ success: false, message: err }); // Return error

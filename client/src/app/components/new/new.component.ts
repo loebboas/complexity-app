@@ -40,8 +40,8 @@ export class NewComponent implements OnInit {
   username;
   userId;
   unstructured;
-  addDiary = false;
-  addGoal = false;
+  showDiary = false;
+  showPlans = false;
   memoriesId;
   showCopyThought = false;
   showNewThought = true;
@@ -56,6 +56,7 @@ export class NewComponent implements OnInit {
   ) {
     //Autocomplete
     this.thoughtCtrl = new FormControl();
+    this.newThought = new FormControl();
     this.filteredThoughts = this.thoughtCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -71,6 +72,7 @@ export class NewComponent implements OnInit {
   }
 
   addToDiary() {
+    this.showDiary = !this.showDiary;
     const dimension = new Dimension;
     dimension.dim = this.memoriesId;
     const date = Date.now;
@@ -79,99 +81,104 @@ export class NewComponent implements OnInit {
   }
 
   copyThought(thought) {
-    //CREATE CONTEXT
-    this.newContexts.unshift(this.selectedThought._id);                     // Add selected Thought as Context
-    this.contexts.forEach(thought => this.newContexts.push(thought._id));   // Add Contexts of Selected Element
-    this.newContexts.push(this.context._id);                                // Add Main Context
 
-    //LEVEL
+    this.newContexts = [];  // Reset Context
+    this.dataService.getSingleThought(this.selectedThought._id).subscribe(data => { // Get Context of selected Thought
+      this.newContexts = data.thought.contexts;                                     //Save Context of selected Thought
+      this.newContexts.unshift(this.selectedThought._id);                           //Add Selected Thought as Context
+      this.contextContent = data.thought.contents;
 
-    thought.level = this.selectedThought.level;                             //Load Level of Selected Thought
-    thought.level++;                                                        // Add a Level
+      //Resave Thought with New Context
+      const copyThought = {
+        label: thought.label,
+        level: this.selectedThought.level,
+        color: thought.color,
+        clicks: 0,
+        showAs: thought.showAs,
+        user: this.userId,
+        contexts: this.newContexts,
+        contents: thought.contents,
+        dimensions: this.dimensions,
+        texture: "",
+        form: "circle",
+        privacy: "private"
+      };
 
-    //Resave Thought with New Context
-    const copyThought = {
-      label: thought.label,
-      level: thought.level,
-      user: this.userId,
-      contexts: this.newContexts,
-      contents: thought.contents,
-      dimensions: this.dimensions,
-      showAs: "grid",
-      privacy: "private"
-    };
-
-    this.dataService.newThought(copyThought).subscribe(data => {
-      this.saveId = data.newId;
+      this.dataService.newThought(copyThought).subscribe(data => {
+        this.saveId = data.newId;
 
 
-      this.dataService.getSingleThought(this.newContexts[0]).subscribe(data => {
-        this.contextContent = data.thought.contents;
         this.contextContent.push(this.saveId);
 
         const editThought = {
-          _id: this.newContexts[0],
+          _id: this.selectedThought._id,
           editContents: this.contextContent
         };
 
         this.dataService.editThought(editThought).subscribe(data => {
-        });
 
-        this.internalService.changeThought(this.newContexts[1]);
-        this.router.navigate(['/viewer/', this.newContexts[0]]);
-        this.internalService.changeThought(this.newContexts[0]);
+
+          this.router.navigate(['/viewer/', this.selectedThought._id]);
+          this.internalService.changeThought(this.selectedThought._id);
+        });
+      });
+    });
+  }
+  linkThought(thought) {
+    //Get Thought to Update
+    this.dataService.getSingleThought(this.selectedThought._id).subscribe(data => {
+      this.contextContent = data.thought.contents;
+      this.contextContent.push(thought._id);
+
+      const editThought = {
+        _id: this.selectedThought._id,
+        editContents: this.contextContent
+      };
+
+      this.dataService.editThought(editThought).subscribe(data => {
+        this.internalService.changeThought(this.selectedThought._id);
+        this.newContexts = [];
       });
     });
   }
 
-
   onNewSubmit() {
+    this.newContexts = [];  // Reset Context
+    this.dataService.getSingleThought(this.selectedThought._id).subscribe(data => { // Get Context of selected Thought
+      this.newContexts = data.thought.contexts;                                     //Save Context of selected Thought
+      this.newContexts.unshift(this.selectedThought._id);                           //Add Selected Thought as Context
+      this.contextContent = data.thought.contents;
 
-    //CREATE CONTEXT
-    this.newContexts.unshift(this.selectedThought._id);                     // Add selected Thought as Context
-    this.contexts.forEach(thought => this.newContexts.push(thought._id));   // Add Contexts of Selected Element
-    this.newContexts.push(this.context._id);                                // Add Main Context
-
-    this.newContents = [];
-
-    const newThought = {
-      label: this.lastInput,
-      level: this.selectedThought.level,
-      user: this.userId,
-      contexts: this.newContexts,
-      contents: this.newContents,
-      dimensions: this.dimensions,
-      showAs: "card",
-      privacy: "private"
-    };
+      const newThought = {  // create New Thought
+        label: this.newThought.value,
+        level: this.selectedThought.level,
+        color: "FFFFFF",
+        clicks: 0,
+        showAs: "grid",
+        user: this.userId,
+        contexts: this.newContexts,
+        contents: this.newContents,
+        dimensions: this.dimensions,
+        texture: "",
+        form: "circle",
+        privacy: "private"
+      };
 
 
-    this.dataService.newThought(newThought).subscribe(data => {
-      this.saveId = data.newId;
+      this.dataService.newThought(newThought).subscribe(data => {
+        this.saveId = data.newId;
 
-      //Get Thought to Update
-      this.dataService.getSingleThought(this.newContexts[0]).subscribe(data => {
-        this.contextContent = data.thought.contents;
+
         this.contextContent.push(this.saveId);
 
         const editThought = {
-          _id: this.newContexts[0],
+          _id: this.selectedThought._id,
           editContents: this.contextContent
         };
 
         this.dataService.editThought(editThought).subscribe(data => {
-          if (!data.success) {
-            this.messageClass = 'alert alert-danger';
-            this.message = data.message;
-          } else {
-            this.messageClass = 'alert alert-success';
-            this.message = data.message;
-          };
+          this.internalService.changeThought(this.selectedThought._id);
           this.newContexts = [];
-
-          this.internalService.changeThought(this.newContexts[1]);
-          this.router.navigate(['/viewer/', this.newContexts[0]]);
-          this.internalService.changeThought(this.newContexts[0]);
         });
       });
     });

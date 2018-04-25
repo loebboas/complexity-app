@@ -40,6 +40,7 @@ export class InternalService {
       this.selSiblings.next(data.thought.contents);              //Save as Siblings
     });
       this.selContext.next(data.thought.contexts.pop());   //Remove Last Context as Main Context
+      data.thought.contexts.reverse();
     this.selContexts.next(data.thought.contexts);       // Save Rest of Contexts
 
     if(data.thought.showAs == "timearray") { // If Timearray

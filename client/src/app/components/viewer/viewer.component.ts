@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./viewer.component.css']
 })
 export class ViewerComponent implements OnInit {
+  personas: any;
   selectedThought: Thought;
   contexts: Thought[];
   contents: Thought[];
@@ -41,10 +42,10 @@ export class ViewerComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; // Used when creating new blog posts and comments
       this.userId = profile.user._id;
-      this.starterId = profile.user.starter;
+      this.personas = profile.user.private;
     
       //GET THOUGHTS
-      this.internalService.changeThought(this.starterId); 
+      this.internalService.changeThought(profile.user.private[0].persona); 
      });
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
     this.internalService.selContentsObs.subscribe(res => this.contents = res);

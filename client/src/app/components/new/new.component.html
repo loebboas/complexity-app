@@ -1,45 +1,57 @@
-<mat-card *ngIf="selectedThought.level > 1">
-  <mat-card-title>
-    <div *ngIf="showNewThought">
-      <form>
-        <mat-form-field>
-          <input matInput placeholder="Add a new Thought" aria-label="Thought" [formControl]="newThought">
-        </mat-form-field>
-      </form>
-    </div>
-    <div *ngIf="showCopyThought">
-      <form class="searchbar-form">
-        <mat-form-field class="searchbar-full-width">
-          <input matInput placeholder="Copy a Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="copyThought(thought)">
-              <span>{{ thought.label }}</span>
-              <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
-    </div>
-    <div *ngIf="showLinkThought">
-      <form class="searchbar-form">
-        <mat-form-field class="searchbar-full-width">
-          <input matInput placeholder="Copy a Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linkThought(thought)">
-              <span>{{ thought.label }}</span>
-              <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
-    </div>
-  </mat-card-title>
+<mat-card *ngIf="selectedThought.level > 0">
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Add a new Thought">
+        <br>
+        <br>
+        <form>
+          <mat-form-field>
+            <input matInput placeholder="Add a new Thought" aria-label="Thought" [formControl]="newThought">
+          </mat-form-field>
+          <br>
+          <button mat-raised-button *ngIf="selectedThought.label" (click)="onNewSubmit()">Add to: {{ selectedThought.label }} </button>
+        </form>
+        <button mat-button (click)="showDiary()">
+          <i class="material-icons">note</i>Add to Diary</button>
+        <button mat-button (click)="showPlans()">
+          <i class="material-icons">alarm</i>Add to Goals</button>
+      </mat-tab>
+      <mat-tab label="Copy a Thought">
+        <form class="searchbar-form">
+          <mat-form-field class="searchbar-full-width">
+            <input matInput placeholder="Click on the Thought you want to copy" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="copyThought(thought)">
+                <span>{{ thought.label }}</span>
+                <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <button mat-button (click)="showDiary()">
+          <i class="material-icons">note</i>Add to Diary</button>
+        <button mat-button (click)="showPlans()">
+          <i class="material-icons">alarm</i>Add to Goals</button>
+      </mat-tab>
+
+      <mat-tab label="Link to a Thought">
+        <form class="searchbar-form">
+          <mat-form-field class="searchbar-full-width">
+            <input matInput placeholder="Link to a Thought" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linkThought(thought)">
+                <span>{{ thought.label }}</span>
+                <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-card-content>
   <mat-card-actions>
-    Add to TimeArray:
-    <button mat-button (click)="addToDiary()">
-      <i class="material-icons">note</i>Add to Diary</button>
-    <button mat-button (click)="addToGoal()">
-      <i class="material-icons">alarm</i>Add to Goals</button>
+
     <div *ngIf="addDiary || addGoal">
       <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Choose a date">
@@ -48,14 +60,14 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button *ngIf="selectedThought.label" (click)="onNewSubmit()">Add to Context: {{ selectedThought.label }} </button>
+
   </mat-card-actions>
 </mat-card>
 
-<mat-card *ngIf="selectedThought.level == 1">
+<mat-card *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
   You can't Add Thoughts on this level.
 </mat-card>
 
-<mat-card *ngIf="selectedThought.level == 0">
+<mat-card *ngIf="selectedThought.level == -1">
   Create new Persona: Public / Private
 </mat-card>

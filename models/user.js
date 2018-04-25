@@ -124,8 +124,9 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  private: [{ persona: String, apps: [{ app: String }], dimensions: [{starter: String, app: String, type: String }] }],
-  public: [{ persona: String, unstructured: String, apps: [{ app: String }], dimensions: [{dim: String, val: String }] }],
+  private: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String }] }],
+  public: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String }] }],
+  friends: [{ friendId: String, label: String, showPersona: [{ personaId: String }]}]
 });
 
 // Schema Middleware to Encrypt Password

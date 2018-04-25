@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -278,7 +279,7 @@ export class RegisterComponent implements OnInit {
                   };
 
                   const myroom = { // rename as "Thoughts"
-                    label: "other Thoughts",
+                    label: "Thoughts",
                     level: 1,
                     color: "FFFFFF",
                     clicks: 0,
@@ -386,61 +387,70 @@ export class RegisterComponent implements OnInit {
                                   editContents: [{ _id: this.sessionsId }, { _id: this.favoritesId }, { _id: this.todoId }]
                                 };
                                 this.dataService.editThought(editThought).subscribe(data => {
-this.privateObj = {
-  persona: this.startId,
-  apps: [{ app: "Diary"}, { app: "Thoughts"},{ app: "Plans"}],
-  dimensions: [{starter: this.sessionsId, app: "Diary", type: "Date" }, {starter: this.diary, app: "Diary", type: "Number" }, {starter: this.goals, app: "Plans", type: "Date" }]
-}
-this.privateArray.push(this.privateObj);
 
-                                                          const editUser = {
-                                                            _id: this.userId,
-                                                            private: this.privateArray
-                                                          };
+                                  const editPlans = {
+                                    _id: this.todoId,
+                                    editContents: [{ _id: this.projects }, { _id: this.goals }]
+                                  };
 
-                                                          this.authService.editUser(editUser).subscribe(data => {
-                                                            this.processing = true; // Lock form fields	
-                                                            // Function to send blog object to backend
+                                  this.dataService.editThought(editPlans).subscribe(data => {
+                                  
+                                    const editDiary = {
+                                      _id: this.sessionsId,
+                                      editContents: [{ _id: this.timeline }, { _id: this.diary }]
+                                    };
+                                    this.dataService.editThought(editDiary).subscribe(data => {
 
-                                                            // Check if PUT request was a success or not
-                                                            if (!data.success) {
-                                                              this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                                                              this.message = data.message; // Set error message
-                                                              this.processing = false; // Unlock form fields
-                                                            } else {
-                                                              this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                                                              this.message = data.message; // Set success message
-                                                              // After two seconds, navigate back to blog page 
-                                                            }
+                                  this.privateArray = [{
+                                    persona: this.startId,
+                                    apps: [{ app: "Diary", obj: this.sessionsId }, { app: "Thoughts", obj: this.favoritesId }, { app: "Plans", obj: this.todoId }],
+                                    dimensions: [{ starter: this.timeline, label: "Memories", app: this.sessionsId, dimtype: "Date" }, { starter: this.diary, label: "Feelings", app: this.sessionsId, dimtype: "Number" }, { starter: this.goals, label: "Goals", app: this.todoId, dimtype: "Date" }]
+                                  }]
+                                  console.log(this.privateArray);
+                                  const editUser = {
+                                    _id: this.userId,
+                                    private: this.privateArray
+                                  };
+                                  console.log(editUser);
+                                  this.authService.editUser(editUser).subscribe(data => {
+                                    this.processing = true; // Lock form fields	
+                                    // Function to send blog object to backend
 
-                                                            this.internalService.loadThoughts();
-                                                            this.internalService.changeThought(this.startId);
-                                                            console.log(this.messageClass)
-                                                            setTimeout(() => {
-                                                              this.router.navigate(['/viewer']); // Redirect to viewer
+                                    // Check if PUT request was a success or not
+                                    if (!data.success) {
+                                      this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                                      this.message = data.message; // Set error message
+                                      this.processing = false; // Unlock form fields
+                                    } else {
+                                      this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                                      this.message = data.message; // Set success message
+                                      // After two seconds, navigate back to blog page 
+                                    }
+                                  });
+                                });
 
-                                                            }, 1500);
-
-                                                          });
-                                                        });
-                                                      });
-                                                    });
-                                                  });
-                                                });
-                                              });
-                                            });
-                                          });
-                                        });
-                                      });
-                                    });
                                   });
                                 });
                               });
                             });
-
-
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
   }
 
+  onAbilitiesSubmit() {
+    this.internalService.changeThought(this.startId);
+    this.router.navigate(['/viewer/', this.startId]); // Redirect to Persona
+  }
   // Function to check if e-mail is taken
   checkEmail() {
     // Function from authentication file to check if e-mail is taken
@@ -496,6 +506,9 @@ this.privateArray.push(this.privateObj);
     }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
 
     this.secondFormGroup = this.formBuilder.group({
+      persona: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
       persona: ['', Validators.required]
     });
   }

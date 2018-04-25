@@ -13,8 +13,8 @@ export class FooterComponent implements OnInit {
   username; userId; starterId;
   selectedThought: Thought;
   //Tools
-  addNew = false;
-  addEdit = false;
+  showNew = false;
+  showEdit = false;
 
   constructor(private router: Router,
     public authService: AuthService,

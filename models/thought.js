@@ -15,6 +15,7 @@ const thoughtSchema = new Schema({
     contents: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
     dimensions: [{ dim: String, val: String }],
     texture: String,
+    form: String,
     privacy: String,
 });
 

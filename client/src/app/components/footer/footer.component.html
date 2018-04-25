@@ -1,14 +1,14 @@
-<div *ngIf="addNew">
+<div *ngIf="showNew">
   <app-new></app-new>
 </div>
-<div *ngIf="addEdit">
-  <app-new></app-new>
+<div *ngIf="showEdit">
+  <app-edit></app-edit>
 </div>
 
-<mat-toolbar>
+<mat-toolbar class="bot">
   <span class='spacer'></span>
-  <button mat-button *ngIf="authService.loggedIn()" (click)="addNew = !addNew">New</button>
-  <button mat-button *ngIf="authService.loggedIn()" (click)="addEdit = !addEdit">Edit</button>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="showNew = !showNew">New</button>
+  <button mat-button *ngIf="authService.loggedIn()" (click)="showEdit = !showEdit">Edit</button>
   <button mat-button *ngIf="authService.loggedIn()" (click)="deleteThought()">Delete</button>
   <button mat-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()">Logout</button>
 

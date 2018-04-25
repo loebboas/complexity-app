@@ -41,16 +41,23 @@
             <input matInput placeholder="Name your Persona" formControlName="persona" required>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext type="submit" value="Submit">Abilities</button>
+            <button mat-button matStepperNext type="submit" value="Submit">Create Persona</button>
           </div>
         </form>
       </mat-step>
-      <mat-step>
-         <mat-list>
-           <mat-list-item>Memories</mat-list-item>
-           <mat-list-item>Thoughts</mat-list-item>
-           <mat-list-item>Plans</mat-list-item>
-         </mat-list>
+      <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup" (ngSubmit)="onAbilitiesSubmit()">
+              <ng-template matStepLabel>Give her Abilities</ng-template>
+            <mat-list>
+              <mat-list-item>Diary <p class="smaller">Store your Memories and your feelings, as a complex Network</p></mat-list-item>
+
+              <mat-list-item>Plans <p class="smaller">Create complex Projects and set Goals within a Timeline</p></mat-list-item>
+              <mat-list-item>Thoughts <p class="smaller">Save and structure your other Thoughts</p></mat-list-item>
+            </mat-list>
+              <div>
+                <button mat-button matStepperNext type="submit" value="Submit">Take a look!</button>
+              </div>
+            </form>
         </mat-step>
     </mat-horizontal-stepper>
   </mat-card-content>

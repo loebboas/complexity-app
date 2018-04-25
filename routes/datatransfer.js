@@ -17,12 +17,16 @@ router.post('/newThought', (req, res) => {
 	} else {
 		let thought = new Thought({
     label: req.body.label,
-    dimensions: req.body.dimensions,
+    level: req.body.level,
+    color: req.body.color,
+    clicks: req.body.clicks,
     showAs: req.body.showAs,
     user: req.body.user,
     contexts: req.body.contexts,
     contents: req.body.contents,
+    dimensions: req.body.dimensions,
     texture: req.body.texture,
+    form: req.body.form,
     privacy: req.body.privacy
 		});
 		thought.save((err) => {
