@@ -2,7 +2,10 @@
 
 export class Dimension {    
         _id: String;
-        dim: String; 
+        starter: String;
+        dimtype: String; 
+        app: String;
+        label: String;
         val: String;
 }
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-footer',
@@ -12,19 +13,22 @@ import { InternalService } from '../../services/internal.service';
 export class FooterComponent implements OnInit {
   username; userId; starterId;
   selectedThought: Thought;
+  user: User;
   //Tools
-  showNew = false;
-  showEdit = false;
+  showTool: String;
 
   constructor(private router: Router,
     public authService: AuthService,
     public internalService: InternalService) { }
 
-  onChangeView() {
-    if (this.selectedThought.showAs == "grid") { this.selectedThought.showAs = "card" }
-    else { this.selectedThought.showAs = "grid" };
 
-    this.internalService.changeShowAs(this.selectedThought);
+  changeTool(tool: String) {
+    if (this.showTool == tool) {
+      this.showTool = "none";
+    } else {
+      this.showTool = tool;
+    }
+    this.internalService.changeTool(this.showTool);
   }
 
   onLogoutClick() {
@@ -34,11 +38,10 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new blog posts and comments
-      this.userId = profile.user._id;
-      this.starterId = profile.user.starter;
+      this.user = profile.user;
     });
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
+    this.internalService.selToolObs.subscribe(res => this.showTool = res);
   }
 
 }

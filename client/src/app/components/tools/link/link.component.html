@@ -1,0 +1,18 @@
+<div *ngIf="selectedThought.level > 0">
+        <form class="searchbar-form">
+            <mat-form-field class="searchbar-full-width">
+              <input matInput placeholder="Link" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="linkThought(thought)">
+                  <span>{{ thought.label }}</span>
+                  <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+        </div>
+
+<div *ngIf="selectedThought.level <= 0">
+    You can't link Thoughts on this level.
+</div>

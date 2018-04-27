@@ -29,6 +29,10 @@ export class InternalService {
   public selSiblings = new BehaviorSubject<Thought[]>([]);
   selSiblingsObs = this.selSiblings.asObservable();
 
+  
+  public selTool = new BehaviorSubject<String>("none");
+      selToolObs = this.selTool.asObservable();
+
   constructor(private dataService: DataService) { 
   }
 
@@ -50,9 +54,10 @@ export class InternalService {
     } else {
     this.selContents.next(data.thought.contents);
   }
-
- 
   })
+  }
+  changeTool(tool: String) {
+    this.selTool.next(tool);
   }
   
   changeShowAs(thought) {

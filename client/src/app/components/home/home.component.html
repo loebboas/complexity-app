@@ -27,7 +27,7 @@
 		</mat-grid-list>
 		<mat-grid-list *ngIf="authService.loggedIn()" [cols]="2" rowHeight="4:1">
 				<mat-grid-tile>
-					<button mat-button routerLink="viewer">viewer</button>
+					<button mat-button routerLink="../viewer">viewer</button>
 				</mat-grid-tile>
 				<mat-grid-tile>
 						<button mat-button (click)="onLogoutClick()">Logout</button>

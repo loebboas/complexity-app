@@ -13,7 +13,7 @@ const thoughtSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     contexts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
     contents: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-    dimensions: [{ dim: String, val: String }],
+    dimensions: [{starter: String, label: String, app: String, dimtype: String, val: String }],
     texture: String,
     form: String,
     privacy: String,

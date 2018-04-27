@@ -12,7 +12,9 @@ import { InternalService } from '../../services/internal.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  showDiary = false;
+  showPlans = false;
+  showThoughts = false;
   form;
   message;
   messageClass;
@@ -196,7 +198,7 @@ export class RegisterComponent implements OnInit {
 
 
         const rooms = { // rename as "Other Users"
-          label: "Other User",
+          label: "Friends",
           level: -1,
           color: "FFFFFF",
           clicks: 0,
@@ -233,7 +235,7 @@ export class RegisterComponent implements OnInit {
           clicks: 0,
           showAs: "grid",
           user: this.userId,
-          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
+          contexts: [{ _id: this.dauser }],
           dimensions: [],
           texture: "",
           form: "circle",
@@ -404,7 +406,7 @@ export class RegisterComponent implements OnInit {
                                   this.privateArray = [{
                                     persona: this.startId,
                                     apps: [{ app: "Diary", obj: this.sessionsId }, { app: "Thoughts", obj: this.favoritesId }, { app: "Plans", obj: this.todoId }],
-                                    dimensions: [{ starter: this.timeline, label: "Memories", app: this.sessionsId, dimtype: "Date" }, { starter: this.diary, label: "Feelings", app: this.sessionsId, dimtype: "Number" }, { starter: this.goals, label: "Goals", app: this.todoId, dimtype: "Date" }]
+                                    dimensions: [{ starter: this.timeline, label: "Memories", app: this.sessionsId, dimtype: "Date", val: "" }, { starter: this.diary, label: "Feelings", app: this.sessionsId, dimtype: "Number", val: "" }, { starter: this.goals, label: "Goals", app: this.todoId, dimtype: "Date", val: "" }]
                                   }]
                                   console.log(this.privateArray);
                                   const editUser = {

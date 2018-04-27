@@ -1,0 +1,8 @@
+.searchbar-fullwidth {
+    width: 100%;
+}
+.searchbar-form {
+    min-width: 600px;
+    max-width: 1000px;
+    width: 100%;
+  }

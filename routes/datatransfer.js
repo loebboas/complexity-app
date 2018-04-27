@@ -262,7 +262,7 @@ router.post('/newPubThought', (req, res) => {
             if(req.body.editLabel)    { thought.label = req.body.editLabel; }
             if(req.body.editContexts) { thought.contexts = req.body.editContexts; }
             if(req.body.editContents) { thought.contents = req.body.editContents; }
-            if(req.body.editDimensions) { thought.contents = req.body.editDimensions; }
+            if(req.body.editDimensions) { thought.dimensions = req.body.editDimensions; }
                     thought.save((err) => {
                       if (err) {
                         if (err.errors) {

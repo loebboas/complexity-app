@@ -1,25 +1,36 @@
 <!-- Contexts -->
 <mat-toolbar>
+<mat-toolbar-row>
+         <!-- Höchster Context -->
+                <span class='spacer'></span>
         <div *ngIf="context">
-                <button mat-raised-button (click)="selectThought(context)">{{ context.label }}</button>
+                       
+                <button mat-raised-button color="primary" (click)="selectThought(context._id)">{{ context.label }}</button>
+               
         </div>
-        <!-- Der ausgewählte Chararakter -->
-</mat-toolbar>
-<mat-list>
-        <mat-list-item *ngFor="let context of contexts">
-                <button mat-button (click)="selectThought(context)">{{ context.label }}</button>
-        </mat-list-item>
-</mat-list>
-<mat-toolbar>
+        <span class='spacer'></span>
+       
+</mat-toolbar-row>
+<mat-toolbar-row *ngFor="let context of contexts">
+            <!-- Mittlere Context -->
+                <span class='spacer'></span>
+                <button mat-button [style.background-color]="000000" (click)="selectThought(context._id)">{{ context.label }}</button>
+                <span class='spacer'></span>
+        </mat-toolbar-row>
+     
+<mat-toolbar-row>
+                <span class='spacer'></span>
         <!-- Siblings -->
         <div *ngFor="let sibling of siblings">
                 <div *ngIf="selectedThought.label != sibling.label">
-                        <button mat-button (click)="selectThought(sibling)">{{ sibling.label}}</button>
+                        <button mat-button (click)="selectThought(sibling._id)">{{ sibling.label}}</button>
                 </div>
                 <div *ngIf="selectedThought.label == sibling.label">
-                        <button mat-raised-button (click)="selectThought(sibling)">{{ sibling.label}}</button>
+                        <button mat-raised-button color="warn" (click)="selectThought(sibling._id)">{{ sibling.label}}</button>
                 </div>
         </div>
+        <span class='spacer'></span>
+</mat-toolbar-row>
 </mat-toolbar>
 
 <!-- Content  -->
@@ -28,20 +39,48 @@
         <div *ngIf="!contents.length">
                 <mat-list>
                         <mat-list-item>
-                                <button class="content-title" mat-button>No content...</button>
+                                <button class="content-title" (click)="changeTool('new')" mat-button>No content yet. Add your Thoughts.</button>
                         </mat-list-item>
+                        <mat-chip-list *ngIf="selectedThought.dimensions.length"  class="smaller"> 
+                                        <div *ngFor="let dimension of selectedThought.dimensions">
+                                                <mat-chip *ngIf="dimension.dimtype == 'Number'" (click)="selectThought(dimension.starter)">
+                                                               {{ dimension.val }} in: {{ dimension.label }}
+                                                </mat-chip>
+                                                <mat-chip *ngIf="dimension.dimtype == 'Date'"  (click)="selectThought(dimension.starter)">
+                                                                 {{ dimension.val | date }} in: {{ dimension.label }}
+                                                </mat-chip>
+                                        </div>
+                        </mat-chip-list>
                 </mat-list>
         </div>
         <!-- 1 Thought:   -->
         <div *ngIf="contents.length == 1">
                 <mat-card *ngFor="let content of contents">
                         <mat-card-title>
-                                <button mat-button (click)="selectThought(content)">{{ content.label }}</button>
+                                <button mat-button (click)="selectThought(content._id)">{{ content.label }}</button>
+                                <div *ngFor="let dimension of selectedThought.dimensions">
+                                                <mat-chip *ngIf="dimension.dimtype == 'Number'" (click)="selectThought(dimension.starter)">
+                                                               {{ dimension.val }} in: {{ dimension.label }}
+                                                </mat-chip>
+                                                <mat-chip *ngIf="dimension.dimtype == 'Date'"  (click)="selectThought(dimension.starter)">
+                                                                 {{ dimension.val | date }} in: {{ dimension.label }}
+                                                </mat-chip>
+                                        </div>
                         </mat-card-title>
                         <mat-card-content *ngIf="content.contents.length">
                                 <mat-list>
                                         <mat-list-item *ngFor="let thought of content.contents">
-                                                <button mat-button (click)="selectThought(thought)">{{ thought.label }}</button>
+                                                <button mat-button (click)="selectThought(thought._id)">{{ thought.label }}</button>
+                                                <div *ngIf="content.dimensions.length"> 
+                                                <div *ngFor="let dimension of content.dimensions">
+                                                        <div *ngIf="dimension.dimtype == 'Number'">
+                                                         Value: {{ dimension.val }} in Dimension: <button mat-button (click)="selectThought(dimension.starter)">{{ dimension.label }}</button>
+                                                        </div>
+                                                        <div *ngIf="dimension.dimtype == 'Date'">
+                                                                        Value: {{ dimension.val | date }} in Dimension: <button mat-button (click)="selectThought(dimension.starter)">{{ dimension.label }}</button>
+                                                                       </div>
+                                                </div>
+                                        </div>
                                         </mat-list-item>
                                 </mat-list>
                         </mat-card-content>
@@ -49,17 +88,29 @@
         </div>
         <!-- 2,3 or 4 Thoughts  -->
         <div *ngIf="contents.length == 2 || contents.length == 3 || contents.length == 4 ">
-                <mat-grid-list [cols]="contents.length" rowHeight="2:1">
-                        <mat-grid-tile *ngFor="let content of contents" [colspan]="1" [rowspan]="1">
+                <mat-grid-list [cols]="contents.length" rowHeight="2:1" appSortableList (sort)="sort($event)">
+                        <mat-grid-tile *ngFor="let content of contents" [colspan]="1" [rowspan]="1" appSortable>
+                                       <mat-card  *appDraggableHelper><button mat-button>{{ content.label }}</button></mat-card>
                                 <mat-card>
                                         <mat-card-title>
-                                                <button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button>
+                                                <button class="content-title" mat-button (click)="selectThought(content._id)">{{ content.label }}</button>
+                                                <mat-chip-list *ngIf="content.dimensions.length"  class="smaller"> 
+                                                                <div *ngFor="let dimension of content.dimensions">
+                                                                        <mat-chip *ngIf="dimension.dimtype == 'Number'" (click)="selectThought(dimension.starter)">
+                                                                                      {{ dimension.val }} in: {{ dimension.label }}
+                                                                        </mat-chip>
+                                                                        <mat-chip *ngIf="dimension.dimtype == 'Date'" (click)="selectThought(dimension.starter)">
+                                                                                      {{ dimension.val | date }} in: {{ dimension.label }}
+                                                                        </mat-chip>
+                                                                </div>
+                                                </mat-chip-list>
                                         </mat-card-title>
                                         <mat-card-content>
                                                 <div *ngIf="content.contents.length <= 4">
                                                         <mat-list>
                                                                 <mat-list-item *ngFor="let thought of content.contents">
-                                                                        <button mat-button (click)="selectThought(thought)">{{ thought.label }}</button>
+                                                                        <button mat-button (click)="selectThought(thought._id)">{{ thought.label }}</button>
+                                                                     
                                                                 </mat-list-item>
                                                         </mat-list>
                                                 </div>
@@ -70,9 +121,20 @@
         </div>
         <!-- 5 or more  -->
         <div *ngIf="contents.length >= 5">
-                <mat-list>
-                        <mat-list-item *ngFor="let content of contents">
-                                <button class="content-title" mat-button (click)="selectThought(content)">{{ content.label }}</button>
+                <mat-list appSortableList (sort)="sort($event)">
+                        <mat-list-item *ngFor="let content of contents" appSortable>
+                        <mat-list-item *appDraggableHelper><button mat-raised-button color="primary">{{ content.label }} </button></mat-list-item>
+                                <button class="content-title" mat-button (click)="selectThought(content._id)">{{ content.label }}</button>
+                                <mat-chip-list *ngIf="content.dimensions.length"> 
+                                                <div *ngFor="let dimension of content.dimensions">
+                                                        <div *ngIf="dimension.dimtype == 'Number'">
+                                                         <mat-chip (click)="selectThought(dimension.starter)">{{ dimension.val }} in: {{ dimension.label }}</mat-chip>
+                                                        </div>
+                                                        <div *ngIf="dimension.dimtype == 'Date'">
+                                                                        <mat-chip (click)="selectThought(dimension.starter)">{{ dimension.val | date }} in: {{ dimension.label }}</mat-chip>
+                                                                       </div>
+                                                </div>
+                                        </mat-chip-list>
                         </mat-list-item>
                 </mat-list>
         </div>

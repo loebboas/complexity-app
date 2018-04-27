@@ -31,14 +31,12 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_viewer_viewer_component__ = __webpack_require__("../../../../../src/app/components/viewer/viewer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_search_search_component__ = __webpack_require__("../../../../../src/app/components/search/search.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -60,8 +58,6 @@ var appRoutes = [
     { path: 'viewer', component: __WEBPACK_IMPORTED_MODULE_8__components_viewer_viewer_component__["a" /* ViewerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__guards_auth_guard__["a" /* AuthGuard */]]
     },
     { path: 'viewer/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_viewer_viewer_component__["a" /* ViewerComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__guards_auth_guard__["a" /* AuthGuard */]]
-    },
-    { path: 'search', component: __WEBPACK_IMPORTED_MODULE_9__components_search_search_component__["a" /* SearchComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__guards_auth_guard__["a" /* AuthGuard */]]
     },
     {
         path: '**', component: __WEBPACK_IMPORTED_MODULE_2__components_home_home_component__["a" /* HomeComponent */]
@@ -162,20 +158,30 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__guards_notAuth_guard__ = __webpack_require__("../../../../../src/app/guards/notAuth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_new_new_component__ = __webpack_require__("../../../../../src/app/components/new/new.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_tools_new_new_component__ = __webpack_require__("../../../../../src/app/components/tools/new/new.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__material_module__ = __webpack_require__("../../../../../src/app/material.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__draggable_draggable_module__ = __webpack_require__("../../../../../src/app/draggable/draggable.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_viewer_viewer_component__ = __webpack_require__("../../../../../src/app/components/viewer/viewer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_footer_footer_component__ = __webpack_require__("../../../../../src/app/components/footer/footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_search_search_component__ = __webpack_require__("../../../../../src/app/components/search/search.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_edit_edit_component__ = __webpack_require__("../../../../../src/app/components/edit/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_tools_search_search_component__ = __webpack_require__("../../../../../src/app/components/tools/search/search.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_tools_edit_edit_component__ = __webpack_require__("../../../../../src/app/components/tools/edit/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_tools_copy_copy_component__ = __webpack_require__("../../../../../src/app/components/tools/copy/copy.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_tools_link_link_component__ = __webpack_require__("../../../../../src/app/components/tools/link/link.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_tools_delete_delete_component__ = __webpack_require__("../../../../../src/app/components/tools/delete/delete.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_tools_dimension_dimension_component__ = __webpack_require__("../../../../../src/app/components/tools/dimension/dimension.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
 
 
 
@@ -212,11 +218,15 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_8__components_register_register_component__["a" /* RegisterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__components_profile_profile_component__["a" /* ProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__components_new_new_component__["a" /* NewComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__components_tools_new_new_component__["a" /* NewComponent */],
                 __WEBPACK_IMPORTED_MODULE_18__components_viewer_viewer_component__["a" /* ViewerComponent */],
                 __WEBPACK_IMPORTED_MODULE_20__components_footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_search_search_component__["a" /* SearchComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_edit_edit_component__["a" /* EditComponent */]
+                __WEBPACK_IMPORTED_MODULE_21__components_tools_search_search_component__["a" /* SearchComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_tools_edit_edit_component__["a" /* EditComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_tools_copy_copy_component__["a" /* CopyComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_tools_link_link_component__["a" /* LinkComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_tools_delete_delete_component__["a" /* DeleteComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_tools_dimension_dimension_component__["a" /* DimensionComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* ReactiveFormsModule */],
@@ -225,106 +235,14 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"],
                 __WEBPACK_IMPORTED_MODULE_16__material_module__["a" /* MaterialModule */],
-                __WEBPACK_IMPORTED_MODULE_17__draggable_draggable_module__["a" /* DraggableModule */]
+                __WEBPACK_IMPORTED_MODULE_17__draggable_draggable_module__["a" /* DraggableModule */],
+                __WEBPACK_IMPORTED_MODULE_26__angular_material__["b" /* MatNativeDateModule */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_9__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_13__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_14__guards_notAuth_guard__["a" /* NotAuthGuard */], __WEBPACK_IMPORTED_MODULE_10__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_19__services_internal_service__["a" /* InternalService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/edit/edit.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/edit/edit.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<mat-card>\r\n  <mat-card-title>\r\n    <form [formGroup]=\"firstFormGroup\" (ngSubmit)=\"onEditSubmit()\">\r\n      <input matInput placeholder=\"selectedThought.label\" aria-label=\"Thought\" [formControl]=\"editThought\">\r\n    </form>\r\n  </mat-card-title>\r\n  <mat-card-content>\r\n    <input matInput placeholder=\"selectedThought.color\">\r\n    <div *ngIf=\"selectedThought.dimensions.length\">\r\n      <mat-list>\r\n        <mat-list-item *ngFor=\"let dimension of selectedThought.dimensions\">{{ dimension.dim }} {{ dimension.val }}</mat-list-item>\r\n      </mat-list>\r\n    </div>\r\n  </mat-card-content>\r\n</mat-card>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/edit/edit.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var EditComponent = (function () {
-    function EditComponent(formBuilder, internalService, dataService, authService, router) {
-        this.formBuilder = formBuilder;
-        this.internalService = internalService;
-        this.dataService = dataService;
-        this.authService = authService;
-        this.router = router;
-    }
-    EditComponent.prototype.onEditSubmit = function () {
-        var editThought = {
-            _id: this.selectedThought._id,
-            editLabel: this.firstFormGroup.get('editThought').value
-        };
-        this.dataService.editThought(editThought).subscribe(function (data) {
-        });
-    };
-    EditComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
-        this.firstFormGroup = this.formBuilder.group({
-            editLabel: []
-        });
-    };
-    EditComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-edit',
-            template: __webpack_require__("../../../../../src/app/components/edit/edit.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/edit/edit.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__services_internal_service__["a" /* InternalService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
-    ], EditComponent);
-    return EditComponent;
 }());
 
 
@@ -352,7 +270,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"addNew\">\r\n  <app-new></app-new>\r\n</div>\r\n<div *ngIf=\"addEdit\">\r\n  <app-new></app-new>\r\n</div>\r\n\r\n<mat-toolbar>\r\n  <span class='spacer'></span>\r\n  <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"addNew = !addNew\">New</button>\r\n  <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"addEdit = !addEdit\">Edit</button>\r\n  <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"deleteThought()\">Delete</button>\r\n  <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\">Logout</button>\r\n\r\n  <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"login\">Login</button>\r\n  <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"register\">Register</button>\r\n  <span class='spacer'></span>\r\n  <button mat-button>Complexity-App v.0.0.6</button>\r\n</mat-toolbar>"
+module.exports = "<mat-toolbar class=\"bot\" *ngIf=\"selectedThought\">\r\n  <mat-toolbar-row *ngIf=\"showTool == 'new'\">\r\n    <app-new></app-new>\r\n  </mat-toolbar-row>\r\n  <mat-toolbar-row *ngIf=\"showTool == 'copy'\">\r\n    <app-copy></app-copy>\r\n  </mat-toolbar-row>\r\n  <mat-toolbar-row *ngIf=\"showTool == 'link'\">\r\n    <app-link></app-link>\r\n  </mat-toolbar-row>\r\n  <mat-toolbar-row *ngIf=\"showTool == 'edit'\">\r\n    <app-edit></app-edit>\r\n  </mat-toolbar-row>\r\n  <mat-toolbar-row *ngIf=\"showTool == 'delete'\">\r\n    <app-delete></app-delete>\r\n  </mat-toolbar-row>\r\n  <mat-toolbar-row *ngIf=\"showTool == 'search'\">\r\n    <app-search></app-search>\r\n  </mat-toolbar-row>\r\n    <mat-toolbar-row *ngIf=\"showTool == 'dimension'\">\r\n      <app-dimension></app-dimension>\r\n    </mat-toolbar-row>\r\n    <mat-toolbar-row>\r\n      <span class='spacer'></span>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i>Add</button>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_box</i> New</button>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('copy')\">\r\n        <i class=\"material-icons\">add_circle</i> Copy</button>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('link')\">\r\n        <i class=\"material-icons\">link</i> Link</button>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Edit</button>\r\n      <button mat-button *ngIf=\"selectedThought.level > 0\" (click)=\"changeTool('delete')\">\r\n        <i class=\"material-icons\">delete_sweep</i> Delete</button>\r\n      <button mat-button *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> search</button>\r\n      <button mat-button *ngIf=\"authService.loggedIn()\" [matMenuTriggerFor]=\"menu\">\r\n        <i class=\"material-icons\">account_circle</i> {{ username | uppercase}}</button>\r\n\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <!-- If LoggedIn -->\r\n        <button mat-menu-item routerLink=\"../../profile\">Profile</button>\r\n        <button mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>"
 
 /***/ }),
 
@@ -384,8 +302,7 @@ var FooterComponent = (function () {
         this.authService = authService;
         this.internalService = internalService;
         //Tools
-        this.addNew = false;
-        this.addEdit = false;
+        this.showTool = "none";
     }
     FooterComponent.prototype.onChangeView = function () {
         if (this.selectedThought.showAs == "grid") {
@@ -397,6 +314,14 @@ var FooterComponent = (function () {
         ;
         this.internalService.changeShowAs(this.selectedThought);
     };
+    FooterComponent.prototype.changeTool = function (tool) {
+        if (this.showTool == tool) {
+            this.showTool = "none";
+        }
+        else {
+            this.showTool = tool;
+        }
+    };
     FooterComponent.prototype.onLogoutClick = function () {
         this.authService.logout(); // Logout user
         this.router.navigate(['/']); // Navigate back to home page
@@ -404,9 +329,6 @@ var FooterComponent = (function () {
     FooterComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-            _this.starterId = profile.user.starter;
         });
         this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
     };
@@ -448,7 +370,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\t\t<mat-grid-list [cols]=\"2\" rowHeight=\"2:1\">\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t<mat-card class=\"card\">\r\n\t\t\t\t\t<mat-card-title>Welcome to the Complexity-App</mat-card-title>\r\n\t\t\t\t\t<mat-card-content>\r\n\t\t\t\t\t\t\tThe Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.<br><br> At the moment this site is still in development.<br> For more information contact loebboas -@- gmail.com.\r\n\t\t\t\t\t</mat-card-content>   \r\n\t\t\t\t</mat-card> \r\n\t\t\t</mat-grid-tile>\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<mat-card class=\"card\">\r\n\t\t\t\t\t\t<mat-card-title>About us</mat-card-title>\r\n\t\t\t\t\t\t<mat-card-content>\r\n\t\t\t\t\t\t\t\tThis site is a project of the Complexity association.<br> Check out a different Site which does not yet exist for more information.\r\n\t\t\t\t\t\t</mat-card-content>   \r\n\t\t\t\t\t</mat-card> \r\n\t\t\t\t</mat-grid-tile>\r\n\t\t</mat-grid-list>\r\n\t\t<mat-grid-list *ngIf=\"!authService.loggedIn()\"  [cols]=\"2\" rowHeight=\"4:1\">\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t<button mat-button routerLink=\"login\">Login</button>\r\n\t\t\t</mat-grid-tile>\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<button mat-button routerLink=\"register\"> Register</button>\r\n\t\t\t\t</mat-grid-tile>\r\n\t\t</mat-grid-list>\r\n\t\t<mat-grid-list *ngIf=\"authService.loggedIn()\" [cols]=\"2\" rowHeight=\"4:1\">\r\n\t\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<button mat-button routerLink=\"viewer\">viewer</button>\r\n\t\t\t\t</mat-grid-tile>\r\n\t\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t\t<button mat-button (click)=\"onLogoutClick()\">Logout</button>\r\n\t\t\t\t\t</mat-grid-tile>\r\n\t\t\t</mat-grid-list>\r\n\t\t\r\n"
+module.exports = "\r\n\t\t<mat-grid-list [cols]=\"2\" rowHeight=\"2:1\">\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t<mat-card class=\"card\">\r\n\t\t\t\t\t<mat-card-title>Welcome to the Complexity-App</mat-card-title>\r\n\t\t\t\t\t<mat-card-content>\r\n\t\t\t\t\t\t\tThe Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.<br><br> At the moment this site is still in development.<br> For more information contact loebboas -@- gmail.com.\r\n\t\t\t\t\t</mat-card-content>   \r\n\t\t\t\t</mat-card> \r\n\t\t\t</mat-grid-tile>\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<mat-card class=\"card\">\r\n\t\t\t\t\t\t<mat-card-title>About us</mat-card-title>\r\n\t\t\t\t\t\t<mat-card-content>\r\n\t\t\t\t\t\t\t\tThis site is a project of the Complexity association.<br> Check out a different Site which does not yet exist for more information.\r\n\t\t\t\t\t\t</mat-card-content>   \r\n\t\t\t\t\t</mat-card> \r\n\t\t\t\t</mat-grid-tile>\r\n\t\t</mat-grid-list>\r\n\t\t<mat-grid-list *ngIf=\"!authService.loggedIn()\"  [cols]=\"2\" rowHeight=\"4:1\">\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t<button mat-button routerLink=\"login\">Login</button>\r\n\t\t\t</mat-grid-tile>\r\n\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<button mat-button routerLink=\"register\"> Register</button>\r\n\t\t\t\t</mat-grid-tile>\r\n\t\t</mat-grid-list>\r\n\t\t<mat-grid-list *ngIf=\"authService.loggedIn()\" [cols]=\"2\" rowHeight=\"4:1\">\r\n\t\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t<button mat-button routerLink=\"../viewer\">viewer</button>\r\n\t\t\t\t</mat-grid-tile>\r\n\t\t\t\t<mat-grid-tile>\r\n\t\t\t\t\t\t<button mat-button (click)=\"onLogoutClick()\">Logout</button>\r\n\t\t\t\t\t</mat-grid-tile>\r\n\t\t\t</mat-grid-list>\r\n\t\t\r\n"
 
 /***/ }),
 
@@ -741,214 +663,6 @@ var NavbarComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/new/new.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".searchbar-form {\r\n    font-size: 14px;\r\n    min-width: 150px;\r\n    max-width: 500px;\r\n    min-height: 0px !important;\r\n  }\r\n  ", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/new/new.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<mat-card *ngIf=\"selectedThought.level > 1\">\r\n  <mat-card-title>\r\n    <div *ngIf=\"showNewThought\">\r\n      <form>\r\n        <mat-form-field>\r\n          <input matInput placeholder=\"Add a new Thought\" aria-label=\"Thought\" [formControl]=\"newThought\">\r\n        </mat-form-field>\r\n      </form>\r\n    </div>\r\n    <div *ngIf=\"showCopyThought\">\r\n      <form class=\"searchbar-form\">\r\n        <mat-form-field class=\"searchbar-full-width\">\r\n          <input matInput placeholder=\"Copy a Thought\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n            <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"copyThought(thought)\">\r\n              <span>{{ thought.label }}</span>\r\n              <small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\r\n            </mat-option>\r\n          </mat-autocomplete>\r\n        </mat-form-field>\r\n      </form>\r\n    </div>\r\n    <div *ngIf=\"showLinkThought\">\r\n      <form class=\"searchbar-form\">\r\n        <mat-form-field class=\"searchbar-full-width\">\r\n          <input matInput placeholder=\"Copy a Thought\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n            <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"linkThought(thought)\">\r\n              <span>{{ thought.label }}</span>\r\n              <small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\r\n            </mat-option>\r\n          </mat-autocomplete>\r\n        </mat-form-field>\r\n      </form>\r\n    </div>\r\n  </mat-card-title>\r\n  <mat-card-actions>\r\n    Add to TimeArray:\r\n    <button mat-button (click)=\"addToDiary()\">\r\n      <i class=\"material-icons\">note</i>Add to Diary</button>\r\n    <button mat-button (click)=\"addToGoal()\">\r\n      <i class=\"material-icons\">alarm</i>Add to Goals</button>\r\n    <div *ngIf=\"addDiary || addGoal\">\r\n      <mat-form-field>\r\n        <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\">\r\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n        <mat-datepicker #picker></mat-datepicker>\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <button mat-raised-button *ngIf=\"selectedThought.label\" (click)=\"onNewSubmit()\">Add to Context: {{ selectedThought.label }} </button>\r\n  </mat-card-actions>\r\n</mat-card>\r\n\r\n<mat-card *ngIf=\"selectedThought.level == 1\">\r\n  You can't Add Thoughts on this level.\r\n</mat-card>\r\n\r\n<mat-card *ngIf=\"selectedThought.level == 0\">\r\n  Create new Persona: Public / Private\r\n</mat-card>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/new/new.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators_startWith__ = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_operators_map__ = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_dimension__ = __webpack_require__("../../../../../src/app/models/dimension.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-var NewComponent = (function () {
-    function NewComponent(dataService, formBuilder, internalService, authService, router) {
-        var _this = this;
-        this.dataService = dataService;
-        this.formBuilder = formBuilder;
-        this.internalService = internalService;
-        this.authService = authService;
-        this.router = router;
-        this.newContexts = [];
-        this.newContents = [];
-        this.contextContent = [];
-        this.addDimensions = false;
-        this.addDiary = false;
-        this.addGoal = false;
-        this.showCopyThought = false;
-        this.showNewThought = true;
-        this.showLinkThought = false;
-        //Autocomplete
-        this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormControl */]();
-        this.filteredThoughts = this.thoughtCtrl.valueChanges
-            .pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators_startWith__["a" /* startWith */])(''), Object(__WEBPACK_IMPORTED_MODULE_6_rxjs_operators_map__["a" /* map */])(function (thought) { return thought ? _this.filterThoughts(thought) : _this.thoughts.slice(); }));
-    }
-    NewComponent.prototype.filterThoughts = function (label) {
-        this.lastInput = label;
-        return this.thoughts.filter(function (thought) {
-            return thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0;
-        });
-    };
-    NewComponent.prototype.addToDiary = function () {
-        var dimension = new __WEBPACK_IMPORTED_MODULE_8__models_dimension__["a" /* Dimension */];
-        dimension.dim = this.memoriesId;
-        var date = Date.now;
-        dimension.val = date.toString();
-        this.dimensions.push(dimension);
-    };
-    NewComponent.prototype.copyThought = function (thought) {
-        var _this = this;
-        //CREATE CONTEXT
-        this.newContexts.unshift(this.selectedThought._id); // Add selected Thought as Context
-        this.contexts.forEach(function (thought) { return _this.newContexts.push(thought._id); }); // Add Contexts of Selected Element
-        this.newContexts.push(this.context._id); // Add Main Context
-        //LEVEL
-        thought.level = this.selectedThought.level; //Load Level of Selected Thought
-        thought.level++; // Add a Level
-        //Resave Thought with New Context
-        var copyThought = {
-            label: thought.label,
-            level: thought.level,
-            user: this.userId,
-            contexts: this.newContexts,
-            contents: thought.contents,
-            dimensions: this.dimensions,
-            showAs: "grid",
-            privacy: "private"
-        };
-        this.dataService.newThought(copyThought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            _this.dataService.getSingleThought(_this.newContexts[0]).subscribe(function (data) {
-                _this.contextContent = data.thought.contents;
-                _this.contextContent.push(_this.saveId);
-                var editThought = {
-                    _id: _this.newContexts[0],
-                    editContents: _this.contextContent
-                };
-                _this.dataService.editThought(editThought).subscribe(function (data) {
-                });
-                _this.internalService.changeThought(_this.newContexts[1]);
-                _this.router.navigate(['/viewer/', _this.newContexts[0]]);
-                _this.internalService.changeThought(_this.newContexts[0]);
-            });
-        });
-    };
-    NewComponent.prototype.onNewSubmit = function () {
-        var _this = this;
-        //CREATE CONTEXT
-        this.newContexts.unshift(this.selectedThought._id); // Add selected Thought as Context
-        this.contexts.forEach(function (thought) { return _this.newContexts.push(thought._id); }); // Add Contexts of Selected Element
-        this.newContexts.push(this.context._id); // Add Main Context
-        this.newContents = [];
-        var newThought = {
-            label: this.lastInput,
-            level: this.selectedThought.level,
-            user: this.userId,
-            contexts: this.newContexts,
-            contents: this.newContents,
-            dimensions: this.dimensions,
-            showAs: "card",
-            privacy: "private"
-        };
-        this.dataService.newThought(newThought).subscribe(function (data) {
-            _this.saveId = data.newId;
-            //Get Thought to Update
-            _this.dataService.getSingleThought(_this.newContexts[0]).subscribe(function (data) {
-                _this.contextContent = data.thought.contents;
-                _this.contextContent.push(_this.saveId);
-                var editThought = {
-                    _id: _this.newContexts[0],
-                    editContents: _this.contextContent
-                };
-                _this.dataService.editThought(editThought).subscribe(function (data) {
-                    if (!data.success) {
-                        _this.messageClass = 'alert alert-danger';
-                        _this.message = data.message;
-                    }
-                    else {
-                        _this.messageClass = 'alert alert-success';
-                        _this.message = data.message;
-                    }
-                    ;
-                    _this.newContexts = [];
-                    _this.internalService.changeThought(_this.newContexts[1]);
-                    _this.router.navigate(['/viewer/', _this.newContexts[0]]);
-                    _this.internalService.changeThought(_this.newContexts[0]);
-                });
-            });
-        });
-    };
-    NewComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        //GET USER Data
-        this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-            _this.unstructured = profile.user.unstructured;
-        });
-        this.internalService.loadThoughts();
-        this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
-        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
-        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
-        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
-    };
-    NewComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-new',
-            template: __webpack_require__("../../../../../src/app/components/new/new.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/new/new.component.css")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_7__services_internal_service__["a" /* InternalService */],
-            __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
-    ], NewComponent);
-    return NewComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "../../../../../src/app/components/profile/profile.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1030,7 +744,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".smaller {\r\n    font-size: 50%;\r\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1043,7 +757,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n<mat-card>\r\n  <mat-card-title>\r\n    Register new User\r\n  </mat-card-title>\r\n  <mat-card-content>\r\n    <mat-horizontal-stepper [linear]=\"true\" #stepper=\"matHorizontalStepper\">\r\n      <mat-step [stepControl]=\"firstFormGroup\">\r\n        <form [formGroup]=\"firstFormGroup\" (ngSubmit)=\"onRegisterSubmit()\">\r\n          <ng-template matStepLabel>Register Account</ng-template>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Username\" formControlName=\"username\" required>\r\n          </mat-form-field>\r\n          <br>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"E-Mail\" formControlName=\"email\" required>\r\n          </mat-form-field>\r\n          <br>\r\n          <mat-form-field>\r\n            <input type=\"password\" matInput placeholder=\"Password\" formControlName=\"password\" required>\r\n          </mat-form-field>\r\n          <br>\r\n          <mat-form-field>\r\n            <input type=\"password\" matInput placeholder=\"Confirm Password\" formControlName=\"confirm\" required>\r\n          </mat-form-field>\r\n          <br>\r\n          <div>\r\n            <button mat-button matStepperNext type=\"submit\" value=\"Submit\">Register</button>\r\n          </div>\r\n        </form>\r\n      </mat-step>\r\n      <mat-step [stepControl]=\"secondFormGroup\">\r\n        <form [formGroup]=\"secondFormGroup\" (ngSubmit)=\"onPersonaSubmit()\">\r\n          <ng-template matStepLabel>Create a Persona</ng-template>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Name your Persona\" formControlName=\"persona\" required>\r\n          </mat-form-field>\r\n          <div>\r\n            <button mat-button matStepperNext type=\"submit\" value=\"Submit\">Create Persona</button>\r\n          </div>\r\n        </form>\r\n      </mat-step>\r\n      <mat-step [stepControl]=\"thirdFormGroup\">\r\n          <form [formGroup]=\"thirdFormGroup\" (ngSubmit)=\"onAbilitiesSubmit()\">\r\n              <ng-template matStepLabel>Give her Abilities</ng-template>\r\n            <mat-list>\r\n              <mat-list-item>Diary <p class=\"smaller\">Store your Memories and your feelings, as a complex Network</p></mat-list-item>\r\n\r\n              <mat-list-item>Plans <p class=\"smaller\">Create complex Projects and set Goals within a Timeline</p></mat-list-item>\r\n              <mat-list-item>Thoughts <p class=\"smaller\">Save and structure your other Thoughts</p></mat-list-item>\r\n            </mat-list>\r\n              <div>\r\n                <button mat-button matStepperNext type=\"submit\" value=\"Submit\">Take a look!</button>\r\n              </div>\r\n            </form>\r\n        </mat-step>\r\n    </mat-horizontal-stepper>\r\n  </mat-card-content>\r\n</mat-card>\r\n\r\n<!-- \r\n<form [formGroup]=\"form\" (ngSubmit)=\"onRegisterSubmit()\">\r\n\r\nUsername Input\r\n  <div class=\"form-group\">\r\n    <label for=\"username\">Username</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.username.errors && form.controls.username.dirty) || (!usernameValid && form.controls.username.dirty), 'has-success': !form.controls.username.errors && usernameValid}\">\r\n      <input type=\"text\" name=\"username\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Username\" formControlName=\"username\" (blur)=\"checkUsername()\" />\r\n     Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.username.errors?.required && form.controls.username.dirty\">This field is required</li>\r\n        <li *ngIf=\"form.controls.username.errors?.minlength && form.controls.username.dirty || form.controls.username.errors?.maxlength && form.controls.username.dirty \">Minimum characters: 3, Maximum characters: 15</li>\r\n        <li *ngIf=\"form.controls.username.errors?.validateUsername && form.controls.username.dirty\">Username must not have any special characters</li>\r\n        <li *ngIf=\"usernameMessage\">{{ usernameMessage }}</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n Email Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"email\">Email</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.email.errors && form.controls.email.dirty) || (!emailValid && form.controls.email.dirty), 'has-success': !form.controls.email.errors && emailValid}\">\r\n      <input type=\"text\" name=\"email\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Email\" formControlName=\"email\" (blur)=\"checkEmail()\"/>\r\n       Validation -->\r\n<!--\r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.email.errors?.required && form.controls.email.dirty\">This field is required</li>\r\n        <li *ngIf=\"(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty\">Minimum characters: 5, Maximum characters: 30</li>\r\n        <li *ngIf=\"form.controls.email.errors?.validateEmail && form.controls.email.dirty\">This must be a valid e-mail</li>\r\n        <li *ngIf=\"emailMessage\">{{ emailMessage}}</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n Password Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"password\">Password</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.password.errors && form.controls.password.dirty), 'has-success': !form.controls.password.errors}\">\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Password\" formControlName=\"password\" />\r\n      Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.password.errors?.required && form.controls.password.dirty\">This field is required</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\nConfirm Password Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"confirm\">Confirm Password</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.confirm.errors && form.controls.confirm.dirty) || (form.errors?.matchingPasswords && form.controls.confirm.dirty), 'has-success': !form.controls.confirm.errors && !form.errors?.matchingPasswords}\">\r\n      <input type=\"password\" name=\"confirm\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Confirm Password\" formControlName=\"confirm\" />\r\n      Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.confirm.errors?.required && form.controls.confirm.dirty\">This field is required</li>\r\n        <li *ngIf=\"form.errors?.matchingPasswords && form.controls.confirm.dirty\">Password do not match</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n  Submit Input -->\r\n<!-- \r\n  <input [disabled]=\"!form.valid || processing || !emailValid || !usernameValid\" type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" />\r\n\r\n</form>\r\nRegistration Form /-->"
+module.exports = "<mat-card>\r\n  <mat-card-title>\r\n    Welcome to the infinity Cloud...\r\n  </mat-card-title>\r\n  <mat-card-content>\r\n    <mat-horizontal-stepper [linear]=\"true\" #stepper=\"matHorizontalStepper\">\r\n      <mat-step [stepControl]=\"firstFormGroup\">\r\n        <form [formGroup]=\"firstFormGroup\" (ngSubmit)=\"onRegisterSubmit()\">\r\n          <ng-template matStepLabel>Register Account</ng-template>\r\n          <mat-form-field [ngClass]=\"{'has-error': (firstFormGroup.controls.username.errors && firstFormGroup.controls.username.dirty) || (!usernameValid && firstFormGroup.controls.username.dirty), 'has-success': !firstFormGroup.controls.username.errors && usernameValid}\">\r\n            <input matInput placeholder=\"Username\" class=\"form-control\" formControlName=\"username\" (blur)=\"checkUsername()\" required>\r\n          </mat-form-field>\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"firstFormGroup.controls.username.errors?.required && firstFormGroup.controls.username.dirty\">This field is required</li>\r\n            <li *ngIf=\"firstFormGroup.controls.username.errors?.minlength && firstFormGroup.controls.username.dirty || firstFormGroup.controls.username.errors?.maxlength && firstFormGroup.controls.username.dirty \">Minimum characters: 3, Maximum characters: 15</li>\r\n            <li *ngIf=\"firstFormGroup.controls.username.errors?.validateUsername && firstFormGroup.controls.username.dirty\">Username must not have any special characters</li>\r\n            <li *ngIf=\"usernameMessage\">{{ usernameMessage }}</li>\r\n          </ul>\r\n\r\n          <mat-form-field [ngClass]=\"{'has-error': (firstFormGroup.controls.email.errors && firstFormGroup.controls.email.dirty) || (!emailValid && firstFormGroup.controls.email.dirty), 'has-success': !firstFormGroup.controls.email.errors && emailValid}\">\r\n            <input matInput placeholder=\"E-Mail\" class=\"form-control\" formControlName=\"email\" formControlName=\"email\" (blur)=\"checkEmail()\"\r\n              required>\r\n          </mat-form-field>\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"firstFormGroup.controls.email.errors?.required && firstFormGroup.controls.email.dirty\">This field is required</li>\r\n            <li *ngIf=\"(firstFormGroup.controls.email.errors?.minlength && firstFormGroup.controls.email.dirty || firstFormGroup.controls.email.errors?.maxlength && firstFormGroup.controls.email.dirty ) && firstFormGroup.controls.email.dirty\">Minimum characters: 5, Maximum characters: 30</li>\r\n            <li *ngIf=\"firstFormGroup.controls.email.errors?.validateEmail && firstFormGroup.controls.email.dirty\">This must be a valid e-mail</li>\r\n            <li *ngIf=\"emailMessage\">{{ emailMessage}}</li>\r\n          </ul>\r\n          <mat-form-field [ngClass]=\"{'has-error': (firstFormGroup.controls.password.errors && firstFormGroup.controls.password.dirty), 'has-success': !firstFormGroup.controls.password.errors}\">\r\n            <input type=\"password\" matInput placeholder=\"Password\" class=\"form-control\" formControlName=\"password\" required>\r\n          </mat-form-field>\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"firstFormGroup.controls.password.errors?.required && firstFormGroup.controls.password.dirty\">This field is required</li>\r\n          </ul>\r\n          <mat-form-field [ngClass]=\"{'has-error': (firstFormGroup.controls.confirm.errors && firstFormGroup.controls.confirm.dirty) || (firstFormGroup.errors?.matchingPasswords && firstFormGroup.controls.confirm.dirty), 'has-success': !firstFormGroup.controls.confirm.errors && !firstFormGroup.errors?.matchingPasswords}\">\r\n            <input type=\"password\" matInput placeholder=\"Confirm Password\" formControlName=\"confirm\" required>\r\n          </mat-form-field>\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"firstFormGroup.controls.confirm.errors?.required && firstFormGroup.controls.confirm.dirty\">This field is required</li>\r\n            <li *ngIf=\"firstFormGroup.errors?.matchingPasswords && firstFormGroup.controls.confirm.dirty\">Password do not match</li>\r\n          </ul>\r\n          <div>\r\n            <br>\r\n            <button mat-raised-button color=\"primary\" matStepperNext type=\"submit\" value=\"Submit\">Register</button>\r\n          </div>\r\n        </form>\r\n      </mat-step>\r\n      <mat-step [stepControl]=\"secondFormGroup\">\r\n        <form [formGroup]=\"secondFormGroup\" (ngSubmit)=\"onPersonaSubmit()\">\r\n          <ng-template matStepLabel>Create a Persona</ng-template>\r\n          <mat-form-field>\r\n            <input matInput placeholder=\"Name your Persona\" formControlName=\"persona\" required>\r\n          </mat-form-field>\r\n          <div>\r\n            <br>\r\n            <button mat-raised-button color=\"primary\" matStepperNext type=\"submit\" value=\"Submit\">Create your Persona</button>\r\n          </div>\r\n        </form>\r\n      </mat-step>\r\n      <mat-step [stepControl]=\"thirdFormGroup\">\r\n        <form [formGroup]=\"thirdFormGroup\" (ngSubmit)=\"onAbilitiesSubmit()\">\r\n          <ng-template matStepLabel>Give her Abilities</ng-template>\r\n          <mat-list>\r\n            <mat-list-item>\r\n              <button mat-button color=\"primary\">Diary</button>\r\n              <button mat-button>Store your Memories and your feelings, as a complex Network</button>\r\n            </mat-list-item>\r\n            <mat-list-item>\r\n              <button mat-button color=\"primary\">Plans</button>\r\n              <button mat-button>Create complex Projects and set Goals within a Timeline</button>\r\n            </mat-list-item>\r\n            <mat-list-item>\r\n              <button mat-button color=\"primary\">Thoughts</button>\r\n              <button mat-button>Save and structure your Thoughts</button>\r\n            </mat-list-item>\r\n          </mat-list>\r\n          <div>\r\n            <br>\r\n            <br>\r\n            <button mat-raised-button matStepperNext color=\"primary\" type=\"submit\" value=\"Submit\">Get started!</button>\r\n          </div>\r\n        </form>\r\n      </mat-step>\r\n    </mat-horizontal-stepper>\r\n  </mat-card-content>\r\n</mat-card>\r\n\r\n<!-- \r\n<form [formGroup]=\"form\" (ngSubmit)=\"onRegisterSubmit()\">\r\n\r\nUsername Input\r\n  <div class=\"form-group\">\r\n    <label for=\"username\">Username</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.username.errors && form.controls.username.dirty) || (!usernameValid && form.controls.username.dirty), 'has-success': !form.controls.username.errors && usernameValid}\">\r\n      <input type=\"text\" name=\"username\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Username\" formControlName=\"username\" (blur)=\"checkUsername()\" />\r\n     Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.username.errors?.required && form.controls.username.dirty\">This field is required</li>\r\n        <li *ngIf=\"form.controls.username.errors?.minlength && form.controls.username.dirty || form.controls.username.errors?.maxlength && form.controls.username.dirty \">Minimum characters: 3, Maximum characters: 15</li>\r\n        <li *ngIf=\"form.controls.username.errors?.validateUsername && form.controls.username.dirty\">Username must not have any special characters</li>\r\n        <li *ngIf=\"usernameMessage\">{{ usernameMessage }}</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n Email Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"email\">Email</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.email.errors && form.controls.email.dirty) || (!emailValid && form.controls.email.dirty), 'has-success': !form.controls.email.errors && emailValid}\">\r\n      <input type=\"text\" name=\"email\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Email\" formControlName=\"email\" (blur)=\"checkEmail()\"/>\r\n       Validation -->\r\n<!--\r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.email.errors?.required && form.controls.email.dirty\">This field is required</li>\r\n        <li *ngIf=\"(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty\">Minimum characters: 5, Maximum characters: 30</li>\r\n        <li *ngIf=\"form.controls.email.errors?.validateEmail && form.controls.email.dirty\">This must be a valid e-mail</li>\r\n        <li *ngIf=\"emailMessage\">{{ emailMessage}}</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n Password Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"password\">Password</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.password.errors && form.controls.password.dirty), 'has-success': !form.controls.password.errors}\">\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Password\" formControlName=\"password\" />\r\n      Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.password.errors?.required && form.controls.password.dirty\">This field is required</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\nConfirm Password Input -->\r\n<!-- \r\n  <div class=\"form-group\">\r\n    <label for=\"confirm\">Confirm Password</label>\r\n    <div [ngClass]=\"{'has-error': (form.controls.confirm.errors && form.controls.confirm.dirty) || (form.errors?.matchingPasswords && form.controls.confirm.dirty), 'has-success': !form.controls.confirm.errors && !form.errors?.matchingPasswords}\">\r\n      <input type=\"password\" name=\"confirm\" class=\"form-control\" autocomplete=\"off\" placeholder=\"*Confirm Password\" formControlName=\"confirm\" />\r\n      Validation -->\r\n<!-- \r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.confirm.errors?.required && form.controls.confirm.dirty\">This field is required</li>\r\n        <li *ngIf=\"form.errors?.matchingPasswords && form.controls.confirm.dirty\">Password do not match</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n  Submit Input -->\r\n<!-- \r\n  <input [disabled]=\"!form.valid || processing || !emailValid || !usernameValid\" type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" />\r\n\r\n</form>\r\nRegistration Form /-->"
 
 /***/ }),
 
@@ -1214,7 +928,7 @@ var RegisterComponent = (function () {
             _this.dataService.newThought(dauser).subscribe(function (data) {
                 _this.dauser = data.newId;
                 var rooms = {
-                    label: "Other User",
+                    label: "Friends",
                     level: -1,
                     color: "FFFFFF",
                     clicks: 0,
@@ -1247,7 +961,7 @@ var RegisterComponent = (function () {
                     clicks: 0,
                     showAs: "grid",
                     user: _this.userId,
-                    contexts: [{ _id: _this.dauser }, { _id: _this.infcl }],
+                    contexts: [{ _id: _this.dauser }],
                     dimensions: [],
                     texture: "",
                     form: "circle",
@@ -1382,31 +1096,43 @@ var RegisterComponent = (function () {
                                                                     editContents: [{ _id: _this.sessionsId }, { _id: _this.favoritesId }, { _id: _this.todoId }]
                                                                 };
                                                                 _this.dataService.editThought(editThought).subscribe(function (data) {
-                                                                    _this.privateArray = [{
-                                                                            persona: _this.startId,
-                                                                            apps: [{ app: "Diary", obj: _this.sessionsId }, { app: "Thoughts", obj: _this.favoritesId }, { app: "Plans", obj: _this.todoId }],
-                                                                            dimensions: [{ starter: _this.timeline, label: "Memories", app: _this.sessionsId, dimtype: "Date" }, { starter: _this.diary, label: "Feelings", app: _this.sessionsId, dimtype: "Number" }, { starter: _this.goals, label: "Goals", app: _this.todoId, dimtype: "Date" }]
-                                                                        }];
-                                                                    console.log(_this.privateArray);
-                                                                    var editUser = {
-                                                                        _id: _this.userId,
-                                                                        private: _this.privateArray
+                                                                    var editPlans = {
+                                                                        _id: _this.todoId,
+                                                                        editContents: [{ _id: _this.projects }, { _id: _this.goals }]
                                                                     };
-                                                                    console.log(editUser);
-                                                                    _this.authService.editUser(editUser).subscribe(function (data) {
-                                                                        _this.processing = true; // Lock form fields	
-                                                                        // Function to send blog object to backend
-                                                                        // Check if PUT request was a success or not
-                                                                        if (!data.success) {
-                                                                            _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                                                                            _this.message = data.message; // Set error message
-                                                                            _this.processing = false; // Unlock form fields
-                                                                        }
-                                                                        else {
-                                                                            _this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                                                                            _this.message = data.message; // Set success message
-                                                                            // After two seconds, navigate back to blog page 
-                                                                        }
+                                                                    _this.dataService.editThought(editPlans).subscribe(function (data) {
+                                                                        var editDiary = {
+                                                                            _id: _this.sessionsId,
+                                                                            editContents: [{ _id: _this.timeline }, { _id: _this.diary }]
+                                                                        };
+                                                                        _this.dataService.editThought(editDiary).subscribe(function (data) {
+                                                                            _this.privateArray = [{
+                                                                                    persona: _this.startId,
+                                                                                    apps: [{ app: "Diary", obj: _this.sessionsId }, { app: "Thoughts", obj: _this.favoritesId }, { app: "Plans", obj: _this.todoId }],
+                                                                                    dimensions: [{ starter: _this.timeline, label: "Memories", app: _this.sessionsId, dimtype: "Date", val: "" }, { starter: _this.diary, label: "Feelings", app: _this.sessionsId, dimtype: "Number", val: "" }, { starter: _this.goals, label: "Goals", app: _this.todoId, dimtype: "Date", val: "" }]
+                                                                                }];
+                                                                            console.log(_this.privateArray);
+                                                                            var editUser = {
+                                                                                _id: _this.userId,
+                                                                                private: _this.privateArray
+                                                                            };
+                                                                            console.log(editUser);
+                                                                            _this.authService.editUser(editUser).subscribe(function (data) {
+                                                                                _this.processing = true; // Lock form fields	
+                                                                                // Function to send blog object to backend
+                                                                                // Check if PUT request was a success or not
+                                                                                if (!data.success) {
+                                                                                    _this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                                                                                    _this.message = data.message; // Set error message
+                                                                                    _this.processing = false; // Unlock form fields
+                                                                                }
+                                                                                else {
+                                                                                    _this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                                                                                    _this.message = data.message; // Set success message
+                                                                                    // After two seconds, navigate back to blog page 
+                                                                                }
+                                                                            });
+                                                                        });
                                                                     });
                                                                 });
                                                             });
@@ -1508,7 +1234,7 @@ var RegisterComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/search/search.component.css":
+/***/ "../../../../../src/app/components/tools/copy/copy.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1516,7 +1242,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".searchbar-fullwidth {\r\n    width: 100%;\r\n}\r\n.searchbar-form {\r\n    min-width: 600px;\r\n    max-width: 1000px;\r\n    width: 100%;\r\n  }", ""]);
 
 // exports
 
@@ -1526,24 +1252,24 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/search/search.component.html":
+/***/ "../../../../../src/app/components/tools/copy/copy.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar>  </app-navbar>\r\n\r\n<form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n      <input matInput placeholder=\"Search\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\r\n        <mat-autocomplete #auto=\"matAutocomplete\">\r\n          <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"selectThought(thought)\">\r\n            <span>{{ thought.label }} </span><small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\r\n          </mat-option>\r\n        </mat-autocomplete>\r\n    </mat-form-field>\r\n  </form>"
+module.exports = "<div *ngIf=\"selectedThought.level > 0\">\n\n  <form class=\"searchbar-form\">\n   \n    <mat-form-field class=\"searchbar-fullwidth\">\n      <input matInput placeholder=\"Copy\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\n      <mat-autocomplete #auto=\"matAutocomplete\">\n        <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"copyThought(thought)\">\n          <span>{{ thought.label }}</span>\n          <small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\n        </mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n  </form>\n \n</div>\n\n<div *ngIf=\"selectedThought.level <= 0\">\n  You can't copy Thoughts on this level.\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/search/search.component.ts":
+/***/ "../../../../../src/app/components/tools/copy/copy.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CopyComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_operators_startWith__ = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_operators_map__ = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1563,23 +1289,788 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var SearchComponent = (function () {
-    function SearchComponent(formBuilder, router, dataService, authService, internalService) {
+var CopyComponent = (function () {
+    function CopyComponent(dataService, formBuilder, internalService, authService, router) {
         var _this = this;
-        this.formBuilder = formBuilder;
-        this.router = router;
         this.dataService = dataService;
-        this.authService = authService;
+        this.formBuilder = formBuilder;
         this.internalService = internalService;
+        this.authService = authService;
+        this.router = router;
+        this.newContexts = [];
+        this.newContents = [];
+        this.contextContent = [];
         //Autocomplete
         this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.newThought = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
         this.filteredThoughts = this.thoughtCtrl.valueChanges
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_6_rxjs_operators_startWith__["a" /* startWith */])(''), Object(__WEBPACK_IMPORTED_MODULE_7_rxjs_operators_map__["a" /* map */])(function (thought) { return thought ? _this.filterThoughts(thought) : _this.thoughts.slice(); }));
     }
-    SearchComponent.prototype.filterThoughts = function (label) {
+    CopyComponent.prototype.filterThoughts = function (label) {
+        this.lastInput = label;
         return this.thoughts.filter(function (thought) {
             return thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0;
         });
+    };
+    CopyComponent.prototype.copyThought = function (thought) {
+        var _this = this;
+        this.newContexts = []; // Reset Context
+        this.dataService.getSingleThought(this.selectedThought._id).subscribe(function (data) {
+            _this.newContexts = data.thought.contexts; //Save Context of selected Thought
+            _this.newContexts.unshift(_this.selectedThought._id); //Add Selected Thought as Context
+            _this.contextContent = data.thought.contents;
+            //Resave Thought with New Context
+            var copyThought = {
+                label: thought.label,
+                level: _this.selectedThought.level,
+                color: thought.color,
+                clicks: 0,
+                showAs: thought.showAs,
+                user: _this.userId,
+                contexts: _this.newContexts,
+                contents: thought.contents,
+                dimensions: _this.dimensions,
+                texture: "",
+                form: "circle",
+                privacy: "private"
+            };
+            _this.dataService.newThought(copyThought).subscribe(function (data) {
+                _this.saveId = data.newId;
+                _this.contextContent.push(_this.saveId);
+                var editThought = {
+                    _id: _this.selectedThought._id,
+                    editContents: _this.contextContent
+                };
+                _this.dataService.editThought(editThought).subscribe(function (data) {
+                    _this.router.navigate(['/viewer/', _this.selectedThought._id]);
+                    _this.internalService.changeThought(_this.selectedThought._id);
+                });
+            });
+        });
+    };
+    CopyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //GET USER Data
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+            _this.private = profile.user.private;
+        });
+        this.internalService.loadThoughts();
+        this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
+        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
+    };
+    CopyComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-copy',
+            template: __webpack_require__("../../../../../src/app/components/tools/copy/copy.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/copy/copy.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]])
+    ], CopyComponent);
+    return CopyComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/delete/delete.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".spacer{\r\n    -ms-flex: 1 1 auto;\r\n    flex: 1 1 auto;\r\n   \r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/delete/delete.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought.level <= 0\">\n    You can't delete Thoughts on this level.\n</div>\n  <div *ngIf=\"selectedThought.level > 0\">\n     Are you sure you want to delete \"{{selectedThought.label}}\"?\"\n     <button mat-button (click)=\"deleteThought(selectedThought._id)\">Yes</button><button mat-button>No</button>\n  </div>\n  "
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/delete/delete.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeleteComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DeleteComponent = (function () {
+    function DeleteComponent(dataService, internalService) {
+        this.dataService = dataService;
+        this.internalService = internalService;
+    }
+    DeleteComponent.prototype.deleteThought = function (id) {
+        //Delete the Thought
+        this.dataService.deleteThought(id).subscribe(function (data) { return console.log(data); });
+    };
+    DeleteComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+    };
+    DeleteComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-delete',
+            template: __webpack_require__("../../../../../src/app/components/tools/delete/delete.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/delete/delete.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_internal_service__["a" /* InternalService */]])
+    ], DeleteComponent);
+    return DeleteComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/dimension/dimension.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/dimension/dimension.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought.level > 0\">\n\n    <form class=\"searchbar-form\">\n        <button mat-button [matMenuTriggerFor]=\"menuDimensions\">Choose Dimension</button>\n        <mat-menu #menuDimensions=\"matMenu\" [overlapTrigger]=\"false\">\n          <button *ngFor=\"let dimension of userDimensions\" mat-menu-item (click)=\"addDimension(dimension)\">\n            <i *ngIf=\"dimension.dimtype == 'Date'\" class=\"material-icons\">event</i>\n            <i *ngIf=\"dimension.dimtype == 'Number'\" class=\"material-icons\">favorite</i>{{ dimension.label }}</button>\n        </mat-menu>\n   \n\n\n      <mat-form-field *ngIf=\"addDate\">\n          <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"newDate\" name=\"newDate\" placeholder=\"Choose a date\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n          <mat-datepicker #picker></mat-datepicker>\n        </mat-form-field>\n        <mat-form-field *ngIf=\"addNumber\">\n          <input matInput #number [(ngModel)]=\"newNumber\" name=\"newNumber\" placeholder=\"Enter a Number\">\n        </mat-form-field>\n\n\n\n      <button mat-button (click)=\"onDimensionSubmit()\">Add Dimension</button>\n  \n  \n    </form>\n  \n  \n  \n  </div>\n  \n  \n  <div *ngIf=\"selectedThought.level == 0 || selectedThought.level < -1\">\n    You can't Add Thoughts on this level.\n  </div>\n  \n  <div *ngIf=\"selectedThought.level == -1\">\n    Create new Persona: Public / Private\n  </div>\n\n\n\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/dimension/dimension.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DimensionComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_dimension__ = __webpack_require__("../../../../../src/app/models/dimension.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var DimensionComponent = (function () {
+    function DimensionComponent(dataService, formBuilder, internalService, authService, router) {
+        this.dataService = dataService;
+        this.formBuilder = formBuilder;
+        this.internalService = internalService;
+        this.authService = authService;
+        this.router = router;
+        this.newContexts = [];
+        this.newContents = [];
+        this.contextContent = [];
+        this.addDimensions = false;
+        this.showDiary = false;
+        this.showPlans = false;
+        this.showCopyThought = false;
+        this.showNewThought = true;
+        this.showLinkThought = false;
+        this.addNumber = false;
+        this.addDate = false;
+        //Autocomplete
+        this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormControl */]();
+        this.newThought = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormControl */]();
+    }
+    DimensionComponent.prototype.onDimensionSubmit = function () {
+        var _this = this;
+        //Create New Dimension
+        this.newDimension = new __WEBPACK_IMPORTED_MODULE_6__models_dimension__["a" /* Dimension */];
+        this.newDimension.app = this.selectedDimension.app;
+        this.newDimension.starter = this.selectedDimension.starter;
+        this.newDimension.label = this.selectedDimension.label;
+        this.newDimension.dimtype = this.selectedDimension.dimtype;
+        //Create Value, depending on Input
+        if (this.selectedDimension.dimtype == "Date") {
+            this.newDimension.val = this.newDate.toString();
+        }
+        ;
+        if (this.selectedDimension.dimtype == "Number") {
+            this.newDimension.val = this.newNumber;
+        }
+        ;
+        //Update Selected Thought with new Dimensions
+        this.selectedThought.dimensions.unshift(this.newDimension);
+        console.log(this.newDimension);
+        console.log(this.selectedThought.dimensions);
+        var editThought = {
+            _id: this.selectedThought._id,
+            editDimensions: this.selectedThought.dimensions
+        };
+        this.dataService.editThought(editThought).subscribe(function (data) {
+            //Update Dimension-Content with new Link
+            _this.dataService.getSingleThought(_this.selectedDimension.starter).subscribe(function (data) {
+                _this.contextContent = data.thought.contents;
+                _this.contextContent.push(_this.selectedThought._id);
+                var editDimThought = {
+                    _id: data.thought._id,
+                    editContents: _this.contextContent
+                };
+                console.log(editDimThought);
+                _this.dataService.editThought(editDimThought).subscribe(function (data) {
+                    _this.internalService.changeThought(_this.selectedThought._id);
+                });
+            });
+        });
+    };
+    DimensionComponent.prototype.addDimension = function (userDimension) {
+        if (userDimension.dimtype == "Number") {
+            this.addNumber = true;
+            this.addDate = false;
+        }
+        ;
+        if (userDimension.dimtype == "Date") {
+            this.addDate = true;
+            this.addNumber = false;
+        }
+        ;
+        this.selectedDimension = userDimension;
+    };
+    DimensionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //GET USER Data
+        this.authService.getProfile().subscribe(function (profile) {
+            console.log(profile.user);
+            console.log(profile.user.private[0].dimensions);
+            _this.user = profile.user;
+            _this.userDimensions = profile.user.private[0].dimensions;
+            console.log(_this.user);
+            console.log(_this.userDimensions);
+        });
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
+        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
+    };
+    DimensionComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-dimension',
+            template: __webpack_require__("../../../../../src/app/components/tools/dimension/dimension.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/dimension/dimension.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]])
+    ], DimensionComponent);
+    return DimensionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/edit/edit.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought.level > 0\">\r\n  \r\n    <form>\r\n      <mat-form-field>\r\n        <input matInput class=\"search-input\" placeholder=\"{{ selectedThought.label }}\" aria-label=\"Thought\" [formControl]=\"editThought\">\r\n      </mat-form-field>\r\n      <button mat-raised-button (click)=\"onEditSubmit()\">Edit Label</button>\r\n    </form>\r\n\r\n    <div *ngIf=\"selectedThought.dimensions.length\">\r\n      <mat-list>\r\n        <mat-list-item *ngFor=\"let dimension of selectedThought.dimensions\">{{ dimension.dim }} {{ dimension.val }}</mat-list-item>\r\n      </mat-list>\r\n    </div>\r\n \r\n</div>\r\n\r\n<div *ngIf=\"selectedThought.level <= 0\">\r\n  You can't edit Thoughts on this level.\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/edit/edit.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".spacer {\n  -ms-flex: 1 1 auto;\n  flex: 1 1 auto; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/edit/edit.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var EditComponent = (function () {
+    function EditComponent(formBuilder, internalService, dataService, authService, router) {
+        this.formBuilder = formBuilder;
+        this.internalService = internalService;
+        this.dataService = dataService;
+        this.authService = authService;
+        this.router = router;
+        this.editThought = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+    }
+    EditComponent.prototype.onEditSubmit = function () {
+        var _this = this;
+        var editThought = {
+            _id: this.selectedThought._id,
+            editLabel: this.editThought.value
+        };
+        this.dataService.editThought(editThought).subscribe(function (data) {
+            _this.internalService.changeThought(_this.selectedThought._id);
+        });
+    };
+    EditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+    };
+    EditComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-edit',
+            template: __webpack_require__("../../../../../src/app/components/tools/edit/edit.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/edit/edit.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]])
+    ], EditComponent);
+    return EditComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/link/link.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".searchbar-fullwidth {\r\n    width: 100%;\r\n}\r\n.searchbar-form {\r\n    min-width: 600px;\r\n    max-width: 1000px;\r\n    width: 100%;\r\n  }", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/link/link.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought.level > 0\">\n        <form class=\"searchbar-form\">\n            <mat-form-field class=\"searchbar-full-width\">\n              <input matInput placeholder=\"Link\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\n              <mat-autocomplete #auto=\"matAutocomplete\">\n                <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"linkThought(thought)\">\n                  <span>{{ thought.label }}</span>\n                  <small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\n                </mat-option>\n              </mat-autocomplete>\n            </mat-form-field>\n          </form>\n\n        </div>\n\n<div *ngIf=\"selectedThought.level <= 0\">\n    You can't link Thoughts on this level.\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/link/link.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LinkComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_operators_startWith__ = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_operators_map__ = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var LinkComponent = (function () {
+    function LinkComponent(dataService, formBuilder, internalService, authService, router) {
+        var _this = this;
+        this.dataService = dataService;
+        this.formBuilder = formBuilder;
+        this.internalService = internalService;
+        this.authService = authService;
+        this.router = router;
+        this.newContexts = [];
+        this.newContents = [];
+        this.contextContent = [];
+        //Autocomplete
+        this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.newThought = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.filteredThoughts = this.thoughtCtrl.valueChanges
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_6_rxjs_operators_startWith__["a" /* startWith */])(''), Object(__WEBPACK_IMPORTED_MODULE_7_rxjs_operators_map__["a" /* map */])(function (thought) { return thought ? _this.filterThoughts(thought) : _this.thoughts.slice(); }));
+    }
+    LinkComponent.prototype.filterThoughts = function (label) {
+        this.lastInput = label;
+        return this.thoughts.filter(function (thought) {
+            return thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0;
+        });
+    };
+    LinkComponent.prototype.linkThought = function (thought) {
+        var _this = this;
+        //Get Thought to Update
+        this.dataService.getSingleThought(this.selectedThought._id).subscribe(function (data) {
+            _this.contextContent = data.thought.contents;
+            _this.contextContent.push(thought._id);
+            var editThought = {
+                _id: _this.selectedThought._id,
+                editContents: _this.contextContent
+            };
+            _this.dataService.editThought(editThought).subscribe(function (data) {
+                _this.internalService.changeThought(_this.selectedThought._id);
+                _this.newContexts = [];
+            });
+        });
+    };
+    LinkComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //GET USER Data
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+            _this.private = profile.user.private;
+        });
+        this.internalService.loadThoughts();
+        this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
+        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
+    };
+    LinkComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-link',
+            template: __webpack_require__("../../../../../src/app/components/tools/link/link.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/link/link.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]])
+    ], LinkComponent);
+    return LinkComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/new/new.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".searchbar-fullwidth {\r\n  width: 100%;\r\n}\r\n.searchbar-form {\r\n  min-width: 600px;\r\n  max-width: 1000px;\r\n  width: 100%;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/new/new.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought.level > 0\">\r\n\r\n  <form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n      <input matInput placeholder=\"New\" aria-label=\"Thought\" [formControl]=\"newThought\">\r\n    </mat-form-field>\r\n    <button mat-button *ngIf=\"selectedThought.label\" (click)=\"onNewSubmit()\">Save Thought</button>\r\n\r\n\r\n  </form>\r\n\r\n\r\n\r\n</div>\r\n\r\n\r\n<div *ngIf=\"selectedThought.level == 0 || selectedThought.level < -1\">\r\n  You can't Add Thoughts on this level.\r\n</div>\r\n\r\n<div *ngIf=\"selectedThought.level == -1\">\r\n  Create new Persona: Public / Private\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/new/new.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var NewComponent = (function () {
+    function NewComponent(dataService, formBuilder, internalService, authService, router) {
+        this.dataService = dataService;
+        this.formBuilder = formBuilder;
+        this.internalService = internalService;
+        this.authService = authService;
+        this.router = router;
+        this.newContexts = [];
+        this.newContents = [];
+        this.contextContent = [];
+        this.addDimensions = false;
+        this.showDiary = false;
+        this.showPlans = false;
+        this.showCopyThought = false;
+        this.showNewThought = true;
+        this.showLinkThought = false;
+        this.addNumber = false;
+        this.addDate = false;
+        //Autocomplete
+        this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.newThought = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+    }
+    NewComponent.prototype.onNewSubmit = function () {
+        var _this = this;
+        this.newContexts = []; // Reset Context
+        this.dataService.getSingleThought(this.selectedThought._id).subscribe(function (data) {
+            _this.newContexts = data.thought.contexts; //Save Context of selected Thought
+            _this.newContexts.unshift(_this.selectedThought._id); //Add Selected Thought as Context
+            _this.contextContent = data.thought.contents;
+            var newThought = {
+                label: _this.newThought.value,
+                level: _this.selectedThought.level,
+                color: "FFFFFF",
+                clicks: 0,
+                showAs: "grid",
+                user: _this.userId,
+                contexts: _this.newContexts,
+                contents: _this.newContents,
+                dimensions: _this.dimensions,
+                texture: "",
+                form: "circle",
+                privacy: "private"
+            };
+            _this.dataService.newThought(newThought).subscribe(function (data) {
+                _this.saveId = data.newId;
+                _this.contextContent.push(_this.saveId);
+                var editThought = {
+                    _id: _this.selectedThought._id,
+                    editContents: _this.contextContent
+                };
+                _this.dataService.editThought(editThought).subscribe(function (data) {
+                    _this.internalService.changeThought(_this.selectedThought._id);
+                    _this.newContexts = [];
+                });
+            });
+        });
+    };
+    NewComponent.prototype.addDimension = function (userDimension) {
+        if (userDimension.dimtype == "Number") {
+            this.addNumber = true;
+            this.addDate = false;
+        }
+        if (userDimension.dimtype == "Date") {
+            this.addDate = true;
+            this.addNumber = false;
+        }
+        this.selectedDimension = userDimension;
+    };
+    NewComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //GET USER Data
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.username = profile.user.username; // Used when creating new blog posts and comments
+            _this.userId = profile.user._id;
+            _this.private = profile.user.private;
+        });
+        this.internalService.loadThoughts();
+        this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
+        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
+    };
+    NewComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-new',
+            template: __webpack_require__("../../../../../src/app/components/tools/new/new.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/new/new.component.css")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_4__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+    ], NewComponent);
+    return NewComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/search/search.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"selectedThought\">\r\n    <form class=\"searchbar-form\">\r\n        <mat-form-field class=\"searchbar-full-width\">\r\n          <input matInput placeholder=\"Search\" aria-label=\"Thought\" [matAutocomplete]=\"auto\" [formControl]=\"thoughtCtrl\">\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n            <mat-option *ngFor=\"let thought of filteredThoughts | async\" [value]=\"thought.label\" (click)=\"goToThought(thought)\">\r\n              <span>{{ thought.label }}</span>\r\n              <small *ngFor=\"let context of thought.contexts\"> | {{ context.label }}</small>\r\n            </mat-option>\r\n          </mat-autocomplete>\r\n        </mat-form-field>\r\n      </form>\r\n\r\n    </div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/search/search.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".searchbar-fullwidth {\n  width: 100%; }\n\n.searchbar-form {\n  min-width: 300px;\n  max-width: 1000px;\n  width: 100%; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/tools/search/search.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operators_startWith__ = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators_map__ = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_internal_service__ = __webpack_require__("../../../../../src/app/services/internal.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var SearchComponent = (function () {
+    function SearchComponent(dataService, formBuilder, internalService, authService, router) {
+        var _this = this;
+        this.dataService = dataService;
+        this.formBuilder = formBuilder;
+        this.internalService = internalService;
+        this.authService = authService;
+        this.router = router;
+        this.newContexts = [];
+        this.newContents = [];
+        this.contextContent = [];
+        //Autocomplete
+        this.thoughtCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.newThought = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */]();
+        this.filteredThoughts = this.thoughtCtrl.valueChanges
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators_startWith__["a" /* startWith */])(''), Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators_map__["a" /* map */])(function (thought) { return thought ? _this.filterThoughts(thought) : _this.thoughts.slice(); }));
+    }
+    SearchComponent.prototype.filterThoughts = function (label) {
+        this.lastInput = label;
+        return this.thoughts.filter(function (thought) {
+            return thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0;
+        });
+    };
+    SearchComponent.prototype.goToThought = function (thought) {
+        this.internalService.changeThought(thought._id);
     };
     SearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1587,24 +2078,25 @@ var SearchComponent = (function () {
         this.authService.getProfile().subscribe(function (profile) {
             _this.username = profile.user.username; // Used when creating new blog posts and comments
             _this.userId = profile.user._id;
-            _this.starterId = profile.user.starter;
-            //GET THOUGHTS
-            _this.internalService.loadThoughts();
-            _this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
-            _this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+            _this.private = profile.user.private;
         });
+        this.internalService.loadThoughts();
+        this.internalService.thoughtObs.subscribe(function (res) { return _this.thoughts = res; });
+        this.internalService.selThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selContextObs.subscribe(function (res) { return _this.context = res; });
+        this.internalService.selContextsObs.subscribe(function (res) { return _this.contexts = res; });
     };
     SearchComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search',
-            template: __webpack_require__("../../../../../src/app/components/search/search.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/search/search.component.css")]
+            template: __webpack_require__("../../../../../src/app/components/tools/search/search.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/tools/search/search.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */],
-            __WEBPACK_IMPORTED_MODULE_3__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_internal_service__["a" /* InternalService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_7__services_internal_service__["a" /* InternalService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
     ], SearchComponent);
     return SearchComponent;
 }());
@@ -1621,7 +2113,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".grid-card {\r\n    margin-top: 40px;\r\n    margin-bottom: 40px;\r\n}\r\n.content-title {\r\n    font-size: 20px;\r\n}", ""]);
+exports.push([module.i, ".grid-card {\r\n    margin-top: 40px;\r\n    margin-bottom: 40px;\r\n}\r\n.content-title {\r\n    font-size: 20px;\r\n}\r\n\r\n.allContent {\r\n    padding-top: 20px;\r\n    padding-bottom: 40px;\r\n}\r\n.spacer{\r\n    -ms-flex: 1 1 auto;\r\n    flex: 1 1 auto;\r\n   \r\n}", ""]);
 
 // exports
 
@@ -1634,7 +2126,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/viewer/viewer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Contexts -->\r\n<mat-toolbar>\r\n        <div>\r\n                <button mat-raised-button (click)=\"selectThought(context)\">{{ context.label }}</button>\r\n        </div>\r\n        <!-- Der ausgewählte Chararakter -->\r\n</mat-toolbar>\r\n<mat-card>\r\n        <mat-list>\r\n                <mat-list-item *ngFor=\"let context of contexts\">\r\n                        <button mat-button (click)=\"selectThought(context)\">{{ context.label }}</button>\r\n                </mat-list-item>\r\n        </mat-list>\r\n</mat-card>\r\n\r\n<mat-toolbar>\r\n        <!-- Siblings -->\r\n        <div *ngFor=\"let sibling of siblings\">\r\n                <div *ngIf=\"selectedThought.label != sibling.label\">\r\n                        <button mat-button (click)=\"selectThought(sibling)\">{{ sibling.label}}</button>\r\n                </div>\r\n                <div *ngIf=\"selectedThought.label == sibling.label\">\r\n                        <button mat-raised-button (click)=\"selectThought(sibling)\">{{ sibling.label}}</button>\r\n                </div>\r\n        </div>\r\n</mat-toolbar>\r\n\r\n<!-- Content  -->\r\n<!-- Short Content  -->\r\n<div *ngIf=\"contents.length <= 5\">\r\n        <mat-grid-list [cols]=\"contents.length || 1\" rowHeight=\"2:1\">\r\n                <mat-grid-tile *ngFor=\"let content of contents\" [colspan]=\"1\" [rowspan]=\"1\">\r\n                        <mat-card>\r\n                                <mat-card-title>\r\n                                        <button class=\"content-title\" mat-button (click)=\"selectThought(content)\">{{ content.label }}</button>\r\n                                </mat-card-title>\r\n                                <mat-card-content>\r\n                                        <div *ngIf=\"content.contents.length\">\r\n                                                <mat-list>\r\n                                                        <mat-list-item *ngFor=\"let thought of content.contents\">\r\n                                                                <button mat-button (click)=\"selectThought(thought)\">{{ thought.label }}</button>\r\n                                                        </mat-list-item>\r\n                                                </mat-list>\r\n                                        </div>\r\n                                </mat-card-content>\r\n                        </mat-card>\r\n                </mat-grid-tile>\r\n        </mat-grid-list>\r\n</div>\r\n<!-- Long Content  -->\r\n<div *ngIf=\"contents.length > 5\">\r\n        <mat-list>\r\n                <mat-list-item *ngFor=\"let content of contents\">\r\n                        <button class=\"content-title\" mat-button (click)=\"selectThought(content)\">{{ content.label }}</button>\r\n                </mat-list-item>\r\n        </mat-list>\r\n</div>\r\n\r\n<app-footer></app-footer>"
+module.exports = "<!-- Contexts -->\r\n<mat-toolbar>\r\n<mat-toolbar-row>\r\n         <!-- Höchster Context -->\r\n                <span class='spacer'></span>\r\n        <div *ngIf=\"context\">\r\n                       \r\n                <button mat-raised-button color=\"primary\" (click)=\"selectThought(context)\">{{ context.label }}</button>\r\n               \r\n        </div>\r\n        <span class='spacer'></span>\r\n       \r\n</mat-toolbar-row>\r\n<mat-toolbar-row *ngFor=\"let context of contexts\">\r\n            <!-- Mittlere Context -->\r\n                <span class='spacer'></span>\r\n                <button mat-button (click)=\"selectThought(context)\">{{ context.label }}</button>\r\n                <span class='spacer'></span>\r\n        </mat-toolbar-row>\r\n     \r\n<mat-toolbar-row>\r\n                <span class='spacer'></span>\r\n        <!-- Siblings -->\r\n        <div *ngFor=\"let sibling of siblings\">\r\n                <div *ngIf=\"selectedThought.label != sibling.label\">\r\n                        <button mat-button (click)=\"selectThought(sibling)\">{{ sibling.label}}</button>\r\n                </div>\r\n                <div *ngIf=\"selectedThought.label == sibling.label\">\r\n                        <button mat-raised-button color=\"warn\" (click)=\"selectThought(sibling)\">{{ sibling.label}}</button>\r\n                </div>\r\n        </div>\r\n        <span class='spacer'></span>\r\n</mat-toolbar-row>\r\n</mat-toolbar>\r\n\r\n<!-- Content  -->\r\n<div class=\"allContent\">\r\n        <!-- No Thought:   -->\r\n        <div *ngIf=\"!contents.length\">\r\n                <mat-list>\r\n                        <mat-list-item>\r\n                                <button class=\"content-title\" mat-button>No content...</button>\r\n                        </mat-list-item>\r\n                </mat-list>\r\n        </div>\r\n        <!-- 1 Thought:   -->\r\n        <div *ngIf=\"contents.length == 1\">\r\n                <mat-card *ngFor=\"let content of contents\">\r\n                        <mat-card-title>\r\n                                <button mat-button (click)=\"selectThought(content)\">{{ content.label }}</button>\r\n                        </mat-card-title>\r\n                        <mat-card-content *ngIf=\"content.contents.length\">\r\n                                <mat-list>\r\n                                        <mat-list-item *ngFor=\"let thought of content.contents\">\r\n                                                <button mat-button (click)=\"selectThought(thought)\">{{ thought.label }}</button>\r\n                                        </mat-list-item>\r\n                                </mat-list>\r\n                        </mat-card-content>\r\n                </mat-card>\r\n        </div>\r\n        <!-- 2,3 or 4 Thoughts  -->\r\n        <div *ngIf=\"contents.length == 2 || contents.length == 3 || contents.length == 4 \">\r\n                <mat-grid-list [cols]=\"contents.length\" rowHeight=\"2:1\">\r\n                        <mat-grid-tile *ngFor=\"let content of contents\" [colspan]=\"1\" [rowspan]=\"1\">\r\n                                <mat-card>\r\n                                        <mat-card-title>\r\n                                                <button class=\"content-title\" mat-button (click)=\"selectThought(content)\">{{ content.label }}</button>\r\n                                        </mat-card-title>\r\n                                        <mat-card-content>\r\n                                                <div *ngIf=\"content.contents.length <= 4\">\r\n                                                        <mat-list>\r\n                                                                <mat-list-item *ngFor=\"let thought of content.contents\">\r\n                                                                        <button mat-button (click)=\"selectThought(thought)\">{{ thought.label }}</button>\r\n                                                                </mat-list-item>\r\n                                                        </mat-list>\r\n                                                </div>\r\n                                        </mat-card-content>\r\n                                </mat-card>\r\n                        </mat-grid-tile>\r\n                </mat-grid-list>\r\n        </div>\r\n        <!-- 5 or more  -->\r\n        <div *ngIf=\"contents.length >= 5\">\r\n                <mat-list>\r\n                        <mat-list-item *ngFor=\"let content of contents\">\r\n                                <button class=\"content-title\" mat-button (click)=\"selectThought(content)\">{{ content.label }}</button>\r\n                        </mat-list-item>\r\n                </mat-list>\r\n        </div>\r\n</div>\r\n<app-footer></app-footer>"
 
 /***/ }),
 
@@ -1669,6 +2161,7 @@ var ViewerComponent = (function () {
         this.router = router;
         this.authService = authService;
     }
+    ;
     ViewerComponent.prototype.selectThought = function (thought) {
         this.router.navigate(['viewer/', thought._id]);
         this.internalService.changeThought(thought._id);
@@ -1676,9 +2169,6 @@ var ViewerComponent = (function () {
     ViewerComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.getProfile().subscribe(function (profile) {
-            _this.username = profile.user.username; // Used when creating new blog posts and comments
-            _this.userId = profile.user._id;
-            _this.personas = profile.user.private;
             //GET THOUGHTS
             _this.internalService.changeThought(profile.user.private[0].persona);
         });
@@ -2442,7 +2932,7 @@ var MaterialModule = (function () {
     }
     MaterialModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material_snack_bar__["a" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_16__angular_material_table__["a" /* MatTableModule */], __WEBPACK_IMPORTED_MODULE_18__angular_material_stepper__["a" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_17__angular_material_icon__["a" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_14__angular_material_grid_list__["a" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_15__angular_material_dialog__["b" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_13__angular_material_chips__["a" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_12__angular_material_datepicker__["a" /* MatDatepickerModule */], __WEBPACK_IMPORTED_MODULE_10__angular_material_list__["a" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_3__angular_material_menu__["a" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */], __WEBPACK_IMPORTED_MODULE_4__angular_material_toolbar__["a" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_5__angular_material_card__["a" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_11__angular_material_autocomplete__["a" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material_expansion__["a" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_7__angular_material_input__["b" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_8__angular_material_tabs__["a" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_9__angular_material_sidenav__["a" /* MatSidenavModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MatNativeDateModule */], __WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material_snack_bar__["a" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_16__angular_material_table__["a" /* MatTableModule */], __WEBPACK_IMPORTED_MODULE_18__angular_material_stepper__["a" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_17__angular_material_icon__["a" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_14__angular_material_grid_list__["a" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_15__angular_material_dialog__["b" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_13__angular_material_chips__["a" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_12__angular_material_datepicker__["a" /* MatDatepickerModule */], __WEBPACK_IMPORTED_MODULE_10__angular_material_list__["a" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_3__angular_material_menu__["a" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */], __WEBPACK_IMPORTED_MODULE_4__angular_material_toolbar__["a" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_5__angular_material_card__["a" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_11__angular_material_autocomplete__["a" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material_expansion__["a" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_7__angular_material_input__["b" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_8__angular_material_tabs__["a" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_9__angular_material_sidenav__["a" /* MatSidenavModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_19__angular_material_snack_bar__["a" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_16__angular_material_table__["a" /* MatTableModule */], __WEBPACK_IMPORTED_MODULE_18__angular_material_stepper__["a" /* MatStepperModule */], __WEBPACK_IMPORTED_MODULE_17__angular_material_icon__["a" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_14__angular_material_grid_list__["a" /* MatGridListModule */], __WEBPACK_IMPORTED_MODULE_15__angular_material_dialog__["b" /* MatDialogModule */], __WEBPACK_IMPORTED_MODULE_13__angular_material_chips__["a" /* MatChipsModule */], __WEBPACK_IMPORTED_MODULE_12__angular_material_datepicker__["a" /* MatDatepickerModule */], __WEBPACK_IMPORTED_MODULE_10__angular_material_list__["a" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_3__angular_material_menu__["a" /* MatMenuModule */], __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */], __WEBPACK_IMPORTED_MODULE_4__angular_material_toolbar__["a" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_5__angular_material_card__["a" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_11__angular_material_autocomplete__["a" /* MatAutocompleteModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material_expansion__["a" /* MatExpansionModule */], __WEBPACK_IMPORTED_MODULE_7__angular_material_input__["b" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_8__angular_material_tabs__["a" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_9__angular_material_sidenav__["a" /* MatSidenavModule */]]
         })
     ], MaterialModule);
@@ -2708,6 +3198,7 @@ var InternalService = (function () {
                 _this.selSiblings.next(data.thought.contents); //Save as Siblings
             });
             _this.selContext.next(data.thought.contexts.pop()); //Remove Last Context as Main Context
+            data.thought.contexts.reverse();
             _this.selContexts.next(data.thought.contexts); // Save Rest of Contexts
             if (data.thought.showAs == "timearray") {
                 _this.dataService.getTimeArray(data.thought._id).subscribe(function (res) {

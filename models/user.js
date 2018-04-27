@@ -124,8 +124,8 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  private: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String }] }],
-  public: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String }] }],
+  private: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String, val: String }] }],
+  public: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String, val: String }] }],
   friends: [{ friendId: String, label: String, showPersona: [{ personaId: String }]}]
 });
 

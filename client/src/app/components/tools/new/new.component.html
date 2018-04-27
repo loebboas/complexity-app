@@ -1,0 +1,23 @@
+<div *ngIf="selectedThought.level > 0">
+
+  <form class="searchbar-form">
+    <mat-form-field class="searchbar-full-width">
+      <input matInput placeholder="New" aria-label="Thought" [formControl]="newThought">
+    </mat-form-field>
+    <button mat-button *ngIf="selectedThought.label" (click)="onNewSubmit()">Save Thought</button>
+
+
+  </form>
+
+
+
+</div>
+
+
+<div *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
+  You can't Add Thoughts on this level.
+</div>
+
+<div *ngIf="selectedThought.level == -1">
+  Create new Persona: Public / Private
+</div>

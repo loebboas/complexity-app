@@ -1,0 +1,43 @@
+<div *ngIf="selectedThought.level > 0">
+
+    <form class="searchbar-form">
+        <button mat-button [matMenuTriggerFor]="menuDimensions">Choose Dimension</button>
+        <mat-menu #menuDimensions="matMenu" [overlapTrigger]="false">
+          <button *ngFor="let dimension of userDimensions" mat-menu-item (click)="addDimension(dimension)">
+            <i *ngIf="dimension.dimtype == 'Date'" class="material-icons">event</i>
+            <i *ngIf="dimension.dimtype == 'Number'" class="material-icons">favorite</i>{{ dimension.label }}</button>
+        </mat-menu>
+   
+
+
+      <mat-form-field *ngIf="addDate">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="newDate" name="newDate" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field *ngIf="addNumber">
+          <input matInput #number [(ngModel)]="newNumber" name="newNumber" placeholder="Enter a Number">
+        </mat-form-field>
+
+
+
+      <button mat-button *ngIf="selectedDimension" (click)="onDimensionSubmit()">Add Dimension</button>
+  
+  
+    </form>
+  
+  
+  
+  </div>
+  
+  
+  <div *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
+    You can't Add Thoughts on this level.
+  </div>
+  
+  <div *ngIf="selectedThought.level == -1">
+    Create new Persona: Public / Private
+  </div>
+
+
+

@@ -6,9 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
-import { NewComponent } from './components/new/new.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
-import { SearchComponent } from './components/search/search.component';
 
 
 const appRoutes: Routes = [
@@ -23,8 +21,6 @@ const appRoutes: Routes = [
   { path: 'viewer', component: ViewerComponent, canActivate: [AuthGuard] 
   },
   { path: 'viewer/:id', component: ViewerComponent, canActivate: [AuthGuard] 
-  },
-  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] 
   },
   {
   	path: '**', component: HomeComponent
