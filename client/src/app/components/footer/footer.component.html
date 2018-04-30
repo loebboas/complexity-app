@@ -1,26 +1,31 @@
-<mat-toolbar class="bot" *ngIf="selectedThought">
-  <mat-toolbar-row *ngIf="showTool == 'new'">
-    <app-new></app-new>
-  </mat-toolbar-row>
-  <mat-toolbar-row *ngIf="showTool == 'copy'">
-    <app-copy></app-copy>
-  </mat-toolbar-row>
-  <mat-toolbar-row *ngIf="showTool == 'link'">
-    <app-link></app-link>
-  </mat-toolbar-row>
-  <mat-toolbar-row *ngIf="showTool == 'edit'">
-    <app-edit></app-edit>
-  </mat-toolbar-row>
-  <mat-toolbar-row *ngIf="showTool == 'delete'">
-    <app-delete></app-delete>
-  </mat-toolbar-row>
-  <mat-toolbar-row *ngIf="showTool == 'search'">
-    <app-search></app-search>
-  </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="showTool == 'dimension'">
+<div class="bot" *ngIf="selectedThought">
+ 
+    <mat-toolbar *ngIf="showTool == 'new'">
+      <app-new></app-new>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'copy'">
+      <app-copy></app-copy>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'link'">
+      <app-link></app-link>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'edit'">
+      <app-edit></app-edit>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'delete'">
+      <app-delete></app-delete>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'search'">
+      <app-search></app-search>
+    </mat-toolbar>
+    <mat-toolbar *ngIf="showTool == 'dimension'">
       <app-dimension></app-dimension>
-    </mat-toolbar-row>
+    </mat-toolbar>
+ 
+  <mat-toolbar>
     <mat-toolbar-row>
+
+
       <span class='spacer'></span>
       <button mat-button *ngIf="selectedThought.level > 0" (click)="changeTool('dimension')">
         <i class="material-icons">add</i>Add</button>
@@ -47,4 +52,5 @@
       <span class='spacer'></span>
       <button mat-button>Complexity-App v.0.0.6</button>
     </mat-toolbar-row>
-</mat-toolbar>
+  </mat-toolbar>
+</div>

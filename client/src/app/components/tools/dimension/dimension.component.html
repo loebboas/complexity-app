@@ -1,4 +1,4 @@
-<div *ngIf="selectedThought.level > 0">
+<mat-toolbar-row *ngIf="selectedThought.level > 0">
 
     <form class="searchbar-form">
         <button mat-button [matMenuTriggerFor]="menuDimensions">Choose Dimension</button>
@@ -28,16 +28,16 @@
   
   
   
-  </div>
+  </mat-toolbar-row>
   
   
-  <div *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
+  <mat-toolbar-row *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
     You can't Add Thoughts on this level.
-  </div>
+  </mat-toolbar-row>
   
-  <div *ngIf="selectedThought.level == -1">
+  <mat-toolbar-row *ngIf="selectedThought.level == -1">
     Create new Persona: Public / Private
-  </div>
+  </mat-toolbar-row>
 
 
 

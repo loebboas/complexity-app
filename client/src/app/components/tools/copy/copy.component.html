@@ -1,4 +1,4 @@
-<div *ngIf="selectedThought.level > 0">
+<mat-toolbar-row *ngIf="selectedThought.level > 0">
 
   <form class="searchbar-form">
    
@@ -13,8 +13,8 @@
     </mat-form-field>
   </form>
  
-</div>
+</mat-toolbar-row>
 
-<div *ngIf="selectedThought.level <= 0">
+<mat-toolbar-row *ngIf="selectedThought.level <= 0">
   You can't copy Thoughts on this level.
-</div>
+</mat-toolbar-row>

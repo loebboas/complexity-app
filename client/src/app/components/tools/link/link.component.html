@@ -1,4 +1,4 @@
-<div *ngIf="selectedThought.level > 0">
+<mat-toolbar-row *ngIf="selectedThought.level > 0">
         <form class="searchbar-form">
             <mat-form-field class="searchbar-full-width">
               <input matInput placeholder="Link" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
@@ -11,8 +11,8 @@
             </mat-form-field>
           </form>
 
-        </div>
+        </mat-toolbar-row>
 
-<div *ngIf="selectedThought.level <= 0">
+<mat-toolbar-row *ngIf="selectedThought.level <= 0">
     You can't link Thoughts on this level.
-</div>
+</mat-toolbar-row>
