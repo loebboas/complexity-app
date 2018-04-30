@@ -8,6 +8,8 @@ import { Dimension } from '../../../models/dimension';
 import { Observable } from 'rxjs/Observable';
 import { Thought } from '../../../models/thought';
 import { User } from '../../../models/user';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: 'app-dimension',
@@ -61,8 +63,18 @@ export class DimensionComponent implements OnInit {
     //Autocomplete
     this.thoughtCtrl = new FormControl();
     this.newThought = new FormControl();
-  }
+    this.filteredThoughts = this.thoughtCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(thought => thought ? this.filterThoughts(thought) : this.thoughts.slice())
+      );
 
+  }
+  filterThoughts(label: string) {
+    this.lastInput = label;
+    return this.thoughts.filter(thought =>
+      thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
+  }
 
 
   onDimensionSubmit() {
@@ -77,8 +89,6 @@ export class DimensionComponent implements OnInit {
     if (this.selectedDimension.dimtype == "Number") { this.newDimension.val = this.newNumber };
     //Update Selected Thought with new Dimensions
     this.selectedThought.dimensions.unshift(this.newDimension);
-    console.log(this.newDimension);
-    console.log(this.selectedThought.dimensions);
     const editThought = {
       _id: this.selectedThought._id,
       editDimensions: this.selectedThought.dimensions
@@ -100,11 +110,19 @@ export class DimensionComponent implements OnInit {
       });
     });
   }
+  selectDimensionThought(thought) {
+    this.selectedDimension = new Dimension;
+    this.selectedDimension.app = thought.contexts[0]._id;
+    this.selectedDimension.starter = thought._id;
+    this.selectedDimension.label = thought.label;
+    this.selectedDimension.dimtype = "Name";
 
-  addDimension(userDimension) {
-    if (userDimension.dimtype == "Number") { this.addNumber = true; this.addDate = false; };
-    if (userDimension.dimtype == "Date") { this.addDate = true; this.addNumber = false; };
-    this.selectedDimension = userDimension;
+  }
+
+  changeType(label: String) {
+    if (label == "Number") { this.addNumber = true; this.addDate = false; };
+    if (label == "Date") { this.addDate = true; this.addNumber = false; };
+    this.selectedDimension.dimtype = label;
   }
 
 
@@ -112,14 +130,11 @@ export class DimensionComponent implements OnInit {
 
     //GET USER Data
     this.authService.getProfile().subscribe(profile => {
-      console.log(profile.user);
-      console.log(profile.user.private[0].dimensions);
       this.user = profile.user;
-      this.userDimensions = profile.user.private[0].dimensions;
-      console.log(this.user);
-      console.log(this.userDimensions);
     });
 
+    this.internalService.loadThoughts();
+    this.internalService.thoughtObs.subscribe(res => this.thoughts = res);
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
     this.internalService.selContextObs.subscribe(res => this.context = res);
     this.internalService.selContextsObs.subscribe(res => this.contexts = res);

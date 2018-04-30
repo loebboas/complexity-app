@@ -1,11 +1,23 @@
 <mat-toolbar-row *ngIf="selectedThought.level > 0">
 
     <form class="searchbar-form">
-        <button mat-button [matMenuTriggerFor]="menuDimensions">Choose Dimension</button>
+        <mat-form-field class="searchbar-full-width">
+          <input matInput placeholder="Link" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="selectDimensionThought(thought)">
+              <span>{{ thought.label }}</span>
+              <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+
+
+    <form class="searchbar-form">
+        <button mat-button [matMenuTriggerFor]="menuDimensions">Choose Type</button>
         <mat-menu #menuDimensions="matMenu" [overlapTrigger]="false">
-          <button *ngFor="let dimension of userDimensions" mat-menu-item (click)="addDimension(dimension)">
-            <i *ngIf="dimension.dimtype == 'Date'" class="material-icons">event</i>
-            <i *ngIf="dimension.dimtype == 'Number'" class="material-icons">favorite</i>{{ dimension.label }}</button>
+          <button mat-menu-item (click)="changeType('Date')"><i class="material-icons">event</i>Date</button>
+          <button mat-menu-item (click)="changeType('Number')"><i class="material-icons">timeline</i>Number</button>
         </mat-menu>
    
 
