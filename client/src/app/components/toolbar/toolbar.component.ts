@@ -6,11 +6,11 @@ import { InternalService } from '../../services/internal.service';
 import { User } from '../../models/user';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  selector: 'app-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.css']
 })
-export class FooterComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
   username; userId; starterId;
   selectedThought: Thought;
   user: User;

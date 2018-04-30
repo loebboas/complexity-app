@@ -19,7 +19,7 @@ import { MaterialModule } from './material.module';
 import { DraggableModule } from './draggable/draggable.module';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { InternalService } from './services/internal.service';
-import { FooterComponent } from './components/footer/footer.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SearchComponent } from './components/tools/search/search.component';
 import { EditComponent } from './components/tools/edit/edit.component';
 import { CopyComponent } from './components/tools/copy/copy.component';
@@ -39,7 +39,7 @@ import { DimensionComponent } from './components/tools/dimension/dimension.compo
     ProfileComponent,
     NewComponent,
     ViewerComponent,
-    FooterComponent,
+    ToolbarComponent,
     SearchComponent,
     EditComponent,
     CopyComponent,
