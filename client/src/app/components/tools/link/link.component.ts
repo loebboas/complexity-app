@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators/map';
 @Component({
   selector: 'app-link',
   templateUrl: './link.component.html',
-  styleUrls: ['./link.component.css']
+  styleUrls: ['./link.component.scss']
 })
 export class LinkComponent implements OnInit {
   thoughts: Thought[];

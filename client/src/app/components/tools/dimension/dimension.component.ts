@@ -51,8 +51,12 @@ export class DimensionComponent implements OnInit {
   selectedDimension: Dimension;
   addNumber = false;
   addDate = false;
+  addTag = false;
   newDimension;
   newNumber;
+  newTag;
+  newLabel;
+  addDimension = false;
 
   constructor(private dataService: DataService,
     private formBuilder: FormBuilder,
@@ -61,32 +65,21 @@ export class DimensionComponent implements OnInit {
     private router: Router
   ) {
     //Autocomplete
-    this.thoughtCtrl = new FormControl();
     this.newThought = new FormControl();
-    this.filteredThoughts = this.thoughtCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(thought => thought ? this.filterThoughts(thought) : this.thoughts.slice())
-      );
-
-  }
-  filterThoughts(label: string) {
-    this.lastInput = label;
-    return this.thoughts.filter(thought =>
-      thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
   }
 
 
   onDimensionSubmit() {
     //Create New Dimension
     this.newDimension = new Dimension;
-    this.newDimension.app = this.selectedDimension.app;
-    this.newDimension.starter = this.selectedDimension.starter;
-    this.newDimension.label = this.selectedDimension.label;
+    this.newDimension.app = "something";
+    this.newDimension.starter = "somethingElse";
+    this.newDimension.label = this.newLabel;
     this.newDimension.dimtype = this.selectedDimension.dimtype;
     //Create Value, depending on Input
     if (this.selectedDimension.dimtype == "Date") { this.newDimension.val = this.newDate.toString() };
     if (this.selectedDimension.dimtype == "Number") { this.newDimension.val = this.newNumber };
+    if (this.selectedDimension.dimtype == "Tag") { this.newDimension.val = this.newTag };
     //Update Selected Thought with new Dimensions
     this.selectedThought.dimensions.unshift(this.newDimension);
     const editThought = {
@@ -95,39 +88,21 @@ export class DimensionComponent implements OnInit {
     };
     this.dataService.editThought(editThought).subscribe(data => {
       //Update Dimension-Content with new Link
-      this.dataService.getSingleThought(this.selectedDimension.starter).subscribe(data => {
-        this.contextContent = data.thought.contents;
-        this.contextContent.push(this.selectedThought._id);
-        const editDimThought = {
-          _id: data.thought._id,
-          editContents: this.contextContent
-        };
+      this.internalService.changeThought(this.selectedThought._id);
 
-        this.dataService.editThought(editDimThought).subscribe(data => {
-          this.internalService.changeThought(this.selectedThought._id);
-            this.internalService.changeTool("none");
-        });
-      });
     });
   }
-  selectDimensionThought(thought) {
-    this.selectedDimension = new Dimension;
-    this.selectedDimension.app = thought.contexts[0]._id;
-    this.selectedDimension.starter = thought._id;
-    this.selectedDimension.label = thought.label;
-    this.selectedDimension.dimtype = "Name";
 
-  }
-
-  changeType(label: String) {
-    if (label == "Number") { this.addNumber = true; this.addDate = false; };
-    if (label == "Date") { this.addDate = true; this.addNumber = false; };
+  changeType(label: string) {
+    if (label == "Number") { this.addNumber = true; this.addDate = false; this.addTag = false; };
+    if (label == "Date") { this.addDate = true; this.addNumber = false; this.addTag = false; };
+    if (label == "Tag") { this.addDate = false; this.addNumber = false; this.addTag = true; };
     this.selectedDimension.dimtype = label;
   }
 
 
   ngOnInit() {
-
+this.selectedDimension = new Dimension;
     //GET USER Data
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;

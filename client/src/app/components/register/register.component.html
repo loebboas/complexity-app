@@ -49,6 +49,10 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup" (ngSubmit)="onPersonaSubmit()">
           <ng-template matStepLabel>Create your Persona</ng-template>
+          <p>Before we start, you'll need to create your first "Persona". A Persona is like a Vessel, a place, where you can store your thoughts.</p>
+          <br><p>This Persona is private, which means, that only you can see it. You can edit it later and add more.</p>
+          <p>But let's start with your first Persona...</p>
+
           <mat-form-field>
             <input matInput placeholder="Name your Persona" formControlName="persona" required>
           </mat-form-field>
@@ -60,8 +64,8 @@
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup" (ngSubmit)="onAbilitiesSubmit()">
-          <ng-template matStepLabel>Choose your Abilities</ng-template>
-          (There are just the following Abilities at the moment:)
+          <ng-template matStepLabel>Start</ng-template>
+            <p>You will start with three Categories, in which you can organise your thoughts. You can change or even delete them anytime!</p>
           <mat-list>
             <mat-list-item>
               <button mat-button color="primary">Diary</button>
@@ -73,7 +77,7 @@
             </mat-list-item>
             <mat-list-item>
               <button mat-button color="primary">Plans</button>
-              <button mat-button>Create complex Projects and set Goals within your Timeline</button>
+              <button mat-button>Create complex Projects and set Goals within your Timelines</button>
             </mat-list-item>
 
           </mat-list>

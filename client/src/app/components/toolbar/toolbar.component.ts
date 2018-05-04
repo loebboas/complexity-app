@@ -31,6 +31,9 @@ export class ToolbarComponent implements OnInit {
     this.internalService.changeTool(this.showTool);
   }
 
+  changeView(label: string){
+    this.internalService.changeShowAs(label);
+  }
   onLogoutClick() {
     this.authService.logout(); // Logout user
     this.router.navigate(['/']); // Navigate back to home page

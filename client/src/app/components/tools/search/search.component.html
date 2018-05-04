@@ -1,14 +1,13 @@
 <mat-toolbar-row *ngIf="selectedThought">
-    <form class="searchbar-form">
-        <mat-form-field class="searchbar-full-width">
-          <input matInput placeholder="Search" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="goToThought(thought)">
-              <span>{{ thought.label }}</span>
-              <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
-
+  <form class="search-form">
+    <mat-form-field class="search-full-width">
+      <input matInput placeholder="Search" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="goToThought(thought)">
+          <span>{{ thought.label }}</span>
+          <small *ngFor="let context of thought.contexts"> | {{ context.label }}</small>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 </mat-toolbar-row>

@@ -164,7 +164,7 @@ export class RegisterComponent implements OnInit {
 
     const infcl = {
       label: "Infinity Cloud",
-      level: -2,
+      level: 1,
       color: "FFFFFF",
       clicks: 0,
       user: this.userId,
@@ -181,7 +181,7 @@ export class RegisterComponent implements OnInit {
 
       const dauser = {
         label: this.firstFormGroup.get('username').value,
-        level: -1,
+        level: 2,
         color: "FFFFFF",
         clicks: 0,
         showAs: "grid",
@@ -199,12 +199,12 @@ export class RegisterComponent implements OnInit {
 
         const rooms = { // rename as "Other Users"
           label: "Friends",
-          level: -1,
+          level: 3,
           color: "FFFFFF",
           clicks: 0,
           showAs: "grid",
           user: this.userId,
-          contexts: [{ _id: this.infcl }],
+          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
           dimensions: [],
           texture: "",
           form: "circle",
@@ -213,7 +213,7 @@ export class RegisterComponent implements OnInit {
 
         const ptho = {  // rename as "Trending"
           label: "Trending", // input field
-          level: -1,
+          level: 2,
           color: "FFFFFF",
           clicks: 0,
           showAs: "grid",
@@ -230,12 +230,12 @@ export class RegisterComponent implements OnInit {
 
         const compApp = {  // rename as "User/Username or Persona"
           label: this.secondFormGroup.get('persona').value,
-          level: 0,
+          level: 3,
           color: "FFFFFF",
           clicks: 0,
           showAs: "grid",
           user: this.userId,
-          contexts: [{ _id: this.dauser }],
+          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
           dimensions: [],
           texture: "",
           form: "circle",
@@ -252,28 +252,28 @@ export class RegisterComponent implements OnInit {
 
               const editInf = {
                 _id: this.infcl,
-                editContexts: [{ _id: this.infcl }],
-                editContents: [{ _id: this.dauser }, { _id: this.rooms }, { _id: this.ptho }]
+                editContexts: [],
+                editContents: [{ _id: this.dauser }, { _id: this.ptho }]
               };
               this.dataService.editThought(editInf).subscribe(data => {
 
                 const editdauser = {
                   _id: this.dauser,
-                  editContents: [{ _id: this.startId }]
+                  editContents: [{ _id: this.startId }, , { _id: this.rooms }]
                 };
                 this.dataService.editThought(editdauser).subscribe(data => {
 
 
-                  //LEVEL 1
+                  //LEVEL 3
 
                   const memories = { // rename as "Diary"
                     label: "Diary",
-                    level: 1,
+                    level: 4,
                     color: "FFFFFF",
                     clicks: 0,
                     showAs: "grid",
                     user: this.userId,
-                    contexts: [{ _id: this.startId }],
+                    contexts: [{ _id: this.startId },{ _id: this.dauser }, { _id: this.infcl }],
                     dimensions: [],
                     texture: "",
                     form: "circle",
@@ -282,12 +282,12 @@ export class RegisterComponent implements OnInit {
 
                   const myroom = { // rename as "Thoughts"
                     label: "Thoughts",
-                    level: 1,
+                    level: 4,
                     color: "FFFFFF",
                     clicks: 0,
                     showAs: "grid",
                     user: this.userId,
-                    contexts: [{ _id: this.startId }],
+                    contexts: [{ _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                     dimensions: [],
                     texture: "",
                     form: "circle",
@@ -296,12 +296,12 @@ export class RegisterComponent implements OnInit {
 
                   const todo = {
                     label: "Plans",
-                    level: 1,
+                    level: 4,
                     color: "FFFFFF",
                     clicks: 0,
                     showAs: "grid",
                     user: this.userId,
-                    contexts: [{ _id: this.startId }],
+                    contexts: [{ _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                     dimensions: [],
                     texture: "",
                     form: "circle",
@@ -322,12 +322,12 @@ export class RegisterComponent implements OnInit {
 
                         const diary = { //Rename as "Feelings"
                           label: "Feelings",
-                          level: 2,
+                          level: 5,
                           color: "FFFFFF",
                           clicks: 0,
                           showAs: "grid",
                           user: this.userId,
-                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
+                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                           dimensions: [],
                           texture: "",
                           form: "circle",
@@ -336,12 +336,12 @@ export class RegisterComponent implements OnInit {
 
                         const timeline = {
                           label: "Memories",
-                          level: 2,
+                          level: 5,
                           color: "FFFFFF",
                           clicks: 0,
-                          showAs: "timeArray",
+                          showAs: "grid",
                           user: this.userId,
-                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }],
+                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                           dimensions: [],
                           texture: "",
                           form: "circle",
@@ -350,12 +350,12 @@ export class RegisterComponent implements OnInit {
 
                         const goals = {
                           label: "Goals",
-                          level: 2,
+                          level: 5,
                           color: "FFFFFF",
                           clicks: 0,
-                          showAs: "timeArray",
+                          showAs: "grid",
                           user: this.userId,
-                          contexts: [{ _id: this.todoId }, { _id: this.startId }],
+                          contexts: [{ _id: this.todoId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                           dimensions: [],
                           texture: "",
                           form: "circle",
@@ -364,12 +364,12 @@ export class RegisterComponent implements OnInit {
 
                         const projects = {
                           label: "Projects",
-                          level: 2,
+                          level: 5,
                           color: "FFFFFF",
                           clicks: 0,
                           showAs: "grid",
                           user: this.userId,
-                          contexts: [{ _id: this.todoId }, { _id: this.startId }],
+                          contexts: [{ _id: this.todoId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
                           dimensions: [],
                           texture: "",
                           form: "circle",

@@ -1,20 +1,20 @@
 import { Dimension } from "./dimension";
 
 export class Thought {    
-        _id: String;
-        level: Number;
-        label: String;
-        color: String;
-        clicks: Number;
+        _id: string;
+        level: number;
+        label: string;
+        color: string;
+        clicks: number;
         dimensions: Dimension[];
-        showAs: String;
-        user: String;
+        showAs: string;
+        user: string;
         contexts: any[];
         contents: any[]; 
-        __v: Number;
-        texture: String;
-        form: String;
-        privacy: String;
+        __v: number;
+        texture: string;
+        form: string;
+        privacy: string;
 }
 
 

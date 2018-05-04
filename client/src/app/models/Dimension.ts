@@ -1,12 +1,12 @@
 
 
 export class Dimension {    
-        _id: String;
-        starter: String;
-        dimtype: String; 
-        app: String;
-        label: String;
-        val: String;
+        _id: string;
+        starter: string;
+        dimtype: string; 
+        app: string;
+        label: string;
+        val: string;
 }
 
 

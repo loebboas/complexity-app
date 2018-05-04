@@ -27,6 +27,10 @@ import { LinkComponent } from './components/tools/link/link.component';
 import { DeleteComponent } from './components/tools/delete/delete.component';
 import { MatNativeDateModule } from '@angular/material';
 import { DimensionComponent } from './components/tools/dimension/dimension.component';
+import { TimelineComponent } from './components/views/timeline/timeline.component';
+import { NetworkComponent } from './components/views/network/network.component';
+import { GraphComponent } from './components/views/graph/graph.component';
+
 
 
 @NgModule({
@@ -45,7 +49,10 @@ import { DimensionComponent } from './components/tools/dimension/dimension.compo
     CopyComponent,
     LinkComponent,
     DeleteComponent,
-    DimensionComponent
+    DimensionComponent,
+    TimelineComponent,
+    NetworkComponent,
+    GraphComponent
   ],
   imports: [
     ReactiveFormsModule,

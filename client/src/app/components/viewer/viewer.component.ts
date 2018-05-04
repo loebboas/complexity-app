@@ -5,6 +5,7 @@ import { InternalService } from '../../services/internal.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SortEvent } from '../../draggable/sortable-list.directive';
+import { User } from '../../models/user';
 
 
 
@@ -14,6 +15,7 @@ import { SortEvent } from '../../draggable/sortable-list.directive';
   styleUrls: ['./viewer.component.css']
 })
 export class ViewerComponent implements OnInit {
+  user: User;
   personas: any;
   selectedThought: Thought;
   contexts: Thought[];
@@ -23,6 +25,8 @@ export class ViewerComponent implements OnInit {
   username: String;
   userId: String;;
   starterId: String;
+  idCounter: 5;
+  
   sort(event: SortEvent) {
     const current = this.contents[event.currentIndex];
     const swapWith = this.contents[event.newIndex];
@@ -46,7 +50,6 @@ export class ViewerComponent implements OnInit {
     updateThought(sortableList: any[]) {
       //UPDATE CONTENT OF CHOSENTHOUGHT
       const newContent = [];
-      console.log(sortableList);
       sortableList.forEach(element => {
         newContent.unshift(element._id);
       });
@@ -67,16 +70,22 @@ export class ViewerComponent implements OnInit {
 
    ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
-      
     
       //GET THOUGHTS
       this.internalService.changeThought(profile.user.private[0].persona); 
-     });
+     
     this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
     this.internalService.selContentsObs.subscribe(res => this.contents = res);
-    this.internalService.selContextObs.subscribe(res => this.context = res);
+   
     this.internalService.selContextsObs.subscribe(res => this.contexts = res);
     this.internalService.selSiblingsObs.subscribe(res => this.siblings = res);
+
+    this.internalService.selContextObs.subscribe(res => {  this.context = res;     });
+  });
+        // create an array with nodes
+ 
+
+
     }
     
 }

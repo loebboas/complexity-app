@@ -15,8 +15,8 @@ export class InternalService {
   thoughtObs = this.thoughts.asObservable();
 
   public selThought = new BehaviorSubject<Thought>(null);
-      selThoughtObs = this.selThought.asObservable();
-  
+  selThoughtObs = this.selThought.asObservable();
+
   public selContents = new BehaviorSubject<Thought[]>([]);
   selContentsObs = this.selContents.asObservable();
 
@@ -29,44 +29,38 @@ export class InternalService {
   public selSiblings = new BehaviorSubject<Thought[]>([]);
   selSiblingsObs = this.selSiblings.asObservable();
 
-  
-  public selTool = new BehaviorSubject<String>("none");
-      selToolObs = this.selTool.asObservable();
 
-  constructor(private dataService: DataService) { 
+  public selTool = new BehaviorSubject<String>("none");
+  selToolObs = this.selTool.asObservable();
+
+  constructor(private dataService: DataService) {
   }
 
   changeThought(id) {
     this.dataService.getThought(id).subscribe(data => {  //Load Populated Thought
-    this.selThought.next(data.thought);    //Save Selected Thought
+      this.selThought.next(data.thought);    //Save Selected Thought
 
-    this.dataService.getContent(data.thought.contexts[0]._id).subscribe(data => { //Get content of the first Context
-      this.selSiblings.next(data.thought.contents);              //Save as Siblings
-    });
-      this.selContext.next(data.thought.contexts.pop());   //Remove Last Context as Main Context
-      data.thought.contexts.reverse();
-    this.selContexts.next(data.thought.contexts);       // Save Rest of Contexts
+      this.dataService.getContent(data.thought.contexts[0]._id).subscribe(data => { //Get content of the first Context
+        data.thought.contents.filter(content => content._id == id);
+        this.selSiblings.next(data.thought.contents);              //Save as Siblings
+      });
 
-    if(data.thought.showAs == "timearray") { // If Timearray
-      this.dataService.getTimeArray(data.thought._id).subscribe(res => {
-        this.selContents.next(res.timeArray);
-      })
-    } else {
-    this.selContents.next(data.thought.contents);
-  }
-  })
+    })
   }
   changeTool(tool: String) {
     this.selTool.next(tool);
   }
-  
-  changeShowAs(thought) {
-    this.selThought.next(thought);
+
+  changeShowAs(label) {
+    const viewThought = this.selThought.getValue();
+    viewThought.showAs = label;
+    this.selThought.next(viewThought);
   }
+
 
   loadThoughts() {
     this.dataService.getAllThought().subscribe(data => {
-    this.thoughts.next(data.allThought);
+      this.thoughts.next(data.allThought);
     })
   }
 }
