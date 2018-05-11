@@ -297,7 +297,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".context {\r\n    font-size: 25px;\r\n\r\n}\r\n.card {\r\n    margin-right: 20px;\r\n    margin-left: 20px;\r\n}\r\n.mat-success {\r\n    background-color: white;\r\n    color: #fff;\r\n}"
+module.exports = ".context {\r\n    font-size: 25px;\r\n\r\n}\r\n.card {\r\n    margin-right: 20px;\r\n    margin-left: 20px;\r\n    text-align: center;\r\n}\r\n.mat-success {\r\n    background-color: white;\r\n    color: #fff;\r\n}"
 
 /***/ }),
 
@@ -308,7 +308,7 @@ module.exports = ".context {\r\n    font-size: 25px;\r\n\r\n}\r\n.card {\r\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"card\">\r\n\t<mat-card-title>Welcome to the Complexity-App</mat-card-title>\r\n\t<mat-card-content>\r\n\t\tThe Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.\r\n\t\t<br>\r\n\t\t<br> At the moment this site is still in development.\r\n\t\t<br> For more information contact loebboas -@- gmail.com.\r\n\t</mat-card-content>\r\n</mat-card>\r\n<mat-card class=\"card\">\r\n\t<mat-card-title>About us</mat-card-title>\r\n\t<mat-card-content>\r\n\t\tThis site is a project of the Complexity association.\r\n\t\t<br> Check out a different Site which does not yet exist for more information.\r\n\t</mat-card-content>\r\n</mat-card>\r\n<div *ngIf=\"!authService.loggedIn()\">\r\n\t<button mat-button routerLink=\"login\">Login</button>\r\n\t<button mat-button routerLink=\"register\"> Register</button>\r\n</div>\r\n<div *ngIf=\"authService.loggedIn()\">\r\n\t<button mat-button routerLink=\"../viewer\">viewer</button>\r\n\t<button mat-button (click)=\"onLogoutClick()\">Logout</button>\r\n</div>"
+module.exports = "<mat-card class=\"card\">\r\n\t<mat-card-title>Welcome to the Complexity-App</mat-card-title>\r\n\t<mat-card-content>\r\n\t\tThe Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.\r\n\t\t<br>\r\n\t\t<br> At the moment this site is still in development.\r\n\t\t<br> For more information contact loebboas -@- gmail.com.\r\n\t</mat-card-content>\r\n\r\n\t<mat-card-title>About us</mat-card-title>\r\n\t<mat-card-content>\r\n\t\tThis site is a project of the Complexity association.\r\n\t\t<br> Check out a different Site which does not yet exist for more information.\r\n\t</mat-card-content>\r\n</mat-card>"
 
 /***/ }),
 
@@ -588,7 +588,7 @@ var NavbarComponent = /** @class */ (function () {
                 shape: 'dot',
                 size: 15,
                 font: {
-                    size: 32,
+                    size: 15,
                     color: '#111111'
                 },
                 borderWidth: 2,
@@ -646,7 +646,7 @@ var NavbarComponent = /** @class */ (function () {
     };
     NavbarComponent.prototype.onRoomChange = function (room) {
         if (this.lastRoom) {
-            if (this.lastRoom != room) {
+            if (this.lastRoom._id != room._id) {
                 this.removeRoomNode(room);
                 this.drawRoomNode(room);
             }
@@ -669,11 +669,7 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.prototype.onThoughtChange = function (thought) {
-        if (this.selectedThought) {
-        }
-        else {
-        }
-        this.selectedThought = thought;
+        // Make selectedThought Node visible differently
     };
     NavbarComponent.prototype.onNodeChange = function (node) { };
     //Drawing Functions
@@ -705,11 +701,11 @@ var NavbarComponent = /** @class */ (function () {
     };
     NavbarComponent.prototype.drawUserContent = function () {
         this.showUserContent = true;
-        this.nodes.add({ id: 4, label: "My Networks", group: 3, first: true }); //Add Networks Node
+        this.nodes.add({ id: 4, label: "My Networks", group: 8, first: true }); //Add Networks Node
         this.edges.add({ from: this.user._id, to: 4, id: "4l" }); //Add Edge from User to Networks
-        this.nodes.add({ id: 5, label: "My Rooms", group: 4, first: true }); //Add Rooms Node
+        this.nodes.add({ id: 5, label: "My Rooms", group: 9, first: true }); //Add Rooms Node
         this.edges.add({ from: this.user._id, to: 5, id: "5l" }); //Add Edge from User to Rooms
-        this.nodes.add({ id: 6, label: "My Friends", group: 5, first: true }); //Add Friends Node
+        this.nodes.add({ id: 6, label: "My Friends", group: 10, first: true }); //Add Friends Node
         this.edges.add({ from: this.user._id, to: 6, id: "6l" }); //Add Edge from User to Friends
     };
     NavbarComponent.prototype.removeUserContent = function () {
@@ -724,7 +720,7 @@ var NavbarComponent = /** @class */ (function () {
         var _this = this;
         this.user.private.forEach(function (network) {
             var i = 0;
-            _this.nodes.add({ id: network._id, label: network.label, group: 4 }); //Add Networks Nodes
+            _this.nodes.add({ id: network._id, label: network.label, group: 3 }); //Add Networks Nodes
             _this.edges.add({ from: 4, to: network._id, id: "networks" + i });
         });
     };
@@ -741,7 +737,7 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.prototype.drawMyRooms = function () {
         var _this = this;
         this.user.rooms.forEach(function (room) {
-            room._id = room._id + "-Link";
+            room._id = room._id + "-Link"; //Create a New ID for the Link 
             var i = 0; //If Room isnt selected Room
             _this.nodes.add({ id: room._id, label: room.label, group: 4 }); //Add Room 
             _this.edges.add({ from: 5, to: room._id, id: "rooms" + i }); //Add Edge from MyRooms to Room 
@@ -749,12 +745,14 @@ var NavbarComponent = /** @class */ (function () {
     };
     NavbarComponent.prototype.removeMyRooms = function () {
         var _this = this;
+        console.log(this.nodes);
         this.user.rooms.forEach(function (room) {
-            room._id = room._id + "-Link";
             var i = 0; //If Room isnt selected Room
-            _this.nodes.remove(room._id); //Add Room 
+            console.log(room._id);
+            _this.nodes.remove(room._id); //Remove Roomlink 
             _this.edges.remove("rooms" + i); //Add Edge from MyRooms to Room 
         });
+        console.log(this.nodes);
     };
     NavbarComponent.prototype.drawMyFriends = function () {
         var _this = this;
@@ -776,10 +774,10 @@ var NavbarComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getContent(id).subscribe(function (data) {
             _this.showThoughts.push(data['thought']);
-            if (data['thought'].contents.length) {
+            if (data['thought'].contents.length > 0) {
                 data['thought'].contents.forEach(function (content) {
                     var i = 0;
-                    _this.nodes.add({ id: content._id, label: content.label, group: 8 }); // Add newRoom Node¨
+                    _this.nodes.add({ id: content._id, label: content.label, group: 3 }); // Add newRoom Node¨
                     _this.edges.add({ from: data['thought']._id, to: content._id, id: content._id + "" + i });
                 });
             }
@@ -821,6 +819,7 @@ var NavbarComponent = /** @class */ (function () {
         } }); //Subscribe to selected Room, onRoomChange
         this.internalService.selectedThoughtObs.subscribe(function (thought) { if (_this.selectedRoom) {
             _this.onThoughtChange(thought);
+            console.log(thought);
         } }); //Subscribe to selected Room, onRoomChange
         this.internalService.selectedNodeObs.subscribe(function (node) { if (_this.user) {
             _this.onNodeChange(node);
@@ -834,69 +833,79 @@ var NavbarComponent = /** @class */ (function () {
         // this.showContentNodes(this.nodes.get(params.nodes[0]));
         //});
         this.network.on('click', function (params) {
-            var selectedNode = _this.nodes.get(params.nodes[0]);
-            if (selectedNode['id'] == _this.user._id) {
-                if (_this.showUserContent) {
-                    _this.removeUserContent();
-                    _this.showUserContent = false;
-                }
-                else {
-                    _this.drawUserContent();
-                    _this.showUserContent = true;
-                }
-            }
-            else if (selectedNode['id'] == 4) {
-                if (_this.showMyNetworks) {
-                    _this.removeMyNetworks();
-                    _this.showMyNetworks = false;
-                }
-                else {
-                    _this.drawMyNetworks();
-                    _this.showMyNetworks = true;
-                }
-            }
-            else if (selectedNode['id'] == 5) {
-                if (_this.showMyRooms) {
-                    _this.removeMyRooms();
-                    _this.showMyRooms = false;
-                }
-                else {
-                    _this.drawMyRooms();
-                    _this.showMyRooms = true;
-                }
-            }
-            else if (selectedNode['id'] == 6) {
-                if (_this.showMyFriends) {
-                    _this.removeMyFriends();
-                    _this.showMyFriends = false;
-                }
-                else {
-                    _this.drawMyFriends();
-                    _this.showMyFriends = true;
-                }
-            }
-            else {
-                if (_this.showThoughts.length > 0) {
-                    var selectedThought = _this.showThoughts.filter(function (thought) { return thought._id == selectedNode['id']; });
-                    if (selectedThought.length > 0) {
-                        _this.removeThoughtContent(selectedThought[0]);
+            if (params.nodes.length > 0) {
+                var selectedNode_1 = _this.nodes.get(params.nodes[0]);
+                if (selectedNode_1['id'] == _this.user._id) {
+                    if (_this.showUserContent) {
+                        _this.removeUserContent();
+                        _this.showUserContent = false;
                     }
                     else {
-                        _this.drawThoughtContent(selectedNode['id']);
+                        _this.drawUserContent();
+                        _this.showUserContent = true;
                     }
                 }
-                else {
-                    _this.drawThoughtContent(selectedNode['id']);
+                else if (selectedNode_1['id'] == 4) {
+                    if (_this.showMyNetworks) {
+                        _this.removeMyNetworks();
+                        _this.showMyNetworks = false;
+                    }
+                    else {
+                        _this.drawMyNetworks();
+                        _this.showMyNetworks = true;
+                    }
+                }
+                else if (selectedNode_1['id'] == 5) {
+                    if (_this.showMyRooms) {
+                        _this.removeMyRooms();
+                        _this.showMyRooms = false;
+                    }
+                    else {
+                        _this.drawMyRooms();
+                        _this.showMyRooms = true;
+                    }
+                }
+                else if (selectedNode_1['id'] == 6) {
+                    if (_this.showMyFriends) {
+                        _this.removeMyFriends();
+                        _this.showMyFriends = false;
+                    }
+                    else {
+                        _this.drawMyFriends();
+                        _this.showMyFriends = true;
+                    }
+                }
+                else if (selectedNode_1['group'] == 3) {
+                    if (_this.showThoughts.length > 0) {
+                        var selectedThought = _this.showThoughts.filter(function (thought) { return thought._id == selectedNode_1['id']; });
+                        if (selectedThought.length > 0) {
+                            _this.removeThoughtContent(selectedThought[0]);
+                        }
+                        else {
+                            _this.drawThoughtContent(selectedNode_1['id']);
+                            _this.internalService.changeThought(selectedNode_1['id']);
+                        }
+                    }
+                    else {
+                        _this.drawThoughtContent(selectedNode_1['id']);
+                        _this.internalService.changeThought(selectedNode_1['id']);
+                    }
+                }
+                else if (selectedNode_1['group'] == 4) {
+                    var roomId = selectedNode_1['id'].substring(0, selectedNode_1['id'].length() - 5); //remove the "-Link" Addon
+                    _this.internalService.changeRoom(roomId);
                 }
             }
         });
         this.network.on('doubleClick', function (params) {
-            var selectedNode = _this.nodes.get(params.nodes[0]);
-            if (selectedNode['group'] = 4) {
-                console.log("you dblClicked a Room!");
-            }
-            else if (selectedNode['group'] = 5) {
-                console.log("you dblClicked Friends!");
+            if (params.nodes.length > 0) {
+                var selectedNode = _this.nodes.get(params.nodes[0]);
+                if (selectedNode['group'] = 4) {
+                    _this.internalService.changeRoom(selectedNode['id']);
+                }
+                else if (selectedNode['group'] = 5) {
+                    console.log("you dblClicked Friends!");
+                }
             }
         });
     };
@@ -1191,7 +1200,7 @@ var RegisterComponent = /** @class */ (function () {
             texture: "",
             form: "circle",
             privacy: "private",
-            grid: { colspan: 1, rowspan: 1, x: 1, y: 1, rows: 1, cols: 1 }
+            grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
         };
         this.dataService.newThought(network).subscribe(function (data) {
             _this.startNetwork = data['thought'];
@@ -1220,7 +1229,7 @@ var RegisterComponent = /** @class */ (function () {
             texture: "",
             form: "circle",
             privacy: "private",
-            grid: { colspan: 1, rowspan: 1, x: 1, y: 1, rows: 1, cols: 1 }
+            grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
         };
         var plans = {
             label: "Plans",
@@ -1235,7 +1244,7 @@ var RegisterComponent = /** @class */ (function () {
             texture: "",
             form: "circle",
             privacy: "private",
-            grid: { colspan: 1, rowspan: 1, x: 1, y: 1, rows: 1, cols: 1 }
+            grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
         };
         this.dataService.newThought(diary).subscribe(function (data) {
             _this.diary = data['thought'];
@@ -1254,7 +1263,7 @@ var RegisterComponent = /** @class */ (function () {
                     texture: "",
                     form: "circle",
                     privacy: "private",
-                    grid: { colspan: 1, rowspan: 1, x: 1, y: 1, rows: 1, cols: 1 }
+                    grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
                 };
                 _this.dataService.newThought(goals).subscribe(function (data) {
                     _this.goals = data['thought'];
@@ -1385,7 +1394,7 @@ module.exports = ".spacer{\r\n    flex: 1 1 auto;\r\n   \r\n}\r\n\r\n\r\n.bot{\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n \r\n    <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n      <app-new></app-new>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'copy'\">\r\n      <app-copy></app-copy>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'link'\">\r\n      <app-link></app-link>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n      <app-edit></app-edit>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'delete'\">\r\n      <app-delete></app-delete>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n      <app-search></app-search>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n      <app-dimension></app-dimension>\r\n    </mat-toolbar>\r\n \r\n  <mat-toolbar>\r\n    <mat-toolbar-row *ngIf=\"selectedThought\">\r\n\r\n\r\n      <span class='spacer'></span>\r\n      <button mat-button matTooltip=\"Add\"  *ngIf=\"selectedThought.level > 2\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add</button>\r\n      <button mat-button matTooltip=\"New\" *ngIf=\"selectedThought.level > 1\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New</button>\r\n      <button mat-button matTooltip=\"Copy\" *ngIf=\"selectedThought.level > 2\" (click)=\"changeTool('copy')\">\r\n        <i class=\"material-icons\">add_box</i> Copy</button>\r\n      <button mat-button matTooltip=\"Link\" *ngIf=\"selectedThought.level > 2\" (click)=\"changeTool('link')\">\r\n        <i class=\"material-icons\">link</i> Link</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"selectedThought.level > 2\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Edit</button>\r\n        <button mat-button matTooltip=\"Edit\" *ngIf=\"selectedThought.level > 2\" [matMenuTriggerFor]=\"views\">\r\n            <i class=\"material-icons\">view_quilt</i> Change View</button>\r\n      <button mat-button matTooltip=\"Delete\" *ngIf=\"selectedThought.level > 2\" (click)=\"changeTool('delete')\">\r\n        <i class=\"material-icons\">delete_sweep</i> Delete</button>\r\n      <button mat-button matTooltip=\"Search\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n      <button mat-button matTooltip=\"{{ user.username | uppercase}}\" *ngIf=\"authService.loggedIn()\" [matMenuTriggerFor]=\"menu\">\r\n        <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n\r\n        <mat-menu #views=\"matMenu\" [overlapTrigger]=\"false\">\r\n            <button mat-menu-item (click)=\"changeView('timeline')\">Timeline</button>\r\n            <button mat-menu-item (click)=\"changeView('graph')\">Graph</button>\r\n            <button mat-menu-item (click)=\"changeView('grid')\">Network</button>\r\n          \r\n          </mat-menu>\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <!-- If LoggedIn -->\r\n        <button mat-menu-item routerLink=\"../../profile\">Profile</button>\r\n        <button mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
+module.exports = "<div>\r\n \r\n    <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n      <app-new></app-new>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'copy'\">\r\n      <app-copy></app-copy>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'link'\">\r\n      <app-link></app-link>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n      <app-edit></app-edit>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'delete'\">\r\n      <app-delete></app-delete>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n      <app-search></app-search>\r\n    </mat-toolbar>\r\n    <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n      <app-dimension></app-dimension>\r\n    </mat-toolbar>\r\n \r\n  <mat-toolbar>\r\n    <mat-toolbar-row>\r\n\r\n\r\n      <span class='spacer'></span>\r\n      <!-- Level: 0 = Networks -->\r\n      <div *ngIf=\"selectedThought\">\r\n      <button mat-button matTooltip=\"Add\"  *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add</button>\r\n      <button mat-button matTooltip=\"New\" *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New</button>\r\n      <button mat-button matTooltip=\"Copy\" *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('copy')\">\r\n        <i class=\"material-icons\">add_box</i> Copy</button>\r\n      <button mat-button matTooltip=\"Link\" *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('link')\">\r\n        <i class=\"material-icons\">link</i> Link</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Edit</button>\r\n        <button mat-button matTooltip=\"Edit\" *ngIf=\"selectedThought.level >= 0\" [matMenuTriggerFor]=\"views\">\r\n            <i class=\"material-icons\">view_quilt</i> Change View</button>\r\n      <button mat-button matTooltip=\"Delete\" *ngIf=\"selectedThought.level >= 0\" (click)=\"changeTool('delete')\">\r\n        <i class=\"material-icons\">delete_sweep</i> Delete</button>\r\n\r\n      </div>\r\n        <button mat-button matTooltip=\"Search\" *ngIf=\"!authService.loggedIn()\"  routerLink=\"../login\">\r\n          <i class=\"material-icons\">account_circle</i> Login</button>\r\n          <button mat-button matTooltip=\"Search\" *ngIf=\"!authService.loggedIn()\" routerLink=\"../register\">\r\n            <i class=\"material-icons\">edit</i> Register</button>\r\n      <button mat-button matTooltip=\"Search\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n      <button mat-button matTooltip=\"{{ user.username | uppercase}}\" *ngIf=\"authService.loggedIn()\" [matMenuTriggerFor]=\"menu\">\r\n        <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n\r\n        <mat-menu #views=\"matMenu\" [overlapTrigger]=\"false\">\r\n            <button mat-menu-item (click)=\"changeView('timeline')\">Timeline</button>\r\n            <button mat-menu-item (click)=\"changeView('graph')\">Graph</button>\r\n            <button mat-menu-item (click)=\"changeView('grid')\">Network</button>\r\n          \r\n          </mat-menu>\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <!-- If LoggedIn -->\r\n        <button mat-menu-item routerLink=\"../../profile\">Profile</button>\r\n        <button mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
 
 /***/ }),
 
@@ -1702,7 +1711,7 @@ module.exports = ".searchbar-form {\r\n    min-width: 600px;\r\n    max-width: 1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar-row *ngIf=\"selectedThought.level > 0\">\r\n\r\n  <mat-form-field>\r\n    <input matInput #label [(ngModel)]=\"newLabel\" name=\"newLabel\" placeholder=\"Enter a Label\">\r\n  </mat-form-field>\r\n\r\n    <form>\r\n        <button mat-button [matMenuTriggerFor]=\"menuDimensions\">Choose Type of Dimension</button>\r\n        <mat-menu #menuDimensions=\"matMenu\" [overlapTrigger]=\"false\">\r\n          <button mat-menu-item (click)=\"changeType('Date')\"><i class=\"material-icons\">event</i> Date</button>\r\n          <button mat-menu-item (click)=\"changeType('Number')\"><i class=\"material-icons\">timeline</i> Number</button>\r\n          <button mat-menu-item (click)=\"changeType('Tag')\"><i class=\"material-icons\">flag</i> Tag</button>\r\n        </mat-menu>\r\n   \r\n\r\n\r\n      <mat-form-field *ngIf=\"addDate\">\r\n          <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"newDate\" name=\"newDate\" placeholder=\"Choose a date\">\r\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n          <mat-datepicker #picker></mat-datepicker>\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addNumber\">\r\n          <input matInput #number [(ngModel)]=\"newNumber\" name=\"newNumber\" placeholder=\"Enter a Number\">\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addTag\">\r\n            <input matInput #tag [(ngModel)]=\"newTag\" name=\"newTag\" placeholder=\"Add a Tag\">\r\n          </mat-form-field>\r\n  \r\n\r\n\r\n\r\n      <button mat-button (click)=\"onDimensionSubmit()\">Add a {{ selectedDimension.dimtype }} Dimension</button>\r\n  \r\n  \r\n    </form>\r\n  \r\n  \r\n  \r\n  </mat-toolbar-row>\r\n  \r\n  \r\n  <mat-toolbar-row *ngIf=\"selectedThought.level == 0 || selectedThought.level < -1\">\r\n    You can't Add Thoughts on this level.\r\n  </mat-toolbar-row>\r\n  \r\n  <mat-toolbar-row *ngIf=\"selectedThought.level == -1\">\r\n    Create new Persona: Public / Private\r\n  </mat-toolbar-row>\r\n\r\n\r\n\r\n"
+module.exports = "<mat-toolbar-row *ngIf=\"selectedThought.level >= 0\">\r\n\r\n  <mat-form-field>\r\n    <input matInput #label [(ngModel)]=\"newLabel\" name=\"newLabel\" placeholder=\"Enter a Label\">\r\n  </mat-form-field>\r\n\r\n    <form>\r\n        <button mat-button [matMenuTriggerFor]=\"menuDimensions\">Choose Type of Dimension</button>\r\n        <mat-menu #menuDimensions=\"matMenu\" [overlapTrigger]=\"false\">\r\n          <button mat-menu-item (click)=\"changeType('Date')\"><i class=\"material-icons\">event</i> Date</button>\r\n          <button mat-menu-item (click)=\"changeType('Number')\"><i class=\"material-icons\">timeline</i> Number</button>\r\n          <button mat-menu-item (click)=\"changeType('Tag')\"><i class=\"material-icons\">flag</i> Tag</button>\r\n        </mat-menu>\r\n   \r\n\r\n\r\n      <mat-form-field *ngIf=\"addDate\">\r\n          <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"newDate\" name=\"newDate\" placeholder=\"Choose a date\">\r\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n          <mat-datepicker #picker></mat-datepicker>\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addNumber\">\r\n          <input matInput #number [(ngModel)]=\"newNumber\" name=\"newNumber\" placeholder=\"Enter a Number\">\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addTag\">\r\n            <input matInput #tag [(ngModel)]=\"newTag\" name=\"newTag\" placeholder=\"Add a Tag\">\r\n          </mat-form-field>\r\n  \r\n\r\n\r\n<div *ngIf=\"addTag || addNumber || addDate\">\r\n      <button mat-button (click)=\"onDimensionSubmit()\">Add a Dimension</button>\r\n    </div>\r\n  \r\n    </form>\r\n  \r\n  \r\n  \r\n  </mat-toolbar-row>\r\n  \r\n  \r\n  <mat-toolbar-row *ngIf=\"selectedThought.level < 0\">\r\n    You can't Add Thoughts on this level.\r\n  </mat-toolbar-row>\r\n  \r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1761,21 +1770,25 @@ var DimensionComponent = /** @class */ (function () {
         this.newThought = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
     }
     DimensionComponent.prototype.onDimensionSubmit = function () {
-        var _this = this;
         //Create New Dimension
-        this.newDimension.label = this.newLabel;
-        this.newDimension.dimtype = this.selectedDimension.dimtype;
+        var _this = this;
+        this.newDimension = {
+            label: this.newLabel,
+            dimtype: "Tag",
+            val: "Something went wrong"
+        };
         //Create Value, depending on Input
-        if (this.selectedDimension.dimtype == "Date") {
+        if (this.addDate) {
             this.newDimension.val = this.newDate.toString();
+            this.newDimension.dimtype = "Date";
         }
         ;
-        if (this.selectedDimension.dimtype == "Number") {
-            this.newDimension.val = this.newNumber;
+        if (this.addNumber) {
+            this.newDimension.val = this.newNumber, this.newDimension.dimtype = "Date";
         }
         ;
-        if (this.selectedDimension.dimtype == "Tag") {
-            this.newDimension.val = this.newTag;
+        if (this.addTag) {
+            this.newDimension.val = this.newTag, this.newDimension.dimtype = "Date";
         }
         ;
         //Update Selected Thought with new Dimensions
@@ -1808,14 +1821,9 @@ var DimensionComponent = /** @class */ (function () {
             this.addTag = true;
         }
         ;
-        this.selectedDimension.dimtype = label;
     };
     DimensionComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //GET USER Data
-        this.authService.getProfile().subscribe(function (profile) {
-            _this.user = profile['user'];
-        });
         this.internalService.selectedThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
     };
     DimensionComponent = __decorate([
@@ -2073,7 +2081,7 @@ module.exports = ".searchbar-fullwidth {\r\n  width: 100%;\r\n}\r\n.searchbar-fo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar-row *ngIf=\"selectedThought.level > 2\">\r\n\r\n  <form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n      <input matInput placeholder=\"New\" aria-label=\"Thought\" [formControl]=\"newThought\">\r\n    </mat-form-field>\r\n    <button mat-button *ngIf=\"selectedThought.label\" (click)=\"onNewSubmit()\">Save Thought</button>\r\n\r\n\r\n  </form>\r\n  \r\n</mat-toolbar-row>\r\n<div *ngIf=\"selectedThought.level == 2\">\r\n    <form class=\"searchbar-form\">\r\n  <mat-toolbar-row>\r\n\r\n   \r\n      <mat-form-field class=\"searchbar-full-width\">\r\n        <input matInput placeholder=\"Create a new Persona\" aria-label=\"Thought\" [formControl]=\"newPersona\">\r\n      \r\n      </mat-form-field>\r\n     \r\n</mat-toolbar-row>\r\n<mat-toolbar-row>\r\n    <mat-slide-toggle>Make it a public Persona</mat-slide-toggle>\r\n    <button mat-button *ngIf=\"selectedThought.label\" (click)=\"onPersonaSubmit()\">Save Persona</button>  \r\n</mat-toolbar-row>\r\n</form>\r\n</div>\r\n\r\n\r\n<mat-toolbar-row *ngIf=\"selectedThought.level == 0 || selectedThought.level < -1\">\r\n  You can't Add Thoughts on this level.\r\n</mat-toolbar-row>\r\n\r\n<mat-toolbar-row *ngIf=\"selectedThought.level == -1\">\r\n  Create new Persona: Public / Private\r\n</mat-toolbar-row>"
+module.exports = "<mat-toolbar-row *ngIf=\"selectedThought.level >= 0\">\r\n\r\n  <form class=\"searchbar-form\">\r\n    <mat-form-field class=\"searchbar-full-width\">\r\n      <input matInput placeholder=\"New\" aria-label=\"Thought\" [formControl]=\"newThought\">\r\n    </mat-form-field>\r\n    <button mat-button *ngIf=\"selectedThought.label\" (click)=\"onNewSubmit()\">Save Thought</button>\r\n\r\n\r\n  </form>\r\n  \r\n</mat-toolbar-row>\r\n<div *ngIf=\"selectedThought.level < 0\">\r\n    <form class=\"searchbar-form\">\r\n  <mat-toolbar-row>\r\n\r\n   \r\n      <mat-form-field class=\"searchbar-full-width\">\r\n        <input matInput placeholder=\"Create a new Persona\" aria-label=\"Thought\" [formControl]=\"newPersona\">\r\n      \r\n      </mat-form-field>\r\n     \r\n</mat-toolbar-row>\r\n<mat-toolbar-row>\r\n    <mat-slide-toggle>Make it a public Persona</mat-slide-toggle>\r\n    <button mat-button *ngIf=\"selectedThought.label\" (click)=\"onPersonaSubmit()\">Save Persona</button>  \r\n</mat-toolbar-row>\r\n</form>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -2170,9 +2178,12 @@ var NewComponent = /** @class */ (function () {
         var _this = this;
         this.newContexts = []; // Reset Context
         this.dataService.getSingleThought(this.selectedThought._id).subscribe(function (data) {
+            console.log(data);
             _this.newContexts = data['thought'].contexts; //Save Context of selected Thought
             _this.newContexts.unshift(_this.selectedThought._id); //Add Selected Thought as Context
-            _this.contextContent = data['thought.contents'];
+            _this.contextContent = data['thought'].contents;
+            console.log(_this.contextContent);
+            _this.selectedThought.level++;
             var newThought = {
                 label: _this.newThought.value,
                 level: _this.selectedThought.level,
@@ -2185,11 +2196,14 @@ var NewComponent = /** @class */ (function () {
                 dimensions: _this.dimensions,
                 texture: "",
                 form: "circle",
-                privacy: "private"
+                privacy: "private",
+                grid: { cols: 1, rows: 1, colspan: 1, rowspan: 1, x: 0, y: 0 }
             };
+            _this.selectedThought.level--;
             _this.dataService.newThought(newThought).subscribe(function (data) {
-                _this.saveId = data['newId'];
+                _this.saveId = data['thought']._id;
                 _this.contextContent.push(_this.saveId);
+                console.log(_this.contextContent);
                 var editThought = {
                     _id: _this.selectedThought._id,
                     editContents: _this.contextContent
@@ -2463,7 +2477,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  graph works!\n</p>\n"
+module.exports = "<p>\r\n  graph works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -2526,7 +2540,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"card\">\n  <mat-card-title>{{thought.label}}</mat-card-title>\n  <mat-card-content>\n    <button mat-button *ngFor=\"let content of thought.contents\">{{ content.label }}</button>\n  </mat-card-content>\n</mat-card>"
+module.exports = "<mat-card class=\"card\">\r\n  <mat-card-title>{{thought.label}}</mat-card-title>\r\n  <mat-card-content>\r\n    <button mat-button *ngFor=\"let content of thought.contents\">{{ content.label }}</button>\r\n  </mat-card-content>\r\n</mat-card>"
 
 /***/ }),
 
@@ -2582,7 +2596,7 @@ var GraphGridComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card {\r\n    min-height: 99%;\r\n    height: 100%;\r\n    width: 100%;\r\n}"
+module.exports = ".grid-card {\r\n\r\n    height: 100%;\r\n    width: 100%;\r\n}"
 
 /***/ }),
 
@@ -2593,7 +2607,7 @@ module.exports = ".card {\r\n    min-height: 99%;\r\n    height: 100%;\r\n    wi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n <button mat-raised-button  (click)=\"gotoThought(thought._id)\">{{thought.label}}</button>\n  <mat-card-content class=\"card\">\n    <button mat-button *ngFor=\"let content of thought.contents\" (click)=\"gotoThought(content._id)\">{{ content.label }}</button>\n  </mat-card-content>\n</div>"
+module.exports = "<div [style.background]=thought.color class=\"grid-card\">\r\n <button mat-raised-button  (click)=\"gotoThought(thought._id)\">{{thought.label}}</button>\r\n  <mat-card-content>\r\n    <button mat-button *ngFor=\"let content of thought.contents\" (click)=\"gotoThought(content._id)\">{{ content.label }}</button>\r\n  </mat-card-content>\r\n</div>"
 
 /***/ }),
 
@@ -2655,7 +2669,7 @@ var GridGridComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".content {\r\n    height: 600px;\r\n    background: white;\r\n}\r\n.gridster {\r\n    border: white;\r\n    background: white;\r\n}\r\n.grid-grid {\r\n    text-align: center;\r\n}"
+module.exports = ".content {\r\n    height: 400px;\r\n    background: white;\r\n}\r\n.gridster {\r\n    border: white;\r\n    background: white;\r\n}\r\n.grid-grid {\r\n    text-align: center;\r\n    height: 100%\r\n}"
 
 /***/ }),
 
@@ -2666,7 +2680,7 @@ module.exports = ".content {\r\n    height: 600px;\r\n    background: white;\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<gridster [options]=\"config\" class=\"content\">\n  <div *ngFor=\"let content of contents\">\n    <gridster-item [item]=\"content.grid\">\n      <div *ngIf=\"content.showAs == 'timeline'\">\n        <app-timeline-grid></app-timeline-grid>\n      </div>\n      <div *ngIf=\"selectedThought.showAs == 'graph'\">\n        <app-graph-grid></app-graph-grid>\n        </div>\n        <div *ngIf=\"selectedThought.showAs == 'network'\">\n            <app-network-grid></app-network-grid>\n            </div>\n            <div *ngIf=\"selectedThought.showAs == 'grid'\">\n            \n                <app-grid-grid [thought]=\"content\" class=\"grid-grid\"></app-grid-grid>\n             \n                </div>\n    </gridster-item>\n    </div>\n</gridster>"
+module.exports = "<gridster [options]=\"config\" class=\"content\" *ngIf=\"contents.length > 0\">\r\n  <div *ngFor=\"let content of contents\">\r\n    <gridster-item [item]=\"content.grid\">\r\n      <div *ngIf=\"content.showAs == 'timeline'\">\r\n        <app-timeline-grid></app-timeline-grid>\r\n      </div>\r\n      <div *ngIf=\"selectedThought.showAs == 'graph'\">\r\n        <app-graph-grid></app-graph-grid>\r\n        </div>\r\n        <div *ngIf=\"selectedThought.showAs == 'network'\">\r\n            <app-network-grid></app-network-grid>\r\n            </div>\r\n            <div *ngIf=\"selectedThought.showAs == 'grid'\">\r\n            \r\n                <app-grid-grid [thought]=\"content\" class=\"grid-grid\"></app-grid-grid>\r\n             \r\n                </div>\r\n    </gridster-item>\r\n    </div>\r\n</gridster>\r\n<div *ngIf=\"contents.length == 0\"> Add a Thought<div *ngIf=\"selectedThought\"> {{selectedThought.label }}</div></div>"
 
 /***/ }),
 
@@ -2774,15 +2788,15 @@ var GridsterConfig = {
     keepFixedWidthInMobile: false,
     compactType: 'none',
     mobileBreakpoint: 640,
-    minCols: 1,
+    minCols: 7,
     maxCols: 100,
-    minRows: 1,
+    minRows: 3,
     maxRows: 100,
     defaultItemCols: 1,
     defaultItemRows: 1,
     maxItemCols: 50,
     maxItemRows: 50,
-    minItemCols: 1,
+    minItemCols: 7,
     minItemRows: 1,
     minItemArea: 1,
     maxItemArea: 2500,
@@ -2804,10 +2818,10 @@ var GridsterConfig = {
     // Arguments: gridsterItem, gridsterItemComponent
     itemRemovedCallback: undefined,
     // Arguments: gridsterItem, gridsterItemComponent
-    enableEmptyCellClick: false,
-    enableEmptyCellContextMenu: false,
-    enableEmptyCellDrop: false,
-    enableEmptyCellDrag: false,
+    enableEmptyCellClick: true,
+    enableEmptyCellContextMenu: true,
+    enableEmptyCellDrop: true,
+    enableEmptyCellDrag: true,
     emptyCellClickCallback: undefined,
     emptyCellContextMenuCallback: undefined,
     emptyCellDropCallback: undefined,
@@ -2849,7 +2863,7 @@ var GridsterConfig = {
     disablePushOnResize: false,
     pushDirections: { north: true, east: true, south: true, west: true },
     pushResizeItems: false,
-    displayGrid: 'onDrag&Resize',
+    displayGrid: 'always',
     disableWindowResize: false,
     disableWarnings: false,
     scrollToNewItems: false // scroll to new items placed in a scrollable view
@@ -2889,7 +2903,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  network-grid works!\n</p>\n"
+module.exports = "<p>\r\n  network-grid works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -2952,7 +2966,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  timeline-grid works!\n</p>\n"
+module.exports = "<p>\r\n  timeline-grid works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -3015,7 +3029,7 @@ module.exports = "#contentnet {\r\n    width: 100%;\r\n    height: 60%;\r\n    \
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"fullscreen\">\n    <div id=\"contentnet\"></div>\n    </div>\n    "
+module.exports = "\r\n<div class=\"fullscreen\">\r\n    <div id=\"contentnet\"></div>\r\n    </div>\r\n    "
 
 /***/ }),
 
@@ -3184,7 +3198,7 @@ module.exports = "\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"visualization\"></div>\n"
+module.exports = "<div id=\"visualization\"></div>\r\n"
 
 /***/ }),
 
@@ -3472,7 +3486,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "http://localhost:8080";
+        this.domain = "";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
@@ -3752,13 +3766,13 @@ var InternalService = /** @class */ (function () {
         var thought = {
             _id: pubRoom._id,
             contents: pubRoom.contents,
-            level: 0,
+            level: -1,
             label: pubRoom.label,
             user: pubRoom.admin[0],
             color: "#FFFFFF",
             clicks: pubRoom.likes,
-            dimensions: pubRoom.dimensions,
-            showAs: "grid"
+            showAs: "grid",
+            grid: { cols: 1, rows: 1, x: 1, y: 1, colspan: 1, rowspan: 1 }
         };
         this.selectedThought.next(thought);
         console.log(thought);
