@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const Thought = require('../models/thought');
+const PubThought = require('../models/pubThought');
+const PubRoom = require('../models/pubRoom');
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database'); // Import database configuration
 
@@ -19,8 +22,7 @@ module.exports = (router) => {
 		 	let user = new User({
 			 	email: req.body.email.toLowerCase(),
 			 	username: req.body.username,
-        password: req.body.password,
-        starter: req.body.starter
+        password: req.body.password
 		 	});
 			user.save((err, user) => {
             // Check if error occured
@@ -67,6 +69,8 @@ module.exports = (router) => {
 	
       User.findOne({ _id: req.body._id }, (err, user) => {
         if (req.body.private) { user.private = req.body.private };
+        if (req.body.public) { user.public = req.body.public };
+        if (req.body.rooms) { user.rooms = req.body.rooms };
         if (req.body.friends) { user.friends = req.body.friends };
 		  user.save((err, user) => {
             // Check if error occured
@@ -166,7 +170,8 @@ module.exports = (router) => {
 
   /* ================================================
   MIDDLEWARE - Used to grab user's token from headers
-  ================================================ */
+      ================================================ */
+
   router.use((req, res, next) => {
     const token = req.headers['authorization']; // Create token found in headers
     // Check if token was found in headers
@@ -185,12 +190,13 @@ module.exports = (router) => {
       });
     }
   });
+
   /* ===============================================================
      Route to get user's profile data
   =============================================================== */
   router.get('/profile', (req, res) => {
     // Search for user in database
-    User.findOne({ _id: req.decoded.userId }).select('username email private public friends').exec((err, user) => {
+    User.findOne({ _id: req.decoded.userId }).populate('private public rooms friends').select('username email private public rooms friends').exec((err, user) => {
       // Check if error connecting
       if (err) {
         res.json({ success: false, message: err }); // Return error

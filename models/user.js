@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const bcrypt = require('bcrypt-nodejs');
 
+const Thought = require('./thought.js');
+const PubThought = require('./pubThought.js');
+const PubRoom = require('./pubRoom.js');
 
 // Validate Function to check e-mail length
 let emailLengthChecker = (email) => {
@@ -124,9 +127,10 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  private: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String, val: String }] }],
-  public: [{ persona: String, apps: [{ app: String, obj: String }], dimensions: [{starter: String, label: String, app: String, dimtype: String, val: String }] }],
-  friends: [{ friendId: String, label: String, showPersona: [{ personaId: String }]}]
+  private: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+  public: [{type: Schema.Types.ObjectId, ref: 'PubThought'}],
+  rooms: [{type: Schema.Types.ObjectId, ref: 'PubRoom'}],
+  friends: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 // Schema Middleware to Encrypt Password

@@ -1,0 +1,12 @@
+.content {
+    height: 400px;
+    background: white;
+}
+.gridster {
+    border: white;
+    background: white;
+}
+.grid-grid {
+    text-align: center;
+    height: 100%
+}

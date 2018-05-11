@@ -40,11 +40,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-    });
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selToolObs.subscribe(res => this.showTool = res);
+    this.internalService.selectedUserObs.subscribe(res => this.user = res);
+    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
+    this.internalService.selectedToolObs.subscribe(res => this.showTool = res);
   }
 
 }

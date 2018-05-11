@@ -1,10 +1,8 @@
 
 
-export class Dimension {    
-        _id: string;
-        starter: string;
+export interface Dimension {    
+        _id?: string;
         dimtype: string; 
-        app: string;
         label: string;
         val: string;
 }

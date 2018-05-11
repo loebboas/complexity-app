@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
+import { PubRoom } from '../../models/pubRoom';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,6 @@ import { InternalService } from '../../services/internal.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  showDiary = false;
-  showPlans = false;
-  showThoughts = false;
   form;
   message;
   messageClass;
@@ -24,13 +22,18 @@ export class RegisterComponent implements OnInit {
   usernameValid;
   usernameMessage;
   userId;
+  startNetwork: Thought;
+  plans :Thought;
+  diary: Thought;
+
+
   projectsId;
   sessionsId;
   favoritesId;
   todoId;
-  startId;
+  startId: string;
   userData;
-  timeline; goals; projects; diary;
+  timeline; goals; projects;
   today; week; month; year; life;
   memory; feeling; all;
   infcl; publ; rooms; ptho;
@@ -41,7 +44,7 @@ export class RegisterComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-
+  userRoom: PubRoom;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -133,15 +136,15 @@ export class RegisterComponent implements OnInit {
     }
 
     this.authService.registerUser(user).subscribe(data => {
-      if (!data.success) {
+      if (!data['success']) {
         this.messageClass = 'alert alert-danger';
-        this.message = data.message;
+        this.message = data['message'];
         this.processing = false;
         this.enableForm();
       } else {
         this.messageClass = 'alert alert-success';
-        this.message = data.message;
-        this.userId = data.user._id;
+        this.message = data['message'];
+        this.userId = data['user']._id;
 
         //Login User 
         const user = {
@@ -151,319 +154,182 @@ export class RegisterComponent implements OnInit {
 
         // Function to send login data to API
         this.authService.login(user).subscribe(data => {
-          this.authService.storeUserData(data.token, data.user)
+          this.authService.storeUserData(data['token'], data['user'])
 
+
+
+          //Create UserRoom
+          this.userRoom = {
+            label: this.firstFormGroup.get('username').value + "'s-Room",
+            admin: [this.userId],
+            members: [],
+            contents: [],
+            dimensions: [{ label: "Creation Time", dimtype: "Date", val: Date.now.toString() }],
+            activeUsers: [this.userId],
+            visible: "open"
+          }
+
+          console.log(this.userRoom)
+          this.dataService.newPubRoom(this.userRoom).subscribe(data => {
+            this.userRoom = data['pubRoom'];
+            console.log(this.userRoom)
+            console.log(data);
+
+
+
+            //add Public Room to Users Rooms
+            const editUser = {
+              _id: this.userId,
+              rooms: [this.userRoom._id]
+            };
+            this.authService.editUser(editUser).subscribe(data => {
+
+
+              //Load User and change Room
+              this.internalService.loadUser();
+            })
+          });
         });
       }
     });
 
   }
 
-  onPersonaSubmit() {
-    //CREATE APP OBJECTS LVL -2
-
-    const infcl = {
-      label: "Infinity Cloud",
-      level: 1,
-      color: "FFFFFF",
+  onNetworkSubmit() {
+    const network: Thought = {  // rename as "User/Username or Persona"
+      label: this.secondFormGroup.get('network').value,
+      level: 0,
+      color: "#FFFFFF",
       clicks: 0,
-      user: this.userId,
-      dimensions: [],
       showAs: "grid",
+      user: this.userId,
+      contexts: [],
+      contents: [],
+      dimensions: [],
       texture: "",
       form: "circle",
-      privacy: "locked"
+      privacy: "private",
+      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
     };
 
-    this.dataService.newThought(infcl).subscribe(data => {
-      this.infcl = data.newId;
-      //CREATE APP OBJECTS LVL -1
 
-      const dauser = {
-        label: this.firstFormGroup.get('username').value,
-        level: 2,
-        color: "FFFFFF",
-        clicks: 0,
-        showAs: "grid",
-        user: this.userId,
-        contexts: [{ _id: this.infcl }],
-        dimensions: [],
-        texture: "",
-        form: "circle",
-        privacy: "locked"
+    this.dataService.newThought(network).subscribe(data => {
+      this.startNetwork = data['thought'];
+      const editUser = {
+        _id: this.userId,
+        private: [this.startNetwork._id]
       };
-
-      this.dataService.newThought(dauser).subscribe(data => {
-        this.dauser = data.newId;
-
-
-        const rooms = { // rename as "Other Users"
-          label: "Friends",
-          level: 3,
-          color: "FFFFFF",
-          clicks: 0,
-          showAs: "grid",
-          user: this.userId,
-          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
-          dimensions: [],
-          texture: "",
-          form: "circle",
-          privacy: "locked"
-        };
-
-        const ptho = {  // rename as "Trending"
-          label: "Trending", // input field
-          level: 2,
-          color: "FFFFFF",
-          clicks: 0,
-          showAs: "grid",
-          user: this.userId,
-          contexts: [{ _id: this.infcl }],
-          dimensions: [],
-          texture: "",
-          form: "circle",
-          privacy: "locked"
-        };
-
-
-        //CREATE APP OBJECTS LVL 0
-
-        const compApp = {  // rename as "User/Username or Persona"
-          label: this.secondFormGroup.get('persona').value,
-          level: 3,
-          color: "FFFFFF",
-          clicks: 0,
-          showAs: "grid",
-          user: this.userId,
-          contexts: [{ _id: this.dauser }, { _id: this.infcl }],
-          dimensions: [],
-          texture: "",
-          form: "circle",
-          privacy: "locked"
-        };
-
-
-        this.dataService.newThought(rooms).subscribe(data => {
-          this.rooms = data.newId;
-          this.dataService.newThought(ptho).subscribe(data => {
-            this.ptho = data.newId;
-            this.dataService.newThought(compApp).subscribe(data => {
-              this.startId = data.newId;
-
-              const editInf = {
-                _id: this.infcl,
-                editContexts: [],
-                editContents: [{ _id: this.dauser }, { _id: this.ptho }]
-              };
-              this.dataService.editThought(editInf).subscribe(data => {
-
-                const editdauser = {
-                  _id: this.dauser,
-                  editContents: [{ _id: this.startId }, , { _id: this.rooms }]
-                };
-                this.dataService.editThought(editdauser).subscribe(data => {
-
-
-                  //LEVEL 3
-
-                  const memories = { // rename as "Diary"
-                    label: "Diary",
-                    level: 4,
-                    color: "FFFFFF",
-                    clicks: 0,
-                    showAs: "grid",
-                    user: this.userId,
-                    contexts: [{ _id: this.startId },{ _id: this.dauser }, { _id: this.infcl }],
-                    dimensions: [],
-                    texture: "",
-                    form: "circle",
-                    privacy: "locked"
-                  };
-
-                  const myroom = { // rename as "Thoughts"
-                    label: "Thoughts",
-                    level: 4,
-                    color: "FFFFFF",
-                    clicks: 0,
-                    showAs: "grid",
-                    user: this.userId,
-                    contexts: [{ _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                    dimensions: [],
-                    texture: "",
-                    form: "circle",
-                    privacy: "locked"
-                  };
-
-                  const todo = {
-                    label: "Plans",
-                    level: 4,
-                    color: "FFFFFF",
-                    clicks: 0,
-                    showAs: "grid",
-                    user: this.userId,
-                    contexts: [{ _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                    dimensions: [],
-                    texture: "",
-                    form: "circle",
-                    privacy: "locked"
-                  };
-
-                  this.dataService.newThought(memories).subscribe(data => {
-                    this.sessionsId = data.newId;
-                    this.dataService.newThought(myroom).subscribe(data => {
-                      this.favoritesId = data.newId;
-                      this.dataService.newThought(todo).subscribe(data => {
-                        this.todoId = data.newId;
-
-
-
-
-                        //LEVEL 2
-
-                        const diary = { //Rename as "Feelings"
-                          label: "Feelings",
-                          level: 5,
-                          color: "FFFFFF",
-                          clicks: 0,
-                          showAs: "grid",
-                          user: this.userId,
-                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                          dimensions: [],
-                          texture: "",
-                          form: "circle",
-                          privacy: "locked"
-                        };
-
-                        const timeline = {
-                          label: "Memories",
-                          level: 5,
-                          color: "FFFFFF",
-                          clicks: 0,
-                          showAs: "grid",
-                          user: this.userId,
-                          contexts: [{ _id: this.sessionsId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                          dimensions: [],
-                          texture: "",
-                          form: "circle",
-                          privacy: "locked"
-                        };
-
-                        const goals = {
-                          label: "Goals",
-                          level: 5,
-                          color: "FFFFFF",
-                          clicks: 0,
-                          showAs: "grid",
-                          user: this.userId,
-                          contexts: [{ _id: this.todoId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                          dimensions: [],
-                          texture: "",
-                          form: "circle",
-                          privacy: "locked"
-                        };
-
-                        const projects = {
-                          label: "Projects",
-                          level: 5,
-                          color: "FFFFFF",
-                          clicks: 0,
-                          showAs: "grid",
-                          user: this.userId,
-                          contexts: [{ _id: this.todoId }, { _id: this.startId }, { _id: this.dauser }, { _id: this.infcl }],
-                          dimensions: [],
-                          texture: "",
-                          form: "circle",
-                          privacy: "locked"
-                        };
-                        this.dataService.newThought(timeline).subscribe(data => {
-                          this.timeline = data.newId;
-                          this.dataService.newThought(diary).subscribe(data => {
-                            this.diary = data.newId;
-                            this.dataService.newThought(goals).subscribe(data => {
-                              this.goals = data.newId;
-                              this.dataService.newThought(projects).subscribe(data => {
-                                this.projects = data.newId;
-
-                                const editThought = {
-                                  _id: this.startId,
-                                  editContents: [{ _id: this.sessionsId }, { _id: this.favoritesId }, { _id: this.todoId }]
-                                };
-                                this.dataService.editThought(editThought).subscribe(data => {
-
-                                  const editPlans = {
-                                    _id: this.todoId,
-                                    editContents: [{ _id: this.projects }, { _id: this.goals }]
-                                  };
-
-                                  this.dataService.editThought(editPlans).subscribe(data => {
-                                  
-                                    const editDiary = {
-                                      _id: this.sessionsId,
-                                      editContents: [{ _id: this.timeline }, { _id: this.diary }]
-                                    };
-                                    this.dataService.editThought(editDiary).subscribe(data => {
-
-                                  this.privateArray = [{
-                                    persona: this.startId,
-                                    apps: [{ app: "Diary", obj: this.sessionsId }, { app: "Thoughts", obj: this.favoritesId }, { app: "Plans", obj: this.todoId }],
-                                    dimensions: [{ starter: this.timeline, label: "Memories", app: this.sessionsId, dimtype: "Date", val: "" }, { starter: this.diary, label: "Feelings", app: this.sessionsId, dimtype: "Number", val: "" }, { starter: this.goals, label: "Goals", app: this.todoId, dimtype: "Date", val: "" }]
-                                  }]
-                                  console.log(this.privateArray);
-                                  const editUser = {
-                                    _id: this.userId,
-                                    private: this.privateArray
-                                  };
-                                  console.log(editUser);
-                                  this.authService.editUser(editUser).subscribe(data => {
-                                    this.processing = true; // Lock form fields	
-                                    // Function to send blog object to backend
-
-                                    // Check if PUT request was a success or not
-                                    if (!data.success) {
-                                      this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                                      this.message = data.message; // Set error message
-                                      this.processing = false; // Unlock form fields
-                                    } else {
-                                      this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                                      this.message = data.message; // Set success message
-                                      // After two seconds, navigate back to blog page 
-                                    }
-                                  });
-                                });
-
-                                  });
-                                });
-                              });
-                            });
-                          });
-                        });
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
+      this.authService.editUser(editUser).subscribe(data => {
+           //Load User and change Room
+           this.internalService.loadUser();
       });
     });
   }
 
-  onAbilitiesSubmit() {
-    this.internalService.changeThought(this.startId);
-    this.router.navigate(['/viewer/', this.startId]); // Redirect to Persona
+
+  onStarterNetworkSubmit() {
+    const diary: Thought = { 
+      label: "Diary",
+      level: 1,
+      color: "#ccffcc",
+      clicks: 0,
+      showAs: "grid",
+      user: this.userId,
+      contexts: [this.startNetwork._id],
+      contents: [],
+      dimensions: [],
+      texture: "",
+      form: "circle",
+      privacy: "private",
+      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
+    };
+
+    const plans: Thought = {
+      label: "Plans",
+      level: 1,
+      color: "#99ccff",
+      clicks: 0,
+      showAs: "grid",
+      user: this.userId,
+      contexts: [this.startNetwork._id],
+      contents: [],
+      dimensions: [],
+      texture: "",
+      form: "circle",
+      privacy: "private",
+      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
+    };
+
+    this.dataService.newThought(diary).subscribe(data => {
+      this.diary = data['thought'];
+      this.dataService.newThought(plans).subscribe(data => {
+        this.plans = data['thought'];
+
+        const goals: Thought = {
+          label: "Goals",
+          level: 2,
+          color: "#99ddff",
+          clicks: 0,
+          showAs: "grid",
+          user: this.userId,
+          contexts: [this.plans._id, this.startNetwork._id],
+          contents: [],
+          dimensions: [],
+          texture: "",
+          form: "circle",
+          privacy: "private",
+          grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
+        };
+    
+        this.dataService.newThought(goals).subscribe(data => {
+          this.goals = data['thought'];
+
+                  const editPlans = {
+                    _id: this.plans._id,
+                    editContents: [this.goals._id]
+                  };
+                  this.dataService.editThought(editPlans).subscribe(data => {
+
+                    const editStartNetwork = {
+                      _id: this.startNetwork._id,
+                      editContents: [this.diary._id, this.plans._id]
+                    };
+                    this.dataService.editThought(editStartNetwork).subscribe(data => {
+  
+
+                        this.processing = true; // Lock form fields	
+                        // Function to send blog object to backend
+
+                        // Check if PUT request was a success or not
+                        if (!data['success']) {
+                          this.messageClass = 'alert alert-danger'; // Set error bootstrap class
+                          this.message = data['message']; // Set error message
+                          this.processing = false; // Unlock form fields
+                        } else {
+                          this.messageClass = 'alert alert-success'; // Set success bootstrap class
+                          this.message = data['message']; // Set success message
+                          // After two seconds, navigate back to blog page 
+                        }
+                      });
+                      });
+                    });
+                  });
+                });
+           
+    this.internalService.changeThought(this.startNetwork._id);
+    this.router.navigate(['/viewer/']); // Redirect to Persona
   }
   // Function to check if e-mail is taken
   checkEmail() {
     // Function from authentication file to check if e-mail is taken
     this.authService.checkEmail(this.firstFormGroup.get('email').value).subscribe(data => {
       // Check if success true or false was returned from API
-      if (!data.success) {
+      if (!data['success']) {
         this.emailValid = false; // Return email as invalid
-        this.emailMessage = data.message; // Return error message
+        this.emailMessage = data['message']; // Return error message
       } else {
         this.emailValid = true; // Return email as valid
-        this.emailMessage = data.message; // Return success message
+        this.emailMessage = data['message']; // Return success message
       }
     });
   }
@@ -473,12 +339,12 @@ export class RegisterComponent implements OnInit {
     // Function from authentication file to check if username is taken
     this.authService.checkUsername(this.firstFormGroup.get('username').value).subscribe(data => {
       // Check if success true or success false was returned from API
-      if (!data.success) {
+      if (!data['success']) {
         this.usernameValid = false; // Return username as invalid
-        this.usernameMessage = data.message; // Return error message
+        this.usernameMessage = data['message']; // Return error message
       } else {
         this.usernameValid = true; // Return username as valid
-        this.usernameMessage = data.message; // Return success message
+        this.usernameMessage = data['message']; // Return success message
       }
     });
   }
@@ -508,10 +374,10 @@ export class RegisterComponent implements OnInit {
     }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
 
     this.secondFormGroup = this.formBuilder.group({
-      persona: ['', Validators.required]
+      network: ['', Validators.required]
     });
     this.thirdFormGroup = this.formBuilder.group({
-      persona: ['', Validators.required]
+
     });
   }
 

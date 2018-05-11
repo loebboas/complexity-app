@@ -1,29 +1,5 @@
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+#navbar {
   width: 100%;
-  text-align: right;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.searchbar-form {
-  font-size: 14px;
-  min-width: 150px;
-  max-width: 500px;
-  min-height: 0px !important;
-}
-
-.searchbar-full-width {
-  width: 100%;
-
-}
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
-.smaller {
-  font-size: 12px;
+  height: 410px;
+  overflow: hidden;
 }

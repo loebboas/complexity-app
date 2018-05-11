@@ -1,4 +1,4 @@
-<mat-toolbar-row *ngIf="selectedThought.level > 0">
+<mat-toolbar-row *ngIf="selectedThought.level >= 0">
 
   <form class="searchbar-form">
     <mat-form-field class="searchbar-full-width">
@@ -8,16 +8,24 @@
 
 
   </form>
-
-
-
+  
 </mat-toolbar-row>
+<div *ngIf="selectedThought.level < 0">
+    <form class="searchbar-form">
+  <mat-toolbar-row>
 
-
-<mat-toolbar-row *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
-  You can't Add Thoughts on this level.
+   
+      <mat-form-field class="searchbar-full-width">
+        <input matInput placeholder="Create a new Persona" aria-label="Thought" [formControl]="newPersona">
+      
+      </mat-form-field>
+     
 </mat-toolbar-row>
-
-<mat-toolbar-row *ngIf="selectedThought.level == -1">
-  Create new Persona: Public / Private
+<mat-toolbar-row>
+    <mat-slide-toggle>Make it a public Persona</mat-slide-toggle>
+    <button mat-button *ngIf="selectedThought.label" (click)="onPersonaSubmit()">Save Persona</button>  
 </mat-toolbar-row>
+</form>
+</div>
+
+

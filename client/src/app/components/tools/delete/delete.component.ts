@@ -15,14 +15,15 @@ export class DeleteComponent implements OnInit {
 
   deleteThought(id) {
     //Delete the Thought
+  
     this.dataService.deleteThought(id).subscribe(data => {
-      this.internalService.changeThought(this.selectedThought.contexts[0]._id);
+      this.internalService.changeThought(this.selectedThought.contexts.pop()._id);
       this.internalService.changeTool("none");
     });
   }
 
   ngOnInit() {
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
+    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
   }
   
    

@@ -1,26 +1,3 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-      <span class="toolbar-spacer"></span>
-            <app-search></app-search>
-        
-            <button mat-button *ngIf="!authService.loggedIn()" [matMenuTriggerFor]="complexity">Login or Register</button>
-            <button mat-button *ngIf="authService.loggedIn()" [matMenuTriggerFor]="complexity">{{ username | uppercase }}</button>
-            <mat-menu #complexity="matMenu" xPosition="after" [overlapTrigger]="false">
-          <!-- If LoggedOut -->
-         
-          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="home">Home</button>
-          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="login">Login</button>
-          <button mat-menu-item *ngIf="!authService.loggedIn()" routerLink="register">Register</button>
+<div id="navbar"></div>
 
-          <!-- If LoggedIn -->
-             
-          <button mat-menu-item *ngIf="authService.loggedIn()"  routerLink="profile">Profile</button>
-          <button mat-menu-item *ngIf="authService.loggedIn()"  (click)="onLogoutClick()">Logout</button>
-        </mat-menu>
-        
-      
-        <small class="smaller"> Complexity-App v0.0.4</small>
-       
-  
-  </mat-toolbar-row>
-</mat-toolbar>
+    

@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Thought } from '../../../models/thought';
 import { Dimension } from '../../../models/dimension';
 import { FormControl, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { DataService } from '../../../services/data.service';
 import { InternalService } from '../../../services/internal.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
+import { startWith ,  map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-copy',
@@ -61,9 +60,9 @@ export class CopyComponent implements OnInit {
 
     this.newContexts = [];  // Reset Context
     this.dataService.getSingleThought(this.selectedThought._id).subscribe(data => { // Get Context of selected Thought
-      this.newContexts = data.thought.contexts;                                     //Save Context of selected Thought
+      this.newContexts = data['thought'].contexts;                                     //Save Context of selected Thought
       this.newContexts.unshift(this.selectedThought._id);                           //Add Selected Thought as Context
-      this.contextContent = data.thought.contents;
+      this.contextContent = data['thought'].contents;
 
       //Resave Thought with New Context
       const copyThought = {
@@ -82,7 +81,7 @@ export class CopyComponent implements OnInit {
       };
 
       this.dataService.newThought(copyThought).subscribe(data => {
-        this.saveId = data.newId;
+        this.saveId = data['newId'];
 
 
         this.contextContent.push(this.saveId);
@@ -105,16 +104,14 @@ export class CopyComponent implements OnInit {
 
     //GET USER Data
     this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new blog posts and comments
-      this.userId = profile.user._id;
-      this.private = profile.user.private;
+      this.username = profile['user'].username; // Used when creating new blog posts and comments
+      this.userId = profile['user']._id;
+      this.private = profile['user'].private;
     });
 
-    this.internalService.loadThoughts();
-    this.internalService.thoughtObs.subscribe(res => this.thoughts = res);
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selContextObs.subscribe(res => this.context = res);
-    this.internalService.selContextsObs.subscribe(res => this.contexts = res);
+
+    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
+ 
 
   }
 }

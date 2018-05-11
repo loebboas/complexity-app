@@ -1,8 +1,8 @@
 export class ChangeTracker {    
-        changeId: String;
-        changeDim: String;
-        changeVal: String;
-        changeTim: Date;
+        changeType: String;
+        changedThought: String;
+        changeValue: String;
+        changeTime: Date;
 }
 
 

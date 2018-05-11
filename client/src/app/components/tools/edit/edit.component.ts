@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
+    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
 
   }
 

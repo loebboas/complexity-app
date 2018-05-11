@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const path = require('path');
 const authentication = require('./routes/authentication')(router);
-const datatransfer = require('./routes/datatransfer')(router);
+const api = require('./routes/api')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 8080;
@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.use('/authentication', authentication);
-app.use('/datatransfer', datatransfer);
+app.use('/api', api);
 
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '/public/index.html'));

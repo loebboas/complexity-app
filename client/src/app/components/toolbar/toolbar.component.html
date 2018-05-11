@@ -1,4 +1,4 @@
-<div class="bot" *ngIf="selectedThought">
+<div>
  
     <mat-toolbar *ngIf="showTool == 'new'">
       <app-new></app-new>
@@ -27,20 +27,28 @@
 
 
       <span class='spacer'></span>
-      <button mat-button matTooltip="Add"  *ngIf="selectedThought.level > 1" (click)="changeTool('dimension')">
+      <!-- Level: 0 = Networks -->
+      <div *ngIf="selectedThought">
+      <button mat-button matTooltip="Add"  *ngIf="selectedThought.level >= 0" (click)="changeTool('dimension')">
         <i class="material-icons">add</i> Add</button>
-      <button mat-button matTooltip="New" *ngIf="selectedThought.level > 1" (click)="changeTool('new')">
+      <button mat-button matTooltip="New" *ngIf="selectedThought.level >= 0" (click)="changeTool('new')">
         <i class="material-icons">add_circle</i> New</button>
-      <button mat-button matTooltip="Copy" *ngIf="selectedThought.level > 1" (click)="changeTool('copy')">
+      <button mat-button matTooltip="Copy" *ngIf="selectedThought.level >= 0" (click)="changeTool('copy')">
         <i class="material-icons">add_box</i> Copy</button>
-      <button mat-button matTooltip="Link" *ngIf="selectedThought.level > 1" (click)="changeTool('link')">
+      <button mat-button matTooltip="Link" *ngIf="selectedThought.level >= 0" (click)="changeTool('link')">
         <i class="material-icons">link</i> Link</button>
-      <button mat-button matTooltip="Edit" *ngIf="selectedThought.level > 1" (click)="changeTool('edit')">
+      <button mat-button matTooltip="Edit" *ngIf="selectedThought.level >= 0" (click)="changeTool('edit')">
         <i class="material-icons">create</i> Edit</button>
-        <button mat-button matTooltip="Edit" *ngIf="selectedThought.level > 1" [matMenuTriggerFor]="views">
+        <button mat-button matTooltip="Edit" *ngIf="selectedThought.level >= 0" [matMenuTriggerFor]="views">
             <i class="material-icons">view_quilt</i> Change View</button>
-      <button mat-button matTooltip="Delete" *ngIf="selectedThought.level > 1" (click)="changeTool('delete')">
+      <button mat-button matTooltip="Delete" *ngIf="selectedThought.level >= 0" (click)="changeTool('delete')">
         <i class="material-icons">delete_sweep</i> Delete</button>
+
+      </div>
+        <button mat-button matTooltip="Search" *ngIf="!authService.loggedIn()"  routerLink="../login">
+          <i class="material-icons">account_circle</i> Login</button>
+          <button mat-button matTooltip="Search" *ngIf="!authService.loggedIn()" routerLink="../register">
+            <i class="material-icons">edit</i> Register</button>
       <button mat-button matTooltip="Search" *ngIf="authService.loggedIn()" (click)="changeTool('search')">
         <i class="material-icons">search</i> Search</button>
       <button mat-button matTooltip="{{ user.username | uppercase}}" *ngIf="authService.loggedIn()" [matMenuTriggerFor]="menu">

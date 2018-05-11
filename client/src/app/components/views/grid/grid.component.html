@@ -1,0 +1,21 @@
+<gridster [options]="config" class="content" *ngIf="contents.length > 0">
+  <div *ngFor="let content of contents">
+    <gridster-item [item]="content.grid">
+      <div *ngIf="content.showAs == 'timeline'">
+        <app-timeline-grid></app-timeline-grid>
+      </div>
+      <div *ngIf="selectedThought.showAs == 'graph'">
+        <app-graph-grid></app-graph-grid>
+        </div>
+        <div *ngIf="selectedThought.showAs == 'network'">
+            <app-network-grid></app-network-grid>
+            </div>
+            <div *ngIf="selectedThought.showAs == 'grid'">
+            
+                <app-grid-grid [thought]="content" class="grid-grid"></app-grid-grid>
+             
+                </div>
+    </gridster-item>
+    </div>
+</gridster>
+<div *ngIf="contents.length == 0"> Add a Thought<div *ngIf="selectedThought"> {{selectedThought.label }}</div></div>

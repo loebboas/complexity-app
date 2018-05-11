@@ -1,36 +1,15 @@
+<mat-card class="card">
+	<mat-card-title>Welcome to the Complexity-App</mat-card-title>
+	<mat-card-content>
+		The Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.
+		<br>
+		<br> At the moment this site is still in development.
+		<br> For more information contact loebboas -@- gmail.com.
+	</mat-card-content>
 
-		<mat-grid-list [cols]="2" rowHeight="2:1">
-			<mat-grid-tile>
-				<mat-card class="card">
-					<mat-card-title>Welcome to the Complexity-App</mat-card-title>
-					<mat-card-content>
-							The Complexity-App is a tool to (someday in the future) help you visualise and express complex thoughts.<br><br> At the moment this site is still in development.<br> For more information contact loebboas -@- gmail.com.
-					</mat-card-content>   
-				</mat-card> 
-			</mat-grid-tile>
-			<mat-grid-tile>
-					<mat-card class="card">
-						<mat-card-title>About us</mat-card-title>
-						<mat-card-content>
-								This site is a project of the Complexity association.<br> Check out a different Site which does not yet exist for more information.
-						</mat-card-content>   
-					</mat-card> 
-				</mat-grid-tile>
-		</mat-grid-list>
-		<mat-grid-list *ngIf="!authService.loggedIn()"  [cols]="2" rowHeight="4:1">
-			<mat-grid-tile>
-				<button mat-button routerLink="login">Login</button>
-			</mat-grid-tile>
-			<mat-grid-tile>
-					<button mat-button routerLink="register"> Register</button>
-				</mat-grid-tile>
-		</mat-grid-list>
-		<mat-grid-list *ngIf="authService.loggedIn()" [cols]="2" rowHeight="4:1">
-				<mat-grid-tile>
-					<button mat-button routerLink="../viewer">viewer</button>
-				</mat-grid-tile>
-				<mat-grid-tile>
-						<button mat-button (click)="onLogoutClick()">Logout</button>
-					</mat-grid-tile>
-			</mat-grid-list>
-		
+	<mat-card-title>About us</mat-card-title>
+	<mat-card-content>
+		This site is a project of the Complexity association.
+		<br> Check out a different Site which does not yet exist for more information.
+	</mat-card-content>
+</mat-card>

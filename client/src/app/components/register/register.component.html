@@ -6,10 +6,11 @@
     <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup" (ngSubmit)="onRegisterSubmit()">
-          <ng-template matStepLabel>Register Account</ng-template>
+          <ng-template matStepLabel>Create a User</ng-template>
           <mat-form-field [ngClass]="{'has-error': (firstFormGroup.controls.username.errors && firstFormGroup.controls.username.dirty) || (!usernameValid && firstFormGroup.controls.username.dirty), 'has-success': !firstFormGroup.controls.username.errors && usernameValid}">
             <input matInput placeholder="Username" class="form-control" formControlName="username" (blur)="checkUsername()" required>
           </mat-form-field>
+          <!-- Add Visualisation of User and Colorchooser Later -->
           <ul class="help-block">
             <li *ngIf="firstFormGroup.controls.username.errors?.required && firstFormGroup.controls.username.dirty">This field is required</li>
             <li *ngIf="firstFormGroup.controls.username.errors?.minlength && firstFormGroup.controls.username.dirty || firstFormGroup.controls.username.errors?.maxlength && firstFormGroup.controls.username.dirty ">Minimum characters: 3, Maximum characters: 15</li>
@@ -42,44 +43,44 @@
           </ul>
           <div>
             <br>
-            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Register</button>
+            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create a User</button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup" (ngSubmit)="onPersonaSubmit()">
-          <ng-template matStepLabel>Create your Persona</ng-template>
-          <p>Before we start, you'll need to create your first "Persona". A Persona is like a Vessel, a place, where you can store your thoughts.</p>
-          <br><p>This Persona is private, which means, that only you can see it. You can edit it later and add more.</p>
-          <p>But let's start with your first Persona...</p>
-
+        <form [formGroup]="secondFormGroup" (ngSubmit)="onNetworkSubmit()">
+          <ng-template matStepLabel>Rooms</ng-template>
+          <p>Now that you are a user, the complexity-App created your own Space in the infinity Cloud.</p>
+          <br><p>By default, this space is open for everyone, so other Users can enter your Room and see its content.</p>
+          <p>You can create multiple public Rooms and become a Member of certain ones.</p>
+          <br><p>Most of your Thoughts thought are going to be thought inside of your user.</p>
+          <p>Every user is capable of storing multiple Networks!</p>
+          <br><p>Let's create your first Network!</p>
+          
           <mat-form-field>
-            <input matInput placeholder="Name your Persona" formControlName="persona" required>
+            <input matInput placeholder="Create your first Network" formControlName="network" required>
           </mat-form-field>
           <div>
             <br>
-            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create your Persona</button>
+            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create a Network!</button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup" (ngSubmit)="onAbilitiesSubmit()">
-          <ng-template matStepLabel>Start</ng-template>
-            <p>You will start with three Categories, in which you can organise your thoughts. You can change or even delete them anytime!</p>
+        <form [formGroup]="thirdFormGroup" (ngSubmit)="onStarterNetworkSubmit()">
+          <ng-template matStepLabel>Starter Set</ng-template>
+            <p>We recommend you to start with an exmaple Network. It will show you the potential of the complexity-app!</p>
+            <br><p>You can also start on a blank Node (for experienced Users, not yet implemented)</p>
+            <p>The starter Set contains the following Nodes.</p>
           <mat-list>
             <mat-list-item>
               <button mat-button color="primary">Diary</button>
-              <button mat-button>Write down your Memories and Feelings as complex networks.</button>
-            </mat-list-item>
-            <mat-list-item>
-              <button mat-button color="primary">Thoughts</button>
-              <button mat-button>Save and structure your Thoughts in your personal Structure.</button>
+              <p>Write down your Memories and Feelings as complex networks. It Includes a timeline and specific feelings.</p>
             </mat-list-item>
             <mat-list-item>
               <button mat-button color="primary">Plans</button>
               <button mat-button>Create complex Projects and set Goals within your Timelines</button>
             </mat-list-item>
-
           </mat-list>
           <div>
             <br>

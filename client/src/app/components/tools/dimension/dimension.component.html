@@ -1,4 +1,4 @@
-<mat-toolbar-row *ngIf="selectedThought.level > 0">
+<mat-toolbar-row *ngIf="selectedThought.level >= 0">
 
   <mat-form-field>
     <input matInput #label [(ngModel)]="newLabel" name="newLabel" placeholder="Enter a Label">
@@ -28,9 +28,9 @@
   
 
 
-
-      <button mat-button (click)="onDimensionSubmit()">Add a {{ selectedDimension.dimtype }} Dimension</button>
-  
+<div *ngIf="addTag || addNumber || addDate">
+      <button mat-button (click)="onDimensionSubmit()">Add a Dimension</button>
+    </div>
   
     </form>
   
@@ -39,13 +39,10 @@
   </mat-toolbar-row>
   
   
-  <mat-toolbar-row *ngIf="selectedThought.level == 0 || selectedThought.level < -1">
+  <mat-toolbar-row *ngIf="selectedThought.level < 0">
     You can't Add Thoughts on this level.
   </mat-toolbar-row>
   
-  <mat-toolbar-row *ngIf="selectedThought.level == -1">
-    Create new Persona: Public / Private
-  </mat-toolbar-row>
 
 
 

@@ -16,7 +16,7 @@ options = {};  // Configuration for the Timeline
 
   ngOnInit() {
 
-    this.internalService.selThoughtObs.subscribe(selectedThought => {
+    this.internalService.selectedThoughtObs.subscribe(selectedThought => {
       this.items.clear();
       if(selectedThought){
       selectedThought.dimensions.forEach(dimension => {

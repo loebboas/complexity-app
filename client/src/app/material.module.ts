@@ -20,9 +20,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
-	imports: [MatNativeDateModule, MatButtonModule, MatTooltipModule, MatSnackBarModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
-	exports: [MatButtonModule, MatSnackBarModule, MatTooltipModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
+	imports: [MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatTooltipModule, MatSnackBarModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule],
+	exports: [MatButtonModule, MatSlideToggleModule, MatSnackBarModule, MatTooltipModule, MatTableModule, MatStepperModule, MatIconModule, MatGridListModule, MatDialogModule, MatChipsModule, MatDatepickerModule, MatListModule, MatMenuModule, BrowserAnimationsModule, MatToolbarModule, MatCardModule, MatAutocompleteModule, MatExpansionModule, MatInputModule, MatTabsModule, MatSidenavModule]
 	})
 
 export class MaterialModule {}

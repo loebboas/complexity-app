@@ -1,95 +1,107 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
 import { AuthService } from './auth.service';
 import { Thought } from '../models/thought';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { PubRoom } from '../models/pubRoom';
 
 
 @Injectable()
 export class DataService {
-	
-	options;
-	domain = this.authService.domain;
+
+  options;
+  domain = this.authService.domain;
+
 
   constructor(
-  	private authService: AuthService,
-  	private http: Http
-  	) { }
+    private authService: AuthService,
+    private http: HttpClient
+  ) { }
 
   // Function to create headers, add token, to be used in HTTP requests
   createAuthenticationHeaders() {
     this.authService.loadToken(); // Get token so it can be attached to headers
     // Headers configuration options
-    this.options = new RequestOptions({
-      headers: new Headers({
+    this.options = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json', // Format set to JSON
         'authorization': this.authService.authToken // Attach token
       })
-    });
+    }
   }
 
   /* ===============================================================
-     ADD THOUGHT
+     ADD DATA
   =============================================================== */
 
   newThought(thought) {
-  	this.createAuthenticationHeaders(); // Create headers
-  	return this.http.post(this.domain + '/datatransfer/newThought', thought, this.options).map(res => res.json());
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/api/newThought', thought, this.options);
   }
 
   newPubThought(thought) {
-  	this.createAuthenticationHeaders(); // Create headers
-  	return this.http.post(this.domain + '/datatransfer/newPubThought', thought, this.options).map(res => res.json());
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/api/newPubThought', thought, this.options);
   }
 
+  newPubRoom(room) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/api/newPubRoom', room, this.options);
+  }
 
-   
   /* ===============================================================
      GET DATA
   =============================================================== */
-    getAllThought() {
+  getPubRoom(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/allThought', this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/getPubRoom/' + id, this.options);
   }
 
-      getSingleThought(id) {
+
+  getAllThought() {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/singleThought/' + id, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/allThought', this.options);
   }
-  
+
+  getSingleThought(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
+  }
+
   getTimeArray(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/timeArray/' + id, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/timeArray/' + id, this.options);
   }
-      getThoughtByName(label) {
+  getThoughtByName(label) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/thoughtByName/' + label, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/thoughtByName/' + label, this.options);
   }
 
-  
-    getThought(id) {
+
+  getThought(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/getThought/' + id, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/getThought/' + id, this.options);
   }
 
   getContent(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/datatransfer/getContent/' + id, this.options).map(res => res.json());
-  }
- 
-
-   /* ===============================================================
-     DELETE/UPDATE DATA
-  =============================================================== */
-    deleteThought(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.delete(this.domain + '/datatransfer/deleteThought/' + id, this.options).map(res => res.json());
+    return this.http.get(this.domain + '/api/getContent/' + id, this.options);
   }
 
-    // Function to edit/update Label
-    editThought(editthought) {
+
+  /* ===============================================================
+    DELETE/UPDATE DATA
+ =============================================================== */
+  deleteThought(id) {
     this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/datatransfer/editThought/', editthought, this.options).map(res => res.json());
+    return this.http.delete(this.domain + '/api/deleteThought/' + id, this.options);
+  }
+
+  // Function to edit/update Label
+  editThought(editthought) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + '/api/editThought/', editthought, this.options);
   }
 
 }

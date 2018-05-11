@@ -1,6 +1,6 @@
 <div *ngIf="selectedThought">
 <div *ngIf="selectedThought.showAs == 'grid'">
-                <app-network></app-network>
+                <app-grid></app-grid>
 </div>
 <div *ngIf="selectedThought.showAs == 'timeline'">
                 <app-timeline></app-timeline>
@@ -9,5 +9,3 @@
                 <app-graph></app-graph>
 </div>
 </div>
-
-<app-toolbar></app-toolbar>

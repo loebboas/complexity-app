@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
+import { startWith ,  map } from 'rxjs/operators';
 import { Thought } from '../../../models/thought';
 import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../services/auth.service';
@@ -63,16 +62,14 @@ export class SearchComponent implements OnInit {
 
     //GET USER Data
     this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new blog posts and comments
-      this.userId = profile.user._id;
-      this.private = profile.user.private;
+      this.username = profile['user'].username; // Used when creating new blog posts and comments
+      this.userId = profile['user']._id;
+      this.private = profile['user'].private;
     });
 
-    this.internalService.loadThoughts();
-    this.internalService.thoughtObs.subscribe(res => this.thoughts = res);
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selContextObs.subscribe(res => this.context = res);
-    this.internalService.selContextsObs.subscribe(res => this.contexts = res);
+
+    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
+
 
   }
 }

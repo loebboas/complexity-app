@@ -5,11 +5,10 @@ import { InternalService } from '../../../services/internal.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Dimension } from '../../../models/dimension';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Thought } from '../../../models/thought';
 import { User } from '../../../models/user';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
+import { startWith ,  map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dimension',
@@ -52,7 +51,7 @@ export class DimensionComponent implements OnInit {
   addNumber = false;
   addDate = false;
   addTag = false;
-  newDimension;
+  newDimension: Dimension;
   newNumber;
   newTag;
   newLabel;
@@ -71,15 +70,17 @@ export class DimensionComponent implements OnInit {
 
   onDimensionSubmit() {
     //Create New Dimension
-    this.newDimension = new Dimension;
-    this.newDimension.app = "something";
-    this.newDimension.starter = "somethingElse";
-    this.newDimension.label = this.newLabel;
-    this.newDimension.dimtype = this.selectedDimension.dimtype;
+
+     this.newDimension = {
+      label: this.newLabel,
+      dimtype: "Tag",
+      val: "Something went wrong"
+      }
+
     //Create Value, depending on Input
-    if (this.selectedDimension.dimtype == "Date") { this.newDimension.val = this.newDate.toString() };
-    if (this.selectedDimension.dimtype == "Number") { this.newDimension.val = this.newNumber };
-    if (this.selectedDimension.dimtype == "Tag") { this.newDimension.val = this.newTag };
+    if (this.addDate) { this.newDimension.val = this.newDate.toString(); this.newDimension.dimtype = "Date"; };
+    if (this.addNumber) { this.newDimension.val = this.newNumber, this.newDimension.dimtype = "Date"; };
+    if (this.addTag) { this.newDimension.val = this.newTag, this.newDimension.dimtype = "Date"; };
     //Update Selected Thought with new Dimensions
     this.selectedThought.dimensions.unshift(this.newDimension);
     const editThought = {
@@ -89,7 +90,6 @@ export class DimensionComponent implements OnInit {
     this.dataService.editThought(editThought).subscribe(data => {
       //Update Dimension-Content with new Link
       this.internalService.changeThought(this.selectedThought._id);
-
     });
   }
 
@@ -97,22 +97,12 @@ export class DimensionComponent implements OnInit {
     if (label == "Number") { this.addNumber = true; this.addDate = false; this.addTag = false; };
     if (label == "Date") { this.addDate = true; this.addNumber = false; this.addTag = false; };
     if (label == "Tag") { this.addDate = false; this.addNumber = false; this.addTag = true; };
-    this.selectedDimension.dimtype = label;
   }
 
 
   ngOnInit() {
-this.selectedDimension = new Dimension;
-    //GET USER Data
-    this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-    });
+  this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
 
-    this.internalService.loadThoughts();
-    this.internalService.thoughtObs.subscribe(res => this.thoughts = res);
-    this.internalService.selThoughtObs.subscribe(res => this.selectedThought = res);
-    this.internalService.selContextObs.subscribe(res => this.context = res);
-    this.internalService.selContextsObs.subscribe(res => this.contexts = res);
 
   }
 } 

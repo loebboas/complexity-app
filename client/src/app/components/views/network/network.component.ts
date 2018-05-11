@@ -77,18 +77,8 @@ export class NetworkComponent implements OnInit {
 
   ngOnInit() {
 
-    this.internalService.selSiblingsObs.subscribe(res => { this.siblings = res; 
-         this.siblings.forEach(sibling => {
-           console.log(sibling._id);
-           console.log(this.selectedThought._id);
-
-           if(sibling._id != this.selectedThought._id){
-        this.nodes.add({ id: sibling._id, label: sibling.label, group: 2 });
-        this.edges.add({ from: this.selectedThought.contexts[0]._id, to: sibling._id })      // Add Selected Thought
-      };
-      });
-    });
-    this.internalService.selThoughtObs.subscribe(selT => {
+    
+    this.internalService.selectedThoughtObs.subscribe(selT => {
       this.selectedThought = selT;
       if (this.selectedThought) {
         this.nodes.clear();

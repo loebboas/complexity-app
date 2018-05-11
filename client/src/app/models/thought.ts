@@ -1,20 +1,22 @@
 import { Dimension } from "./dimension";
+import { GridsterItem } from "angular-gridster2";
 
-export class Thought {    
-        _id: string;
+export interface Thought {    
+        _id?: string;
         level: number;
         label: string;
-        color: string;
+        color?: string;
         clicks: number;
-        dimensions: Dimension[];
+        dimensions?: Dimension[];
         showAs: string;
         user: string;
-        contexts: any[];
+        contexts?: any[];
         contents: any[]; 
-        __v: number;
-        texture: string;
-        form: string;
-        privacy: string;
+        __v?: number;
+        texture?: string;
+        form?: string;
+        privacy?: string;
+        grid?: GridsterItem;
 }
 
 
