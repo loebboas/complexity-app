@@ -197,12 +197,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_views_grid_network_grid_network_grid_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/views/grid/network-grid/network-grid.component */ "./src/app/components/views/grid/network-grid/network-grid.component.ts");
 /* harmony import */ var _components_views_grid_grid_grid_grid_grid_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/views/grid/grid-grid/grid-grid.component */ "./src/app/components/views/grid/grid-grid/grid-grid.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./services/draw-navbar.service */ "./src/app/services/draw-navbar.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -279,7 +281,7 @@ var AppModule = /** @class */ (function () {
                 _material_module__WEBPACK_IMPORTED_MODULE_15__["MaterialModule"],
                 angular_gridster2__WEBPACK_IMPORTED_MODULE_29__["GridsterModule"]
             ],
-            providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"], _guards_notAuth_guard__WEBPACK_IMPORTED_MODULE_13__["NotAuthGuard"], _services_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"], _services_internal_service__WEBPACK_IMPORTED_MODULE_17__["InternalService"], _components_views_grid_gridster_config_service__WEBPACK_IMPORTED_MODULE_30__["GridsterConfigService"]],
+            providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"], _guards_notAuth_guard__WEBPACK_IMPORTED_MODULE_13__["NotAuthGuard"], _services_data_service__WEBPACK_IMPORTED_MODULE_9__["DataService"], _services_internal_service__WEBPACK_IMPORTED_MODULE_17__["InternalService"], _components_views_grid_gridster_config_service__WEBPACK_IMPORTED_MODULE_30__["GridsterConfigService"], _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_36__["DrawNavbarService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -551,8 +553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vis */ "./node_modules/vis/dist/vis.js");
 /* harmony import */ var vis__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vis__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _services_internal_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/internal.service */ "./src/app/services/internal.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/draw-navbar.service */ "./src/app/services/draw-navbar.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -566,12 +567,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(internalService, authService, dataService) {
+    function NavbarComponent(internalService, drawNavbarService) {
         this.internalService = internalService;
-        this.authService = authService;
-        this.dataService = dataService;
+        this.drawNavbarService = drawNavbarService;
         this.nodes = new vis__WEBPACK_IMPORTED_MODULE_1__["DataSet"]([]);
         this.edges = new vis__WEBPACK_IMPORTED_MODULE_1__["DataSet"]([]);
         this.showUserContent = false;
@@ -600,39 +599,45 @@ var NavbarComponent = /** @class */ (function () {
                 }
             },
             groups: {
-                0: {
+                'infCloud': {
                     size: 40,
                     color: '#A59BB2',
                     font: { size: 16, strokeWidth: 3, strokeColor: 'white' },
                 },
-                1: {
-                    size: 30,
+                'pubRooms': {
+                    first: {
+                        size: 30,
+                    },
+                    size: 5,
                     color: '#84729C',
                     font: { size: 22, strokeWidth: 3, strokeColor: 'white' }
                 },
-                2: {
+                'selPubRoom': {
                     color: '#55558E',
                     size: 15,
                     font: { size: 18, strokeWidth: 3, strokeColor: 'white' }
                 },
-                3: {
+                'user': {
                     color: '#4C2C76',
                     size: 15,
                     font: { size: 14, strokeWidth: 3, strokeColor: 'white' }
                 },
-                4: {
+                'myNetworks': {
                     color: '#361265',
                     size: 15,
                     font: { size: 12, strokeWidth: 3, strokeColor: 'white' }
                 },
-                5: {
+                'myRooms': {
                     color: '#361265',
                     size: 15,
                     font: { size: 12, strokeWidth: 3, strokeColor: 'white' }
                 },
-                6: {
+                'myFriends': {
                     color: '#361265',
                     size: 15,
+                    font: { size: 12, strokeWidth: 3, strokeColor: 'white' }
+                },
+                'thoughts': {
                     font: { size: 12, strokeWidth: 3, strokeColor: 'white' }
                 },
             },
@@ -641,190 +646,10 @@ var NavbarComponent = /** @class */ (function () {
             }
         };
     }
-    NavbarComponent.prototype.showContentNodes = function (id) {
-        this.dataService.getContent(id).subscribe(function (data) { console.log(data); });
-    };
-    NavbarComponent.prototype.onRoomChange = function (room) {
-        if (this.lastRoom) {
-            if (this.lastRoom._id != room._id) {
-                this.removeRoomNode(room);
-                this.drawRoomNode(room);
-            }
-        }
-        else {
-            this.drawRoomNode(room);
-        }
-        this.lastRoom = room;
-    };
-    NavbarComponent.prototype.onUserChange = function (user) {
-        if (this.user) {
-            if (user._id != this.user._id) {
-                this.removeUserNodes(user);
-                this.drawUserNodes(user);
-            }
-        }
-        else {
-            this.user = user; // First User (=Guest)
-            this.nodes.add({ id: "3", label: this.user.username, group: 2 }); // Add Guest Node
-        }
-    };
-    NavbarComponent.prototype.onThoughtChange = function (thought) {
-        // Make selectedThought Node visible differently
-    };
-    NavbarComponent.prototype.onNodeChange = function (node) { };
-    //Drawing Functions
-    NavbarComponent.prototype.drawRoomNode = function (room) {
-        this.selectedRoom = room;
-        this.nodes.add({ id: this.selectedRoom._id, label: this.selectedRoom.label, group: 1 }); // Add newRoom Node¨
-        this.edges.add({ from: 1, to: this.selectedRoom._id, id: "3l" });
-        this.edges.add({ from: this.selectedRoom._id, to: this.user._id, id: "2l" });
-    };
-    NavbarComponent.prototype.removeRoomNode = function (room) {
-        if (room._id != this.lastRoom._id) {
-            this.nodes.remove(this.lastRoom._id);
-            this.edges.remove("3l");
-            this.edges.remove("2l");
-        }
-    };
-    NavbarComponent.prototype.drawUserNodes = function (user) {
-        //Remove the Edge from Room to Guest/User
-        this.user = user;
-        this.nodes.add({ id: this.user._id, label: this.user.username, group: 2 }); //Add User Node
-        this.edges.add({ from: this.selectedRoom._id, to: this.user._id, id: "2l" }); //Add Edge from Room to User
-    };
-    NavbarComponent.prototype.removeUserNodes = function (user) {
-        if (this.nodes.get("3"))
-            this.nodes.remove("3"); //Remove the Guest UserNode, if found
-        if (this.nodes.get(user._id))
-            this.nodes.remove(user._id); //Remove other UserNode, if found
-        this.edges.remove("2l"); //Remove Edge from Room to User
-    };
-    NavbarComponent.prototype.drawUserContent = function () {
-        this.showUserContent = true;
-        this.nodes.add({ id: 4, label: "My Networks", group: 8, first: true }); //Add Networks Node
-        this.edges.add({ from: this.user._id, to: 4, id: "4l" }); //Add Edge from User to Networks
-        this.nodes.add({ id: 5, label: "My Rooms", group: 9, first: true }); //Add Rooms Node
-        this.edges.add({ from: this.user._id, to: 5, id: "5l" }); //Add Edge from User to Rooms
-        this.nodes.add({ id: 6, label: "My Friends", group: 10, first: true }); //Add Friends Node
-        this.edges.add({ from: this.user._id, to: 6, id: "6l" }); //Add Edge from User to Friends
-    };
-    NavbarComponent.prototype.removeUserContent = function () {
-        this.nodes.remove(4); //Remove Networks Node
-        this.edges.remove("4l"); //Remove Edge from User to Networks
-        this.nodes.remove(5); //Remove Rooms Node
-        this.edges.remove("5l"); //Remove Edge from User to Rooms
-        this.nodes.remove(6); //Remove Friends Node
-        this.edges.remove("6l"); //Remove Edge from User to Friends
-    };
-    NavbarComponent.prototype.drawMyNetworks = function () {
-        var _this = this;
-        this.user.private.forEach(function (network) {
-            var i = 0;
-            _this.nodes.add({ id: network._id, label: network.label, group: 3 }); //Add Networks Nodes
-            _this.edges.add({ from: 4, to: network._id, id: "networks" + i });
-        });
-    };
-    NavbarComponent.prototype.removeMyNetworks = function () {
-        var _this = this;
-        this.user.private.forEach(function (network) {
-            var i = 0;
-            _this.nodes.remove(network._id); //Add Networks Nodes
-            _this.edges.remove("networks" + i);
-        });
-    };
-    NavbarComponent.prototype.drawPublic = function () {
-    };
-    NavbarComponent.prototype.drawMyRooms = function () {
-        var _this = this;
-        this.user.rooms.forEach(function (room) {
-            room._id = room._id + "-Link"; //Create a New ID for the Link 
-            var i = 0; //If Room isnt selected Room
-            _this.nodes.add({ id: room._id, label: room.label, group: 4 }); //Add Room 
-            _this.edges.add({ from: 5, to: room._id, id: "rooms" + i }); //Add Edge from MyRooms to Room 
-        });
-    };
-    NavbarComponent.prototype.removeMyRooms = function () {
-        var _this = this;
-        console.log(this.nodes);
-        this.user.rooms.forEach(function (room) {
-            var i = 0; //If Room isnt selected Room
-            console.log(room._id);
-            _this.nodes.remove(room._id); //Remove Roomlink 
-            _this.edges.remove("rooms" + i); //Add Edge from MyRooms to Room 
-        });
-        console.log(this.nodes);
-    };
-    NavbarComponent.prototype.drawMyFriends = function () {
-        var _this = this;
-        this.user.friends.forEach(function (friend) {
-            var i = 0; //If Room isnt selected Room
-            _this.nodes.add({ id: friend._id, label: friend.label, group: 5 }); //Add Room 
-            _this.edges.add({ from: 6, to: friend._id, id: "friend" + i }); //Add Edge from MyRooms to Room 
-        });
-    };
-    NavbarComponent.prototype.removeMyFriends = function () {
-        var _this = this;
-        this.user.friends.forEach(function (friend) {
-            var i = 0; //Add all Friends as Nodes
-            _this.nodes.remove(friend._id);
-            _this.edges.remove("friend" + i);
-        });
-    };
-    NavbarComponent.prototype.drawThoughtContent = function (id) {
-        var _this = this;
-        this.dataService.getContent(id).subscribe(function (data) {
-            _this.showThoughts.push(data['thought']);
-            if (data['thought'].contents.length > 0) {
-                data['thought'].contents.forEach(function (content) {
-                    var i = 0;
-                    _this.nodes.add({ id: content._id, label: content.label, group: 3 }); // Add newRoom Node¨
-                    _this.edges.add({ from: data['thought']._id, to: content._id, id: content._id + "" + i });
-                });
-            }
-        });
-    };
-    NavbarComponent.prototype.removeThoughtContent = function (thought) {
-        var _this = this;
-        thought.contents.forEach(function (content) {
-            var i = 0;
-            _this.nodes.remove(content._id);
-            _this.edges.remove(content._id + "" + i);
-        });
-        //Delete from Array (That's the easiest way??)
-        this.showThoughts.forEach(function (showThought) {
-            var i = 0;
-            if (showThought._id === thought._id) {
-                _this.showThoughts.splice(i, 1);
-            }
-            i++;
-        });
-        console.log(this.showThoughts);
-    };
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //load User on Init if LoggedIn
-        if (this.authService.loggedIn()) {
-            this.internalService.loadUser();
-        }
-        //Groups: 0 = InfCloud, 1 = selRoom, 1a = selRoom Content, 2 = User, 3 = networks, 3a = networks content, 4 = rooms, 5 = friends 
-        //Static IDs: 
-        // Nodes: 1 = InfCl, 2 = Welcome, 3 = Guest, 4 = Networks, 5 = Rooms, 6 = Friends
-        // Edges: 1l = InfCl-Room, 2l = Room-User, 
-        //Create Infinity-Cloud Node
-        this.nodes.add({ id: 1, label: "Infinity Cloud", group: 0 }); //Add Infinity Cloud Node
-        //Subscribe to selected User, Room, Thought and NOdes 
-        this.internalService.selectedUserObs.subscribe(function (user) { return _this.onUserChange(user); }); //Subscribe to User, on UserChange
-        this.internalService.selectedRoomObs.subscribe(function (room) { if (_this.user) {
-            _this.onRoomChange(room);
-        } }); //Subscribe to selected Room, onRoomChange
-        this.internalService.selectedThoughtObs.subscribe(function (thought) { if (_this.selectedRoom) {
-            _this.onThoughtChange(thought);
-            console.log(thought);
-        } }); //Subscribe to selected Room, onRoomChange
-        this.internalService.selectedNodeObs.subscribe(function (node) { if (_this.user) {
-            _this.onNodeChange(node);
-        } }); //Subscribe to selected Room, onRoomChange
-        //Later: Subscribe to trending/close by public Rooms
+        this.drawNavbarService.nodesObs.subscribe(function (nodes) { return _this.nodes = nodes; });
+        this.drawNavbarService.edgesObs.subscribe(function (edges) { return _this.edges = edges; });
         var container = document.getElementById('navbar');
         this.network = new vis__WEBPACK_IMPORTED_MODULE_1__["Network"](container, this.data, this.options);
         //0 = InfinityCloud, 1 = Other Rooms, 2 = selected Room, 3 = User + UserDimensions, 4 = networks, 5 = public, 6 = Rooms, 7 = Friends, 8 = SelectedRoom.Contents
@@ -832,82 +657,70 @@ var NavbarComponent = /** @class */ (function () {
         //console.log(params);
         // this.showContentNodes(this.nodes.get(params.nodes[0]));
         //});
-        this.network.on('click', function (params) {
-            if (params.nodes.length > 0) {
-                var selectedNode_1 = _this.nodes.get(params.nodes[0]);
-                if (selectedNode_1['id'] == _this.user._id) {
-                    if (_this.showUserContent) {
-                        _this.removeUserContent();
-                        _this.showUserContent = false;
-                    }
-                    else {
-                        _this.drawUserContent();
-                        _this.showUserContent = true;
-                    }
-                }
-                else if (selectedNode_1['id'] == 4) {
-                    if (_this.showMyNetworks) {
-                        _this.removeMyNetworks();
-                        _this.showMyNetworks = false;
-                    }
-                    else {
-                        _this.drawMyNetworks();
-                        _this.showMyNetworks = true;
-                    }
-                }
-                else if (selectedNode_1['id'] == 5) {
-                    if (_this.showMyRooms) {
-                        _this.removeMyRooms();
-                        _this.showMyRooms = false;
-                    }
-                    else {
-                        _this.drawMyRooms();
-                        _this.showMyRooms = true;
-                    }
-                }
-                else if (selectedNode_1['id'] == 6) {
-                    if (_this.showMyFriends) {
-                        _this.removeMyFriends();
-                        _this.showMyFriends = false;
-                    }
-                    else {
-                        _this.drawMyFriends();
-                        _this.showMyFriends = true;
-                    }
-                }
-                else if (selectedNode_1['group'] == 3) {
-                    if (_this.showThoughts.length > 0) {
-                        var selectedThought = _this.showThoughts.filter(function (thought) { return thought._id == selectedNode_1['id']; });
-                        if (selectedThought.length > 0) {
-                            _this.removeThoughtContent(selectedThought[0]);
-                        }
-                        else {
-                            _this.drawThoughtContent(selectedNode_1['id']);
-                            _this.internalService.changeThought(selectedNode_1['id']);
-                        }
-                    }
-                    else {
-                        _this.drawThoughtContent(selectedNode_1['id']);
-                        _this.internalService.changeThought(selectedNode_1['id']);
-                    }
-                }
-                else if (selectedNode_1['group'] == 4) {
-                    var roomId = selectedNode_1['id'].substring(0, selectedNode_1['id'].length() - 5); //remove the "-Link" Addon
-                    _this.internalService.changeRoom(roomId);
-                }
-            }
-        });
-        this.network.on('doubleClick', function (params) {
-            if (params.nodes.length > 0) {
-                var selectedNode = _this.nodes.get(params.nodes[0]);
-                if (selectedNode['group'] = 4) {
-                    _this.internalService.changeRoom(selectedNode['id']);
-                }
-                else if (selectedNode['group'] = 5) {
-                    console.log("you dblClicked Friends!");
-                }
-            }
-        });
+        // this.network.on('click', params => {
+        //   if(params.nodes.length > 0){
+        //   const selectedNode = this.nodes.get(params.nodes[0])
+        //   if (selectedNode['id'] == this.user._id) {  // If clickOn User: Draw/Remove User Content
+        //     if (this.showUserContent) {
+        //       this.drawNavbarService.removeUserContent();
+        //       this.showUserContent = false;
+        //     } else {
+        //       this.drawNavbarService.drawUserContent();
+        //       this.showUserContent = true;
+        //     }
+        //   } else if (selectedNode['id'] == 4) { // If clickOn Networks: Draw/Remove My Networks
+        //     if (this.showMyNetworks) {
+        //       this.drawNavbarService.removeMyNetworks();
+        //       this.showMyNetworks = false;
+        //     } else {
+        //       this.drawNavbarService.drawMyNetworks();
+        //       this.showMyNetworks = true;
+        //     }
+        //   } else if (selectedNode['id'] == 5) {   //If clickOn MyRooms Draw/Remove MyRooms
+        //     if (this.showMyRooms) {
+        //       this.drawNavbarService.removeMyRooms();
+        //       this.showMyRooms = false;
+        //     } else {
+        //       this.drawNavbarService.drawMyRooms();
+        //       this.showMyRooms = true;
+        //     }
+        //   } else if (selectedNode['id'] == 6) { //If clickOn Friends Draw/Remove Friends
+        //     if (this.showMyFriends) {
+        //       this.drawNavbarService.removeMyFriends();
+        //       this.showMyFriends = false;
+        //     } else {
+        //       this.drawNavbarService.drawMyFriends();
+        //       this.showMyFriends = true;
+        //     }
+        //   } else if (selectedNode['group'] == 3) {    //If ClickOn My Thoughts (MyNetworks and below)
+        //     if(this.showThoughts.length > 0){
+        //     const selectedThought = this.showThoughts.filter(thought => thought._id == selectedNode['id'])
+        //     if (selectedThought.length > 0) {
+        //       this.drawNavbarService.removeThoughtContent(selectedThought[0]);
+        //     } else {
+        //       this.drawNavbarService.drawThoughtContent(selectedNode['id']);
+        //       this.internalService.changeThought(selectedNode['id']);
+        //     }
+        //   } else {
+        //     this.drawNavbarService.drawThoughtContent(selectedNode['id']);
+        //     this.internalService.changeThought(selectedNode['id']);
+        //   } 
+        //   } else if (selectedNode['group'] == 4) {    
+        //     var roomId = selectedNode['id'].substring(0, selectedNode['id'].length() - 5); //remove the "-Link" Addon
+        //     this.internalService.changeRoom(roomId)
+        //   }
+        // }
+        // });
+        // this.network.on('doubleClick', params => {
+        //   if(params.nodes.length > 0){
+        //   const selectedNode = this.nodes.get(params.nodes[0])
+        //   if (selectedNode['group'] = 4) {
+        //     this.internalService.changeRoom(selectedNode['id']);
+        //   } else if (selectedNode['group'] = 5) {
+        //     console.log("you dblClicked Friends!")
+        //   }
+        // }
+        // })
     };
     NavbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -916,7 +729,7 @@ var NavbarComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./navbar.component.css */ "./src/app/components/navbar/navbar.component.css")],
             encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None
         }),
-        __metadata("design:paramtypes", [_services_internal_service__WEBPACK_IMPORTED_MODULE_2__["InternalService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"]])
+        __metadata("design:paramtypes", [_services_internal_service__WEBPACK_IMPORTED_MODULE_2__["InternalService"], _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_3__["DrawNavbarService"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -3628,14 +3441,6 @@ var DataService = /** @class */ (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
     };
-    DataService.prototype.getTimeArray = function (id) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/api/timeArray/' + id, this.options);
-    };
-    DataService.prototype.getThoughtByName = function (label) {
-        this.createAuthenticationHeaders(); // Create headers
-        return this.http.get(this.domain + '/api/thoughtByName/' + label, this.options);
-    };
     DataService.prototype.getThought = function (id) {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/api/getThought/' + id, this.options);
@@ -3668,6 +3473,210 @@ var DataService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/draw-navbar.service.ts":
+/*!*************************************************!*\
+  !*** ./src/app/services/draw-navbar.service.ts ***!
+  \*************************************************/
+/*! exports provided: DrawNavbarService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrawNavbarService", function() { return DrawNavbarService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var vis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vis */ "./node_modules/vis/dist/vis.js");
+/* harmony import */ var vis__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vis__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DrawNavbarService = /** @class */ (function () {
+    function DrawNavbarService() {
+        this.nodes = new vis__WEBPACK_IMPORTED_MODULE_1__["DataSet"]([]);
+        this.edges = new vis__WEBPACK_IMPORTED_MODULE_1__["DataSet"]([]);
+        // Store Data for Navbar Component as BehaviourSubjects
+        this.thenodes = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](this.nodes);
+        this.nodesObs = this.thenodes.asObservable();
+        this.theedges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](this.edges);
+        this.edgesObs = this.theedges.asObservable();
+    }
+    DrawNavbarService.prototype.onRoomChange = function (room) {
+        // if (this.lastRoom) {
+        //   if (this.lastRoom._id != room._id) {
+        //     this.removeRoomNode(room)
+        //     this.drawRoomNode(room)
+        //   }
+        // } else { //First time
+        //   this.drawRoomNode(room)
+        // }
+        // this.lastRoom = room;
+    };
+    // this.nodes.add({ id: 1, label: "Infinity Cloud", group: 0 })                        //Add Infinity Cloud Node
+    // //Subscribe to selected User, Room, Thought and NOdes 
+    DrawNavbarService.prototype.onUserChange = function (user) {
+        if (this.user) {
+            if (user._id != this.user._id) {
+                this.removeUserNodes(user);
+                this.drawUserNodes(user);
+            }
+        }
+        else {
+            this.user = user; // First User (=Guest)
+            this.nodes.add({ id: "3", label: this.user.username, group: 2 }); // Add Guest Node
+        }
+    };
+    DrawNavbarService.prototype.onThoughtChange = function (thought) {
+        // Make selectedThought Node visible differently
+    };
+    DrawNavbarService.prototype.onNodeChange = function (node) { };
+    //Drawing Functions
+    DrawNavbarService.prototype.drawPubRooms = function (room) {
+        this.selectedRoom = room;
+        this.nodes.add({ id: this.selectedRoom._id, label: this.selectedRoom.label, group: 1 }); // Add newRoom Node¨
+        this.edges.add({ from: 1, to: this.selectedRoom._id, id: "3l" });
+        this.edges.add({ from: this.selectedRoom._id, to: this.user._id, id: "2l" });
+    };
+    DrawNavbarService.prototype.removeRoomNode = function (room) {
+        if (room._id != this.lastRoom._id) {
+            this.nodes.remove(this.lastRoom._id);
+            this.edges.remove("3l");
+            this.edges.remove("2l");
+        }
+    };
+    DrawNavbarService.prototype.drawUserNodes = function (user) {
+        //Remove the Edge from Room to Guest/User
+        this.user = user;
+        this.nodes.add({ id: this.user._id, label: this.user.username, group: 2 }); //Add User Node
+        this.edges.add({ from: this.selectedRoom._id, to: this.user._id, id: "2l" }); //Add Edge from Room to User
+    };
+    DrawNavbarService.prototype.removeUserNodes = function (user) {
+        if (this.nodes.get("3"))
+            this.nodes.remove("3"); //Remove the Guest UserNode, if found
+        if (this.nodes.get(user._id))
+            this.nodes.remove(user._id); //Remove other UserNode, if found
+        this.edges.remove("2l"); //Remove Edge from Room to User
+    };
+    DrawNavbarService.prototype.drawUserContent = function () {
+        this.showUserContent = true;
+        this.nodes.add({ id: 4, label: "My Networks", group: 8, first: true }); //Add Networks Node
+        this.edges.add({ from: this.user._id, to: 4, id: "4l" }); //Add Edge from User to Networks
+        this.nodes.add({ id: 5, label: "My Rooms", group: 9, first: true }); //Add Rooms Node
+        this.edges.add({ from: this.user._id, to: 5, id: "5l" }); //Add Edge from User to Rooms
+        this.nodes.add({ id: 6, label: "My Friends", group: 10, first: true }); //Add Friends Node
+        this.edges.add({ from: this.user._id, to: 6, id: "6l" }); //Add Edge from User to Friends
+    };
+    DrawNavbarService.prototype.removeUserContent = function () {
+        this.nodes.remove(4); //Remove Networks Node
+        this.edges.remove("4l"); //Remove Edge from User to Networks
+        this.nodes.remove(5); //Remove Rooms Node
+        this.edges.remove("5l"); //Remove Edge from User to Rooms
+        this.nodes.remove(6); //Remove Friends Node
+        this.edges.remove("6l"); //Remove Edge from User to Friends
+    };
+    DrawNavbarService.prototype.drawMyNetworks = function () {
+        var _this = this;
+        this.user.private.forEach(function (network) {
+            var i = 0;
+            _this.nodes.add({ id: network._id, label: network.label, group: 3 }); //Add Networks Nodes
+            _this.edges.add({ from: 4, to: network._id, id: "networks" + i });
+        });
+    };
+    DrawNavbarService.prototype.removeMyNetworks = function () {
+        var _this = this;
+        this.user.private.forEach(function (network) {
+            var i = 0;
+            _this.nodes.remove(network._id); //Add Networks Nodes
+            _this.edges.remove("networks" + i);
+        });
+    };
+    DrawNavbarService.prototype.drawPublic = function () {
+    };
+    DrawNavbarService.prototype.drawMyRooms = function () {
+        var _this = this;
+        this.user.rooms.forEach(function (room) {
+            room._id = room._id + "-Link"; //Create a New ID for the Link 
+            var i = 0; //If Room isnt selected Room
+            _this.nodes.add({ id: room._id, label: room.label, group: 4 }); //Add Room 
+            _this.edges.add({ from: 5, to: room._id, id: "rooms" + i }); //Add Edge from MyRooms to Room 
+        });
+    };
+    DrawNavbarService.prototype.removeMyRooms = function () {
+        var _this = this;
+        console.log(this.nodes);
+        this.user.rooms.forEach(function (room) {
+            var i = 0; //If Room isnt selected Room
+            console.log(room._id);
+            _this.nodes.remove(room._id); //Remove Roomlink 
+            _this.edges.remove("rooms" + i); //Add Edge from MyRooms to Room 
+        });
+        console.log(this.nodes);
+    };
+    DrawNavbarService.prototype.drawMyFriends = function () {
+        var _this = this;
+        this.user.friends.forEach(function (friend) {
+            var i = 0; //If Room isnt selected Room
+            _this.nodes.add({ id: friend._id, label: friend.label, group: 5 }); //Add Room 
+            _this.edges.add({ from: 6, to: friend._id, id: "friend" + i }); //Add Edge from MyRooms to Room 
+        });
+    };
+    DrawNavbarService.prototype.removeMyFriends = function () {
+        var _this = this;
+        this.user.friends.forEach(function (friend) {
+            var i = 0; //Add all Friends as Nodes
+            _this.nodes.remove(friend._id);
+            _this.edges.remove("friend" + i);
+        });
+    };
+    DrawNavbarService.prototype.drawThoughtContent = function (id) {
+        // this.dataService.getContent(id).subscribe(data => {
+        //   this.showThoughts.push(data['thought']);
+        //   if(data['thought'].contents.length > 0) {
+        //   data['thought'].contents.forEach(content => {
+        //     var i = 0;
+        //     this.nodes.add({ id: content._id, label: content.label, group: 3 }) // Add newRoom Node¨
+        //     this.edges.add({ from: data['thought']._id, to: content._id, id: content._id + "" + i })   
+        //   });
+        // }
+        // })
+    };
+    DrawNavbarService.prototype.removeThoughtContent = function (thought) {
+        // thought.contents.forEach(content => {
+        //   var i = 0;
+        //   this.nodes.remove(content._id)
+        //   this.edges.remove(content._id + "" + i )
+        // });
+        // //Delete from Array (That's the easiest way??)
+        // this.showThoughts.forEach(showThought => {
+        //   var i = 0;
+        //   if (showThought._id === thought._id) {
+        //     this.showThoughts.splice(i, 1);
+        // }
+        // i++;
+        // })
+        // console.log(this.showThoughts)
+    };
+    DrawNavbarService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], DrawNavbarService);
+    return DrawNavbarService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/internal.service.ts":
 /*!**********************************************!*\
   !*** ./src/app/services/internal.service.ts ***!
@@ -3682,6 +3691,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.service */ "./src/app/services/data.service.ts");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _public_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./public.service */ "./src/app/services/public.service.ts");
+/* harmony import */ var _draw_navbar_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./draw-navbar.service */ "./src/app/services/draw-navbar.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3695,19 +3706,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var InternalService = /** @class */ (function () {
-    function InternalService(dataService, authService) {
+    function InternalService(dataService, authService, publicService, drawNavbarService) {
         this.dataService = dataService;
         this.authService = authService;
-        // Array with all Thoughts which can be searched.
-        this.searchList = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
-        this.searchListObs = this.searchList.asObservable();
-        //Selected Thought (Thought incl. Content which is being shown)
-        this.selectedThought = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
-        this.selectedThoughtObs = this.selectedThought.asObservable();
-        //Selected Room (default: Welcome)
-        this.selectedRoom = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]({
-            _id: "2",
+        this.publicService = publicService;
+        this.drawNavbarService = drawNavbarService;
+        this.guestRoom = {
+            _id: "guestroom",
             label: "Welcome!",
             admin: [],
             members: [],
@@ -3715,26 +3723,15 @@ var InternalService = /** @class */ (function () {
             dimensions: [],
             visible: "open",
             activeUsers: []
-        });
-        this.selectedRoomObs = this.selectedRoom.asObservable();
-        //Node which is selected, relevant for Editingpossibilities
-        this.selectedNode = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
-        this.selectedNodeObs = this.selectedNode.asObservable();
-        //ReplaySubject which holds the last 10 changes.
-        this.changeTracker = new rxjs__WEBPACK_IMPORTED_MODULE_1__["ReplaySubject"]();
-        this.changeTrackerObs = this.changeTracker.asObservable();
-        //Selected Tool
-        this.selectedTool = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]("none");
-        this.selectedToolObs = this.selectedTool.asObservable();
-        //User (default: Guest)
-        this.selectedUser = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]({
-            _id: "3",
+        };
+        this.guestUser = {
+            _id: "guestuser",
             email: "guest@complexity-app.com",
             username: "Guest",
             private: [],
             public: [],
             rooms: [{
-                    _id: "2",
+                    _id: "guestroom",
                     label: "Welcome!",
                     admin: [],
                     members: [],
@@ -3744,24 +3741,81 @@ var InternalService = /** @class */ (function () {
                     activeUsers: []
                 }],
             friends: []
-        });
+        };
+        // Stores Data for Viewer as GridsterItems
+        this.Items = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.ItemsObs = this.Items.asObservable();
+        // Stores all public Rooms (later: Selected Rooms, SEARCH, shown as Stars in Background)
+        this.pubRooms = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.pubRoomsObs = this.pubRooms.asObservable();
+        //Stores the selected Room (default: Welcome)
+        this.selectedRoom = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](this.guestRoom);
+        this.selectedRoomObs = this.selectedRoom.asObservable();
+        // Stores public Thoughts of selected Room
+        this.pubThoughts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.pubThoughtsObs = this.pubThoughts.asObservable();
+        //stores User (default: Guest)
+        this.selectedUser = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](this.guestUser);
         this.selectedUserObs = this.selectedUser.asObservable();
+        //Selected Thought (Thought incl. Content which is being shown)
+        this.selectedThought = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.selectedThoughtObs = this.selectedThought.asObservable();
+        // Array with all Thoughts of this Session
+        this.sessionThoughts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.sessionThoughtsObs = this.sessionThoughts.asObservable();
+        //Selected Tool
+        this.selectedTool = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]("none");
+        this.selectedToolObs = this.selectedTool.asObservable();
     }
-    InternalService.prototype.changeThought = function (id) {
+    //Consts: GuestUser, WelcomeRoom
+    //Observables: PubRooms (incl. one = selected), SessionThoughts, SelectedThought, User, Networks, Tools
+    //Input: AuthService: User (Friends, Networks, Room-Links)
+    //Input: DataService: Thoughts
+    //Input: PublicService: PubRooms, PubThoughts
+    //Functions: ChangeUser, ShowMyNetworks, ShowThought, RemoveThought ShowFriends, GoToFriendRoom, ShowMyRooms, GoToRoom
+    //Function: ChangeSelectedThought
+    //Function: ChangeTool, changeShowAs
+    //Output: PubRooms, SessionThoughts, User @Navbar (via DrawGraph-Service)
+    //Output: SelectedThought (incl. Contents + SubContents) @Viewer 
+    //LOAD DATA
+    InternalService.prototype.loadUser = function () {
         var _this = this;
-        this.dataService.getThought(id).subscribe(function (data) {
-            var thought = data['thought']; //Load Populated Thought
-            _this.selectedThought.next(thought);
+        if (this.authService.loggedIn()) {
+            this.authService.getProfile().subscribe(function (data) {
+                if (data['user']) {
+                    var user = data['user'];
+                    _this.changeRoom(user.rooms[0]._id);
+                    _this.selectedUser.next(user);
+                    _this.drawNavbarService.removeUserNodes;
+                    _this.drawNavbarService.drawUserNodes;
+                }
+                else {
+                    var user = _this.guestUser;
+                    _this.selectedUser.next(user);
+                    _this.changeRoom(user.rooms[0]._id);
+                    _this.drawNavbarService.removeUserNodes;
+                    _this.drawNavbarService.drawUserNodes;
+                }
+            });
+        }
+    };
+    InternalService.prototype.loadPubRooms = function () {
+        var _this = this;
+        this.publicService.getAllPubRooms().subscribe(function (data) {
+            _this.pubRooms.next(data['pubRooms']);
+            _this.drawNavbarService.drawPubRooms(data['pubRooms']);
         });
     };
+    //ROOMS
     InternalService.prototype.changeRoom = function (id) {
-        var _this = this;
-        this.dataService.getPubRoom(id).subscribe(function (data) {
-            var pubRoom = data['pubRoom'];
-            _this.selectedRoom.next(pubRoom);
-            _this.roomToThought(pubRoom);
-        });
+        if (this.pubRooms.getValue().length > 0) {
+            var pubRoom = this.pubRooms.getValue().find(function (pubRoom) { return id == pubRoom._id; });
+            this.selectedRoom.next(pubRoom);
+            this.roomToThought(pubRoom);
+            this.drawNavbarService.onRoomChange(pubRoom);
+        }
     };
+    //THOUGHTS
     InternalService.prototype.roomToThought = function (pubRoom) {
         var thought = {
             _id: pubRoom._id,
@@ -3772,10 +3826,16 @@ var InternalService = /** @class */ (function () {
             color: "#FFFFFF",
             clicks: pubRoom.likes,
             showAs: "grid",
-            grid: { cols: 1, rows: 1, x: 1, y: 1, colspan: 1, rowspan: 1 }
+            grid: { cols: 7, rows: 1, x: 0, y: 0, colspan: 0, rowspan: 0 }
         };
         this.selectedThought.next(thought);
-        console.log(thought);
+    };
+    InternalService.prototype.changeThought = function (id) {
+        var _this = this;
+        this.dataService.getThought(id).subscribe(function (data) {
+            var thought = data['thought']; //Load Populated Thought
+            _this.selectedThought.next(thought);
+        });
     };
     InternalService.prototype.changeTool = function (tool) {
         this.selectedTool.next(tool);
@@ -3785,41 +3845,84 @@ var InternalService = /** @class */ (function () {
         viewThought.showAs = label;
         this.selectedThought.next(viewThought);
     };
-    InternalService.prototype.loadUser = function () {
-        var _this = this;
-        if (this.authService.loggedIn()) {
-            this.authService.getProfile().subscribe(function (data) {
-                if (data['user']) {
-                    var user = data['user'];
-                    _this.changeRoom(user.rooms[0]._id);
-                    _this.selectedUser.next(user);
-                }
-                else {
-                    var user = { _id: "3",
-                        email: "guest@complexity-app.com",
-                        username: "Guest",
-                        private: [],
-                        public: [],
-                        rooms: [{ _id: "2" }],
-                        friends: []
-                    };
-                    _this.selectedUser.next(user);
-                    _this.changeRoom(user.rooms[0]._id);
-                }
-            });
-        }
-    };
-    InternalService.prototype.getSearchList = function () {
-        var _this = this;
-        this.dataService.getAllThought().subscribe(function (data) {
-            _this.searchList.next(data['allThought']);
-        });
+    InternalService.prototype.showContentNodes = function (id) {
+        this.dataService.getContent(id).subscribe(function (data) { console.log(data); });
     };
     InternalService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        __metadata("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _public_service__WEBPACK_IMPORTED_MODULE_4__["PublicService"], _draw_navbar_service__WEBPACK_IMPORTED_MODULE_5__["DrawNavbarService"]])
     ], InternalService);
     return InternalService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/public.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/public.service.ts ***!
+  \********************************************/
+/*! exports provided: PublicService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PublicService", function() { return PublicService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PublicService = /** @class */ (function () {
+    function PublicService(authService, http) {
+        this.authService = authService;
+        this.http = http;
+        this.domain = this.authService.domain;
+    }
+    // Function to create headers, add token, to be used in HTTP requests
+    PublicService.prototype.createAuthenticationHeaders = function () {
+        this.authService.loadToken(); // Get token so it can be attached to headers
+        // Headers configuration options
+        this.options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json',
+                'authorization': this.authService.authToken // Attach token
+            })
+        };
+    };
+    PublicService.prototype.getAllPubRooms = function () {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/public/allPubRooms', this.options);
+    };
+    PublicService.prototype.getPubRoom = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/public/getPubRoom/' + id, this.options);
+    };
+    PublicService.prototype.getPubContent = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/public/getPubContent/' + id, this.options);
+    };
+    PublicService.prototype.getPubThought = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/public/getPubThought/' + id, this.options);
+    };
+    PublicService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], PublicService);
+    return PublicService;
 }());
 
 

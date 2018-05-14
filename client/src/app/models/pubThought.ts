@@ -1,7 +1,7 @@
 import { Dimension } from "./dimension";
 import { GridsterItem } from "angular-gridster2";
 
-export interface Thought {    
+export interface PubThought {    
         _id: string;
         label: string;
         level: number;

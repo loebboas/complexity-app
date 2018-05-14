@@ -125,30 +125,8 @@ router.post('/newThought', (req, res) => {
     }); // Sort blogs from newest to oldest
   });
 
-   /* ===============================================================
-     GET TIMEARRAY OF USER
-  =============================================================== */
-
-  router.get('/timeArray', (req, res) => {
-    // Search database for all Thoughts
-    Thought.find({ user: req.decoded.userId, 'dimensions.dim': req.body._id })
-      .exec((err, timeArray) => {
-              // Check if error was found or not
-              if (err) {
-                res.json({ success: false, message: err }); // Return error message
-              } else {
-                // Check if timearray entries were found in database
-                if (!allThought) {
-                  res.json({ success: false, message: 'No Entries in TimeArray found.' }); // Return error
-                } else {       
-                  res.json({ success: true, timeArray: timeArray }); // Return success and array
-                }
-              }
-    }); 
-  });
   
-  
-     /* ===============================================================
+  /* ===============================================================
      GET THOUGHT
   =============================================================== */
   router.get('/getThought/:id', (req, res) => {
@@ -171,27 +149,8 @@ router.post('/newThought', (req, res) => {
 });  
 
  
-     /* ===============================================================
-     GET ROOM
-  =============================================================== */
-  router.get('/getPubRoom/:id', (req, res) => {
-    // Search database for all thoughts linked to :id as bottom
-    PubRoom
-        .findOne({_id: req.params.id })
-        .populate({
-          path: 'contents'
-        })
-        .exec((err, pubRoom) => {
-            // Check if error was found or not
-            if (err) {
-                res.json({success: false, message: err}); // Return error message
-            } else  {
-                res.json({success: true, pubRoom: pubRoom });
-            }
-        });
-});  
 
-     /* ===============================================================
+  /* ===============================================================
      GET CONTENT
   =============================================================== */
   router.get('/getContent/:id', (req, res) => {
@@ -234,9 +193,6 @@ router.post('/newThought', (req, res) => {
     });
   }
   });
-
-
-  
 
       /* ===============================================================
      GET THOUGHT BY NAME

@@ -4,24 +4,21 @@ import { ChangeTracker } from '../models/changeTracker';
 import { Observable, of, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { DataService } from './data.service';
 import { PubRoom } from '../models/pubRoom';
+import { PubThought } from '../models/pubThought';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
+import { PublicService } from './public.service';
+import { DrawNavbarService } from './draw-navbar.service';
+import { DataSet, Edge } from 'vis';
+import { GridsterItem } from 'angular-gridster2';
 
 
 
 @Injectable()
 export class InternalService {
-  
-  // Array with all Thoughts which can be searched.
-  public searchList = new BehaviorSubject<Thought[]>([]);
-  searchListObs = this.searchList.asObservable();
-  //Selected Thought (Thought incl. Content which is being shown)
-  public selectedThought = new BehaviorSubject<Thought>(null);
-  selectedThoughtObs = this.selectedThought.asObservable();
-  //Selected Room (default: Welcome)
-  public selectedRoom = new BehaviorSubject<PubRoom>({
-    _id: "2",
+  guestRoom: PubRoom = {
+    _id: "guestroom",
     label: "Welcome!",
     admin: [],
     members: [],
@@ -29,26 +26,16 @@ export class InternalService {
     dimensions: [],
     visible: "open",
     activeUsers: []
-  });
-  selectedRoomObs = this.selectedRoom.asObservable();
-  //Node which is selected, relevant for Editingpossibilities
-  public selectedNode = new BehaviorSubject<Thought>(null);
-  selectedNodeObs = this.selectedNode.asObservable();
-  //ReplaySubject which holds the last 10 changes.
-  public changeTracker = new ReplaySubject<Thought[]>();
-  changeTrackerObs = this.changeTracker.asObservable();
-  //Selected Tool
-  public selectedTool = new BehaviorSubject<String>("none");
-  selectedToolObs = this.selectedTool.asObservable();
-  //User (default: Guest)
-  public selectedUser = new BehaviorSubject<User>({
-    _id: "3",
+  }
+
+  guestUser: User = {
+    _id: "guestuser",
     email: "guest@complexity-app.com",
     username: "Guest",
     private: [],
     public: [],
     rooms: [{
-      _id: "2",
+      _id: "guestroom",
       label: "Welcome!",
       admin: [],
       members: [],
@@ -58,27 +45,96 @@ export class InternalService {
       activeUsers: []
     }],
     friends: []
-  });
+  }
+
+  // Stores Data for Viewer as GridsterItems
+  public Items = new BehaviorSubject<GridsterItem[]>([]);
+  ItemsObs = this.Items.asObservable();
+
+  // Stores all public Rooms (later: Selected Rooms, SEARCH, shown as Stars in Background)
+  public pubRooms = new BehaviorSubject<PubRoom[]>([]);
+  pubRoomsObs = this.pubRooms.asObservable();
+
+  //Stores the selected Room (default: Welcome)
+  public selectedRoom = new BehaviorSubject<PubRoom>(this.guestRoom);
+  selectedRoomObs = this.selectedRoom.asObservable();
+
+  // Stores public Thoughts of selected Room
+  public pubThoughts = new BehaviorSubject<PubThought[]>([]);
+  pubThoughtsObs = this.pubThoughts.asObservable();
+
+  //stores User (default: Guest)
+  public selectedUser = new BehaviorSubject<User>(this.guestUser);
   selectedUserObs = this.selectedUser.asObservable();
 
-  constructor(private dataService: DataService, private authService: AuthService) {
+  //Selected Thought (Thought incl. Content which is being shown)
+  public selectedThought = new BehaviorSubject<Thought>(null);
+  selectedThoughtObs = this.selectedThought.asObservable();
+
+  // Array with all Thoughts of this Session
+  public sessionThoughts = new BehaviorSubject<Thought[]>([]);
+  sessionThoughtsObs = this.sessionThoughts.asObservable();
+
+  //Selected Tool
+  public selectedTool = new BehaviorSubject<String>("none");
+  selectedToolObs = this.selectedTool.asObservable();
+
+  constructor(private dataService: DataService, private authService: AuthService, private publicService: PublicService, private drawNavbarService: DrawNavbarService ) {
+  }
+  //Consts: GuestUser, WelcomeRoom
+  //Observables: PubRooms (incl. one = selected), SessionThoughts, SelectedThought, User, Networks, Tools
+  //Input: AuthService: User (Friends, Networks, Room-Links)
+  //Input: DataService: Thoughts
+  //Input: PublicService: PubRooms, PubThoughts
+  //Functions: ChangeUser, ShowMyNetworks, ShowThought, RemoveThought ShowFriends, GoToFriendRoom, ShowMyRooms, GoToRoom
+  //Function: ChangeSelectedThought
+  //Function: ChangeTool, changeShowAs
+  //Output: PubRooms, SessionThoughts, User @Navbar (via DrawGraph-Service)
+  //Output: SelectedThought (incl. Contents + SubContents) @Viewer 
+
+  //LOAD DATA
+  loadUser() {
+    if (this.authService.loggedIn()) {  //Check if LoggedIn
+      this.authService.getProfile().subscribe(data => {   //Get UserData
+        if (data['user']) {
+          const user: User = data['user'];
+          this.changeRoom(user.rooms[0]._id);
+          this.selectedUser.next(user);
+          this.drawNavbarService.removeUserNodes;
+          this.drawNavbarService.drawUserNodes;
+        } else {
+          const user = this.guestUser;
+          this.selectedUser.next(user);
+          this.changeRoom(user.rooms[0]._id);
+          this.drawNavbarService.removeUserNodes;
+          this.drawNavbarService.drawUserNodes;
+        }
+      });
+    }
   }
 
-  changeThought(id) {
-    this.dataService.getThought(id).subscribe(data => {
-      const thought: Thought = data['thought']; //Load Populated Thought
-      this.selectedThought.next(thought);
-    });
-  }
-  changeRoom(id) {
-    this.dataService.getPubRoom(id).subscribe(data => {
-      const pubRoom: PubRoom = data['pubRoom'];
-      this.selectedRoom.next(pubRoom);
-      this.roomToThought(pubRoom);
+  loadPubRooms() {
+    this.publicService.getAllPubRooms().subscribe(data => {
+      this.pubRooms.next(data['pubRooms']);
+      this.drawNavbarService.drawPubRooms(data['pubRooms'])
     })
   }
+
+
+
+  //ROOMS
+  changeRoom(id) { //Changes Selected Thought as well
+    if (this.pubRooms.getValue().length > 0) {
+      const pubRoom = this.pubRooms.getValue().find(pubRoom => id == pubRoom._id);
+      this.selectedRoom.next(pubRoom);
+      this.roomToThought(pubRoom);
+      this.drawNavbarService.onRoomChange(pubRoom);
+    }
+  }
+
+  //THOUGHTS
   roomToThought(pubRoom: PubRoom) {
-    const thought: Thought =  {
+    const thought: Thought = {
       _id: pubRoom._id,
       contents: pubRoom.contents,
       level: -1,
@@ -87,10 +143,16 @@ export class InternalService {
       color: "#FFFFFF",
       clicks: pubRoom.likes,
       showAs: "grid",
-      grid: { cols: 1, rows: 1, x: 1, y: 1, colspan: 1, rowspan: 1}
+      grid: { cols: 7, rows: 1, x: 0, y: 0, colspan: 0, rowspan: 0 }
     }
     this.selectedThought.next(thought);
-    console.log(thought);
+  }
+
+  changeThought(id) {
+    this.dataService.getThought(id).subscribe(data => {
+      const thought: Thought = data['thought']; //Load Populated Thought
+      this.selectedThought.next(thought);
+    });
   }
 
   changeTool(tool: String) {
@@ -103,32 +165,8 @@ export class InternalService {
     this.selectedThought.next(viewThought);
   }
 
-  loadUser() {
-    if(this.authService.loggedIn()){
-    this.authService.getProfile().subscribe(data => {
-      if(data['user']){ 
-      const user: User = data['user'];
-      this.changeRoom(user.rooms[0]._id);
-      this.selectedUser.next(user);
-    } else {
-      const user: User =    {  _id: "3",
-      email: "guest@complexity-app.com",
-      username: "Guest",
-      private: [],
-      public: [],
-      rooms: [{_id: "2"}],
-      friends: []
-    }
-    this.selectedUser.next(user);
-    this.changeRoom(user.rooms[0]._id);
-         }
-    });
-  }
+  showContentNodes(id) {
+    this.dataService.getContent(id).subscribe(data => { console.log(data); })
   }
 
-  getSearchList() {
-    this.dataService.getAllThought().subscribe(data => {
-      this.searchList.next(data['allThought']);
-    });
-  }
 }

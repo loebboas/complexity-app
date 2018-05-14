@@ -69,16 +69,6 @@ export class DataService {
     return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
   }
 
-  getTimeArray(id) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/api/timeArray/' + id, this.options);
-  }
-  getThoughtByName(label) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.get(this.domain + '/api/thoughtByName/' + label, this.options);
-  }
-
-
   getThought(id) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/api/getThought/' + id, this.options);

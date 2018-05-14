@@ -35,6 +35,7 @@ import { TimelineGridComponent } from './components/views/grid/timeline-grid/tim
 import { NetworkGridComponent } from './components/views/grid/network-grid/network-grid.component';
 import { GridGridComponent } from './components/views/grid/grid-grid/grid-grid.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DrawNavbarService } from './services/draw-navbar.service';
 
 
 @NgModule({
@@ -72,7 +73,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     GridsterModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService, GridsterConfigService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService, GridsterConfigService, DrawNavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
