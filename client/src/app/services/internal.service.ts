@@ -55,6 +55,14 @@ export class InternalService {
   public pubRooms = new BehaviorSubject<PubRoom[]>([]);
   pubRoomsObs = this.pubRooms.asObservable();
 
+  // Stores all Private Thoughts
+  public thoughts = new BehaviorSubject<Thought[]>([]);
+  thoughtsObs = this.thoughts.asObservable();
+
+  // Stores all Thoughts of selected Room
+  public roomThoughts = new BehaviorSubject<Thought[]>([]);
+  roomThoughtsObs = this.roomThoughts.asObservable();
+
   //Stores the selected Room (default: Welcome)
   public selectedRoom = new BehaviorSubject<PubRoom>(this.guestRoom);
   selectedRoomObs = this.selectedRoom.asObservable();
@@ -79,7 +87,7 @@ export class InternalService {
   public selectedTool = new BehaviorSubject<String>("none");
   selectedToolObs = this.selectedTool.asObservable();
 
-  constructor(private dataService: DataService, private authService: AuthService, private publicService: PublicService, private drawNavbarService: DrawNavbarService ) {
+  constructor(private dataService: DataService, private authService: AuthService, private publicService: PublicService, private drawNavbarService: DrawNavbarService) {
   }
   //Consts: GuestUser, WelcomeRoom
   //Observables: PubRooms (incl. one = selected), SessionThoughts, SelectedThought, User, Networks, Tools
@@ -100,14 +108,14 @@ export class InternalService {
           const user: User = data['user'];
           this.changeRoom(user.rooms[0]._id);
           this.selectedUser.next(user);
-          this.drawNavbarService.removeUserNodes;
-          this.drawNavbarService.drawUserNodes;
+          this.drawNavbarService.loadUser(user);
+
         } else {
           const user = this.guestUser;
           this.selectedUser.next(user);
           this.changeRoom(user.rooms[0]._id);
-          this.drawNavbarService.removeUserNodes;
-          this.drawNavbarService.drawUserNodes;
+          this.drawNavbarService.deleteUser();
+          this.drawNavbarService.loadUser(user);
         }
       });
     }
@@ -116,11 +124,21 @@ export class InternalService {
   loadPubRooms() {
     this.publicService.getAllPubRooms().subscribe(data => {
       this.pubRooms.next(data['pubRooms']);
-      this.drawNavbarService.drawPubRooms(data['pubRooms'])
+      this.drawNavbarService.loadRooms(data['pubRooms'])
     })
   }
 
+  loadThoughts() {
+    this.dataService.getAllThought().subscribe(data => {
+      this.thoughts.next(data['allThought']);
+    })
+  }
 
+  loadRoomThoughts(id) {
+    this.publicService.getRoomContent(id).subscribe(data => {
+      this.roomThoughts.next(data['thoughts']);
+    })
+  }
 
   //ROOMS
   changeRoom(id) { //Changes Selected Thought as well
@@ -128,11 +146,10 @@ export class InternalService {
       const pubRoom = this.pubRooms.getValue().find(pubRoom => id == pubRoom._id);
       this.selectedRoom.next(pubRoom);
       this.roomToThought(pubRoom);
-      this.drawNavbarService.onRoomChange(pubRoom);
+      this.drawNavbarService.changeRoom(pubRoom);
     }
   }
 
-  //THOUGHTS
   roomToThought(pubRoom: PubRoom) {
     const thought: Thought = {
       _id: pubRoom._id,
@@ -149,9 +166,10 @@ export class InternalService {
   }
 
   changeThought(id) {
-    this.dataService.getThought(id).subscribe(data => {
-      const thought: Thought = data['thought']; //Load Populated Thought
-      this.selectedThought.next(thought);
+    this.thoughts.getValue().forEach(thought => {
+      if (thought._id == id) {
+        this.selectedThought.next(thought);
+      }
     });
   }
 
@@ -163,10 +181,6 @@ export class InternalService {
     const viewThought = this.selectedThought.getValue();
     viewThought.showAs = label;
     this.selectedThought.next(viewThought);
-  }
-
-  showContentNodes(id) {
-    this.dataService.getContent(id).subscribe(data => { console.log(data); })
   }
 
 }

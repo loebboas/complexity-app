@@ -36,6 +36,11 @@ export class PublicService {
     return this.http.get(this.domain + '/public/getPubRoom/' + id, this.options);
   }
 
+  getRoomContent(id) { //Fehlt noch!
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/public/getPubContent/' + id, this.options);
+  }
+
   getPubContent(id) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + '/public/getPubContent/' + id, this.options);
