@@ -51,6 +51,12 @@ export class DataService {
     return this.http.get(this.domain + '/api/allPubThought', this.options);
   }
 
+  getSingleThought(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
+  }
+
+
   /* ===============================================================
     DELETE/UPDATE DATA
  =============================================================== */

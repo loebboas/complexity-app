@@ -78,7 +78,31 @@ module.exports = (router) => {
       }); // Sort blogs from newest to oldest
   });
 
+ /* ===============================================================
+     GET ONE THOUGHT
+  =============================================================== */
+  router.get('/singleThought/:id', (req, res) => {
 
+    if (!req.params.id) {
+           res.json({ success: false, message: 'No thought ID was provided.' }); // Return error message
+         } else {
+
+         // Search database for Thought
+         Thought.findOne({_id: req.params.id}, (err, thought) => {
+         // Check if error was found or not
+         if (err) {
+           res.json({ success: false, message: err }); // Return error message
+         } else {
+           // Check if blogs were found in database
+           if (!thought) {
+             res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+           } else {       
+             res.json({ success: true, thought: thought }); // Return success and blogs array
+           }
+         }
+});
+}
+});
 
   /* ===============================================================
     UPDATE ONE THOUGHT
