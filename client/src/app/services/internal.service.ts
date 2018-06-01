@@ -93,10 +93,12 @@ export class InternalService {
 
         console.log(data);
         var UserThought: Thought = {  //Create a UserSelected Thought:
-          label: "My Thoughts"
+          _id: "StarterID",
+          label: "My Thoughts",
+          contents: []
         }
         var thoughtsArray: Thought[] = [];  //Add a UserSelected Thought to DrawingArray
-        thoughtsArray.push(UserThought);
+       
         if (data['allThoughts']) {
           data['allThoughts'].forEach(thought => {
             thoughtsArray.push(thought);
