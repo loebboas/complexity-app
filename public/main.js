@@ -584,7 +584,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  perspective works!\r\n</p>\r\n"
+module.exports = "\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Active Perspective\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <ul>\r\n        <li>Boas Perspective</li>\r\n        <li>What to learn for test</li>\r\n        <li>other fancy way to look at it</li>\r\n      </ul>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n<mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Levels\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          See dimensions ordered after levels\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list>\r\n        <mat-list-item>Level 1</mat-list-item>\r\n        <mat-divider></mat-divider>\r\n        <mat-list-item>Level 2</mat-list-item>\r\n        <mat-divider></mat-divider>\r\n        <mat-list-item>Level 3</mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Switch perspective\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <ul>\r\n      <li>Boas Perspective</li>\r\n      <li></li>\r\n      <li></li>\r\n    </ul>\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"First name\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"Age\">\r\n    </mat-form-field>\r\n  </mat-expansion-panel>\r\n\r\n\r\n\r\n  <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\">\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Self aware panel\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Currently I am {{panelOpenState ? 'open' : 'closed'}}\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <p>I'm visible because I am open</p>\r\n  </mat-expansion-panel>\r\n</mat-accordion>"
 
 /***/ }),
 
@@ -611,6 +611,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var PerspectiveComponent = /** @class */ (function () {
     function PerspectiveComponent() {
+        this.panelOpenState = false;
     }
     PerspectiveComponent.prototype.ngOnInit = function () {
     };

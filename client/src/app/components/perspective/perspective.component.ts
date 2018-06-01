@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perspective.component.css']
 })
 export class PerspectiveComponent implements OnInit {
-
+  panelOpenState: boolean = false;
+  
   constructor() { }
 
   ngOnInit() {
