@@ -284,7 +284,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Login</h2>\r\n\r\n<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n<!-- Login Form -->\r\n<form [formGroup]=\"form\" (submit)=\"onLoginSubmit()\">\r\n\r\n  <!-- Username Field -->\r\n  <div class=\"form-group\">\r\n    <label for=\"username\">Username</label>\r\n    <div [ngClass]=\"{'has-error': form.controls.username.errors && form.controls.username.dirty, 'has-success': form.controls.username.valid && form.controls.username.dirty }\">\r\n      <input class=\"form-control\" type=\"text\" name=\"username\" formControlName=\"username\" />\r\n      <!-- Validation -->\r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.username.errors?.required && form.controls.username.dirty\">This field is required.</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- Password Field  -->\r\n  <div class=\"form-group\">\r\n    <label for=\"password\">Password</label>\r\n    <div [ngClass]=\"{'has-error': form.controls.password.errors && form.controls.password.dirty, 'has-success': form.controls.password.valid && form.controls.password.dirty }\">\r\n      <input class=\"form-control\" type=\"password\" name=\"password\" formControlName=\"password\" />\r\n      <!-- Validation -->\r\n      <ul class=\"help-block\">\r\n        <li *ngIf=\"form.controls.password.errors?.required && form.controls.password.dirty\">This field is required.</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <!-- Submit Button -->\r\n  <input [disabled]=\"!form.valid || processing\" class=\"btn btn-primary\" type=\"submit\" value=\"Login\" />\r\n</form>"
+module.exports = "<!-- Custom Success/Error Message -->\r\n<div class=\"row show-hide-message\">\r\n  <div [ngClass]=\"messageClass\">\r\n    {{ message }}\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<mat-card>\r\n  <!-- Login Form -->\r\n  <form [formGroup]=\"form\" (submit)=\"onLoginSubmit()\">\r\n    <mat-card-title>\r\n      Login\r\n    </mat-card-title>\r\n    <mat-card-content>\r\n      <!-- Username Field -->\r\n      <div class=\"form-group\">\r\n        <label for=\"username\">Username</label>\r\n        <div [ngClass]=\"{'has-error': form.controls.username.errors && form.controls.username.dirty, 'has-success': form.controls.username.valid && form.controls.username.dirty }\">\r\n          <input class=\"form-control\" type=\"text\" name=\"username\" formControlName=\"username\" />\r\n          <!-- Validation -->\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"form.controls.username.errors?.required && form.controls.username.dirty\">This field is required.</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <!-- Password Field  -->\r\n      <div class=\"form-group\">\r\n        <label for=\"password\">Password</label>\r\n        <div [ngClass]=\"{'has-error': form.controls.password.errors && form.controls.password.dirty, 'has-success': form.controls.password.valid && form.controls.password.dirty }\">\r\n          <input class=\"form-control\" type=\"password\" name=\"password\" formControlName=\"password\" />\r\n          <!-- Validation -->\r\n          <ul class=\"help-block\">\r\n            <li *ngIf=\"form.controls.password.errors?.required && form.controls.password.dirty\">This field is required.</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n\r\n    </mat-card-content>\r\n\r\n    <!-- Submit Button -->\r\n   <button mat-raised-button [disabled]=\"!form.valid || processing\" class=\"btn btn-primary\" color=\"primary\" type=\"submit\" value=\"Login\">Login</button>\r\n  </form>\r\n</mat-card>"
 
 /***/ }),
 
@@ -584,7 +584,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  perspective works!\n</p>\n"
+module.exports = "<p>\r\n  perspective works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -2335,7 +2335,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\loebb\complexity-app\client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Noah\complexity-app\client\src\main.ts */"./src/main.ts");
 
 
 /***/ })
