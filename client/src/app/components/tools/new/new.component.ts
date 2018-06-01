@@ -49,15 +49,18 @@ export class NewComponent implements OnInit {
     }
 
     //check if Public
-    if (this.selectedThought.public) newThought.public = true;
+    if (this.selectedThought.public) { newThought.public = true };
 
     this.dataService.newThought(newThought).subscribe(data => {
       if (this.selectedThought.label != "My Thoughts") {
         this.selectedThought.contents.push(data['thought']._id);
         console.log(this.selectedThought);
+       this.dataService.editThought(this.selectedThought).subscribe(data => {
+         
+       })
       }
     });
-
+    this.internalService.loadData();
   }
 
 

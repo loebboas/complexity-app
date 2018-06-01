@@ -113,7 +113,7 @@ module.exports = (router) => {
       res.json({ success: false, message: 'No thought id provided' }); // Return error message
     } else {
       // Check if id exists in database
-      Thought.findOne({ user: req.decoded.userId, _id: req.body._id }, (err, thought) => {
+      Thought.findOne({ _id: req.body._id }, (err, thought) => {
         // Check if id is a valid ID
         if (err) {
           res.json({ success: false, message: 'Not a valid thought id' }); // Return error message
@@ -123,10 +123,9 @@ module.exports = (router) => {
             res.json({ success: false, message: 'thought id was not found.' }); // Return error message
           } else {
             // Check who user is that is requesting blog update
-            if (req.body.editLabel) { thought.label = req.body.editLabel; }
-            if (req.body.editContexts) { thought.contexts = req.body.editContexts; }
-            if (req.body.editContents) { thought.contents = req.body.editContents; }
-            if (req.body.editDimensions) { thought.dimensions = req.body.editDimensions; }
+            if (req.body.label) { thought.label = req.body.label; }
+            if (req.body.contexts) { thought.contexts = req.body.contexts; }
+            if (req.body.contents) { thought.contents = req.body.contents; }
             thought.save((err) => {
               if (err) {
                 if (err.errors) {

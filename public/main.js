@@ -885,7 +885,7 @@ module.exports = ".spacer{\r\n    flex: 1 1 auto;\r\n   \r\n}\r\n\r\n.onTop{\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n\r\n  <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n    <app-new></app-new>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n    <app-edit></app-edit>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n    <app-search></app-search>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n    <app-dimension></app-dimension>\r\n  </mat-toolbar>\r\n\r\n  <mat-toolbar>\r\n    <mat-toolbar-row>\r\n\r\n\r\n      <span class='spacer'></span>\r\n\r\n      <button mat-button matTooltip=\"My Thoughts\" *ngIf=\"authService.loggedIn()\" (click)=\"loadMyThoughts()\">\r\n        <i class=\"material-icons\">group_work</i> My Thoughts</button>\r\n      <button mat-button matTooltip=\"New Thought\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New Thought</button>\r\n      <button mat-button matTooltip=\"Add Dimension\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add Dimension</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Details</button>\r\n\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../login\">\r\n        <i class=\"material-icons\">account_box</i> Login</button>\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../register\">\r\n        <i class=\"material-icons\">launch</i> Register</button>\r\n      <div *ngIf=\"user\">\r\n        <button mat-button *ngIf=\"!authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n        <button mat-button *ngIf=\"authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\" [matMenuTriggerFor]=\"menu\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n      </div>\r\n      <button mat-button matTooltip=\"Change Perspective\" (click)=\"changeTool('sidenav')\">\r\n        <i class=\"material-icons\">view_quilt</i> Change Perspective</button>\r\n      <button mat-button matTooltip=\"Search\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"loadMyUser()\">My User</button>\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
+module.exports = "<div>\r\n\r\n  <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n    <app-new></app-new>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n    <app-edit></app-edit>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n    <app-search></app-search>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n    <app-dimension></app-dimension>\r\n  </mat-toolbar>\r\n\r\n  <mat-toolbar>\r\n    <mat-toolbar-row>\r\n\r\n\r\n      <span class='spacer'></span>\r\n      <div *ngIf=\"selectedThought\">{{ selectedThought.label }}</div>\r\n      <button mat-button matTooltip=\"My Thoughts\" *ngIf=\"authService.loggedIn()\" (click)=\"loadMyThoughts()\">\r\n        <i class=\"material-icons\">group_work</i> My Thoughts</button>\r\n      <button mat-button matTooltip=\"New Thought\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New Thought</button>\r\n      <button mat-button matTooltip=\"Add Dimension\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add Dimension</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Details</button>\r\n\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../login\">\r\n        <i class=\"material-icons\">account_box</i> Login</button>\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../register\">\r\n        <i class=\"material-icons\">launch</i> Register</button>\r\n      <div *ngIf=\"user\">\r\n        <button mat-button *ngIf=\"!authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n        <button mat-button *ngIf=\"authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\" [matMenuTriggerFor]=\"menu\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n      </div>\r\n      <button mat-button matTooltip=\"Change Perspective\" (click)=\"changeTool('sidenav')\">\r\n        <i class=\"material-icons\">view_quilt</i> Change Perspective</button>\r\n      <button mat-button matTooltip=\"Search\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"loadMyUser()\">My User</button>\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
 
 /***/ }),
 
@@ -1287,14 +1287,19 @@ var NewComponent = /** @class */ (function () {
             public: false
         };
         //check if Public
-        if (this.selectedThought.public)
+        if (this.selectedThought.public) {
             newThought.public = true;
+        }
+        ;
         this.dataService.newThought(newThought).subscribe(function (data) {
             if (_this.selectedThought.label != "My Thoughts") {
                 _this.selectedThought.contents.push(data['thought']._id);
                 console.log(_this.selectedThought);
+                _this.dataService.editThought(_this.selectedThought).subscribe(function (data) {
+                });
             }
         });
+        this.internalService.loadData();
     };
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1509,6 +1514,10 @@ var ViewerComponent = /** @class */ (function () {
         this.drawViewerService.viewerOptionsObs.subscribe(function (options) { return _this.options = options; });
         var container = document.getElementById('mainbar');
         this.network = new vis__WEBPACK_IMPORTED_MODULE_5__["Network"](container, this.data, this.options);
+        this.network.on("click", function (params) {
+            console.log(params);
+            _this.internalService.changeSelectedThought(params.nodes[0]);
+        });
     };
     ViewerComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1875,6 +1884,10 @@ var DataService = /** @class */ (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/api/allPubThought', this.options);
     };
+    DataService.prototype.getSingleThought = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
+    };
     /* ===============================================================
       DELETE/UPDATE DATA
    =============================================================== */
@@ -2237,10 +2250,8 @@ var InternalService = /** @class */ (function () {
     //Put private and public thoughts into AllThoughts
     InternalService.prototype.changeSelectedThought = function (id) {
         var _this = this;
-        this.allThoughts.forEach(function (thought) {
-            if (thought._id == id) {
-                _this.selectedThought.next(thought);
-            }
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            _this.selectedThought.next(data['thought']);
         });
     };
     InternalService.prototype.changeViewerThoughts = function (id) {

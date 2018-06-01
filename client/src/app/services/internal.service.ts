@@ -118,7 +118,7 @@ export class InternalService {
       this.drawNavbarService.drawUsers(UserArray);
       console.log(thoughtArray);
       this.drawNavbarService.drawPubThoughts(thoughtArray);
-      
+
       this.drawViewerService.drawThoughtsArray(thoughtArray);
 
 
@@ -136,17 +136,16 @@ export class InternalService {
     this.drawViewerService.clearAll();
     this.selectedUser.next(this.guestUser);
     setTimeout(() => {
-      this.loadData()},500);
+      this.loadData()
+    }, 500);
   }
 
   //Load Data: After Login, load private Thoughts, load Users, load Selected User, load public Thoughts
   //Put private and public thoughts into AllThoughts
 
   changeSelectedThought(id) {
-    this.allThoughts.forEach(thought => {
-      if (thought._id == id) {
-        this.selectedThought.next(thought)
-      }
+    this.dataService.getSingleThought(id).subscribe(data => {
+      this.selectedThought.next(data['thought']);
     })
   }
 

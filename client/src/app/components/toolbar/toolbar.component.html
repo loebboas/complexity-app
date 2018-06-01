@@ -18,7 +18,7 @@
 
 
       <span class='spacer'></span>
-
+      <div *ngIf="selectedThought">{{ selectedThought.label }}</div>
       <button mat-button matTooltip="My Thoughts" *ngIf="authService.loggedIn()" (click)="loadMyThoughts()">
         <i class="material-icons">group_work</i> My Thoughts</button>
       <button mat-button matTooltip="New Thought" *ngIf="authService.loggedIn()" (click)="changeTool('new')">
