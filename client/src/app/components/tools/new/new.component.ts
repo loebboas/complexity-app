@@ -36,7 +36,7 @@ export class NewComponent implements OnInit {
         newContext.unshift(context)
       });
     }
-    if(this.selectedThought.label != "My Thoughts") {
+    if(this.selectedThought.label != "My Thoughts" && this.selectedThought._id != "WelcomeThought") {
       newContext.unshift(this.selectedThought._id)
     }
 
@@ -50,11 +50,12 @@ export class NewComponent implements OnInit {
 
     //check if Public
     if (this.selectedThought.public) { newThought.public = true };
-
+    console.log(newThought);
     this.dataService.newThought(newThought).subscribe(data => {
-      if (this.selectedThought.label != "My Thoughts") {
+     
+      if (this.selectedThought.label != "My Thoughts" && this.selectedThought._id != "WelcomeThought") {
         this.selectedThought.contents.push(data['thought']._id);
-        console.log(this.selectedThought);
+        
        this.dataService.editThought(this.selectedThought).subscribe(data => {
          
        })

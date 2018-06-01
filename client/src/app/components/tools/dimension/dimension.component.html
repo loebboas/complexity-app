@@ -1,4 +1,4 @@
-<mat-toolbar-row>
+<mat-toolbar-row *ngIf="selectedThought.label != 'My Thoughts'">
 
   <mat-form-field>
     <input matInput #label [(ngModel)]="newLabel" name="newLabel" placeholder="Enter a Label">

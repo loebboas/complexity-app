@@ -7,9 +7,8 @@ import { AuthService } from './auth.service';
 import { DrawNavbarService } from './draw-navbar.service';
 import { DrawViewerService } from './draw-viewer.service';
 import { timeout } from 'rxjs/operators';
-
-
-
+import { Perspective } from '../models/perspective';
+import { Dimensions } from '../models/Dimensions/dimensions';
 
 @Injectable()
 export class InternalService {
@@ -31,6 +30,7 @@ export class InternalService {
   }
 
   allThoughts: Thought[];
+  newDimensionsArray: Dimensions;
   //Save all relevant Data as BehaviourSubjects
 
   //SEARCH LISTS
@@ -56,17 +56,13 @@ export class InternalService {
   public selectedThought = new BehaviorSubject<Thought>(this.welcomeThought);
   selectedThoughtObs = this.selectedThought.asObservable();
 
-  // Stores all ThoughtObjects presented in Navbar
-  public navbarThoughts = new BehaviorSubject<Thought[]>([]);
-  navbarThoughtsObs = this.navbarThoughts.asObservable();
+  //SELECTED TOOL
+  public selectedPerspectives = new BehaviorSubject<Perspective[]>([]);
+  selectedPerspectivesObs = this.selectedPerspectives.asObservable();
 
-  // Stores all UserObjects presented in Navbar
-  public navbarUsers = new BehaviorSubject<User[]>([]); // All Users i senough?
-  navbarUsersObs = this.navbarUsers.asObservable();
-
-  // Stores all Thoughts presented in Viewer
-  public viewerThoughts = new BehaviorSubject<Thought[]>([]);
-  viewerThoughtsObs = this.viewerThoughts.asObservable();
+  //SELECTED TOOL
+  public selectedDimensions = new BehaviorSubject<Dimensions>(null);
+  selectedDimensionsObs = this.selectedDimensions.asObservable();
 
   //SELECTED TOOL
   public selectedTool = new BehaviorSubject<String>("none");
@@ -75,74 +71,114 @@ export class InternalService {
   constructor(private dataService: DataService, private authService: AuthService, private drawViewerService: DrawViewerService, private drawNavbarService: DrawNavbarService) {
   }
 
-
-  //LOAD DATA --> FirstLoad(Navbar) or after Login/Register
+  //LOAD DATA --> FirstLoad (Navbar) or Login/Register
   loadData() {
     //IF LOGGEDIN
-    //NAVBAR ARRAY
     if (this.authService.loggedIn()) {
+
+      //NAVBAR
+      //1. UserArray
       this.authService.getProfile().subscribe(data => { //Get Selected User
         this.selectedUser.next(data['user']);
-        this.drawNavbarService.deleteUsers();
       });
-      this.authService.getAllUser().subscribe(data => {//Get all User
-        this.allUsers.next(data['users']);
-        this.drawNavbarService.drawUsers(data['users']);
-      });
-      this.dataService.getAllPubThought().subscribe(data => { //Get all public Thoughts
+      this.drawNavbarService.deleteUsers();
+      this.authService.getAllUser().subscribe(data => { //Get all User
         console.log(data);
+        var userArray: User[] = [];
+
+        data['users'].forEach(user => {
+          if (user._id != this.selectedUser.getValue()._id) {
+            userArray.push(user)
+          }
+        })
+
+        this.allUsers.next(userArray); //Save User without myself For Searches
+        userArray.unshift(this.selectedUser.getValue());  //Add Me at first Place
+        this.drawNavbarService.drawUsers(userArray);
+      });
+      //2. PubThoughtsArray
+      this.dataService.getAllPubThought().subscribe(data => { //Get all public Thoughts
         this.publicThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
         this.drawNavbarService.drawPubThoughts(data['allThoughts']); // Draw PubThoughts
       })
-
-      //LOAD VIEWER ARRAY WITH PRIVATE THOUGHTS TO START/AFTER LOGIN
-      this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
-
-        console.log(data);
-     
-        var thoughtsArray: Thought[] = [];  //Add a UserSelected Thought to DrawingArray
-       
-        if (data['allThoughts']) {
-          data['allThoughts'].forEach(thought => {
-            thoughtsArray.push(thought);
-          });
-        }
-        this.selectedThought.next(this.UserThought);
-        this.privateThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
-        this.drawViewerService.clearAll(); // Draw PubThoughts
-        this.drawViewerService.drawThoughtsArray(thoughtsArray); // Draw PubThoughts
-      })
-
-    } else { // If not LoggedIn, load Welcome and GuestUser!
-
-      var UserArray: User[] = [];
-      UserArray.push(this.guestUser);
-      var thoughtArray: Thought[] = [];
-      thoughtArray.push(this.welcomeThought);
-
-      this.drawNavbarService.drawUsers(UserArray);
-      console.log(thoughtArray);
-      this.drawNavbarService.drawPubThoughts(thoughtArray);
-
-      this.drawViewerService.drawThoughtsArray(thoughtArray);
-
-
+      //VIEWER
+      this.loadMyThoughts();
+    } else {
+      this.loggedOut()
     }
-
-    //ELSE:
-    //Load Guest
-    //load Welcome Thought
-
-    //Create Arrays for Viewer/Navbar
-    //Create Navbar Array:
   }
+  loggedOut() {
+    this.clearAll();
+    var UserArray: User[] = [];
+    UserArray.push(this.guestUser);
+    var thoughtArray: Thought[] = [];
+    thoughtArray.push(this.welcomeThought);
+    this.drawNavbarService.drawUsers(UserArray);
+    this.drawNavbarService.drawPubThoughts(thoughtArray);
+    this.drawViewerService.drawThoughtsArray(thoughtArray);
+    this.selectedUser.next(this.guestUser);
+  }
+
+  loadMyThoughts() {
+
+    this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
+      this.selectedThought.next(this.UserThought); //Take UserThought as Selected Thought
+      this.privateThoughts.next(data['allThoughts']); //Save Private Thoughts for Search
+      if (this.selectedUser.getValue().startPerspectives.length > 0) {
+        this.selectedPerspectives.next(this.selectedUser.getValue().startPerspectives) //Select first Perspective of UserPerspectives as Selected Perspective
+        this.getDimensions(data['allThoughts'])
+        this.perspectiveFilter(data['allThoughts'])
+        console.log("this happens?")
+      } else {
+        this.getDimensions(data['allThoughts'])
+        this.drawViewerService.clearAll(); // Clear Viewer
+        this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
+      }
+    })
+  }
+
+  getDimensions(thoughts: Thought[]) {
+    this.newDimensionsArray = {
+      levelDimensions: [],
+      dateDimensions: [],
+      numberDimensions: [],
+      tagDimensions: []
+    };
+    thoughts.forEach(thought => {
+      if (thought.contents.length > 0) {
+        this.newDimensionsArray.levelDimensions.push({ label: thought.label, ObjID: thought._id, level: thought.contexts.length })
+      }
+      if (thought.dateDim.length > 0) {
+        thought.dateDim.forEach(dim => {
+          if ( this.newDimensionsArray.dateDimensions['label'] != dim.label)
+          this.newDimensionsArray.dateDimensions.push({ label: dim.label })
+        })
+      }
+      if (thought.tagDim.length > 0) {
+        thought.tagDim.forEach(dim => {
+          if ( this.newDimensionsArray.tagDimensions['label'] != dim.label)
+          this.newDimensionsArray.tagDimensions.push({ label: dim.label })
+        })
+      }
+      if (thought.numberDim.length > 0) {
+        thought.numberDim.forEach(dim => {
+          if ( this.newDimensionsArray.numberDimensions['label'] != dim.label)
+          this.newDimensionsArray.numberDimensions.push({ label: dim.label })
+        })
+      }
+      this.selectedDimensions.next( this.newDimensionsArray);
+      console.log( this.newDimensionsArray);
+    })
+
+  }
+  perspectiveFilter(thoughts: Thought[]) {
+    this.drawViewerService.clearAll(); // Clear Viewer
+    this.drawViewerService.drawThoughtsArray(thoughts); // Draw ThoughtsArray
+  }
+
   clearAll() {
     this.drawNavbarService.clearAll();
     this.drawViewerService.clearAll();
-    this.selectedUser.next(this.guestUser);
-    setTimeout(() => {
-      this.loadData()
-    }, 500);
   }
 
   //Load Data: After Login, load private Thoughts, load Users, load Selected User, load public Thoughts

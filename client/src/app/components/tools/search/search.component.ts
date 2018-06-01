@@ -53,7 +53,7 @@ export class SearchComponent implements OnInit {
   }
 
   goToThought(thought) {
-    this.internalService.changeThought(thought._id);
+    this.internalService.changeSelectedThought(thought._id);
   }
 
   ngOnInit() {

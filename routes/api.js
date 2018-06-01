@@ -126,6 +126,10 @@ module.exports = (router) => {
             if (req.body.label) { thought.label = req.body.label; }
             if (req.body.contexts) { thought.contexts = req.body.contexts; }
             if (req.body.contents) { thought.contents = req.body.contents; }
+            if (req.body.dateDim) { thought.dateDim = req.body.dateDim; }
+            if (req.body.numberDim) { thought.numberDim = req.body.numberDim; }
+            if (req.body.tagDim) { thought.tagDim = req.body.tagDim; }
+            if (req.body.locationDim) { thought.locationDim = req.body.locationDim; }
             thought.save((err) => {
               if (err) {
                 if (err.errors) {

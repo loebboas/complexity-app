@@ -1,3 +1,5 @@
+import { Perspective } from "./perspective";
+
 export interface User {
     _id?: string,
     email?: string,
@@ -6,7 +8,7 @@ export interface User {
     friends?: [string],
     followUser?: [string],
     followThought?: [string],
-    startPerspectives?: [{ label: string, dimensions: [{ label: string, dimType: string, startValue: string, endValue: string}]}],
+    startPerspectives?: Perspective[],
     changeHistory?: [{ event: string, timestamp: Date }],
     socialHistory?: [{ user: string, event: string, timestamp: Date }]
 }

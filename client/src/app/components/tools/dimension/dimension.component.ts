@@ -15,44 +15,17 @@ import { startWith ,  map } from 'rxjs/operators';
   styleUrls: ['./dimension.component.css']
 })
 export class DimensionComponent implements OnInit {
-  newDate;
-  saveId: any;
-  thoughts: Thought[];
-  selectedThought: Thought;
-  context: Thought;
-  contexts: Thought[];
-  lastInput: String;
-  newContexts: String[] = [];
-  newContents: String[] = [];
-  contextContent: String[] = [];
-  //Autocomplete
-  thoughtCtrl: FormControl;
-  newThought: FormControl;
-  filteredThoughts: Observable<Thought[]>;
-  user: User;
-  messageClass;
-  message;
-  newCompApp;
-  addDimensions = false;
-  username;
-  userId;
-  unstructured;
-  showDiary = false;
-  showPlans = false;
-  memoriesId;
-  showCopyThought = false;
-  showNewThought = true;
-  showLinkThought = false;
-  private: any[];
+  newThought;
+  addDate;
+  addNumber;
+  addTag;
   newDimension;
-  addNumber = false;
-  addDate = false;
-  addTag = false;
-
-  newNumber;
-  newTag;
+  selectedThought;
+  user: User;
   newLabel;
-  addDimension = false;
+  newDate;
+  newNumber: number;
+  newTag;
 
   constructor(private dataService: DataService,
     private formBuilder: FormBuilder,
@@ -64,30 +37,36 @@ export class DimensionComponent implements OnInit {
     this.newThought = new FormControl();
   }
 
-
   onDimensionSubmit() {
     //Create New Dimension
-
      this.newDimension = {
+      user: this.user._id,
       label: this.newLabel,
-      dimtype: "Tag",
-      val: "Something went wrong"
-      }
-
+      val: ""
+    }
+    const editThought: Thought = this.selectedThought; 
     //Create Value, depending on Input
-    if (this.addDate) { this.newDimension.val = this.newDate.toString(); this.newDimension.dimtype = "Date"; };
-    if (this.addNumber) { this.newDimension.val = this.newNumber, this.newDimension.dimtype = "Date"; };
-    if (this.addTag) { this.newDimension.val = this.newTag, this.newDimension.dimtype = "Date"; };
+    if (this.addDate) { 
+      this.newDimension.val = this.newDate;
+      this.selectedThought.dateDim.push(this.newDimension)
+     };
+    if (this.addNumber) { 
+      this.newDimension.val = this.newNumber, 
+      this.selectedThought.numberDim.push(this.newDimension)
+    };
+    if (this.addTag) { this.newDimension.val = this.newTag;
+      this.selectedThought.tagDim.push(this.newDimension) 
+    };
     //Update Selected Thought with new Dimensions
     
-    const editThought = "something"; //This doesnt work!!
+    
     this.dataService.editThought(editThought).subscribe(data => {
       //Update Dimension-Content with new Link
-      this.internalService.changeThought(this.selectedThought._id);
+      this.internalService.loadData();
     });
   }
 
-  changeType(label: string) {
+  changeType(label: string) { // I know this is horrible... Just let me be^^
     if (label == "Number") { this.addNumber = true; this.addDate = false; this.addTag = false; };
     if (label == "Date") { this.addDate = true; this.addNumber = false; this.addTag = false; };
     if (label == "Tag") { this.addDate = false; this.addNumber = false; this.addTag = true; };
@@ -96,6 +75,7 @@ export class DimensionComponent implements OnInit {
 
   ngOnInit() {
   this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
+  this.internalService.selectedUser.subscribe(res => this.user = res);
 
 
   }

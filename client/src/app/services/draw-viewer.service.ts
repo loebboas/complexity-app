@@ -20,6 +20,11 @@ export class DrawViewerService {
         size: 15,
         color: '#111111'
       },
+    },
+    groups: {
+      dateDim: {color:{background:'red'}, size:3},
+      numberDim: {color:{background:'blue'}, size:3},
+      tagDim: {color:{background:'green'}, size:3},
     }
   };
 
@@ -39,11 +44,29 @@ export class DrawViewerService {
     if (thoughts) {
       thoughts.forEach(thought => { //Draw Nodes for all Thoughts in Array
         this.nodes.add({ id: thought._id, label: thought.label });
+        if(thought.dateDim){
+          thought.dateDim.forEach(dim => {
+            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val.toString(), group: 'dateDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+          })
+        }
+        if(thought.numberDim){
+          thought.numberDim.forEach(dim => {
+            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'numberDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+          })
+        }
+        if(thought.tagDim){
+          thought.tagDim.forEach(dim => {
+            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'tagDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+          })
+        }
       });
-      console.log(thoughts);
+     
       thoughts.forEach(thought => { //Draw Edges for all Thoughts with Contents
         var checkThought: Thought = thought;
-        if (checkThought.contents.length) {
+        if (checkThought.contents) {
           checkThought.contents.forEach(content => {
             this.edges.add({ from: checkThought._id, to: content })
           })

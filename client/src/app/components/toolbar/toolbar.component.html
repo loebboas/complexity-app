@@ -23,7 +23,7 @@
         <i class="material-icons">group_work</i> My Thoughts</button>
       <button mat-button matTooltip="New Thought" *ngIf="authService.loggedIn()" (click)="changeTool('new')">
         <i class="material-icons">add_circle</i> New Thought</button>
-      <button mat-button matTooltip="Add Dimension" *ngIf="authService.loggedIn()" (click)="changeTool('dimension')">
+      <button mat-button matTooltip="Add Dimension" *ngIf="authService.loggedIn() && selectedThought.label != 'My Thoughts'" (click)="changeTool('dimension')">
         <i class="material-icons">add</i> Add Dimension</button>
       <button mat-button matTooltip="Edit" *ngIf="authService.loggedIn()" (click)="changeTool('edit')">
         <i class="material-icons">create</i> Details</button>
