@@ -1,6 +1,0 @@
-<div [style.background]=thought.color class="grid-card">
- <button mat-raised-button  (click)="gotoThought(thought._id)">{{thought.label}}</button>
-  <mat-card-content>
-    <button mat-button *ngFor="let content of thought.contents" (click)="gotoThought(content._id)">{{ content.label }}</button>
-  </mat-card-content>
-</div>

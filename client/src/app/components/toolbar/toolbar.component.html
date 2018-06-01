@@ -1,70 +1,52 @@
 <div>
- 
-    <mat-toolbar *ngIf="showTool == 'new'">
-      <app-new></app-new>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'copy'">
-      <app-copy></app-copy>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'link'">
-      <app-link></app-link>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'edit'">
-      <app-edit></app-edit>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'delete'">
-      <app-delete></app-delete>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'search'">
-      <app-search></app-search>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="showTool == 'dimension'">
-      <app-dimension></app-dimension>
-    </mat-toolbar>
- 
+
+  <mat-toolbar *ngIf="showTool == 'new'">
+    <app-new></app-new>
+  </mat-toolbar>
+  <mat-toolbar *ngIf="showTool == 'edit'">
+    <app-edit></app-edit>
+  </mat-toolbar>
+  <mat-toolbar *ngIf="showTool == 'search'">
+    <app-search></app-search>
+  </mat-toolbar>
+  <mat-toolbar *ngIf="showTool == 'dimension'">
+    <app-dimension></app-dimension>
+  </mat-toolbar>
+
   <mat-toolbar>
     <mat-toolbar-row>
 
 
       <span class='spacer'></span>
-      <!-- Level: 0 = Networks -->
-      <div *ngIf="selectedThought">
-      <button mat-button matTooltip="Add"  *ngIf="selectedThought.level >= 0" (click)="changeTool('dimension')">
-        <i class="material-icons">add</i> Add</button>
-      <button mat-button matTooltip="New" *ngIf="selectedThought.level >= 0" (click)="changeTool('new')">
-        <i class="material-icons">add_circle</i> New</button>
-      <button mat-button matTooltip="Copy" *ngIf="selectedThought.level >= 0" (click)="changeTool('copy')">
-        <i class="material-icons">add_box</i> Copy</button>
-      <button mat-button matTooltip="Link" *ngIf="selectedThought.level >= 0" (click)="changeTool('link')">
-        <i class="material-icons">link</i> Link</button>
-      <button mat-button matTooltip="Edit" *ngIf="selectedThought.level >= 0" (click)="changeTool('edit')">
-        <i class="material-icons">create</i> Edit</button>
-        <button mat-button matTooltip="Edit" *ngIf="selectedThought.level >= 0" [matMenuTriggerFor]="views">
-            <i class="material-icons">view_quilt</i> Change View</button>
-      <button mat-button matTooltip="Delete" *ngIf="selectedThought.level >= 0" (click)="changeTool('delete')">
-        <i class="material-icons">delete_sweep</i> Delete</button>
 
+      <button mat-button matTooltip="My Thoughts" *ngIf="authService.loggedIn()" (click)="loadMyThoughts()">
+        <i class="material-icons">group_work</i> My Thoughts</button>
+      <button mat-button matTooltip="New Thought" *ngIf="authService.loggedIn()" (click)="changeTool('new')">
+        <i class="material-icons">add_circle</i> New Thought</button>
+      <button mat-button matTooltip="Add Dimension" *ngIf="authService.loggedIn()" (click)="changeTool('dimension')">
+        <i class="material-icons">add</i> Add Dimension</button>
+      <button mat-button matTooltip="Edit" *ngIf="authService.loggedIn()" (click)="changeTool('edit')">
+        <i class="material-icons">create</i> Details</button>
+
+      <button mat-button *ngIf="!authService.loggedIn()" routerLink="../login">
+        <i class="material-icons">account_box</i> Login</button>
+      <button mat-button *ngIf="!authService.loggedIn()" routerLink="../register">
+        <i class="material-icons">launch</i> Register</button>
+      <div *ngIf="user">
+        <button mat-button *ngIf="!authService.loggedIn()" matTooltip="{{ user.username | uppercase}}">
+          <i class="material-icons">account_circle</i> {{ user.username | uppercase}}</button>
+
+        <button mat-button *ngIf="authService.loggedIn()" matTooltip="{{ user.username | uppercase}}" [matMenuTriggerFor]="menu">
+          <i class="material-icons">account_circle</i> {{ user.username | uppercase}}</button>
       </div>
-        <button mat-button matTooltip="Search" *ngIf="!authService.loggedIn()"  routerLink="../login">
-          <i class="material-icons">account_circle</i> Login</button>
-          <button mat-button matTooltip="Search" *ngIf="!authService.loggedIn()" routerLink="../register">
-            <i class="material-icons">edit</i> Register</button>
-      <button mat-button matTooltip="Search" *ngIf="authService.loggedIn()" (click)="changeTool('search')">
+      <button mat-button matTooltip="Change Perspective" (click)="changeTool('sidenav')">
+        <i class="material-icons">view_quilt</i> Change Perspective</button>
+      <button mat-button matTooltip="Search" (click)="changeTool('search')">
         <i class="material-icons">search</i> Search</button>
-      <button mat-button matTooltip="{{ user.username | uppercase}}" *ngIf="authService.loggedIn()" [matMenuTriggerFor]="menu">
-        <i class="material-icons">account_circle</i> {{ user.username | uppercase}}</button>
 
-
-        <mat-menu #views="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item (click)="changeView('timeline')">Timeline</button>
-            <button mat-menu-item (click)="changeView('graph')">Graph</button>
-            <button mat-menu-item (click)="changeView('grid')">Network</button>
-          
-          </mat-menu>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
-        <!-- If LoggedIn -->
-        <button mat-menu-item routerLink="../../profile">Profile</button>
-        <button mat-menu-item (click)="onLogoutClick()">Logout</button>
+        <button *ngIf="authService.loggedIn" mat-menu-item (click)="loadMyUser()">My User</button>
+        <button *ngIf="authService.loggedIn" mat-menu-item (click)="onLogoutClick()">Logout</button>
       </mat-menu>
       <span class='spacer'></span>
       <button mat-button>Complexity-App v.0.0.6</button>

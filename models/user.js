@@ -3,8 +3,6 @@ mongoose.Promise = global.Promise;
 const bcrypt = require('bcrypt-nodejs');
 
 const Thought = require('./thought.js');
-const PubThought = require('./pubThought.js');
-const PubRoom = require('./pubRoom.js');
 
 // Validate Function to check e-mail length
 let emailLengthChecker = (email) => {
@@ -127,10 +125,13 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  private: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-  public: [{type: Schema.Types.ObjectId, ref: 'PubThought'}],
-  rooms: [{type: Schema.Types.ObjectId, ref: 'PubRoom'}],
-  friends: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  stream: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+  friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  followUser: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  followThought: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+  startPerspectives: [{ label: String, dimensions: [{ label: String, dimType: String, startValue: String, endValue: String}]}],
+  changeHistory: [{ event: String, timestamp: Date }],
+  socialHistory: [{ user: {type: Schema.Types.ObjectId, ref: 'User'}, event: String, timestamp: Date }]
 });
 
 // Schema Middleware to Encrypt Password

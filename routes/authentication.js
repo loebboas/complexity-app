@@ -1,7 +1,5 @@
 const User = require('../models/user');
 const Thought = require('../models/thought');
-const PubThought = require('../models/pubThought');
-const PubRoom = require('../models/pubRoom');
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database'); // Import database configuration
 
@@ -68,10 +66,13 @@ module.exports = (router) => {
   router.put('/edit', (req, res) => {
 	
       User.findOne({ _id: req.body._id }, (err, user) => {
-        if (req.body.private) { user.private = req.body.private };
-        if (req.body.public) { user.public = req.body.public };
-        if (req.body.rooms) { user.rooms = req.body.rooms };
+        if (req.body.stream) { user.stream = req.body.stream };
+        if (req.body.startPerspectives) { user.startPerspectives = req.body.startPerspectives };
         if (req.body.friends) { user.friends = req.body.friends };
+        if (req.body.changeHistory) { user.changeHistory = req.body.changeHistory };
+        if (req.body.socialHistory) { user.socialHistory = req.body.socialHistory };
+        if (req.body.followUser) { user.followUser = req.body.followUser };
+        if (req.body.followThought) { user.followThought = req.body.followThought };
 		  user.save((err, user) => {
             // Check if error occured
             if (err) {
@@ -196,7 +197,8 @@ module.exports = (router) => {
   =============================================================== */
   router.get('/profile', (req, res) => {
     // Search for user in database
-    User.findOne({ _id: req.decoded.userId }).populate('private public rooms friends').select('username email private public rooms friends').exec((err, user) => {
+    User.findOne({ _id: req.decoded.userId })
+    .select('username email stream friends changeHistory socialHistory startPerspectives').exec((err, user) => {
       // Check if error connecting
       if (err) {
         res.json({ success: false, message: err }); // Return error
@@ -206,6 +208,27 @@ module.exports = (router) => {
           res.json({ success: false, message: 'User not found' }); // Return error, user was not found in db
         } else {
           res.json({ success: true, user: user }); // Return success, send user object to frontend for profile
+        }
+      }
+    });
+  });
+
+   /* ===============================================================
+     Route to search all Users
+  =============================================================== */
+  router.get('/allUser', (req, res) => {
+    // Search for user in database
+    User.find()
+    .select('username').exec((err, users) => {
+      // Check if error connecting
+      if (err) {
+        res.json({ success: false, message: err }); // Return error
+      } else {
+        // Check if user was found in database
+        if (!users) {
+          res.json({ success: false, message: 'User not found' }); // Return error, user was not found in db
+        } else {
+          res.json({ success: true, users: users }); // Return success, send user object to frontend for profile
         }
       }
     });

@@ -7,7 +7,6 @@ import { Thought } from '../../../models/thought';
 import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../services/auth.service';
 import { InternalService } from '../../../services/internal.service';
-import { Dimension } from '../../../models/dimension';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +19,6 @@ export class SearchComponent implements OnInit {
   context: Thought;
   contexts: Thought[];
   lastInput: String;
-  dimensions: Dimension[];
   newContexts: String[] = [];
   newContents: String[] = [];
   contextContent: String[] = [];

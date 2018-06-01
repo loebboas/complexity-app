@@ -1,29 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core'; 
-import { HomeComponent } from './components/home/home.component'; 
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { ViewerComponent } from './components/viewer/viewer.component';
 
 
 const appRoutes: Routes = [
-  { path: 'public', component: ViewerComponent, canActivate: [AuthGuard] 
-  }, 
+
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] 
   },  
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] 
   },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] 
+  { path: 'viewer', component: ViewerComponent 
   },
-  { path: 'viewer', component: ViewerComponent, canActivate: [AuthGuard] 
-  },
-  { path: 'viewer/:id', component: ViewerComponent, canActivate: [AuthGuard] 
+  { path: 'viewer/:id', component: ViewerComponent 
   },
   {
-  	path: '**', component: HomeComponent
+  	path: '**', component: ViewerComponent
   }
   ];
 

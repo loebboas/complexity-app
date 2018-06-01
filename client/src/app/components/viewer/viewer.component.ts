@@ -5,6 +5,8 @@ import { InternalService } from '../../services/internal.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { Network, DataSet } from 'vis';
+import { DrawViewerService } from '../../services/draw-viewer.service';
 
 
 
@@ -14,42 +16,36 @@ import { User } from '../../models/user';
   styleUrls: ['./viewer.component.css']
 })
 export class ViewerComponent implements OnInit {
-  user: User;
-  personas: any;
-  selectedThought: Thought;
-  contexts: Thought[];
-  contents: Thought[];
-  context: Thought;
-  siblings: Thought[];
-  username: String;
-  userId: String;;
-  starterId: String;
-  idCounter: 5;
-
-
+  nodes = new DataSet([
+  ]);
+  edges = new DataSet([
+  ]);
+  data = {
+    nodes: this.nodes,
+    edges: this.edges
+  };
+  options;
+  
+  network;
+  
    constructor(private dataService: DataService,
                private internalService: InternalService,
                private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+               private drawViewerService: DrawViewerService) { }
 
-    changeTool(tool: String) {
-      this.internalService.changeTool(tool);
-    }
+ 
 
-   selectThought(id): void {
-    this.router.navigate(['viewer/', id]);
-      this.internalService.changeThought(id);  
-  }
-
-   ngOnInit() {
-    this.authService.getProfile().subscribe(profile => {
-    console.log(profile);
-      //GET THOUGHTS 
-     
-    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
-
-  });
-        // create an array with nodes
+  
+  
+  
+  
+    ngOnInit() {
+      this.drawViewerService.viewerNodesObs.subscribe(nodes => this.data.nodes = nodes);
+      this.drawViewerService.viewerEdgesObs.subscribe(edges => this.data.edges = edges);
+      this.drawViewerService.viewerOptionsObs.subscribe(options => this.options = options);
+      var  container = document.getElementById('mainbar');
+      this.network = new Network(container, this.data, this.options);
  
 
 

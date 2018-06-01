@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.router.navigate(['viewer']); // Navigate to dashboard view
           }
-          this.internalService.loadUser();
+          this.internalService.loadData();
         }, 500);
       }
     });

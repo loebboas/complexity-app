@@ -8,7 +8,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-domain = "";
+domain = "http://localhost:8080";
 authToken;
 user;
 options;
@@ -76,6 +76,11 @@ options;
     this.createAuthenticationHeaders(); // Create headers before sending to API
     return this.http.get(this.domain + '/authentication/profile', this.options);
   }
+  getAllUser() {
+    this.createAuthenticationHeaders(); // Create headers before sending to API
+    return this.http.get(this.domain + '/authentication/allUser', this.options);
+  }
+  
     // Function to check if user is logged in
   loggedIn() {
     return tokenNotExpired();

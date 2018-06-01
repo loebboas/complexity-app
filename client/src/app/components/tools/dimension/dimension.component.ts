@@ -4,7 +4,6 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { InternalService } from '../../../services/internal.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { Dimension } from '../../../models/dimension';
 import { Observable } from 'rxjs';
 import { Thought } from '../../../models/thought';
 import { User } from '../../../models/user';
@@ -23,8 +22,6 @@ export class DimensionComponent implements OnInit {
   context: Thought;
   contexts: Thought[];
   lastInput: String;
-  dimensions: Dimension[];
-  userDimensions: Dimension[];
   newContexts: String[] = [];
   newContents: String[] = [];
   contextContent: String[] = [];
@@ -47,11 +44,11 @@ export class DimensionComponent implements OnInit {
   showNewThought = true;
   showLinkThought = false;
   private: any[];
-  selectedDimension: Dimension;
+  newDimension;
   addNumber = false;
   addDate = false;
   addTag = false;
-  newDimension: Dimension;
+
   newNumber;
   newTag;
   newLabel;
@@ -82,11 +79,8 @@ export class DimensionComponent implements OnInit {
     if (this.addNumber) { this.newDimension.val = this.newNumber, this.newDimension.dimtype = "Date"; };
     if (this.addTag) { this.newDimension.val = this.newTag, this.newDimension.dimtype = "Date"; };
     //Update Selected Thought with new Dimensions
-    this.selectedThought.dimensions.unshift(this.newDimension);
-    const editThought = {
-      _id: this.selectedThought._id,
-      editDimensions: this.selectedThought.dimensions
-    };
+    
+    const editThought = "something"; //This doesnt work!!
     this.dataService.editThought(editThought).subscribe(data => {
       //Update Dimension-Content with new Link
       this.internalService.changeThought(this.selectedThought._id);

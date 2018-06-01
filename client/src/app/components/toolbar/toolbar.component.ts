@@ -21,7 +21,6 @@ export class ToolbarComponent implements OnInit {
     public authService: AuthService,
     public internalService: InternalService) { }
 
-
   changeTool(tool: String) {
     if (this.showTool == tool) {
       this.showTool = "none";
@@ -31,17 +30,23 @@ export class ToolbarComponent implements OnInit {
     this.internalService.changeTool(this.showTool);
   }
 
-  changeView(label: string){
-    this.internalService.changeShowAs(label);
+  loadMyUser(){
+
   }
+  
   onLogoutClick() {
+    this.internalService.clearAll();
     this.authService.logout(); // Logout user
     this.router.navigate(['/']); // Navigate back to home page
   }
 
   ngOnInit() {
     this.internalService.selectedUserObs.subscribe(res => this.user = res);
+    console.log(this.authService.loggedIn());
+    console.log(this.user);
     this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
+    console.log(this.selectedThought);
+
     this.internalService.selectedToolObs.subscribe(res => this.showTool = res);
   }
 

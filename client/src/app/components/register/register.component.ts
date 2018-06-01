@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
-import { PubRoom } from '../../models/pubRoom';
 
 @Component({
   selector: 'app-register',
@@ -22,29 +21,8 @@ export class RegisterComponent implements OnInit {
   usernameValid;
   usernameMessage;
   userId;
-  startNetwork: Thought;
-  plans :Thought;
-  diary: Thought;
-
-
-  projectsId;
-  sessionsId;
-  favoritesId;
-  todoId;
-  startId: string;
-  userData;
-  timeline; goals; projects;
-  today; week; month; year; life;
-  memory; feeling; all;
-  infcl; publ; rooms; ptho;
-  dauser;
-  privateArray: any[];
-  privateObj;
-
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  userRoom: PubRoom;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -156,169 +134,17 @@ export class RegisterComponent implements OnInit {
         this.authService.login(user).subscribe(data => {
           this.authService.storeUserData(data['token'], data['user'])
 
-
-
-          //Create UserRoom
-          this.userRoom = {
-            label: this.firstFormGroup.get('username').value + "'s-Room",
-            admin: [this.userId],
-            members: [],
-            contents: [],
-            dimensions: [{ label: "Creation Time", dimtype: "Date", val: Date.now.toString() }],
-            activeUsers: [this.userId],
-            visible: "open"
-          }
-
-          console.log(this.userRoom)
-          this.dataService.newPubRoom(this.userRoom).subscribe(data => {
-            this.userRoom = data['pubRoom'];
-            console.log(this.userRoom)
-            console.log(data);
-
-
-
-            //add Public Room to Users Rooms
-            const editUser = {
-              _id: this.userId,
-              rooms: [this.userRoom._id]
-            };
-            this.authService.editUser(editUser).subscribe(data => {
-
-
-              //Load User and change Room
-              this.internalService.loadUser();
+              this.internalService.loadData();
             })
-          });
-        });
       }
     });
 
   }
 
-  onNetworkSubmit() {
-    const network: Thought = {  // rename as "User/Username or Persona"
-      label: this.secondFormGroup.get('network').value,
-      level: 0,
-      color: "#FFFFFF",
-      clicks: 0,
-      showAs: "grid",
-      user: this.userId,
-      contexts: [],
-      contents: [],
-      dimensions: [],
-      texture: "",
-      form: "circle",
-      privacy: "private",
-      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
-    };
-
-
-    this.dataService.newThought(network).subscribe(data => {
-      this.startNetwork = data['thought'];
-      const editUser = {
-        _id: this.userId,
-        private: [this.startNetwork._id]
-      };
-      this.authService.editUser(editUser).subscribe(data => {
-           //Load User and change Room
-           this.internalService.loadUser();
-      });
-    });
+  onTutorialFinish(){
+    this.router.navigate(['viewer']);
   }
-
-
-  onStarterNetworkSubmit() {
-    const diary: Thought = { 
-      label: "Diary",
-      level: 1,
-      color: "#ccffcc",
-      clicks: 0,
-      showAs: "grid",
-      user: this.userId,
-      contexts: [this.startNetwork._id],
-      contents: [],
-      dimensions: [],
-      texture: "",
-      form: "circle",
-      privacy: "private",
-      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
-    };
-
-    const plans: Thought = {
-      label: "Plans",
-      level: 1,
-      color: "#99ccff",
-      clicks: 0,
-      showAs: "grid",
-      user: this.userId,
-      contexts: [this.startNetwork._id],
-      contents: [],
-      dimensions: [],
-      texture: "",
-      form: "circle",
-      privacy: "private",
-      grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 3 }
-    };
-
-    this.dataService.newThought(diary).subscribe(data => {
-      this.diary = data['thought'];
-      this.dataService.newThought(plans).subscribe(data => {
-        this.plans = data['thought'];
-
-        const goals: Thought = {
-          label: "Goals",
-          level: 2,
-          color: "#99ddff",
-          clicks: 0,
-          showAs: "grid",
-          user: this.userId,
-          contexts: [this.plans._id, this.startNetwork._id],
-          contents: [],
-          dimensions: [],
-          texture: "",
-          form: "circle",
-          privacy: "private",
-          grid: { colspan: 0, rowspan: 0, x: 0, y: 0, rows: 3, cols: 7 }
-        };
-    
-        this.dataService.newThought(goals).subscribe(data => {
-          this.goals = data['thought'];
-
-                  const editPlans = {
-                    _id: this.plans._id,
-                    editContents: [this.goals._id]
-                  };
-                  this.dataService.editThought(editPlans).subscribe(data => {
-
-                    const editStartNetwork = {
-                      _id: this.startNetwork._id,
-                      editContents: [this.diary._id, this.plans._id]
-                    };
-                    this.dataService.editThought(editStartNetwork).subscribe(data => {
   
-
-                        this.processing = true; // Lock form fields	
-                        // Function to send blog object to backend
-
-                        // Check if PUT request was a success or not
-                        if (!data['success']) {
-                          this.messageClass = 'alert alert-danger'; // Set error bootstrap class
-                          this.message = data['message']; // Set error message
-                          this.processing = false; // Unlock form fields
-                        } else {
-                          this.messageClass = 'alert alert-success'; // Set success bootstrap class
-                          this.message = data['message']; // Set success message
-                          // After two seconds, navigate back to blog page 
-                        }
-                      });
-                      });
-                    });
-                  });
-                });
-           
-    this.internalService.changeThought(this.startNetwork._id);
-    this.router.navigate(['/viewer/']); // Redirect to Persona
-  }
   // Function to check if e-mail is taken
   checkEmail() {
     // Function from authentication file to check if e-mail is taken
@@ -372,13 +198,6 @@ export class RegisterComponent implements OnInit {
       // Confirm Password Input
       confirm: ['', Validators.required] // Field is required
     }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
-
-    this.secondFormGroup = this.formBuilder.group({
-      network: ['', Validators.required]
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-
-    });
   }
 
 }

@@ -1,8 +1,0 @@
-<div *ngIf="selectedThought.level <= 0">
-    You can't delete Thoughts on this level.
-</div>
-  <div *ngIf="selectedThought.level > 0">
-     Are you sure you want to delete "{{selectedThought.label}}"?"
-     <button mat-button (click)="deleteThought(selectedThought._id)">Yes</button><button mat-button>No</button>
-  </div>
-  

@@ -1,41 +1,78 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { PubRoom } from '../models/pubRoom';
 import { DataSet, Edge, Node } from 'vis';
 import { Thought } from '../models/thought';
 import { Observable, of, BehaviorSubject, ReplaySubject } from 'rxjs';
-import { NullTemplateVisitor } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrawNavbarService {
-  user: User;
+ activeUsers: User[] = [];
+ activeThoughts: Thought[] = [];
   nodes = new DataSet([
   ]);
   edges = new DataSet([
   ]);
+  options = {
+    nodes: {
+      shape: 'dot',
+      size: 99,
+      font: {
+        size: 15,
+        color: '#111111'
+      },
+    }
+  };
 
   constructor() { }
     // Store Data for Navbar Component as BehaviourSubjects
-    public thenodes = new BehaviorSubject<DataSet<Node>>(this.nodes)
-    nodesObs = this.thenodes.asObservable();
-    public theedges = new BehaviorSubject<DataSet<Edge>>(this.edges);
-    edgesObs = this.theedges.asObservable();
+    public navbarNodes = new BehaviorSubject<DataSet<Node>>(this.nodes)
+    navbarNodesObs = this.navbarNodes.asObservable();
+    public navbarEdges = new BehaviorSubject<DataSet<Edge>>(this.edges);
+    navbarEdgesObs = this.navbarEdges.asObservable();
+    public navbarOptions = new BehaviorSubject(this.options);
+    navbarOptionsObs = this.navbarOptions.asObservable();
 
-  loadRooms(rooms: PubRoom[]){
-    //draw Nodes for each PubRoom, make selected Room bigger and in Center! ??Which is Selected Room
-  }
-
-  changeRoom(room: PubRoom) {
-    //animation toward chosen Room
-    //Chosen Room in Middle and Bigger
+    clearAll(){
+      this.nodes.clear();
+      this.edges.clear();
     }
-  
-    loadUser(user: User){
 
-}
+    drawPubThoughts(thoughts: Thought[]){
+      if(thoughts){
+      thoughts.forEach(thought => {
+        this.nodes.add({ id: thought._id, label: thought.label});
+        if(thought.contents){
+        thought.contents.forEach(function (content, index){
+          var linkID = thought._id + index;
+          this.edges.add({ id: linkID, from: thought._id, to: content._id  })
+        })
+      };
+        this.activeThoughts.push(thought);
+      })
+    }
+    }
 
-deleteUser(){}
+    addPubThought(thought: Thought){
+    }
 
-}
+    deleteUsers(){
+      if(this.activeUsers.length > 0){
+      this.activeUsers.forEach(user => {
+        this.nodes.remove(user._id)
+      })
+    }
+    }
+
+    drawUsers(users: User[]) {
+     if(users){
+       
+      users.forEach(user => {
+        this.nodes.add({ id: user._id, label: user.username});
+        this.activeUsers.push(user);
+      })
+       this.navbarNodes.next(this.nodes);
+    }
+  }
+  }

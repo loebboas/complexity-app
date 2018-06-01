@@ -1,186 +1,170 @@
 import { Injectable } from '@angular/core';
 import { Thought } from '../models/thought';
-import { ChangeTracker } from '../models/changeTracker';
 import { Observable, of, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { DataService } from './data.service';
-import { PubRoom } from '../models/pubRoom';
-import { PubThought } from '../models/pubThought';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
-import { PublicService } from './public.service';
 import { DrawNavbarService } from './draw-navbar.service';
-import { DataSet, Edge } from 'vis';
-import { GridsterItem } from 'angular-gridster2';
+import { DrawViewerService } from './draw-viewer.service';
+import { timeout } from 'rxjs/operators';
+
 
 
 
 @Injectable()
 export class InternalService {
-  guestRoom: PubRoom = {
-    _id: "guestroom",
-    label: "Welcome!",
-    admin: [],
-    members: [],
-    contents: [],
-    dimensions: [],
-    visible: "open",
-    activeUsers: []
-  }
 
+  //Default Objects (for LoggedOut Views)
+  welcomeThought: Thought = {
+    _id: "WelcomeThought",
+    label: "Welcome!"
+  };
   guestUser: User = {
-    _id: "guestuser",
-    email: "guest@complexity-app.com",
-    username: "Guest",
-    private: [],
-    public: [],
-    rooms: [{
-      _id: "guestroom",
-      label: "Welcome!",
-      admin: [],
-      members: [],
-      contents: [],
-      dimensions: [],
-      visible: "open",
-      activeUsers: []
-    }],
-    friends: []
-  }
+    _id: "guestID",
+    username: "Guest"
+  };
+  allThoughts: Thought[];
+  //Save all relevant Data as BehaviourSubjects
 
-  // Stores Data for Viewer as GridsterItems
-  public Items = new BehaviorSubject<GridsterItem[]>([]);
-  ItemsObs = this.Items.asObservable();
-
-  // Stores all public Rooms (later: Selected Rooms, SEARCH, shown as Stars in Background)
-  public pubRooms = new BehaviorSubject<PubRoom[]>([]);
-  pubRoomsObs = this.pubRooms.asObservable();
+  //SEARCH LISTS
+  // Stores all Private Thoughts
+  public privateThoughts = new BehaviorSubject<Thought[]>([]);
+  privateThoughtsObs = this.privateThoughts.asObservable();
 
   // Stores all Private Thoughts
-  public thoughts = new BehaviorSubject<Thought[]>([]);
-  thoughtsObs = this.thoughts.asObservable();
+  public publicThoughts = new BehaviorSubject<Thought[]>([]);
+  publicThoughtsObs = this.publicThoughts.asObservable();
 
-  // Stores all Thoughts of selected Room
-  public roomThoughts = new BehaviorSubject<Thought[]>([]);
-  roomThoughtsObs = this.roomThoughts.asObservable();
+  // Stores all all Users 
+  public allUsers = new BehaviorSubject<User[]>([]);
+  allUsersObs = this.allUsers.asObservable();
 
-  //Stores the selected Room (default: Welcome)
-  public selectedRoom = new BehaviorSubject<PubRoom>(this.guestRoom);
-  selectedRoomObs = this.selectedRoom.asObservable();
 
-  // Stores public Thoughts of selected Room
-  public pubThoughts = new BehaviorSubject<PubThought[]>([]);
-  pubThoughtsObs = this.pubThoughts.asObservable();
-
+  //SELECTED DATA
   //stores User (default: Guest)
   public selectedUser = new BehaviorSubject<User>(this.guestUser);
   selectedUserObs = this.selectedUser.asObservable();
 
   //Selected Thought (Thought incl. Content which is being shown)
-  public selectedThought = new BehaviorSubject<Thought>(null);
+  public selectedThought = new BehaviorSubject<Thought>(this.welcomeThought);
   selectedThoughtObs = this.selectedThought.asObservable();
 
-  // Array with all Thoughts of this Session
-  public sessionThoughts = new BehaviorSubject<Thought[]>([]);
-  sessionThoughtsObs = this.sessionThoughts.asObservable();
+  // Stores all ThoughtObjects presented in Navbar
+  public navbarThoughts = new BehaviorSubject<Thought[]>([]);
+  navbarThoughtsObs = this.navbarThoughts.asObservable();
 
-  //Selected Tool
+  // Stores all UserObjects presented in Navbar
+  public navbarUsers = new BehaviorSubject<User[]>([]); // All Users i senough?
+  navbarUsersObs = this.navbarUsers.asObservable();
+
+  // Stores all Thoughts presented in Viewer
+  public viewerThoughts = new BehaviorSubject<Thought[]>([]);
+  viewerThoughtsObs = this.viewerThoughts.asObservable();
+
+  //SELECTED TOOL
   public selectedTool = new BehaviorSubject<String>("none");
   selectedToolObs = this.selectedTool.asObservable();
 
-  constructor(private dataService: DataService, private authService: AuthService, private publicService: PublicService, private drawNavbarService: DrawNavbarService) {
+  constructor(private dataService: DataService, private authService: AuthService, private drawViewerService: DrawViewerService, private drawNavbarService: DrawNavbarService) {
   }
-  //Consts: GuestUser, WelcomeRoom
-  //Observables: PubRooms (incl. one = selected), SessionThoughts, SelectedThought, User, Networks, Tools
-  //Input: AuthService: User (Friends, Networks, Room-Links)
-  //Input: DataService: Thoughts
-  //Input: PublicService: PubRooms, PubThoughts
-  //Functions: ChangeUser, ShowMyNetworks, ShowThought, RemoveThought ShowFriends, GoToFriendRoom, ShowMyRooms, GoToRoom
-  //Function: ChangeSelectedThought
-  //Function: ChangeTool, changeShowAs
-  //Output: PubRooms, SessionThoughts, User @Navbar (via DrawGraph-Service)
-  //Output: SelectedThought (incl. Contents + SubContents) @Viewer 
 
-  //LOAD DATA
-  loadUser() {
-    if (this.authService.loggedIn()) {  //Check if LoggedIn
-      this.authService.getProfile().subscribe(data => {   //Get UserData
-        if (data['user']) {
-          const user: User = data['user'];
-          this.changeRoom(user.rooms[0]._id);
-          this.selectedUser.next(user);
-          this.drawNavbarService.loadUser(user);
 
-        } else {
-          const user = this.guestUser;
-          this.selectedUser.next(user);
-          this.changeRoom(user.rooms[0]._id);
-          this.drawNavbarService.deleteUser();
-          this.drawNavbarService.loadUser(user);
-        }
+  //LOAD DATA --> FirstLoad(Navbar) or after Login/Register
+  loadData() {
+    //IF LOGGEDIN
+    //NAVBAR ARRAY
+    if (this.authService.loggedIn()) {
+      this.authService.getProfile().subscribe(data => { //Get Selected User
+        this.selectedUser.next(data['user']);
+        this.drawNavbarService.deleteUsers();
       });
+      this.authService.getAllUser().subscribe(data => {//Get all User
+        this.allUsers.next(data['users']);
+        this.drawNavbarService.drawUsers(data['users']);
+      });
+      this.dataService.getAllPubThought().subscribe(data => { //Get all public Thoughts
+        console.log(data);
+        this.publicThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
+        this.drawNavbarService.drawPubThoughts(data['allThoughts']); // Draw PubThoughts
+      })
+
+      //LOAD VIEWER ARRAY WITH PRIVATE THOUGHTS TO START/AFTER LOGIN
+      this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
+        var UserThought: Thought = {  //Create a UserSelected Thought:
+          label: "My Thoughts"
+        }
+        var thoughtsArray: Thought[] = [];  //Add a UserSelected Thought to DrawingArray
+        thoughtsArray.push(UserThought);
+        if (data['allThoughts']) {
+          data['allThoughts'].forEach(thought => {
+            thoughtsArray.push(thought);
+          });
+        }
+        this.selectedThought.next(UserThought);
+        this.privateThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
+        this.drawViewerService.clearAll(); // Draw PubThoughts
+        this.drawViewerService.drawThoughtsArray(thoughtsArray); // Draw PubThoughts
+      })
+
+    } else { // If not LoggedIn, load Welcome and GuestUser!
+
+      var UserArray: User[] = [];
+      UserArray.push(this.guestUser);
+      var thoughtArray: Thought[] = [];
+      thoughtArray.push(this.welcomeThought);
+
+      this.drawNavbarService.drawUsers(UserArray);
+      console.log(thoughtArray);
+      this.drawNavbarService.drawPubThoughts(thoughtArray);
+      
+      this.drawViewerService.drawThoughtsArray(thoughtArray);
+
+
     }
+
+    //ELSE:
+    //Load Guest
+    //load Welcome Thought
+
+    //Create Arrays for Viewer/Navbar
+    //Create Navbar Array:
+  }
+  clearAll() {
+    this.drawNavbarService.clearAll();
+    this.drawViewerService.clearAll();
+    this.selectedUser.next(this.guestUser);
+    setTimeout(() => {
+      this.loadData()},500);
   }
 
-  loadPubRooms() {
-    this.publicService.getAllPubRooms().subscribe(data => {
-      this.pubRooms.next(data['pubRooms']);
-      this.drawNavbarService.loadRooms(data['pubRooms'])
+  //Load Data: After Login, load private Thoughts, load Users, load Selected User, load public Thoughts
+  //Put private and public thoughts into AllThoughts
+
+  changeSelectedThought(id) {
+    this.allThoughts.forEach(thought => {
+      if (thought._id == id) {
+        this.selectedThought.next(thought)
+      }
     })
   }
 
-  loadThoughts() {
-    this.dataService.getAllThought().subscribe(data => {
-      this.thoughts.next(data['allThought']);
-    })
+  changeViewerThoughts(id) {
+    //get selected Thought
+    //For as Long as there are Contents, add Contents to viewerThoughts
+    // For Each Content of Selected Thought, add Thought.
+    //Eventuell: 3 level rauf und 3 level runter.
+    // For Each Content of added Thought, add Content...
+
+    //First part: Get new ViewerThoughtsArray
+    //Second: Change Viewer ThoughtsArray
   }
 
-  loadRoomThoughts(id) {
-    this.publicService.getRoomContent(id).subscribe(data => {
-      this.roomThoughts.next(data['thoughts']);
-    })
-  }
-
-  //ROOMS
-  changeRoom(id) { //Changes Selected Thought as well
-    if (this.pubRooms.getValue().length > 0) {
-      const pubRoom = this.pubRooms.getValue().find(pubRoom => id == pubRoom._id);
-      this.selectedRoom.next(pubRoom);
-      this.roomToThought(pubRoom);
-      this.drawNavbarService.changeRoom(pubRoom);
-    }
-  }
-
-  roomToThought(pubRoom: PubRoom) {
-    const thought: Thought = {
-      _id: pubRoom._id,
-      contents: pubRoom.contents,
-      level: -1,
-      label: pubRoom.label,
-      user: pubRoom.admin[0],
-      color: "#FFFFFF",
-      clicks: pubRoom.likes,
-      showAs: "grid",
-      grid: { cols: 7, rows: 1, x: 0, y: 0, colspan: 0, rowspan: 0 }
-    }
-    this.selectedThought.next(thought);
-  }
 
   changeThought(id) {
-    this.thoughts.getValue().forEach(thought => {
-      if (thought._id == id) {
-        this.selectedThought.next(thought);
-      }
-    });
+
   }
 
   changeTool(tool: String) {
     this.selectedTool.next(tool);
   }
-
-  changeShowAs(label) {
-    const viewThought = this.selectedThought.getValue();
-    viewThought.showAs = label;
-    this.selectedThought.next(viewThought);
-  }
-
 }

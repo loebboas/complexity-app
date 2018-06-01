@@ -6,18 +6,27 @@ const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
     label: String,
-    level: Number,
     color: String,
     clicks: Number,
-    showAs: String,
-    grid: { colspan: Number, rowspan: Number, x: Number, y: Number, rows: Number, cols: Number },
-    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    valued: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date, val: Number }],
+    dateDim: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, label: String, val: Date }],
+    locationDim: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, label: String, val: String }],
+    numberDim: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, label: String, val: Number }],
+    tagDim: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, label: String, val: String }],
+    perspectives: [{ label: String, dimensions: [{ label: String, dimType: String, startValue: String, endValue: String}]}],
+    createdBy: {user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date },
+    shared: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date }],
+    edited: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date, event: String, val: String }],
+    deleted: [{user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date }],
     contexts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
     contents: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-    dimensions: [{label: String, dimtype: String, val: String }],
     texture: String,
     form: String,
-    privacy: String,
+    public: Boolean,
+    changeableBy:  [{type: Schema.Types.ObjectId, ref: 'User'}],
+    viewableBy:  [{type: Schema.Types.ObjectId, ref: 'User'}],
+    viewedBy:  [{type: Schema.Types.ObjectId, ref: 'User'}],
+    emotions: [{ user: {type: Schema.Types.ObjectId, ref: 'User'}, timestamp: Date, event: String, val: Number }]
 });
 
 module.exports = mongoose.model('Thought', thoughtSchema);

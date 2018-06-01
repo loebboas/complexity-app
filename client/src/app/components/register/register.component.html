@@ -43,12 +43,11 @@
           </ul>
           <div>
             <br>
-            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create a User</button>
+            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Register</button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup" (ngSubmit)="onNetworkSubmit()">
+      <mat-step >
           <ng-template matStepLabel>Rooms</ng-template>
           <p>Now that you are a user, the complexity-App created your own Space in the infinity Cloud.</p>
           <br><p>By default, this space is open for everyone, so other Users can enter your Room and see its content.</p>
@@ -57,14 +56,8 @@
           <p>Every user is capable of storing multiple Networks!</p>
           <br><p>Let's create your first Network!</p>
           
-          <mat-form-field>
-            <input matInput placeholder="Create your first Network" formControlName="network" required>
-          </mat-form-field>
-          <div>
-            <br>
             <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create a Network!</button>
-          </div>
-        </form>
+     
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup" (ngSubmit)="onStarterNetworkSubmit()">
