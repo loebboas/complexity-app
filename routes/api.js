@@ -16,18 +16,11 @@ module.exports = (router) => {
     } else {
       let thought = new Thought({
         label: req.body.label,
-        level: req.body.level,
-        color: req.body.color,
         clicks: req.body.clicks,
-        showAs: req.body.showAs,
-        user: req.body.user,
+        createdBy: req.body.createdBy,
         contexts: req.body.contexts,
         contents: req.body.contents,
-        dimensions: req.body.dimensions,
-        texture: req.body.texture,
-        form: req.body.form,
-        grid: req.body.grid,
-        privacy: req.body.privacy
+        public: req.body.public
       });
       thought.save((err) => {
         if (err) {
@@ -45,7 +38,7 @@ module.exports = (router) => {
 
   router.get('/allThought', (req, res) => {
     // Search database for all Thoughts
-    Thought.find({ createdBy: { user: req.decoded.userId }, public: true })
+    Thought.find({ 'createdBy.user': req.decoded.userId, public: false })
       .exec((err, allThoughts) => {
         // Check if error was found or not
         if (err) {
@@ -85,7 +78,31 @@ module.exports = (router) => {
       }); // Sort blogs from newest to oldest
   });
 
+ /* ===============================================================
+     GET ONE THOUGHT
+  =============================================================== */
+  router.get('/singleThought/:id', (req, res) => {
 
+    if (!req.params.id) {
+           res.json({ success: false, message: 'No thought ID was provided.' }); // Return error message
+         } else {
+
+         // Search database for Thought
+         Thought.findOne({_id: req.params.id}, (err, thought) => {
+         // Check if error was found or not
+         if (err) {
+           res.json({ success: false, message: err }); // Return error message
+         } else {
+           // Check if blogs were found in database
+           if (!thought) {
+             res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+           } else {       
+             res.json({ success: true, thought: thought }); // Return success and blogs array
+           }
+         }
+});
+}
+});
 
   /* ===============================================================
     UPDATE ONE THOUGHT
@@ -96,7 +113,7 @@ module.exports = (router) => {
       res.json({ success: false, message: 'No thought id provided' }); // Return error message
     } else {
       // Check if id exists in database
-      Thought.findOne({ user: req.decoded.userId, _id: req.body._id }, (err, thought) => {
+      Thought.findOne({ _id: req.body._id }, (err, thought) => {
         // Check if id is a valid ID
         if (err) {
           res.json({ success: false, message: 'Not a valid thought id' }); // Return error message
@@ -106,10 +123,13 @@ module.exports = (router) => {
             res.json({ success: false, message: 'thought id was not found.' }); // Return error message
           } else {
             // Check who user is that is requesting blog update
-            if (req.body.editLabel) { thought.label = req.body.editLabel; }
-            if (req.body.editContexts) { thought.contexts = req.body.editContexts; }
-            if (req.body.editContents) { thought.contents = req.body.editContents; }
-            if (req.body.editDimensions) { thought.dimensions = req.body.editDimensions; }
+            if (req.body.label) { thought.label = req.body.label; }
+            if (req.body.contexts) { thought.contexts = req.body.contexts; }
+            if (req.body.contents) { thought.contents = req.body.contents; }
+            if (req.body.dateDim) { thought.dateDim = req.body.dateDim; }
+            if (req.body.numberDim) { thought.numberDim = req.body.numberDim; }
+            if (req.body.tagDim) { thought.tagDim = req.body.tagDim; }
+            if (req.body.locationDim) { thought.locationDim = req.body.locationDim; }
             thought.save((err) => {
               if (err) {
                 if (err.errors) {

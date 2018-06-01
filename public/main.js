@@ -418,7 +418,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#navbar {\r\n  width: 99%;\r\n  height: 410px;\r\n  border: 1px solid;\r\n}\r\n"
+module.exports = "#navbar {\r\n  width: 100%;\r\n  height: 300px;\r\n  background-color: lightblue;\r\n}\r\n"
 
 /***/ }),
 
@@ -584,7 +584,11 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Active Perspective\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <ul>\r\n        <li>Boas Perspective</li>\r\n        <li>What to learn for test</li>\r\n        <li>other fancy way to look at it</li>\r\n      </ul>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n<mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Levels\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          See dimensions ordered after levels\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list>\r\n        <mat-list-item>Level 1</mat-list-item>\r\n        <mat-divider></mat-divider>\r\n        <mat-list-item>Level 2</mat-list-item>\r\n        <mat-divider></mat-divider>\r\n        <mat-list-item>Level 3</mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Switch perspective\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <ul>\r\n      <li>Boas Perspective</li>\r\n      <li></li>\r\n      <li></li>\r\n    </ul>\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"First name\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field>\r\n      <input matInput placeholder=\"Age\">\r\n    </mat-form-field>\r\n  </mat-expansion-panel>\r\n\r\n\r\n\r\n  <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\">\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Self aware panel\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Currently I am {{panelOpenState ? 'open' : 'closed'}}\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <p>I'm visible because I am open</p>\r\n  </mat-expansion-panel>\r\n</mat-accordion>"
+=======
+module.exports = "<p>\r\n  perspective works!\r\n</p>\r\n"
+>>>>>>> bedf000788a2536526a15bcbe7725465bcf948c2
 
 /***/ }),
 
@@ -886,7 +890,7 @@ module.exports = ".spacer{\r\n    flex: 1 1 auto;\r\n   \r\n}\r\n\r\n.onTop{\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n\r\n  <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n    <app-new></app-new>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n    <app-edit></app-edit>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n    <app-search></app-search>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n    <app-dimension></app-dimension>\r\n  </mat-toolbar>\r\n\r\n  <mat-toolbar>\r\n    <mat-toolbar-row>\r\n\r\n\r\n      <span class='spacer'></span>\r\n\r\n      <button mat-button matTooltip=\"My Thoughts\" *ngIf=\"authService.loggedIn()\" (click)=\"loadMyThoughts()\">\r\n        <i class=\"material-icons\">group_work</i> My Thoughts</button>\r\n      <button mat-button matTooltip=\"New Thought\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New Thought</button>\r\n      <button mat-button matTooltip=\"Add Dimension\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add Dimension</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Details</button>\r\n\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../login\">\r\n        <i class=\"material-icons\">account_box</i> Login</button>\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../register\">\r\n        <i class=\"material-icons\">launch</i> Register</button>\r\n      <div *ngIf=\"user\">\r\n        <button mat-button *ngIf=\"!authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n        <button mat-button *ngIf=\"authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\" [matMenuTriggerFor]=\"menu\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n      </div>\r\n      <button mat-button matTooltip=\"Change Perspective\" (click)=\"changeTool('sidenav')\">\r\n        <i class=\"material-icons\">view_quilt</i> Change Perspective</button>\r\n      <button mat-button matTooltip=\"Search\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"loadMyUser()\">My User</button>\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
+module.exports = "<div>\r\n\r\n  <mat-toolbar *ngIf=\"showTool == 'new'\">\r\n    <app-new></app-new>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'edit'\">\r\n    <app-edit></app-edit>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'search'\">\r\n    <app-search></app-search>\r\n  </mat-toolbar>\r\n  <mat-toolbar *ngIf=\"showTool == 'dimension'\">\r\n    <app-dimension></app-dimension>\r\n  </mat-toolbar>\r\n\r\n  <mat-toolbar>\r\n    <mat-toolbar-row>\r\n\r\n\r\n      <span class='spacer'></span>\r\n      <div *ngIf=\"selectedThought\">{{ selectedThought.label }}</div>\r\n      <button mat-button matTooltip=\"My Thoughts\" *ngIf=\"authService.loggedIn()\" (click)=\"loadMyThoughts()\">\r\n        <i class=\"material-icons\">group_work</i> My Thoughts</button>\r\n      <button mat-button matTooltip=\"New Thought\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('new')\">\r\n        <i class=\"material-icons\">add_circle</i> New Thought</button>\r\n      <button mat-button matTooltip=\"Add Dimension\" *ngIf=\"authService.loggedIn() && selectedThought.label != 'My Thoughts'\" (click)=\"changeTool('dimension')\">\r\n        <i class=\"material-icons\">add</i> Add Dimension</button>\r\n      <button mat-button matTooltip=\"Edit\" *ngIf=\"authService.loggedIn()\" (click)=\"changeTool('edit')\">\r\n        <i class=\"material-icons\">create</i> Details</button>\r\n\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../login\">\r\n        <i class=\"material-icons\">account_box</i> Login</button>\r\n      <button mat-button *ngIf=\"!authService.loggedIn()\" routerLink=\"../register\">\r\n        <i class=\"material-icons\">launch</i> Register</button>\r\n      <div *ngIf=\"user\">\r\n        <button mat-button *ngIf=\"!authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n\r\n        <button mat-button *ngIf=\"authService.loggedIn()\" matTooltip=\"{{ user.username | uppercase}}\" [matMenuTriggerFor]=\"menu\">\r\n          <i class=\"material-icons\">account_circle</i> {{ user.username | uppercase}}</button>\r\n      </div>\r\n      <button mat-button matTooltip=\"Change Perspective\" (click)=\"changeTool('sidenav')\">\r\n        <i class=\"material-icons\">view_quilt</i> Change Perspective</button>\r\n      <button mat-button matTooltip=\"Search\" (click)=\"changeTool('search')\">\r\n        <i class=\"material-icons\">search</i> Search</button>\r\n\r\n      <mat-menu #menu=\"matMenu\" [overlapTrigger]=\"false\">\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"loadMyUser()\">My User</button>\r\n        <button *ngIf=\"authService.loggedIn\" mat-menu-item (click)=\"onLogoutClick()\">Logout</button>\r\n      </mat-menu>\r\n      <span class='spacer'></span>\r\n      <button mat-button>Complexity-App v.0.0.6</button>\r\n    </mat-toolbar-row>\r\n  </mat-toolbar>\r\n</div>"
 
 /***/ }),
 
@@ -983,7 +987,7 @@ module.exports = ".searchbar-form {\r\n    min-width: 600px;\r\n    max-width: 1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar-row>\r\n\r\n  <mat-form-field>\r\n    <input matInput #label [(ngModel)]=\"newLabel\" name=\"newLabel\" placeholder=\"Enter a Label\">\r\n  </mat-form-field>\r\n\r\n    <form>\r\n        <button mat-button [matMenuTriggerFor]=\"menuDimensions\">Choose Type of Dimension</button>\r\n        <mat-menu #menuDimensions=\"matMenu\" [overlapTrigger]=\"false\">\r\n          <button mat-menu-item (click)=\"changeType('Date')\"><i class=\"material-icons\">event</i> Date</button>\r\n          <button mat-menu-item (click)=\"changeType('Number')\"><i class=\"material-icons\">timeline</i> Number</button>\r\n          <button mat-menu-item (click)=\"changeType('Tag')\"><i class=\"material-icons\">flag</i> Tag</button>\r\n        </mat-menu>\r\n   \r\n\r\n\r\n      <mat-form-field *ngIf=\"addDate\">\r\n          <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"newDate\" name=\"newDate\" placeholder=\"Choose a date\">\r\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n          <mat-datepicker #picker></mat-datepicker>\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addNumber\">\r\n          <input matInput #number [(ngModel)]=\"newNumber\" name=\"newNumber\" placeholder=\"Enter a Number\">\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addTag\">\r\n            <input matInput #tag [(ngModel)]=\"newTag\" name=\"newTag\" placeholder=\"Add a Tag\">\r\n          </mat-form-field>\r\n  \r\n\r\n\r\n<div *ngIf=\"addTag || addNumber || addDate\">\r\n      <button mat-button (click)=\"onDimensionSubmit()\">Add a Dimension</button>\r\n    </div>\r\n  \r\n    </form>\r\n  \r\n  \r\n  \r\n  </mat-toolbar-row>\r\n  \r\n  \r\n  <mat-toolbar-row *ngIf=\"selectedThought.level < 0\">\r\n    You can't Add Thoughts on this level.\r\n  </mat-toolbar-row>\r\n  \r\n\r\n\r\n\r\n"
+module.exports = "<mat-toolbar-row *ngIf=\"selectedThought.label != 'My Thoughts'\">\r\n\r\n  <mat-form-field>\r\n    <input matInput #label [(ngModel)]=\"newLabel\" name=\"newLabel\" placeholder=\"Enter a Label\">\r\n  </mat-form-field>\r\n\r\n    <form>\r\n        <button mat-button [matMenuTriggerFor]=\"menuDimensions\">Choose Type of Dimension</button>\r\n        <mat-menu #menuDimensions=\"matMenu\" [overlapTrigger]=\"false\">\r\n          <button mat-menu-item (click)=\"changeType('Date')\"><i class=\"material-icons\">event</i> Date</button>\r\n          <button mat-menu-item (click)=\"changeType('Number')\"><i class=\"material-icons\">timeline</i> Number</button>\r\n          <button mat-menu-item (click)=\"changeType('Tag')\"><i class=\"material-icons\">flag</i> Tag</button>\r\n        </mat-menu>\r\n   \r\n\r\n\r\n      <mat-form-field *ngIf=\"addDate\">\r\n          <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"newDate\" name=\"newDate\" placeholder=\"Choose a date\">\r\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n          <mat-datepicker #picker></mat-datepicker>\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addNumber\">\r\n          <input matInput #number [(ngModel)]=\"newNumber\" name=\"newNumber\" placeholder=\"Enter a Number\">\r\n        </mat-form-field>\r\n        <mat-form-field *ngIf=\"addTag\">\r\n            <input matInput #tag [(ngModel)]=\"newTag\" name=\"newTag\" placeholder=\"Add a Tag\">\r\n          </mat-form-field>\r\n  \r\n\r\n\r\n<div *ngIf=\"addTag || addNumber || addDate\">\r\n      <button mat-button (click)=\"onDimensionSubmit()\">Add a Dimension</button>\r\n    </div>\r\n  \r\n    </form>\r\n  \r\n  \r\n  \r\n  </mat-toolbar-row>\r\n  \r\n  \r\n  <mat-toolbar-row *ngIf=\"selectedThought.level < 0\">\r\n    You can't Add Thoughts on this level.\r\n  </mat-toolbar-row>\r\n  \r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1025,49 +1029,38 @@ var DimensionComponent = /** @class */ (function () {
         this.internalService = internalService;
         this.authService = authService;
         this.router = router;
-        this.newContexts = [];
-        this.newContents = [];
-        this.contextContent = [];
-        this.addDimensions = false;
-        this.showDiary = false;
-        this.showPlans = false;
-        this.showCopyThought = false;
-        this.showNewThought = true;
-        this.showLinkThought = false;
-        this.addNumber = false;
-        this.addDate = false;
-        this.addTag = false;
-        this.addDimension = false;
         //Autocomplete
         this.newThought = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
     }
     DimensionComponent.prototype.onDimensionSubmit = function () {
-        //Create New Dimension
         var _this = this;
+        //Create New Dimension
         this.newDimension = {
+            user: this.user._id,
             label: this.newLabel,
-            dimtype: "Tag",
-            val: "Something went wrong"
+            val: ""
         };
+        var editThought = this.selectedThought;
         //Create Value, depending on Input
         if (this.addDate) {
-            this.newDimension.val = this.newDate.toString();
-            this.newDimension.dimtype = "Date";
+            this.newDimension.val = this.newDate;
+            this.selectedThought.dateDim.push(this.newDimension);
         }
         ;
         if (this.addNumber) {
-            this.newDimension.val = this.newNumber, this.newDimension.dimtype = "Date";
+            this.newDimension.val = this.newNumber,
+                this.selectedThought.numberDim.push(this.newDimension);
         }
         ;
         if (this.addTag) {
-            this.newDimension.val = this.newTag, this.newDimension.dimtype = "Date";
+            this.newDimension.val = this.newTag;
+            this.selectedThought.tagDim.push(this.newDimension);
         }
         ;
         //Update Selected Thought with new Dimensions
-        var editThought = "something"; //This doesnt work!!
         this.dataService.editThought(editThought).subscribe(function (data) {
             //Update Dimension-Content with new Link
-            _this.internalService.changeThought(_this.selectedThought._id);
+            _this.internalService.loadData();
         });
     };
     DimensionComponent.prototype.changeType = function (label) {
@@ -1093,6 +1086,7 @@ var DimensionComponent = /** @class */ (function () {
     DimensionComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.internalService.selectedThoughtObs.subscribe(function (res) { return _this.selectedThought = res; });
+        this.internalService.selectedUser.subscribe(function (res) { return _this.user = res; });
     };
     DimensionComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1182,7 +1176,7 @@ var EditComponent = /** @class */ (function () {
             editLabel: this.editThought.value
         };
         this.dataService.editThought(editThought).subscribe(function (data) {
-            _this.internalService.changeThought(_this.selectedThought._id);
+            _this.internalService.changeSelectedThought(_this.selectedThought._id);
         });
     };
     EditComponent.prototype.ngOnInit = function () {
@@ -1270,6 +1264,37 @@ var NewComponent = /** @class */ (function () {
         this.router = router;
     }
     NewComponent.prototype.onNewSubmit = function () {
+        var _this = this;
+        var newContext = [];
+        if (this.selectedThought.contexts) {
+            this.selectedThought.contexts.forEach(function (context) {
+                newContext.unshift(context);
+            });
+        }
+        if (this.selectedThought.label != "My Thoughts" && this.selectedThought._id != "WelcomeThought") {
+            newContext.unshift(this.selectedThought._id);
+        }
+        var newThought = {
+            label: this.newThought.value,
+            createdBy: { user: this.user._id, timestamp: new Date() },
+            contexts: newContext,
+            clicks: 0,
+            public: false
+        };
+        //check if Public
+        if (this.selectedThought.public) {
+            newThought.public = true;
+        }
+        ;
+        console.log(newThought);
+        this.dataService.newThought(newThought).subscribe(function (data) {
+            if (_this.selectedThought.label != "My Thoughts" && _this.selectedThought._id != "WelcomeThought") {
+                _this.selectedThought.contents.push(data['thought']._id);
+                _this.dataService.editThought(_this.selectedThought).subscribe(function (data) {
+                });
+            }
+            _this.internalService.loadData();
+        });
     };
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1376,7 +1401,7 @@ var SearchComponent = /** @class */ (function () {
         });
     };
     SearchComponent.prototype.goToThought = function (thought) {
-        this.internalService.changeThought(thought._id);
+        this.internalService.changeSelectedThought(thought._id);
     };
     SearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1414,7 +1439,7 @@ var SearchComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n#mainbar {\r\n    width: 100%;\r\n    height: 410px;\r\n    overflow: hidden;\r\n  }\r\n  "
+module.exports = "\r\n#mainbar {\r\n    width: 100%;\r\n    height: 500px;\r\n    overflow: hidden;\r\n  }\r\n  "
 
 /***/ }),
 
@@ -1425,7 +1450,7 @@ module.exports = "\r\n#mainbar {\r\n    width: 100%;\r\n    height: 410px;\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"mainbar\"></div>"
+module.exports = "<div id=\"mainbar\"></div>\r\n\r\n    "
 
 /***/ }),
 
@@ -1484,6 +1509,14 @@ var ViewerComponent = /** @class */ (function () {
         this.drawViewerService.viewerOptionsObs.subscribe(function (options) { return _this.options = options; });
         var container = document.getElementById('mainbar');
         this.network = new vis__WEBPACK_IMPORTED_MODULE_5__["Network"](container, this.data, this.options);
+        this.network.on("click", function (params) {
+            if (params.nodes.length) {
+                _this.internalService.changeSelectedThought(params.nodes[0]);
+            }
+            else {
+                _this.internalService.defaultSelectedThought();
+            }
+        });
     };
     ViewerComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1850,6 +1883,10 @@ var DataService = /** @class */ (function () {
         this.createAuthenticationHeaders(); // Create headers
         return this.http.get(this.domain + '/api/allPubThought', this.options);
     };
+    DataService.prototype.getSingleThought = function (id) {
+        this.createAuthenticationHeaders(); // Create headers
+        return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
+    };
     /* ===============================================================
       DELETE/UPDATE DATA
    =============================================================== */
@@ -1909,7 +1946,7 @@ var DrawNavbarService = /** @class */ (function () {
         this.options = {
             nodes: {
                 shape: 'dot',
-                size: 99,
+                size: 20,
                 font: {
                     size: 15,
                     color: '#111111'
@@ -2011,11 +2048,16 @@ var DrawViewerService = /** @class */ (function () {
         this.options = {
             nodes: {
                 shape: 'dot',
-                size: 99,
+                size: 10,
                 font: {
                     size: 15,
                     color: '#111111'
                 },
+            },
+            groups: {
+                dateDim: { color: { background: 'red' }, size: 3 },
+                numberDim: { color: { background: 'blue' }, size: 3 },
+                tagDim: { color: { background: 'green' }, size: 3 },
             }
         };
         // Store Data for Navbar Component as BehaviourSubjects
@@ -2028,13 +2070,34 @@ var DrawViewerService = /** @class */ (function () {
     }
     DrawViewerService.prototype.drawThoughtsArray = function (thoughts) {
         var _this = this;
+        console.log(thoughts);
         if (thoughts) {
             thoughts.forEach(function (thought) {
                 _this.nodes.add({ id: thought._id, label: thought.label });
-                if (thought.contents) {
-                    thought.contents.forEach(function (content, index) {
-                        var linkID = thought._id + index;
-                        this.edges.add({ id: linkID, from: thought._id, to: content._id });
+                if (thought.dateDim) {
+                    thought.dateDim.forEach(function (dim) {
+                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val.toString(), group: 'dateDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                    });
+                }
+                if (thought.numberDim) {
+                    thought.numberDim.forEach(function (dim) {
+                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'numberDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                    });
+                }
+                if (thought.tagDim) {
+                    thought.tagDim.forEach(function (dim) {
+                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'tagDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                    });
+                }
+            });
+            thoughts.forEach(function (thought) {
+                var checkThought = thought;
+                if (checkThought.contents) {
+                    checkThought.contents.forEach(function (content) {
+                        _this.edges.add({ from: checkThought._id, to: content });
                     });
                 }
                 _this.activeThoughts.push(thought);
@@ -2114,6 +2177,12 @@ var InternalService = /** @class */ (function () {
             _id: "guestID",
             username: "Guest"
         };
+        this.UserThought = {
+            _id: "fakeID",
+            label: "My Thoughts",
+            contents: []
+        };
+        this.newDimensionsArray = {};
         //Save all relevant Data as BehaviourSubjects
         //SEARCH LISTS
         // Stores all Private Thoughts
@@ -2132,89 +2201,130 @@ var InternalService = /** @class */ (function () {
         //Selected Thought (Thought incl. Content which is being shown)
         this.selectedThought = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](this.welcomeThought);
         this.selectedThoughtObs = this.selectedThought.asObservable();
-        // Stores all ThoughtObjects presented in Navbar
-        this.navbarThoughts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
-        this.navbarThoughtsObs = this.navbarThoughts.asObservable();
-        // Stores all UserObjects presented in Navbar
-        this.navbarUsers = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]); // All Users i senough?
-        this.navbarUsersObs = this.navbarUsers.asObservable();
-        // Stores all Thoughts presented in Viewer
-        this.viewerThoughts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
-        this.viewerThoughtsObs = this.viewerThoughts.asObservable();
+        //SELECTED TOOL
+        this.selectedPerspectives = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.selectedPerspectivesObs = this.selectedPerspectives.asObservable();
+        //SELECTED TOOL
+        this.selectedDimensions = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.selectedDimensionsObs = this.selectedDimensions.asObservable();
         //SELECTED TOOL
         this.selectedTool = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]("none");
         this.selectedToolObs = this.selectedTool.asObservable();
     }
-    //LOAD DATA --> FirstLoad(Navbar) or after Login/Register
+    //LOAD DATA --> FirstLoad (Navbar) or Login/Register
     InternalService.prototype.loadData = function () {
         var _this = this;
         //IF LOGGEDIN
-        //NAVBAR ARRAY
         if (this.authService.loggedIn()) {
+            //NAVBAR
+            //1. UserArray
             this.authService.getProfile().subscribe(function (data) {
                 _this.selectedUser.next(data['user']);
-                _this.drawNavbarService.deleteUsers();
             });
+            this.drawNavbarService.deleteUsers();
             this.authService.getAllUser().subscribe(function (data) {
-                _this.allUsers.next(data['users']);
-                _this.drawNavbarService.drawUsers(data['users']);
+                var userArray = [];
+                data['users'].forEach(function (user) {
+                    if (user._id != _this.selectedUser.getValue()._id) {
+                        userArray.push(user);
+                    }
+                });
+                _this.allUsers.next(userArray); //Save User without myself For Searches
+                userArray.unshift(_this.selectedUser.getValue()); //Add Me at first Place
+                _this.drawNavbarService.drawUsers(userArray);
             });
+            //2. PubThoughtsArray
             this.dataService.getAllPubThought().subscribe(function (data) {
-                console.log(data);
                 _this.publicThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
                 _this.drawNavbarService.drawPubThoughts(data['allThoughts']); // Draw PubThoughts
             });
-            //LOAD VIEWER ARRAY WITH PRIVATE THOUGHTS TO START/AFTER LOGIN
-            this.dataService.getAllThought().subscribe(function (data) {
-                var UserThought = {
-                    label: "My Thoughts"
-                };
-                var thoughtsArray = []; //Add a UserSelected Thought to DrawingArray
-                thoughtsArray.push(UserThought);
-                if (data['allThoughts']) {
-                    data['allThoughts'].forEach(function (thought) {
-                        thoughtsArray.push(thought);
-                    });
-                }
-                _this.selectedThought.next(UserThought);
-                _this.privateThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
-                _this.drawViewerService.clearAll(); // Draw PubThoughts
-                _this.drawViewerService.drawThoughtsArray(thoughtsArray); // Draw PubThoughts
-            });
+            //VIEWER
+            this.loadMyThoughts();
         }
         else {
-            var UserArray = [];
-            UserArray.push(this.guestUser);
-            var thoughtArray = [];
-            thoughtArray.push(this.welcomeThought);
-            this.drawNavbarService.drawUsers(UserArray);
-            console.log(thoughtArray);
-            this.drawNavbarService.drawPubThoughts(thoughtArray);
-            this.drawViewerService.drawThoughtsArray(thoughtArray);
+            this.loggedOut();
         }
-        //ELSE:
-        //Load Guest
-        //load Welcome Thought
-        //Create Arrays for Viewer/Navbar
-        //Create Navbar Array:
+    };
+    InternalService.prototype.loggedOut = function () {
+        this.clearAll();
+        var UserArray = [];
+        UserArray.push(this.guestUser);
+        var thoughtArray = [];
+        thoughtArray.push(this.welcomeThought);
+        this.drawNavbarService.drawUsers(UserArray);
+        this.drawNavbarService.drawPubThoughts(thoughtArray);
+        this.drawViewerService.drawThoughtsArray(thoughtArray);
+        this.selectedUser.next(this.guestUser);
+    };
+    InternalService.prototype.loadMyThoughts = function () {
+        var _this = this;
+        this.dataService.getAllThought().subscribe(function (data) {
+            _this.selectedThought.next(_this.UserThought); //Take UserThought as Selected Thought
+            _this.privateThoughts.next(data['allThoughts']); //Save Private Thoughts for Search
+            if (_this.selectedUser.getValue().startPerspectives.length > 0) {
+                _this.selectedPerspectives.next(_this.selectedUser.getValue().startPerspectives); //Select first Perspective of UserPerspectives as Selected Perspective
+                _this.getDimensions(data['allThoughts']);
+                _this.perspectiveFilter(data['allThoughts']);
+                console.log("this happens?");
+            }
+            else {
+                _this.getDimensions(data['allThoughts']);
+                _this.drawViewerService.clearAll(); // Clear Viewer
+                _this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
+            }
+        });
+    };
+    InternalService.prototype.getDimensions = function (thoughts) {
+        var _this = this;
+        this.newDimensionsArray = {
+            levelDimensions: [],
+            dateDimensions: [],
+            numberDimensions: [],
+            tagDimensions: []
+        };
+        thoughts.forEach(function (thought) {
+            if (thought.contents.length > 0) {
+                _this.newDimensionsArray.levelDimensions.push({ label: thought.label, ObjID: thought._id, level: thought.contexts.length });
+            }
+            if (thought.dateDim.length > 0) {
+                thought.dateDim.forEach(function (dim) {
+                    if (_this.newDimensionsArray.dateDimensions['label'] != dim.label)
+                        _this.newDimensionsArray.dateDimensions.push({ label: dim.label });
+                });
+            }
+            if (thought.tagDim.length > 0) {
+                thought.tagDim.forEach(function (dim) {
+                    if (_this.newDimensionsArray.tagDimensions['label'] != dim.label)
+                        _this.newDimensionsArray.tagDimensions.push({ label: dim.label });
+                });
+            }
+            if (thought.numberDim.length > 0) {
+                thought.numberDim.forEach(function (dim) {
+                    if (_this.newDimensionsArray.numberDimensions['label'] != dim.label)
+                        _this.newDimensionsArray.numberDimensions.push({ label: dim.label });
+                });
+            }
+            _this.selectedDimensions.next(_this.newDimensionsArray);
+            console.log(_this.newDimensionsArray);
+        });
+    };
+    InternalService.prototype.perspectiveFilter = function (thoughts) {
+        this.drawViewerService.clearAll(); // Clear Viewer
+        this.drawViewerService.drawThoughtsArray(thoughts); // Draw ThoughtsArray
     };
     InternalService.prototype.clearAll = function () {
-        var _this = this;
         this.drawNavbarService.clearAll();
         this.drawViewerService.clearAll();
-        this.selectedUser.next(this.guestUser);
-        setTimeout(function () {
-            _this.loadData();
-        }, 500);
     };
     //Load Data: After Login, load private Thoughts, load Users, load Selected User, load public Thoughts
     //Put private and public thoughts into AllThoughts
+    InternalService.prototype.defaultSelectedThought = function () {
+        this.selectedThought.next(this.UserThought);
+    };
     InternalService.prototype.changeSelectedThought = function (id) {
         var _this = this;
-        this.allThoughts.forEach(function (thought) {
-            if (thought._id == id) {
-                _this.selectedThought.next(thought);
-            }
+        this.dataService.getSingleThought(id).subscribe(function (data) {
+            _this.selectedThought.next(data['thought']);
         });
     };
     InternalService.prototype.changeViewerThoughts = function (id) {

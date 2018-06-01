@@ -31,7 +31,7 @@ export class EditComponent implements OnInit {
         editLabel: this.editThought.value
       };
       this.dataService.editThought(editThought).subscribe(data => {
-        this.internalService.changeThought(this.selectedThought._id);
+        this.internalService.changeSelectedThought(this.selectedThought._id);
       });
       
     }

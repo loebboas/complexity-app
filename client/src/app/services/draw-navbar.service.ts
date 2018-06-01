@@ -17,7 +17,7 @@ export class DrawNavbarService {
   options = {
     nodes: {
       shape: 'dot',
-      size: 99,
+      size: 20,
       font: {
         size: 15,
         color: '#111111'
@@ -67,7 +67,6 @@ export class DrawNavbarService {
 
     drawUsers(users: User[]) {
      if(users){
-       
       users.forEach(user => {
         this.nodes.add({ id: user._id, label: user.username});
         this.activeUsers.push(user);
