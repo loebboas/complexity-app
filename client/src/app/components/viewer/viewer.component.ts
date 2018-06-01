@@ -43,9 +43,7 @@ export class ViewerComponent implements OnInit {
       this.network.on("click", params => {
         if(params.nodes.length) { 
           this.internalService.changeSelectedThought(params.nodes[0]);
-        } else {
-          this.internalService.defaultSelectedThought();
-        }
+        } 
         });
     }
     

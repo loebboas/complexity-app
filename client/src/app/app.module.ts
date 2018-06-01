@@ -23,7 +23,6 @@ import { GridsterModule } from 'angular-gridster2';
 import { HttpClientModule } from '@angular/common/http';
 import { DrawNavbarService } from './services/draw-navbar.service';
 import { DrawViewerService } from './services/draw-viewer.service';
-import { PerspectivesService } from './services/perspectives.service';
 import { PerspectiveComponent } from './components/perspective/perspective.component';
 
 
@@ -60,7 +59,7 @@ import {CommonModule} from '@angular/common';
     A11yModule,
     CommonModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService, DrawNavbarService, DrawViewerService, PerspectivesService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService, DrawNavbarService, DrawViewerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

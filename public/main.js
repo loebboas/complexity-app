@@ -193,11 +193,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./services/draw-navbar.service */ "./src/app/services/draw-navbar.service.ts");
 /* harmony import */ var _services_draw_viewer_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/draw-viewer.service */ "./src/app/services/draw-viewer.service.ts");
+<<<<<<< HEAD
 /* harmony import */ var _services_perspectives_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/perspectives.service */ "./src/app/services/perspectives.service.ts");
 /* harmony import */ var _components_perspective_perspective_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/perspective/perspective.component */ "./src/app/components/perspective/perspective.component.ts");
 /* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @angular/cdk/overlay */ "./node_modules/@angular/cdk/esm5/overlay.es5.js");
 /* harmony import */ var _angular_cdk_a11y__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @angular/cdk/a11y */ "./node_modules/@angular/cdk/esm5/a11y.es5.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+=======
+/* harmony import */ var _components_perspective_perspective_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/perspective/perspective.component */ "./src/app/components/perspective/perspective.component.ts");
+>>>>>>> boas
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -230,10 +234,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> boas
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -250,7 +257,7 @@ var AppModule = /** @class */ (function () {
                 _components_tools_search_search_component__WEBPACK_IMPORTED_MODULE_17__["SearchComponent"],
                 _components_tools_edit_edit_component__WEBPACK_IMPORTED_MODULE_18__["EditComponent"],
                 _components_tools_dimension_dimension_component__WEBPACK_IMPORTED_MODULE_19__["DimensionComponent"],
-                _components_perspective_perspective_component__WEBPACK_IMPORTED_MODULE_25__["PerspectiveComponent"]
+                _components_perspective_perspective_component__WEBPACK_IMPORTED_MODULE_24__["PerspectiveComponent"]
             ],
             imports: [
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
@@ -265,7 +272,7 @@ var AppModule = /** @class */ (function () {
                 _angular_cdk_a11y__WEBPACK_IMPORTED_MODULE_27__["A11yModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_28__["CommonModule"]
             ],
-            providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__["AuthGuard"], _guards_notAuth_guard__WEBPACK_IMPORTED_MODULE_11__["NotAuthGuard"], _services_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"], _services_internal_service__WEBPACK_IMPORTED_MODULE_15__["InternalService"], _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_22__["DrawNavbarService"], _services_draw_viewer_service__WEBPACK_IMPORTED_MODULE_23__["DrawViewerService"], _services_perspectives_service__WEBPACK_IMPORTED_MODULE_24__["PerspectivesService"]],
+            providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__["AuthGuard"], _guards_notAuth_guard__WEBPACK_IMPORTED_MODULE_11__["NotAuthGuard"], _services_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"], _services_internal_service__WEBPACK_IMPORTED_MODULE_15__["InternalService"], _services_draw_navbar_service__WEBPACK_IMPORTED_MODULE_22__["DrawNavbarService"], _services_draw_viewer_service__WEBPACK_IMPORTED_MODULE_23__["DrawViewerService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -594,7 +601,11 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Active Perspective\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <mat-list-item>Boas Perspective</mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>What to learn for test</mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>other fancy way to look at it</mat-list-item>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Levels\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Dimensions in the network from level\r\n        <button>1</button> to\r\n        <button>4</button>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <mat-list-item>Level 1</mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Level 2</mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Level 3</mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Level 4</mat-list-item>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Tag dimensions\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        <mat-slide-toggle>Toggle all</mat-slide-toggle>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <mat-list-item>Tag dimension 1\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Tag dimension 2\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Tag dimension 3\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Tag dimension 4\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Time dimensions\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        <mat-slide-toggle>Toggle all</mat-slide-toggle>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <mat-list-item>Time 1\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Time 2\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Time 3\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Time 4\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Numeric dimensions\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        <mat-slide-toggle>Toggle all</mat-slide-toggle>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <mat-list-item>Numeric dimension 1\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Numeric dimension 2\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Numeric dimension 3\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n      <mat-divider></mat-divider>\r\n      <mat-list-item>Numeric dimension 4\r\n        <mat-slide-toggle></mat-slide-toggle>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n"
+=======
+module.exports = "<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        <p>{{ selectedPerspective.label }}</p>\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <div *ngFor=\"let perspective of perspectives\">\r\n        <mat-list-item>\r\n          <button mat-button (click)=\"changePerspective(perspective)\">{{ perspective.label }}</button>\r\n        </mat-list-item>\r\n      </div>\r\n      <mat-divider></mat-divider>\r\n      <button mat-button (click)=\"newPerspective()\">New Perspective</button>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n<div>\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Levels\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          Show only certain Levels\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let levelDim of dimensions.levelDimensions\">\r\n          <button mat-button (click)=\"toggleLevel(levelDim)\">{{ levelDim.label }} (Level {{ levelDim.level }})</button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Tag dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let tagDim of dimensions.tagDimensions\">\r\n          <button mat-button>{{ tagDim.label }}:\r\n            <p *ngFor=\"let tag of tagDim.tags\">{{ tag }} </p>\r\n          </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Time dimensions\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let dateDim of dimensions.dateDimensions\">\r\n          <button mat-button (click)=\"toggleDate(dateDim)\">{{ dateDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Numeric dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let numberDim of dimensions.numberDimensions\">\r\n          <button mat-button (click)=\"toggleDate(numberDim)\">{{ numberDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n  <form>\r\n      <mat-form-field>\r\n        <input matInput placeholder=\"New\" aria-label=\"selectedPerspective.label\" [formControl]=\"label\">\r\n      </mat-form-field>\r\n      <button mat-raised-button (click)=\"savePerspective()\">Save Perspective</button>\r\n    </form>\r\n  \r\n</div>"
+>>>>>>> boas
 
 /***/ }),
 
@@ -609,6 +620,9 @@ module.exports = "<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansi
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PerspectiveComponent", function() { return PerspectiveComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_internal_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/internal.service */ "./src/app/services/internal.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -619,11 +633,106 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var PerspectiveComponent = /** @class */ (function () {
-    function PerspectiveComponent() {
+    function PerspectiveComponent(internalService, authService) {
+        this.internalService = internalService;
+        this.authService = authService;
         this.panelOpenState = false;
     }
+    PerspectiveComponent.prototype.toggleLevel = function (levelDim) {
+        var newLevelDimensions = [];
+        this.selectedPerspective.dimensions.levelDimensions.forEach(function (dim) {
+            if (dim.ObjID != levelDim.ObjID) {
+                newLevelDimensions.push(dim);
+            }
+        });
+        var newPerspective = this.selectedPerspective;
+        newPerspective.label = "custom Perspective";
+        newPerspective.dimensions.levelDimensions = newLevelDimensions;
+        console.log(newPerspective);
+        this.internalService.changePerspective(newPerspective);
+    };
+    PerspectiveComponent.prototype.toggleDate = function (dateDim) {
+        var newDateDimensions = [];
+        this.selectedPerspective.dimensions.dateDimensions.forEach(function (dim) {
+            if (dim.label != dateDim.label) {
+                newDateDimensions.push(dim);
+            }
+        });
+        var newPerspective = this.selectedPerspective;
+        newPerspective.label = "custom Perspective";
+        newPerspective.dimensions.dateDimensions = newDateDimensions;
+        console.log(newPerspective);
+        this.internalService.changePerspective(newPerspective);
+    };
+    PerspectiveComponent.prototype.toggleNumber = function (numberDim) {
+        var newNumberDimensions = [];
+        this.selectedPerspective.dimensions.numberDimensions.forEach(function (dim) {
+            if (dim.label != numberDim.label) {
+                newNumberDimensions.push(dim);
+            }
+        });
+        var newPerspective = this.selectedPerspective;
+        newPerspective.label = "custom Perspective";
+        newPerspective.dimensions.numberDimensions = newNumberDimensions;
+        console.log(newPerspective);
+        this.internalService.changePerspective(newPerspective);
+    };
+    PerspectiveComponent.prototype.toggleTag = function (tagDim) {
+        var newTagDimensions = [];
+        this.selectedPerspective.dimensions.tagDimensions.forEach(function (dim) {
+            if (dim.label != tagDim.label) {
+                newTagDimensions.push(dim);
+            }
+        });
+        var newPerspective = this.selectedPerspective;
+        newPerspective.label = "custom Perspective";
+        newPerspective.dimensions.tagDimensions = newTagDimensions;
+        console.log(newPerspective);
+        this.internalService.changePerspective(newPerspective);
+    };
+    PerspectiveComponent.prototype.newPerspective = function () {
+        var perspective = this.selectedPerspective;
+        perspective.label = "specialCode!";
+        this.internalService.changePerspective(perspective);
+    };
+    PerspectiveComponent.prototype.savePerspective = function () {
+        var newUser = this.user;
+        if (this.label) {
+            this.selectedPerspective.label = this.label;
+        }
+        newUser.startPerspectives.unshift(this.selectedPerspective);
+        this.authService.editUser(newUser).subscribe(function (data) { });
+    };
+    PerspectiveComponent.prototype.changePerspective = function (perspective) {
+        this.internalService.changePerspective(perspective);
+    };
     PerspectiveComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.label = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
+        this.internalService.selectedUserObs.subscribe(function (user) { return _this.user = user; });
+        this.internalService.selectedPerspectivesObs.subscribe(function (perspectives) { return _this.perspectives = perspectives; });
+        this.internalService.selectedDimensionsObs.subscribe(function (dimensions) { return _this.dimensions = dimensions; });
+        this.internalService.selectedPerspectiveObs.subscribe(function (perspective) {
+            console.log(perspective);
+            if (perspective != null) {
+                _this.selectedPerspective = perspective;
+            }
+            else {
+                _this.dimensions = _this.internalService.selectedDimensions.getValue();
+                _this.selectedPerspective = {
+                    label: "New Perspective",
+                    dimensions: _this.dimensions
+                };
+                console.log(_this.dimensions);
+            }
+            console.log(_this.selectedPerspective);
+        });
+    };
+    PerspectiveComponent.prototype.ngAfterContentInit = function () {
     };
     PerspectiveComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -631,7 +740,7 @@ var PerspectiveComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./perspective.component.html */ "./src/app/components/perspective/perspective.component.html"),
             styles: [__webpack_require__(/*! ./perspective.component.css */ "./src/app/components/perspective/perspective.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_internal_service__WEBPACK_IMPORTED_MODULE_1__["InternalService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], PerspectiveComponent);
     return PerspectiveComponent;
 }());
@@ -1067,7 +1176,7 @@ var DimensionComponent = /** @class */ (function () {
         //Update Selected Thought with new Dimensions
         this.dataService.editThought(editThought).subscribe(function (data) {
             //Update Dimension-Content with new Link
-            _this.internalService.loadData();
+            _this.internalService.loadMyThoughts();
         });
     };
     DimensionComponent.prototype.changeType = function (label) {
@@ -1300,7 +1409,7 @@ var NewComponent = /** @class */ (function () {
                 _this.dataService.editThought(_this.selectedThought).subscribe(function (data) {
                 });
             }
-            _this.internalService.loadData();
+            _this.internalService.loadMyThoughts();
         });
     };
     NewComponent.prototype.ngOnInit = function () {
@@ -1519,9 +1628,6 @@ var ViewerComponent = /** @class */ (function () {
         this.network.on("click", function (params) {
             if (params.nodes.length) {
                 _this.internalService.changeSelectedThought(params.nodes[0]);
-            }
-            else {
-                _this.internalService.defaultSelectedThought();
             }
         });
     };
@@ -2064,9 +2170,9 @@ var DrawViewerService = /** @class */ (function () {
                 },
             },
             groups: {
-                dateDim: { color: { background: 'red' }, size: 3 },
-                numberDim: { color: { background: 'blue' }, size: 3 },
-                tagDim: { color: { background: 'green' }, size: 3 },
+                dateDim: { color: { background: 'red' }, size: 5 },
+                numberDim: { color: { background: 'blue' }, size: 5 },
+                tagDim: { color: { background: 'green' }, size: 5 },
             }
         };
         // Store Data for Navbar Component as BehaviourSubjects
@@ -2085,20 +2191,20 @@ var DrawViewerService = /** @class */ (function () {
                 _this.nodes.add({ id: thought._id, label: thought.label });
                 if (thought.dateDim) {
                     thought.dateDim.forEach(function (dim) {
-                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val.toString(), group: 'dateDim' });
-                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                        _this.nodes.add({ id: dim._id, group: 'dateDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true });
                     });
                 }
                 if (thought.numberDim) {
                     thought.numberDim.forEach(function (dim) {
-                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'numberDim' });
-                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                        _this.nodes.add({ id: dim._id, group: 'numberDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true });
                     });
                 }
                 if (thought.tagDim) {
                     thought.tagDim.forEach(function (dim) {
-                        _this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'tagDim' });
-                        _this.edges.add({ from: thought._id, to: dim._id, length: 1 });
+                        _this.nodes.add({ id: dim._id, group: 'tagDim' });
+                        _this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true });
                     });
                 }
             });
@@ -2206,12 +2312,17 @@ var InternalService = /** @class */ (function () {
         //stores User (default: Guest)
         this.selectedUser = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](this.guestUser);
         this.selectedUserObs = this.selectedUser.asObservable();
-        //Selected Thought (Thought incl. Content which is being shown)
+        //Selected Thought 
         this.selectedThought = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](this.welcomeThought);
         this.selectedThoughtObs = this.selectedThought.asObservable();
+        //Selected ThoughtsArray (Thought incl. Content which is being shown)
+        this.selectedThoughtArray = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.selectedThoughtArrayObs = this.selectedThoughtArray.asObservable();
         //SELECTED TOOL
         this.selectedPerspectives = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
         this.selectedPerspectivesObs = this.selectedPerspectives.asObservable();
+        this.selectedPerspective = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.selectedPerspectiveObs = this.selectedPerspective.asObservable();
         //SELECTED TOOL
         this.selectedDimensions = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
         this.selectedDimensionsObs = this.selectedDimensions.asObservable();
@@ -2270,14 +2381,16 @@ var InternalService = /** @class */ (function () {
         this.dataService.getAllThought().subscribe(function (data) {
             _this.selectedThought.next(_this.UserThought); //Take UserThought as Selected Thought
             _this.privateThoughts.next(data['allThoughts']); //Save Private Thoughts for Search
+            _this.selectedThoughtArray.next(data['allThoughts']);
+            _this.getDimensions(data['allThoughts']); // Get Dimensions of selected Thought Array
             if (_this.selectedUser.getValue().startPerspectives.length > 0) {
-                _this.selectedPerspectives.next(_this.selectedUser.getValue().startPerspectives); //Select first Perspective of UserPerspectives as Selected Perspective
-                _this.getDimensions(data['allThoughts']);
+                _this.selectedPerspectives.next(_this.selectedUser.getValue().startPerspectives); //load Available  Perspectives of UserPerspectives as Selected Perspective
+                _this.selectedPerspective.next(_this.selectedUser.getValue().startPerspectives[0]); //load first  Perspective of UserPerspectives as Selected Perspective
                 _this.perspectiveFilter(data['allThoughts']);
-                console.log("this happens?");
             }
             else {
-                _this.getDimensions(data['allThoughts']);
+                _this.selectedPerspectives.next(null); // no Perspectives available
+                _this.selectedPerspective.next(null); // no Perspective Selected
                 _this.drawViewerService.clearAll(); // Clear Viewer
                 _this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
             }
@@ -2297,19 +2410,19 @@ var InternalService = /** @class */ (function () {
             }
             if (thought.dateDim.length > 0) {
                 thought.dateDim.forEach(function (dim) {
-                    if (_this.newDimensionsArray.dateDimensions['label'] != dim.label)
+                    if (!_this.newDimensionsArray.dateDimensions.find(function (d) { return dim.label == d.label; }))
                         _this.newDimensionsArray.dateDimensions.push({ label: dim.label });
                 });
             }
             if (thought.tagDim.length > 0) {
                 thought.tagDim.forEach(function (dim) {
-                    if (_this.newDimensionsArray.tagDimensions['label'] != dim.label)
+                    if (!_this.newDimensionsArray.tagDimensions.find(function (d) { return dim.label == d.label; }))
                         _this.newDimensionsArray.tagDimensions.push({ label: dim.label });
                 });
             }
             if (thought.numberDim.length > 0) {
                 thought.numberDim.forEach(function (dim) {
-                    if (_this.newDimensionsArray.numberDimensions['label'] != dim.label)
+                    if (!_this.newDimensionsArray.numberDimensions.find(function (d) { return dim.label == d.label; }))
                         _this.newDimensionsArray.numberDimensions.push({ label: dim.label });
                 });
             }
@@ -2317,9 +2430,65 @@ var InternalService = /** @class */ (function () {
             console.log(_this.newDimensionsArray);
         });
     };
+    InternalService.prototype.changePerspective = function (perspective) {
+        if (perspective.label == "specialCode!") {
+            this.selectedPerspective.next(null);
+            this.drawViewerService.clearAll();
+            this.drawViewerService.drawThoughtsArray(this.selectedThoughtArray.getValue());
+        }
+        else {
+            this.selectedPerspective.next(perspective);
+            this.perspectiveFilter(this.selectedThoughtArray.getValue());
+        }
+        console.log(this.selectedThoughtArray.getValue());
+    };
     InternalService.prototype.perspectiveFilter = function (thoughts) {
         this.drawViewerService.clearAll(); // Clear Viewer
-        this.drawViewerService.drawThoughtsArray(thoughts); // Draw ThoughtsArray
+        var relevantLevels = this.selectedPerspective.getValue().dimensions.levelDimensions;
+        var relevantDates = this.selectedPerspective.getValue().dimensions.dateDimensions;
+        var relevantTags = this.selectedPerspective.getValue().dimensions.tagDimensions;
+        var relevantNumbers = this.selectedPerspective.getValue().dimensions.numberDimensions;
+        var newThoughtArray = [];
+        thoughts.forEach(function (thought) {
+            var pushIt = false;
+            //For each Thought, check if it has any of the relevant Dimensions
+            //First check Level, else check other Dimensions
+            if (relevantLevels) {
+                relevantLevels.forEach(function (levelDim) {
+                    if (levelDim.ObjID == thought.contexts[0])
+                        pushIt = true;
+                });
+            }
+            if (relevantDates) {
+                relevantDates.forEach(function (dateDim) {
+                    thought.dateDim.forEach(function (date) {
+                        if (date.label == dateDim.label)
+                            pushIt = true;
+                    });
+                });
+            }
+            if (relevantTags) {
+                relevantTags.forEach(function (tagDim) {
+                    thought.dateDim.forEach(function (tag) {
+                        if (tag.label == tagDim.label)
+                            pushIt = true;
+                    });
+                });
+            }
+            if (relevantNumbers) {
+                relevantNumbers.forEach(function (numberDim) {
+                    thought.dateDim.forEach(function (numb) {
+                        if (numb.label == numberDim.label)
+                            pushIt = true;
+                    });
+                });
+            }
+            if (pushIt) {
+                newThoughtArray.push(thought);
+            }
+            ;
+        });
+        this.drawViewerService.drawThoughtsArray(newThoughtArray); // Draw ThoughtsArray
     };
     InternalService.prototype.clearAll = function () {
         this.drawNavbarService.clearAll();
@@ -2355,43 +2524,6 @@ var InternalService = /** @class */ (function () {
         __metadata("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _draw_viewer_service__WEBPACK_IMPORTED_MODULE_5__["DrawViewerService"], _draw_navbar_service__WEBPACK_IMPORTED_MODULE_4__["DrawNavbarService"]])
     ], InternalService);
     return InternalService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/perspectives.service.ts":
-/*!**************************************************!*\
-  !*** ./src/app/services/perspectives.service.ts ***!
-  \**************************************************/
-/*! exports provided: PerspectivesService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PerspectivesService", function() { return PerspectivesService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PerspectivesService = /** @class */ (function () {
-    function PerspectivesService() {
-    }
-    PerspectivesService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], PerspectivesService);
-    return PerspectivesService;
 }());
 
 
@@ -2455,7 +2587,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Noah\complexity-app\client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\loebb\complexity-app\client\src\main.ts */"./src/main.ts");
 
 
 /***/ })

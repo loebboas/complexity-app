@@ -9,6 +9,10 @@ import { DrawViewerService } from './draw-viewer.service';
 import { timeout } from 'rxjs/operators';
 import { Perspective } from '../models/perspective';
 import { Dimensions } from '../models/Dimensions/dimensions';
+import { LevelDimension } from '../models/Dimensions/levelDimension';
+import { DateDimension } from '../models/Dimensions/dateDimension';
+import { TagDimension } from '../models/Dimensions/tagDimension';
+import { NumberDimension } from '../models/Dimensions/numberDimension';
 
 @Injectable()
 export class InternalService {
@@ -52,13 +56,20 @@ export class InternalService {
   public selectedUser = new BehaviorSubject<User>(this.guestUser);
   selectedUserObs = this.selectedUser.asObservable();
 
-  //Selected Thought (Thought incl. Content which is being shown)
+  //Selected Thought 
   public selectedThought = new BehaviorSubject<Thought>(this.welcomeThought);
   selectedThoughtObs = this.selectedThought.asObservable();
+
+  //Selected ThoughtsArray (Thought incl. Content which is being shown)
+  public selectedThoughtArray = new BehaviorSubject<Thought[]>([]);
+  selectedThoughtArrayObs = this.selectedThoughtArray.asObservable();
 
   //SELECTED TOOL
   public selectedPerspectives = new BehaviorSubject<Perspective[]>([]);
   selectedPerspectivesObs = this.selectedPerspectives.asObservable();
+
+  public selectedPerspective = new BehaviorSubject<Perspective>(null);
+  selectedPerspectiveObs = this.selectedPerspective.asObservable();
 
   //SELECTED TOOL
   public selectedDimensions = new BehaviorSubject<Dimensions>(null);
@@ -124,13 +135,15 @@ export class InternalService {
     this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
       this.selectedThought.next(this.UserThought); //Take UserThought as Selected Thought
       this.privateThoughts.next(data['allThoughts']); //Save Private Thoughts for Search
+      this.selectedThoughtArray.next(data['allThoughts']);
+      this.getDimensions(data['allThoughts']); // Get Dimensions of selected Thought Array
       if (this.selectedUser.getValue().startPerspectives.length > 0) {
-        this.selectedPerspectives.next(this.selectedUser.getValue().startPerspectives) //Select first Perspective of UserPerspectives as Selected Perspective
-        this.getDimensions(data['allThoughts'])
+        this.selectedPerspectives.next(this.selectedUser.getValue().startPerspectives) //load Available  Perspectives of UserPerspectives as Selected Perspective
+        this.selectedPerspective.next(this.selectedUser.getValue().startPerspectives[0]) //load first  Perspective of UserPerspectives as Selected Perspective
         this.perspectiveFilter(data['allThoughts'])
-        console.log("this happens?")
       } else {
-        this.getDimensions(data['allThoughts'])
+        this.selectedPerspectives.next(null); // no Perspectives available
+        this.selectedPerspective.next(null); // no Perspective Selected
         this.drawViewerService.clearAll(); // Clear Viewer
         this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
       }
@@ -150,30 +163,82 @@ export class InternalService {
       }
       if (thought.dateDim.length > 0) {
         thought.dateDim.forEach(dim => {
-          if ( this.newDimensionsArray.dateDimensions['label'] != dim.label)
-          this.newDimensionsArray.dateDimensions.push({ label: dim.label })
+          if (!this.newDimensionsArray.dateDimensions.find(d => dim.label == d.label))
+            this.newDimensionsArray.dateDimensions.push({ label: dim.label })
         })
       }
       if (thought.tagDim.length > 0) {
         thought.tagDim.forEach(dim => {
-          if ( this.newDimensionsArray.tagDimensions['label'] != dim.label)
-          this.newDimensionsArray.tagDimensions.push({ label: dim.label })
+          if (!this.newDimensionsArray.tagDimensions.find(d => dim.label == d.label))
+            this.newDimensionsArray.tagDimensions.push({ label: dim.label })
         })
       }
       if (thought.numberDim.length > 0) {
         thought.numberDim.forEach(dim => {
-          if ( this.newDimensionsArray.numberDimensions['label'] != dim.label)
-          this.newDimensionsArray.numberDimensions.push({ label: dim.label })
+          if (!this.newDimensionsArray.numberDimensions.find(d => dim.label == d.label))
+            this.newDimensionsArray.numberDimensions.push({ label: dim.label })
         })
       }
-      this.selectedDimensions.next( this.newDimensionsArray);
-      console.log( this.newDimensionsArray);
+      this.selectedDimensions.next(this.newDimensionsArray);
+      console.log(this.newDimensionsArray);
     })
 
   }
+
+  changePerspective(perspective: Perspective) {
+    if (perspective.label == "specialCode!") {
+      this.selectedPerspective.next(null);
+      this.drawViewerService.clearAll();
+      this.drawViewerService.drawThoughtsArray(this.selectedThoughtArray.getValue());
+    } else {
+      this.selectedPerspective.next(perspective);
+      this.perspectiveFilter(this.selectedThoughtArray.getValue());
+    }
+    console.log(this.selectedThoughtArray.getValue());
+
+  }
+
   perspectiveFilter(thoughts: Thought[]) {
     this.drawViewerService.clearAll(); // Clear Viewer
-    this.drawViewerService.drawThoughtsArray(thoughts); // Draw ThoughtsArray
+
+    var relevantLevels: LevelDimension[] = this.selectedPerspective.getValue().dimensions.levelDimensions;
+    var relevantDates: DateDimension[] = this.selectedPerspective.getValue().dimensions.dateDimensions;
+    var relevantTags: TagDimension[] = this.selectedPerspective.getValue().dimensions.tagDimensions;
+    var relevantNumbers: NumberDimension[] = this.selectedPerspective.getValue().dimensions.numberDimensions;
+    var newThoughtArray: Thought[] = [];
+    thoughts.forEach(thought => {
+      var pushIt = false;
+      //For each Thought, check if it has any of the relevant Dimensions
+      //First check Level, else check other Dimensions
+      if (relevantLevels) {
+        relevantLevels.forEach(levelDim => {
+          if (levelDim.ObjID == thought.contexts[0]) pushIt = true;
+        });
+      }
+      if (relevantDates) {
+      relevantDates.forEach(dateDim => {
+        thought.dateDim.forEach(date => {
+          if (date.label == dateDim.label) pushIt = true;
+        });
+      });
+    }
+    if (relevantTags) {
+      relevantTags.forEach(tagDim => {
+        thought.dateDim.forEach(tag => {
+          if (tag.label == tagDim.label) pushIt = true;
+        });
+      });
+    }
+    if (relevantNumbers) {
+      relevantNumbers.forEach(numberDim => {
+        thought.dateDim.forEach(numb => {
+          if (numb.label == numberDim.label) pushIt = true;
+        });
+      });
+    }
+      if (pushIt) { newThoughtArray.push(thought) };
+    })
+    this.drawViewerService.drawThoughtsArray(newThoughtArray); // Draw ThoughtsArray
   }
 
   clearAll() {
