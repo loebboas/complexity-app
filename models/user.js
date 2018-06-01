@@ -125,17 +125,26 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
   username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
   password: { type: String, required: true, validate: passwordValidators },
-  stream: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-  friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
-  followUser: [{type: Schema.Types.ObjectId, ref: 'User'}],
-  followThought: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-  startPerspectives: [{ label: String, dimensions: [{ label: String, dimType: String, startValue: String, endValue: String}]}],
+  stream: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  followUser: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  followThought: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
+  startPerspectives: [{
+    label: String,
+    dimensions: {
+      levelDimensions: [{ label: String, ObjID: String, startValue: String, endValue: String, level: Number }],
+      numberDimensions: [{ label: String, startValue: Number, endValue: Number }],
+      tagDimensions: [{ label: String, tags: [String] }],
+      locationDimensions: [{ label: String, startValue: String, endValue: String }],
+      dateDimensions: [{ label: String, startValue: Date, endValue: Date }]
+    }
+  }],
   changeHistory: [{ event: String, timestamp: Date }],
-  socialHistory: [{ user: {type: Schema.Types.ObjectId, ref: 'User'}, event: String, timestamp: Date }]
+  socialHistory: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, event: String, timestamp: Date }]
 });
 
 // Schema Middleware to Encrypt Password
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   // Ensure password is new or modified before applying encryption
   if (!this.isModified('password'))
     return next();
@@ -149,7 +158,7 @@ userSchema.pre('save', function(next) {
 });
 
 // Methods to compare password to encrypted password upon login
-userSchema.methods.comparePassword = function(password) {
+userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
 };
 

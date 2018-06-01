@@ -22,9 +22,9 @@ export class DrawViewerService {
       },
     },
     groups: {
-      dateDim: {color:{background:'red'}, size:3},
-      numberDim: {color:{background:'blue'}, size:3},
-      tagDim: {color:{background:'green'}, size:3},
+      dateDim: {color:{background:'red'}, size:5},
+      numberDim: {color:{background:'blue'}, size:5},
+      tagDim: {color:{background:'green'}, size:5},
     }
   };
 
@@ -46,20 +46,20 @@ export class DrawViewerService {
         this.nodes.add({ id: thought._id, label: thought.label });
         if(thought.dateDim){
           thought.dateDim.forEach(dim => {
-            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val.toString(), group: 'dateDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+            this.nodes.add({ id: dim._id, group: 'dateDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
           })
         }
         if(thought.numberDim){
           thought.numberDim.forEach(dim => {
-            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'numberDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+            this.nodes.add({ id: dim._id, group: 'numberDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
           })
         }
         if(thought.tagDim){
           thought.tagDim.forEach(dim => {
-            this.nodes.add({ id: dim._id, label: dim.label + " " + dim.val, group: 'tagDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 1  })
+            this.nodes.add({ id: dim._id, group: 'tagDim' })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
           })
         }
       });

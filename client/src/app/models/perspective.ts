@@ -1,5 +1,6 @@
+import { Dimensions } from "./Dimensions/dimensions";
 
 export interface Perspective {
        label: string, 
-       dimensions: [{ label: string, dimType: string, startValue?: string, endValue?: string }] 
+       dimensions: Dimensions
 }

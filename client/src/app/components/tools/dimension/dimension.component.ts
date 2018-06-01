@@ -62,7 +62,7 @@ export class DimensionComponent implements OnInit {
     
     this.dataService.editThought(editThought).subscribe(data => {
       //Update Dimension-Content with new Link
-      this.internalService.loadData();
+      this.internalService.loadMyThoughts();
     });
   }
 
