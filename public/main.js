@@ -584,7 +584,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  perspective works!\n</p>\n"
+module.exports = "<p>\r\n  perspective works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1269,6 +1269,32 @@ var NewComponent = /** @class */ (function () {
         this.router = router;
     }
     NewComponent.prototype.onNewSubmit = function () {
+        var _this = this;
+        var newContext = [];
+        if (this.selectedThought.contexts) {
+            this.selectedThought.contexts.forEach(function (context) {
+                newContext.unshift(context);
+            });
+        }
+        if (this.selectedThought.label != "My Thoughts") {
+            newContext.unshift(this.selectedThought._id);
+        }
+        var newThought = {
+            label: this.newThought.value,
+            createdBy: { user: this.user._id, timestamp: new Date() },
+            contexts: newContext,
+            clicks: 0,
+            public: false
+        };
+        //check if Public
+        if (this.selectedThought.public)
+            newThought.public = true;
+        this.dataService.newThought(newThought).subscribe(function (data) {
+            if (_this.selectedThought.label != "My Thoughts") {
+                _this.selectedThought.contents.push(data['thought']._id);
+                console.log(_this.selectedThought);
+            }
+        });
     };
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2165,6 +2191,7 @@ var InternalService = /** @class */ (function () {
             });
             //LOAD VIEWER ARRAY WITH PRIVATE THOUGHTS TO START/AFTER LOGIN
             this.dataService.getAllThought().subscribe(function (data) {
+                console.log(data);
                 var UserThought = {
                     label: "My Thoughts"
                 };

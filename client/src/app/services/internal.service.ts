@@ -90,6 +90,8 @@ export class InternalService {
 
       //LOAD VIEWER ARRAY WITH PRIVATE THOUGHTS TO START/AFTER LOGIN
       this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
+
+        console.log(data);
         var UserThought: Thought = {  //Create a UserSelected Thought:
           label: "My Thoughts"
         }

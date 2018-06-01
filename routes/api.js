@@ -16,18 +16,11 @@ module.exports = (router) => {
     } else {
       let thought = new Thought({
         label: req.body.label,
-        level: req.body.level,
-        color: req.body.color,
         clicks: req.body.clicks,
-        showAs: req.body.showAs,
-        user: req.body.user,
+        createdBy: req.body.createdBy,
         contexts: req.body.contexts,
         contents: req.body.contents,
-        dimensions: req.body.dimensions,
-        texture: req.body.texture,
-        form: req.body.form,
-        grid: req.body.grid,
-        privacy: req.body.privacy
+        public: req.body.public
       });
       thought.save((err) => {
         if (err) {
@@ -45,7 +38,7 @@ module.exports = (router) => {
 
   router.get('/allThought', (req, res) => {
     // Search database for all Thoughts
-    Thought.find({ createdBy: { user: req.decoded.userId }, public: true })
+    Thought.find({ 'createdBy.user': req.decoded.userId, public: false })
       .exec((err, allThoughts) => {
         // Check if error was found or not
         if (err) {
