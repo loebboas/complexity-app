@@ -17,7 +17,7 @@ export class DrawNavbarService {
   options = {
     nodes: {
       shape: 'dot',
-      size: 99,
+      size: 20,
       font: {
         size: 15,
         color: '#111111'

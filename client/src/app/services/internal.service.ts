@@ -23,6 +23,13 @@ export class InternalService {
     _id: "guestID",
     username: "Guest"
   };
+
+  UserThought: Thought = {  //Create a UserSelected Thought:
+    _id: "fakeID",
+    label: "My Thoughts",
+    contents: []
+  }
+
   allThoughts: Thought[];
   //Save all relevant Data as BehaviourSubjects
 
@@ -92,11 +99,7 @@ export class InternalService {
       this.dataService.getAllThought().subscribe(data => { //Get all Private Thoughts
 
         console.log(data);
-        var UserThought: Thought = {  //Create a UserSelected Thought:
-          _id: "StarterID",
-          label: "My Thoughts",
-          contents: []
-        }
+     
         var thoughtsArray: Thought[] = [];  //Add a UserSelected Thought to DrawingArray
        
         if (data['allThoughts']) {
@@ -104,7 +107,7 @@ export class InternalService {
             thoughtsArray.push(thought);
           });
         }
-        this.selectedThought.next(UserThought);
+        this.selectedThought.next(this.UserThought);
         this.privateThoughts.next(data['allThoughts']); //Save PubThoughts for later Search
         this.drawViewerService.clearAll(); // Draw PubThoughts
         this.drawViewerService.drawThoughtsArray(thoughtsArray); // Draw PubThoughts
@@ -144,6 +147,10 @@ export class InternalService {
 
   //Load Data: After Login, load private Thoughts, load Users, load Selected User, load public Thoughts
   //Put private and public thoughts into AllThoughts
+
+  defaultSelectedThought() {
+    this.selectedThought.next(this.UserThought);
+  }
 
   changeSelectedThought(id) {
     this.dataService.getSingleThought(id).subscribe(data => {

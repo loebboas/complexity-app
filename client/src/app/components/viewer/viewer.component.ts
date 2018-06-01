@@ -41,8 +41,11 @@ export class ViewerComponent implements OnInit {
       var  container = document.getElementById('mainbar');
       this.network = new Network(container, this.data, this.options);
       this.network.on("click", params => {
-        console.log(params);
-        this.internalService.changeSelectedThought(params.nodes[0]);
+        if(params.nodes.length) { 
+          this.internalService.changeSelectedThought(params.nodes[0]);
+        } else {
+          this.internalService.defaultSelectedThought();
+        }
         });
     }
     

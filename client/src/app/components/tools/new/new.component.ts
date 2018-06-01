@@ -59,8 +59,9 @@ export class NewComponent implements OnInit {
          
        })
       }
-    });
+   
     this.internalService.loadData();
+   });
   }
 
 

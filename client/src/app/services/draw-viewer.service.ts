@@ -15,7 +15,7 @@ export class DrawViewerService {
   options = {
     nodes: {
       shape: 'dot',
-      size: 99,
+      size: 10,
       font: {
         size: 15,
         color: '#111111'
