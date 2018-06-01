@@ -27,6 +27,12 @@ import { PerspectivesService } from './services/perspectives.service';
 import { PerspectiveComponent } from './components/perspective/perspective.component';
 
 
+
+import {OverlayModule} from '@angular/cdk/overlay';
+import {A11yModule} from '@angular/cdk/a11y';
+import {CommonModule} from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +54,11 @@ import { PerspectiveComponent } from './components/perspective/perspective.compo
     BrowserModule,
     HttpClientModule,
     MaterialModule,
-    GridsterModule
+    GridsterModule,
+    BrowserModule,
+    OverlayModule,
+    A11yModule,
+    CommonModule
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, DataService, InternalService, DrawNavbarService, DrawViewerService, PerspectivesService],
   bootstrap: [AppComponent]

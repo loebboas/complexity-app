@@ -1,6 +1,11 @@
-c
 .spacer{
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
+}
+.search-form {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  width: 700px;
 }

@@ -1,6 +1,8 @@
+
+<div class="search-form1">
 <mat-toolbar-row *ngIf="selectedThought">
   <form class="search-form">
-    <mat-form-field class="search-full-width">
+    <mat-form-field class="search-full-width" >
       <input matInput placeholder="Search" aria-label="Thought" [matAutocomplete]="auto" [formControl]="thoughtCtrl">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let thought of filteredThoughts | async" [value]="thought.label" (click)="goToThought(thought)">
@@ -11,3 +13,4 @@
     </mat-form-field>
   </form>
 </mat-toolbar-row>
+</div>

@@ -1,37 +1,55 @@
 <div>
-
-  <mat-toolbar *ngIf="showTool == 'new'">
+    <ng-template  cdkConnectedOverlay [cdkConnectedOverlayOrigin]="newTrigger" [cdkConnectedOverlayOpen]="myThoughtsOpen">
     <app-new></app-new>
-  </mat-toolbar>
-  <mat-toolbar *ngIf="showTool == 'edit'">
+  </ng-template>
+
+
+<ng-template  cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
     <app-edit></app-edit>
-  </mat-toolbar>
-  <mat-toolbar *ngIf="showTool == 'search'">
+  </ng-template>
+
+
+  <ng-template  cdkConnectedOverlay [cdkConnectedOverlayOrigin]="searchTrigger" [cdkConnectedOverlayOpen]="searchOpen">
     <app-search></app-search>
-  </mat-toolbar>
-  <mat-toolbar *ngIf="showTool == 'dimension'">
+</ng-template>
+<ng-template  cdkConnectedOverlay [cdkConnectedOverlayOrigin]="dimensionTrigger" [cdkConnectedOverlayOpen]="dimensionOpen">
     <app-dimension></app-dimension>
-  </mat-toolbar>
+</ng-template>
+
 
   <mat-toolbar>
     <mat-toolbar-row>
-
-
       <span class='spacer'></span>
       <div *ngIf="selectedThought">{{ selectedThought.label }}</div>
       <button mat-button matTooltip="My Thoughts" *ngIf="authService.loggedIn()" (click)="loadMyThoughts()">
-        <i class="material-icons">group_work</i> My Thoughts</button>
-      <button mat-button matTooltip="New Thought" *ngIf="authService.loggedIn()" (click)="changeTool('new')">
-        <i class="material-icons">add_circle</i> New Thought</button>
-      <button mat-button matTooltip="Add Dimension" *ngIf="authService.loggedIn() && selectedThought.label != 'My Thoughts'" (click)="changeTool('dimension')">
-        <i class="material-icons">add</i> Add Dimension</button>
-      <button mat-button matTooltip="Edit" *ngIf="authService.loggedIn()" (click)="changeTool('edit')">
+          <i class="material-icons">group_work</i> My Thoughts</button>
+
+        <div *ngIf="authService.loggedIn()"></div>
+        <button mat-button matTooltip="New Thought" 
+        (click)="myThoughtsOpen = !myThoughtsOpen" 
+        cdkOverlayOrigin 
+        #newTrigger="cdkOverlayOrigin">
+          <i class="material-icons">add_circle</i> New Thought</button>
+
+          <div *ngIf="authService.loggedIn() && selectedThought.label != 'My Thoughts'" ></div>
+          <button mat-button matTooltip="Add Dimension" 
+          (click)="dimensionOpen = !dimensionOpen" 
+          cdkOverlayOrigin 
+          #dimensionTrigger="cdkOverlayOrigin">
+            <i class="material-icons">add</i> Add Dimension</button>
+
+      <div *ngIf="authService.loggedIn()"></div>
+      <button mat-button matTooltip="Edit" 
+      (click)="isOpen = !isOpen" 
+      cdkOverlayOrigin 
+      #trigger="cdkOverlayOrigin">
         <i class="material-icons">create</i> Details</button>
 
       <button mat-button *ngIf="!authService.loggedIn()" routerLink="../login">
         <i class="material-icons">account_box</i> Login</button>
       <button mat-button *ngIf="!authService.loggedIn()" routerLink="../register">
         <i class="material-icons">launch</i> Register</button>
+
       <div *ngIf="user">
         <button mat-button *ngIf="!authService.loggedIn()" matTooltip="{{ user.username | uppercase}}">
           <i class="material-icons">account_circle</i> {{ user.username | uppercase}}</button>
@@ -39,10 +57,17 @@
         <button mat-button *ngIf="authService.loggedIn()" matTooltip="{{ user.username | uppercase}}" [matMenuTriggerFor]="menu">
           <i class="material-icons">account_circle</i> {{ user.username | uppercase}}</button>
       </div>
+
       <button mat-button matTooltip="Change Perspective" (click)="changeTool('sidenav')">
         <i class="material-icons">view_quilt</i> Change Perspective</button>
-      <button mat-button matTooltip="Search" (click)="changeTool('search')">
-        <i class="material-icons">search</i> Search</button>
+      
+        <div *ngIf="authService.loggedIn()"></div>
+        <button mat-button matTooltip="Search" 
+        (click)="searchOpen = !searchOpen" 
+        cdkOverlayOrigin 
+        #searchTrigger="cdkOverlayOrigin">
+          <i class="material-icons">search</i> Search</button>
+
 
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <button *ngIf="authService.loggedIn" mat-menu-item (click)="loadMyUser()">My User</button>

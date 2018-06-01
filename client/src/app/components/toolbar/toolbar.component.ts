@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
 import { User } from '../../models/user';
+
+import {Directive, QueryList, ViewChildren} from '@angular/core';
+import {ActiveDescendantKeyManager, Highlightable} from '@angular/cdk/a11y';
+import { Output } from '@angular/core';
+
+
+
 
 @Component({
   selector: 'app-toolbar',
@@ -16,11 +23,12 @@ export class ToolbarComponent implements OnInit {
   user: User;
   //Tools
   showTool: String;
-
+  isOpen = false;
+  
   constructor(private router: Router,
     public authService: AuthService,
     public internalService: InternalService) { }
-
+  
   changeTool(tool: String) {
     if (this.showTool == tool) {
       this.showTool = "none";
@@ -29,7 +37,7 @@ export class ToolbarComponent implements OnInit {
     }
     this.internalService.changeTool(this.showTool);
   }
-
+ 
   loadMyUser(){
 
   }
