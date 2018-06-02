@@ -1,12 +1,23 @@
-<mat-toolbar-row>
+<mat-card class="details-selectedThought">
+    <mat-card-header>
+      <mat-card-title>Add a new Thought</mat-card-title>
+      <mat-card-subtitle><i>{{ selectedThought.label }}</i></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="searchbar-form">
+            <mat-form-field class="searchbar-full-width">
+              <input matInput placeholder="New" aria-label="Thought" [formControl]="newThought">
+            </mat-form-field>
+          </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onNewSubmit()">Save Thought</button>
+      </mat-card-actions>
+  </mat-card>
 
-  <form class="searchbar-form">
-    <mat-form-field class="searchbar-full-width">
-      <input matInput placeholder="New" aria-label="Thought" [formControl]="newThought">
-    </mat-form-field>
-    <button mat-button (click)="onNewSubmit()">Save Thought</button>
-  </form>
+
+ 
   
-</mat-toolbar-row>
+
 
 

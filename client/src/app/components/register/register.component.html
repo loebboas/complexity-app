@@ -47,40 +47,54 @@
           </div>
         </form>
       </mat-step>
-      <mat-step >
-          <ng-template matStepLabel>Rooms</ng-template>
-          <p>Now that you are a user, the complexity-App created your own Space in the infinity Cloud.</p>
-          <br><p>By default, this space is open for everyone, so other Users can enter your Room and see its content.</p>
-          <p>You can create multiple public Rooms and become a Member of certain ones.</p>
-          <br><p>Most of your Thoughts thought are going to be thought inside of your user.</p>
-          <p>Every user is capable of storing multiple Networks!</p>
-          <br><p>Let's create your first Network!</p>
-          
-            <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">Create a Network!</button>
-     
+      <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Tutorial I</ng-template>
+      <p> We really planned to to a Tutorial here, as well as other stuff we couldn't finish in time. But, here is the
+        main idea:
+      </p>
+      <ul>
+        <li>
+          Wherever you are, in our infinite Cloud of Complexity (not yet though): The Complexity App is basically one infinite Network.
+          Wherever you are, you can create new multidimensional Objects, which we call "Thoughts". 
+        </li>
+        <li>
+          Thoughts can usually be found in the context <i>(or as the content)</i> of another Thought. Together, they constitute a theoretically infinite
+          network of all kinds of information. 
+        </li>
+        <li>
+        Thoughts though, are much more complex. They are connected through several other dimensions as well. This makes it very difficult to imagine complex networks. 
+        This is where our App comes in.
+        </li>
+      </ul>
+
+      <button mat-raised-button color="primary" matStepperNext type="submit" value="Submit">What's this App?</button>
+
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup" (ngSubmit)="onStarterNetworkSubmit()">
-          <ng-template matStepLabel>Starter Set</ng-template>
-            <p>We recommend you to start with an exmaple Network. It will show you the potential of the complexity-app!</p>
-            <br><p>You can also start on a blank Node (for experienced Users, not yet implemented)</p>
-            <p>The starter Set contains the following Nodes.</p>
-          <mat-list>
-            <mat-list-item>
-              <button mat-button color="primary">Diary</button>
-              <p>Write down your Memories and Feelings as complex networks. It Includes a timeline and specific feelings.</p>
-            </mat-list-item>
-            <mat-list-item>
-              <button mat-button color="primary">Plans</button>
-              <button mat-button>Create complex Projects and set Goals within your Timelines</button>
-            </mat-list-item>
-          </mat-list>
-          <div>
-            <br>
-            <br>
-            <button mat-raised-button matStepperNext color="primary" type="submit" value="Submit">Get started!</button>
-          </div>
-        </form>
+        <ng-template matStepLabel>Tutorial II</ng-template>
+        <p> Our app lets you create infinite complex networks, without ever having to think more than few connections at a time. You can create your own networks and add Dimensions for each of them.
+          Our App helps you to navigate and understand such complex networks. Instead of trying to understand multidimensional Networks, we let you navigate through different Dimensions, by creating your own perspectives.
+          In short: </p>
+        <mat-list>
+          <mat-list-item>
+            <button mat-button color="primary">Create</button>
+            <p>Create New Thoughts and add as many Dimensions as you want.</p>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button color="primary">Visualise</button>
+            <button mat-button>Play around with different Settings for your Perspectives, and see things from Angles you have never seen before.</button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button color="primary">Much more to follow</button>
+            <button mat-button>Work together with your friends, a better Design and a much better UserInterface to come!</button>
+          </mat-list-item>
+        </mat-list>
+        <p> We would love to hear your feedback! Noah und Boas</p>
+        <div>
+          <br>
+          <br>
+          <button mat-raised-button matStepperNext color="primary" type="submit" value="Submit">Let's have a look!</button>
+        </div>
       </mat-step>
     </mat-horizontal-stepper>
   </mat-card-content>

@@ -90,7 +90,7 @@ export class PerspectiveComponent implements OnInit, AfterContentInit {
 
   savePerspective() {
     var newUser: User = this.user;
-    if(this.label){ this.selectedPerspective.label = this.label}
+    if(this.label){ this.selectedPerspective.label = this.label.getValue}
     newUser.startPerspectives.unshift(this.selectedPerspective);
     this.authService.editUser(newUser).subscribe(data => {});
   }

@@ -38,8 +38,8 @@ export class ToolbarComponent implements OnInit {
     this.internalService.changeTool(this.showTool);
   }
  
-  loadMyUser(){
-
+  loadMyThoughts(){
+    this.internalService.loadMyThoughts();
   }
   
   onLogoutClick() {

@@ -15,16 +15,8 @@ import { InternalService } from '../../../services/internal.service';
 })
 export class SearchComponent implements OnInit {
   thoughts: Thought[];
-  selectedThought: Thought;
-  context: Thought;
-  contexts: Thought[];
   lastInput: String;
-  newContexts: String[] = [];
-  newContents: String[] = [];
-  contextContent: String[] = [];
-  private: any[];
-  username;
-  userId;
+
   //Autocomplete
   thoughtCtrl: FormControl;
   newThought: FormControl;
@@ -52,22 +44,8 @@ export class SearchComponent implements OnInit {
       thought.label.toLowerCase().indexOf(label.toLowerCase()) === 0);
   }
 
-  goToThought(thought) {
-    this.internalService.changeSelectedThought(thought._id);
-  }
-
+  
   ngOnInit() {
-
-    //GET USER Data
-    this.authService.getProfile().subscribe(profile => {
-      this.username = profile['user'].username; // Used when creating new blog posts and comments
-      this.userId = profile['user']._id;
-      this.private = profile['user'].private;
-    });
-
-
-    this.internalService.selectedThoughtObs.subscribe(res => this.selectedThought = res);
-
 
   }
 }

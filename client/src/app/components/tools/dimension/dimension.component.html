@@ -1,20 +1,28 @@
-<mat-toolbar-row *ngIf="selectedThought.label != 'My Thoughts'">
+<div *ngIf="selectedThought.label != 'My Thoughts'">
+  <mat-card class="details-selectedThought">
+    <mat-card-header>
+      <mat-card-title>Add a Dimension</mat-card-title>
+      <mat-card-subtitle>
+        <i>{{ selectedThought.label }}</i>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput #label [(ngModel)]="newLabel" name="newLabel" placeholder="Enter a Label">
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput #label [(ngModel)]="newLabel" name="newLabel" placeholder="Enter a Label">
-  </mat-form-field>
-
-    <form>
+      <form>
         <button mat-button [matMenuTriggerFor]="menuDimensions">Choose Type of Dimension</button>
         <mat-menu #menuDimensions="matMenu" [overlapTrigger]="false">
-          <button mat-menu-item (click)="changeType('Date')"><i class="material-icons">event</i> Date</button>
-          <button mat-menu-item (click)="changeType('Number')"><i class="material-icons">timeline</i> Number</button>
-          <button mat-menu-item (click)="changeType('Tag')"><i class="material-icons">flag</i> Tag</button>
+          <button mat-menu-item (click)="changeType('Date')">
+            <i class="material-icons">event</i> Date</button>
+          <button mat-menu-item (click)="changeType('Number')">
+            <i class="material-icons">timeline</i> Number</button>
+          <button mat-menu-item (click)="changeType('Tag')">
+            <i class="material-icons">flag</i> Tag</button>
         </mat-menu>
-   
 
-
-      <mat-form-field *ngIf="addDate">
+        <mat-form-field *ngIf="addDate">
           <input matInput [matDatepicker]="picker" [(ngModel)]="newDate" name="newDate" placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -23,26 +31,12 @@
           <input matInput #number [(ngModel)]="newNumber" name="newNumber" placeholder="Enter a Number">
         </mat-form-field>
         <mat-form-field *ngIf="addTag">
-            <input matInput #tag [(ngModel)]="newTag" name="newTag" placeholder="Add a Tag">
-          </mat-form-field>
-  
-
-
-
-  
-    </form>
-  <div *ngIf="addTag || addNumber || addDate">
-      <button mat-button (click)="onDimensionSubmit()">Add Dimension</button>
-    </div>
-  
-  
-  </mat-toolbar-row>
-  
-  
-  <mat-toolbar-row *ngIf="selectedThought.level < 0">
-    You can't Add Thoughts on this level.
-  </mat-toolbar-row>
-  
-
-
-
+          <input matInput #tag [(ngModel)]="newTag" name="newTag" placeholder="Add a Tag">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions  *ngIf="addTag || addNumber || addDate">
+        <button mat-raised-button color="primary" (click)="onDimensionSubmit()">Add Dimension</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

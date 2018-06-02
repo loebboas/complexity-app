@@ -1,14 +1,20 @@
 
-    <mat-card class="details-selectedThought">
+    <mat-card *ngIf="selectedThought">
       <mat-card-header>
         <mat-card-title>Details: {{ selectedThought.label }}</mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-          <mat-list>
-              <mat-list-item></mat-list-item>
-              <mat-divider></mat-divider>
+          <mat-list *ngFor="let dDims of selectedThought.dateDim">
+              <mat-list-item>{{ dDims.label }} : {{ dDims.val }}</mat-list-item>
             </mat-list>
+            <mat-list *ngFor="let dDims of selectedThought.numberDim">
+                    <mat-list-item>{{ dDims.label }} : {{ dDims.val }} </mat-list-item>
+                  </mat-list>
+                  <mat-list *ngFor="let dDims of selectedThought.tagDim">
+                        <mat-list-item>{{ dDims.label }} : {{ dDims.val }}</mat-list-item>
+                      </mat-list>
+                
       </mat-card-content>
       <mat-card-actions>
           <button mat-raised-button color="primary">Publish</button>
