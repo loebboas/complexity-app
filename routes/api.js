@@ -1,5 +1,6 @@
 const User = require('../models/user'); // Import User Model Schema
 const Thought = require('../models/thought');
+const Perspective = require('../models/perspective');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database'); // Import database configuration
 
@@ -27,6 +28,29 @@ module.exports = (router) => {
           res.json({ success: false, message: 'Could not save Thought. Error: ', err });
         } else {
           res.json({ success: true, message: 'Thought saved ', thought: thought });
+        }
+      })
+    }
+  });
+
+   /* ===============================================================
+      ADD NEW Perspective
+   =============================================================== */
+
+   router.post('/newPerspective', (req, res) => {
+    if (!req.body.label) {
+      res.json({ success: false, message: 'You must input a Label' });
+    } else {
+      let perspective = new Perspective({
+        label: req.body.label,
+        objId: req.body.objId,
+        dimensions: req.body.dimensions
+      });
+      perspective.save((err) => {
+        if (err) {
+          res.json({ success: false, message: 'Could not save perspective. Error: ', err });
+        } else {
+          res.json({ success: true, message: 'perspective saved ', perspective: perspective });
         }
       })
     }
@@ -103,6 +127,32 @@ module.exports = (router) => {
 });
 }
 });
+
+ /* ===============================================================
+     GET CHILDREN
+  =============================================================== */
+  router.get('/getChildren/:id', (req, res) => {
+
+    if (!req.params.id) {
+           res.json({ success: false, message: 'No thought ID was provided.' }); // Return error message
+         } else {
+         // Search database for Thought
+         Thought.find({ contexts: req.params.id }, (err, allThoughts) => {
+         // Check if error was found or not
+         if (err) {
+           res.json({ success: false, message: err }); // Return error message
+         } else {
+           // Check if blogs were found in database
+           if (!allThoughts) {
+             res.json({ success: false, message: 'No thoughts found.' }); // Return error of no blogs found
+           } else {       
+             res.json({ success: true, allThoughts: allThoughts }); // Return success and blogs array
+           }
+         }
+});
+}
+});
+
 
   /* ===============================================================
     UPDATE ONE THOUGHT

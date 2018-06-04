@@ -67,7 +67,8 @@ module.exports = (router) => {
 	
       User.findOne({ _id: req.body._id }, (err, user) => {
         if (req.body.stream) { user.stream = req.body.stream };
-        if (req.body.startPerspectives) { user.startPerspectives = req.body.startPerspectives };
+        if (req.body.lastPerspectives) { user.starterPerspectives = req.body.lastPerspectives };
+        if (req.body.starterPerspectives) { user.starterPerspectives = req.body.starterPerspectives };
         if (req.body.friends) { user.friends = req.body.friends };
         if (req.body.changeHistory) { user.changeHistory = req.body.changeHistory };
         if (req.body.socialHistory) { user.socialHistory = req.body.socialHistory };

@@ -25,6 +25,7 @@ export class ToolbarComponent implements OnInit {
   showTool: String;
   isOpen = false;
   
+
   constructor(private router: Router,
     public authService: AuthService,
     public internalService: InternalService) { }
@@ -37,7 +38,21 @@ export class ToolbarComponent implements OnInit {
     }
     this.internalService.changeTool(this.showTool);
   }
+  
+  showNew(tool){
+    if (this.showTool == "new") return true;
+    else return false;
+  }
+  showEdit(tool){
+    if (this.showTool == "edit") return true;
+    else return false;
+  }
+  showDimension(tool){
+    if (this.showTool == "dimension") return true;
+    else return false;
+  }
  
+
   loadMyThoughts(){
     this.internalService.loadMyThoughts();
   }

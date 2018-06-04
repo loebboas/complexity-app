@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { InternalService } from './services/internal.service';
 
 
@@ -11,9 +11,13 @@ export class AppComponent implements OnInit {
   title = 'Complexity-App';
   opened: boolean;
   showTool;
+  viewerY: number;
+  navbarY: number;
   constructor(private internalService: InternalService) { }
+
+ 
   ngOnInit() {
-  this.internalService.selectedToolObs.subscribe(tool => {
+    this.internalService.selectedToolObs.subscribe(tool => {
     if(tool == "sidenav"){
      this.opened = true;
     } else {

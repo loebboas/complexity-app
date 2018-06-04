@@ -38,6 +38,11 @@ export class DataService {
     return this.http.post(this.domain + '/api/newThought', thought, this.options);
   }
 
+  newPerspective(perspective) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + '/api/newPerspective', perspective, this.options);
+  }
+
   /* ===============================================================
      GET DATA
   =============================================================== */
@@ -56,6 +61,10 @@ export class DataService {
     return this.http.get(this.domain + '/api/singleThought/' + id, this.options);
   }
 
+  getChildren(id) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + '/api/getChildren/' + id, this.options);
+  }
 
   /* ===============================================================
     DELETE/UPDATE DATA

@@ -1,8 +1,9 @@
 
 export interface LevelDimension {
     label: string, 
-    ObjID: string, 
+    objId: string, 
     startValue?: string, 
     endValue?: string, 
-    level: number
+    level: number,
+    selected?: boolean
 }

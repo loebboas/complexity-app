@@ -25,9 +25,9 @@ export class ViewerComponent implements OnInit {
     edges: this.edges
   };
   options;
-  
   network;
-  
+
+
    constructor(private dataService: DataService,
                private internalService: InternalService,
                private router: Router,
@@ -35,6 +35,7 @@ export class ViewerComponent implements OnInit {
                private drawViewerService: DrawViewerService) { }
 
     ngOnInit() {
+    
       this.drawViewerService.viewerNodesObs.subscribe(nodes => this.data.nodes = nodes);
       this.drawViewerService.viewerEdgesObs.subscribe(edges => this.data.edges = edges);
       this.drawViewerService.viewerOptionsObs.subscribe(options => this.options = options);
@@ -43,7 +44,10 @@ export class ViewerComponent implements OnInit {
       this.network.on("click", params => {
         if(params.nodes.length) { 
           this.internalService.changeSelectedThought(params.nodes[0]);
-        } 
+        } else {
+          this.internalService.defaultSelectedThought();
+          this.internalService.changeTool('none');
+        }
         });
     }
     

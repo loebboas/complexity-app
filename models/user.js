@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const bcrypt = require('bcrypt-nodejs');
-
+const Perspective = require('./perspective.js');
 const Thought = require('./thought.js');
 
 // Validate Function to check e-mail length
@@ -129,16 +129,8 @@ const userSchema = new Schema({
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   followUser: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   followThought: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
-  startPerspectives: [{
-    label: String,
-    dimensions: {
-      levelDimensions: [{ label: String, ObjID: String, startValue: String, endValue: String, level: Number }],
-      numberDimensions: [{ label: String, startValue: Number, endValue: Number }],
-      tagDimensions: [{ label: String, tags: [String] }],
-      locationDimensions: [{ label: String, startValue: String, endValue: String }],
-      dateDimensions: [{ label: String, startValue: Date, endValue: Date }]
-    }
-  }],
+  starterPerspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
+  lastPerspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
   changeHistory: [{ event: String, timestamp: Date }],
   socialHistory: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, event: String, timestamp: Date }]
 });

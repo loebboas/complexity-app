@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ import { User } from '../../../models/user';
   encapsulation: ViewEncapsulation.None
 })
 export class NewComponent implements OnInit {
+  @Output() backdropClick: EventEmitter<any> = new EventEmitter<MouseEvent>(); 
   newThought;
   user: User;
   selectedThought: Thought;
@@ -37,7 +38,7 @@ export class NewComponent implements OnInit {
       });
     }
     if(this.selectedThought.label != "My Thoughts" && this.selectedThought._id != "WelcomeThought") {
-      newContext.unshift(this.selectedThought._id)
+      newContext.unshift(this.selectedThought._id);
     }
 
     var newThought: Thought = {
@@ -60,7 +61,6 @@ export class NewComponent implements OnInit {
          
        })
       }
-   
     this.internalService.loadMyThoughts();
    });
   }

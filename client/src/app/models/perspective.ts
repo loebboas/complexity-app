@@ -1,6 +1,8 @@
 import { Dimensions } from "./Dimensions/dimensions";
 
 export interface Perspective {
-       label: string, 
-       dimensions: Dimensions
+    _id?: string,
+    objId?: string,
+    label: string,
+    dimensions: Dimensions
 }

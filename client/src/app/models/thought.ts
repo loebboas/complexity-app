@@ -1,3 +1,4 @@
+import { Perspective } from "./perspective";
 
 export interface Thought {
         _id?: string,
@@ -9,7 +10,7 @@ export interface Thought {
         locationDim?: [{ _id?: string, user: string, label: string, val: string }],
         numberDim?: [{ _id?: string, user: string, label: string, val: number }],
         tagDim?: [{ _id?: string, user: string, label: string, val: string }],
-        perspectives?: [{ label: string, dimensions: [{ label: string, dimType: string, startValue?: string, endValue?: string }] }],
+        perspectives?: Perspective[],
         createdBy?: { user: string, timestamp: Date },
         shared?: [{ user: string, timestamp: Date }],
         edited?: [{ user: string, timestamp: Date, event: string, val: string }],

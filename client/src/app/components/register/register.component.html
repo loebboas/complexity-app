@@ -49,21 +49,21 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Tutorial I</ng-template>
-      <p> We really planned to to a Tutorial here, as well as other stuff we couldn't finish in time. But, here is the
+      <p> We really planned to to a tutorial here, as well as other stuff we couldn't finish in time. But time is short. Here is the
         main idea:
       </p>
       <ul>
         <li>
-          Wherever you are, in our infinite Cloud of Complexity (not yet though): The Complexity App is basically one infinite Network.
-          Wherever you are, you can create new multidimensional Objects, which we call "Thoughts". 
+         Welcome to our infinite cloud of Complexity: The Complexity App, which is basically an infinite complex network.
+          Wherever you are in this network, you can create your own multidimensional Objects, which we call "Thoughts". 
         </li>
         <li>
-          Thoughts can usually be found in the context <i>(or as the content)</i> of another Thought. Together, they constitute a theoretically infinite
+          Thoughts can usually be found in the context <i>(or as the content)</i> of other Thoughts. Together, they constitute a theoretically infinite
           network of all kinds of information. 
         </li>
         <li>
-        Thoughts though, are much more complex. They are connected through several other dimensions as well. This makes it very difficult to imagine complex networks. 
-        This is where our App comes in.
+        In reality though, our thoughts are much more complex. They are connected through several dimensions at the same time, which is obviously hard to imagine. 
+        This is where our App comes in! ;)
         </li>
       </ul>
 
@@ -72,13 +72,13 @@
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
         <ng-template matStepLabel>Tutorial II</ng-template>
-        <p> Our app lets you create infinite complex networks, without ever having to think more than few connections at a time. You can create your own networks and add Dimensions for each of them.
-          Our App helps you to navigate and understand such complex networks. Instead of trying to understand multidimensional Networks, we let you navigate through different Dimensions, by creating your own perspectives.
+        <p> Our app lets you create infinite complex networks, without ever having to think more than few connections at a time. You can create your own thought-networks and add as many dimensions to each thought, as u want.  
+          Our App takes care of the difficult calculations, and will let you navigate <i>with ease</i> trough really complex networks. Instead of trying to understand multidimensional networks, we let you navigate through different Dimensions, by creating your own perspectives.
           In short: </p>
         <mat-list>
           <mat-list-item>
             <button mat-button color="primary">Create</button>
-            <p>Create New Thoughts and add as many Dimensions as you want.</p>
+            <button mat-button>Create New Thoughts and add as many Dimensions as you want.</button>
           </mat-list-item>
           <mat-list-item>
             <button mat-button color="primary">Visualise</button>
@@ -93,7 +93,7 @@
         <div>
           <br>
           <br>
-          <button mat-raised-button matStepperNext color="primary" type="submit" value="Submit">Let's have a look!</button>
+          <button mat-raised-button matStepperNext color="primary" type="submit" (click)="onTutorialFinish()" value="Submit">Let's have a look!</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

@@ -30,6 +30,7 @@ import { PerspectiveComponent } from './components/perspective/perspective.compo
 import {OverlayModule} from '@angular/cdk/overlay';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CommonModule} from '@angular/common';
+import { MiddlebarComponent } from './components/middlebar/middlebar.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {CommonModule} from '@angular/common';
     SearchComponent,
     EditComponent,
     DimensionComponent,
-    PerspectiveComponent
+    PerspectiveComponent,
+    MiddlebarComponent
   ],
   imports: [
     ReactiveFormsModule,

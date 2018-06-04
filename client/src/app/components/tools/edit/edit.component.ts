@@ -24,7 +24,13 @@ export class EditComponent implements OnInit {
       this.editThought = new FormControl();
      }
 
-  
+     publish(){
+       const editedThought: Thought = this.selectedThought;
+       editedThought.public = true;
+
+       this.dataService.editThought(editedThought);
+     }
+
     onEditSubmit() {
       const editThought = {
         _id: this.selectedThought._id,

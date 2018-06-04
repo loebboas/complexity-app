@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user.js');
-
+const Perspective = require('./perspective.js');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
@@ -13,16 +13,7 @@ const thoughtSchema = new Schema({
     locationDim: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, label: String, val: String }],
     numberDim: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, label: String, val: Number }],
     tagDim: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, label: String, val: String }],
-    perspectives: [{
-        label: String, 
-        dimensions: {
-            levelDimensions: [{ label: String, ObjID: String, startValue: String, endValue: String, level: Number }],
-            numberDimensions: [{ label: String, startValue: Number, endValue: Number }],
-            tagDimensions: [{ label: String, tags: [String] }],
-            locationDimensions: [{ label: String, startValue: String, endValue: String }],
-            dateDimensions: [{ label: String, startValue: Date, endValue: Date }]
-        }
-    }],
+    perspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
     createdBy: { user: { type: Schema.Types.ObjectId, ref: 'User' }, timestamp: Date },
     shared: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, timestamp: Date }],
     edited: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, timestamp: Date, event: String, val: String }],

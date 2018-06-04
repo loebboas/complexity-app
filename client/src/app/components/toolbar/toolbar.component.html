@@ -1,43 +1,47 @@
 <div>
-  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="newTrigger" [cdkConnectedOverlayOpen]="myThoughtsOpen">
-    <app-new></app-new>
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="newTrigger" [cdkConnectedOverlayOpen]="showNew(tool)">
+    <app-new (changeThoughtsOpen)="myThoughtsOpen($event)"></app-new>
   </ng-template>
 
 
-  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="showEdit(tool)">
     <app-edit></app-edit>
   </ng-template>
 
+  <ng-template  cdkConnectedOverlay [cdkConnectedOverlayOrigin]="dimensionTrigger" [cdkConnectedOverlayOpen]="showDimension(tool)">
+      <app-dimension></app-dimension>
+    </ng-template>
 
   <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="searchTrigger" [cdkConnectedOverlayOpen]="searchOpen">
     <app-search></app-search>
   </ng-template>
-  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="dimensionTrigger" [cdkConnectedOverlayOpen]="dimensionOpen">
-    <app-dimension></app-dimension>
-  </ng-template>
+  
 
 
-  <mat-toolbar>
+  <mat-toolbar class="bot" >
+    <mat-toolbar-row>
+        <span class='spacer'></span>
+        <button mat-button (click)="changeTool('new')" cdkOverlayOrigin
+        #newTrigger="cdkOverlayOrigin">
+        <i class="material-icons">add_circle</i> New Thought</button>
+
+      <button mat-button  (click)="changeTool('dimension')"
+        cdkOverlayOrigin #dimensionTrigger="cdkOverlayOrigin">
+        <i class="material-icons">add</i> Add Dimension</button>
+
+      <button mat-button (click)="changeTool('edit')" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+        <i class="material-icons">create</i> Edit / Details</button>
+        <span class='spacer'></span>
+    </mat-toolbar-row>
     <mat-toolbar-row>
       <span class='spacer'></span>
 
 
-      <button mat-button matTooltip="My Thoughts" *ngIf="authService.loggedIn()" (click)="loadMyThoughts()">
+      <button mat-button  (click)="loadMyThoughts()">
         <i class="material-icons">group_work</i> My Thoughts</button>
 
 
-      <button mat-button matTooltip="New Thought" (click)="myThoughtsOpen = !myThoughtsOpen" cdkOverlayOrigin
-        #newTrigger="cdkOverlayOrigin">
-        <i class="material-icons">add_circle</i> New Thought</button>
-
-
-      <button mat-button matTooltip="Add Dimension" (click)="dimensionOpen = !dimensionOpen"
-        cdkOverlayOrigin #dimensionTrigger="cdkOverlayOrigin">
-        <i class="material-icons">add</i> Add Dimension</button>
-
-      <button mat-button matTooltip="Edit" (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-        <i class="material-icons">create</i> Details</button>
-
+     
       
       <button mat-button *ngIf="!authService.loggedIn()" routerLink="../login">
         <i class="material-icons">account_box</i> Login</button>

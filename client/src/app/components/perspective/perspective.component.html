@@ -32,9 +32,10 @@
           Show only certain Levels
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-list *ngIf="dimensions">
-        <mat-list-item *ngFor="let levelDim of dimensions.levelDimensions">
-          <button mat-button (click)="toggleLevel(levelDim)">{{ levelDim.label }} (Level {{ levelDim.level }})</button>
+      <mat-list *ngIf="allDimensions">
+        <mat-list-item *ngFor="let levelDim of allDimensions.levelDimensions">
+          <button mat-button *ngIf="levelDim.selected" (click)="toggleLevel(levelDim)">{{ levelDim.label }} (Level {{ levelDim.level }})</button>
+          <button mat-button  color="primary" *ngIf="!levelDim.selected" (click)="toggleLevel(levelDim)">{{ levelDim.label }} (Level {{ levelDim.level }})</button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -47,11 +48,14 @@
           Tag dimensions
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-list *ngIf="dimensions">
-        <mat-list-item *ngFor="let tagDim of dimensions.tagDimensions">
-          <button mat-button>{{ tagDim.label }}:
+      <mat-list *ngIf="allDimensions">
+        <mat-list-item *ngFor="let tagDim of allDimensions.tagDimensions">
+          <button *ngIf="tagDim.selected"  mat-button (click)="toggleTag(tagDim)">{{ tagDim.label }}:
             <p *ngFor="let tag of tagDim.tags">{{ tag }} </p>
           </button>
+          <button color="primary" *ngIf="!tagDim.selected" mat-button (click)="toggleTag(tagDim)">{{ tagDim.label }}:
+              <p *ngFor="let tag of tagDim.tags">{{ tag }} </p>
+            </button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -67,9 +71,10 @@
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-list *ngIf="dimensions">
-        <mat-list-item *ngFor="let dateDim of dimensions.dateDimensions">
-          <button mat-button (click)="toggleDate(dateDim)">{{ dateDim.label }}: </button>
+      <mat-list *ngIf="allDimensions">
+        <mat-list-item *ngFor="let dateDim of allDimensions.dateDimensions">
+          <button mat-button  *ngIf="dateDim.selected" (click)="toggleDate(dateDim)">{{ dateDim.label }}: </button>
+          <button color="primary" *ngIf="!dateDim.selected" mat-button (click)="toggleDate(dateDim)">{{ dateDim.label }}: </button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -86,9 +91,10 @@
           Numeric dimensions
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-list *ngIf="dimensions">
-        <mat-list-item *ngFor="let numberDim of dimensions.numberDimensions">
-          <button mat-button (click)="toggleDate(numberDim)">{{ numberDim.label }}: </button>
+      <mat-list *ngIf="allDimensions">
+        <mat-list-item *ngFor="let numberDim of allDimensions.numberDimensions">
+          <button *ngIf="numberDim.selected" mat-button (click)="toggleNumber(numberDim)">{{ numberDim.label }}: </button>
+          <button color="primary" *ngIf="!numberDim.selected" mat-button (click)="toggleNumber(numberDim)">{{ numberDim.label }}: </button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>

@@ -21,10 +21,22 @@ export class DrawViewerService {
         color: '#111111'
       },
     },
+    physics: {
+      forceAtlas2Based: {
+        gravitationalConstant: -26,
+        centralGravity: 0.005,
+        springLength: 230,
+        springConstant: 0.18
+      },
+      maxVelocity: 146,
+      solver: 'forceAtlas2Based',
+      timestep: 0.35,
+      stabilization: { iterations: 150 }
+    },
     groups: {
-      dateDim: {color:{background:'red'}, size:5},
-      numberDim: {color:{background:'blue'}, size:5},
-      tagDim: {color:{background:'green'}, size:5},
+      dateDim: { color: { background: 'red' }, size: 5 },
+      numberDim: { color: { background: 'blue' }, size: 5 },
+      tagDim: { color: { background: 'green' }, size: 5 },
     }
   };
 
@@ -44,26 +56,50 @@ export class DrawViewerService {
     if (thoughts) {
       thoughts.forEach(thought => { //Draw Nodes for all Thoughts in Array
         this.nodes.add({ id: thought._id, label: thought.label });
-        if(thought.dateDim){
+        if (thought.dateDim) {
           thought.dateDim.forEach(dim => {
+            if (!this.nodes.get("Timeline")) {
+              this.nodes.add({ id: "Timeline", label: "Time Dimensions", group: 'dateDim' })
+            }
             this.nodes.add({ id: dim._id, group: 'dateDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0 })
+            if (!this.nodes.get(dim.label)) {
+              this.nodes.add({ id: dim.label, label: dim.label, group: 'dateDim' })
+              this.edges.add({ from: dim._id, to: dim.label, length: 0, color: 'green' })
+              this.edges.add({ from: dim.label, to: "Timeline", length: 0, color: 'green' })
+            }
           })
         }
-        if(thought.numberDim){
+        if (thought.numberDim) {
           thought.numberDim.forEach(dim => {
+            if (!this.nodes.get("Numbers")) {
+              this.nodes.add({ id: 'Numbers', label: 'Number Dimensions', group: 'numberDim' })
+            }
             this.nodes.add({ id: dim._id, group: 'numberDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0 })
+            if (!this.nodes.get(dim.label)) {
+              this.nodes.add({ id: dim.label, label: dim.label, group: 'numberDim' })
+              this.edges.add({ from: dim._id, to: dim.label, length: 0, color: 'yellow' })
+              this.edges.add({ from: dim.label, to: 'Numbers', length: 0, color: 'yellow' })
+            }
           })
         }
-        if(thought.tagDim){
+        if (thought.tagDim) {
           thought.tagDim.forEach(dim => {
+            if (!this.nodes.get("Tags")) {
+              this.nodes.add({ id: 'Tags', label: 'Tag Dimensions', group: 'tagDim' })
+            }
             this.nodes.add({ id: dim._id, group: 'tagDim' })
-            this.edges.add({ from: thought._id, to: dim._id, length: 0, hidden: true  })
+            this.edges.add({ from: thought._id, to: dim._id, length: 0 })
+            if (!this.nodes.get(dim.label)) {
+              this.nodes.add({ id: dim.label, label: dim.label, group: 'tagDim' })
+              this.edges.add({ from: dim._id, to: dim.label, length: 0, color: 'red' })
+              this.edges.add({ from: dim.label, to: 'Tags', length: 0, color: 'red' })
+            }
           })
         }
       });
-     
+
       thoughts.forEach(thought => { //Draw Edges for all Thoughts with Contents
         var checkThought: Thought = thought;
         if (checkThought.contents) {

@@ -2,5 +2,6 @@
 export interface NumberDimension {
   label?: string, 
   startValue?: number, 
-  endValue?: number 
+  endValue?: number,
+  selected?: boolean
 }
