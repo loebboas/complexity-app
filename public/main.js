@@ -664,7 +664,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        <p>{{ selectedPerspective.label }}</p>\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <div *ngFor=\"let perspective of perspectives\">\r\n        <mat-list-item>\r\n          <button mat-button (click)=\"changePerspective(perspective)\">{{ perspective.label }}</button>\r\n        </mat-list-item>\r\n      </div>\r\n      <mat-divider></mat-divider>\r\n      <button mat-button (click)=\"newPerspective()\">New Perspective</button>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n<div>\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Levels\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          Show only certain Levels\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let levelDim of allDimensions.levelDimensions\">\r\n          <button mat-button (click)=\"toggleLevel(levelDim)\">{{ levelDim.label }} (Level {{ levelDim.level }})</button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Tag dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let tagDim of allDimensions.tagDimensions\">\r\n          <button mat-button>{{ tagDim.label }}:\r\n            <p *ngFor=\"let tag of tagDim.tags\">{{ tag }} </p>\r\n          </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Time dimensions\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let dateDim of allDimensions.dateDimensions\">\r\n          <button mat-button (click)=\"toggleDate(dateDim)\">{{ dateDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Numeric dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"dimensions\">\r\n        <mat-list-item *ngFor=\"let numberDim of allDimensions.numberDimensions\">\r\n          <button mat-button (click)=\"toggleNumber(numberDim)\">{{ numberDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n  <form>\r\n      <mat-form-field>\r\n        <input matInput placeholder=\"New\" aria-label=\"selectedPerspective.label\" [formControl]=\"label\">\r\n      </mat-form-field>\r\n      <button mat-raised-button (click)=\"savePerspective()\">Save Perspective</button>\r\n    </form>\r\n  \r\n</div>"
+module.exports = "<mat-accordion>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        <p>{{ selectedPerspective.label }}</p>\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n        Open for other Perspectives\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <mat-list>\r\n      <div *ngFor=\"let perspective of perspectives\">\r\n        <mat-list-item>\r\n          <button mat-button (click)=\"changePerspective(perspective)\">{{ perspective.label }}</button>\r\n        </mat-list-item>\r\n      </div>\r\n      <mat-divider></mat-divider>\r\n      <button mat-button (click)=\"newPerspective()\">New Perspective</button>\r\n    </mat-list>\r\n  </mat-expansion-panel>\r\n</mat-accordion>\r\n\r\n\r\n<div>\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Levels\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n          Show only certain Levels\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"allDimensions\">\r\n        <mat-list-item *ngFor=\"let levelDim of allDimensions.levelDimensions\">\r\n          <button mat-button *ngIf=\"levelDim.selected\" (click)=\"toggleLevel(levelDim)\">{{ levelDim.label }} (Level {{ levelDim.level }})</button>\r\n          <button mat-button  color=\"primary\" *ngIf=\"!levelDim.selected\" (click)=\"toggleLevel(levelDim)\">{{ levelDim.label }} (Level {{ levelDim.level }})</button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Tag dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"allDimensions\">\r\n        <mat-list-item *ngFor=\"let tagDim of allDimensions.tagDimensions\">\r\n          <button *ngIf=\"tagDim.selected\"  mat-button (click)=\"toggleTag(tagDim)\">{{ tagDim.label }}:\r\n            <p *ngFor=\"let tag of tagDim.tags\">{{ tag }} </p>\r\n          </button>\r\n          <button color=\"primary\" *ngIf=\"!tagDim.selected\" mat-button (click)=\"toggleTag(tagDim)\">{{ tagDim.label }}:\r\n              <p *ngFor=\"let tag of tagDim.tags\">{{ tag }} </p>\r\n            </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Time dimensions\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"allDimensions\">\r\n        <mat-list-item *ngFor=\"let dateDim of allDimensions.dateDimensions\">\r\n          <button mat-button  *ngIf=\"dateDim.selected\" (click)=\"toggleDate(dateDim)\">{{ dateDim.label }}: </button>\r\n          <button color=\"primary\" *ngIf=\"!dateDim.selected\" mat-button (click)=\"toggleDate(dateDim)\">{{ dateDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n\r\n\r\n\r\n\r\n\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Numeric dimensions\r\n        </mat-panel-title>\r\n      </mat-expansion-panel-header>\r\n      <mat-list *ngIf=\"allDimensions\">\r\n        <mat-list-item *ngFor=\"let numberDim of allDimensions.numberDimensions\">\r\n          <button *ngIf=\"numberDim.selected\" mat-button (click)=\"toggleNumber(numberDim)\">{{ numberDim.label }}: </button>\r\n          <button color=\"primary\" *ngIf=\"!numberDim.selected\" mat-button (click)=\"toggleNumber(numberDim)\">{{ numberDim.label }}: </button>\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n  <form>\r\n      <mat-form-field>\r\n        <input matInput placeholder=\"New\" aria-label=\"selectedPerspective.label\" [formControl]=\"label\">\r\n      </mat-form-field>\r\n      <button mat-raised-button (click)=\"savePerspective()\">Save Perspective</button>\r\n    </form>\r\n  \r\n</div>"
 
 /***/ }),
 
@@ -706,26 +706,39 @@ var PerspectiveComponent = /** @class */ (function () {
     }
     PerspectiveComponent.prototype.toggleLevel = function (levelDim) {
         var newLevelDimensions = [];
+        var addIt = false;
         this.selectedPerspective.dimensions.levelDimensions.forEach(function (dim) {
             if (dim.objId != levelDim.objId) {
                 newLevelDimensions.push(dim);
             }
+            else
+                addIt = true;
         });
+        if (addIt)
+            newLevelDimensions.push(levelDim);
         var newPerspective = this.selectedPerspective;
         newPerspective.dimensions.levelDimensions = newLevelDimensions;
         console.log(newPerspective);
+        this.allDimensions.levelDimensions.find(function (leveldim) { return levelDim == leveldim; }).selected = !this.allDimensions.levelDimensions.find(function (leveldim) { return levelDim == leveldim; }).selected;
         this.internalService.changePerspective(newPerspective);
     };
     PerspectiveComponent.prototype.toggleDate = function (dateDim) {
         var newDateDimensions = [];
+        var addIt = false;
         this.selectedPerspective.dimensions.dateDimensions.forEach(function (dim) {
             if (dim.label != dateDim.label) {
                 newDateDimensions.push(dim);
             }
+            else
+                addIt = true;
         });
+        var newDateDimensions = [];
+        if (addIt)
+            newDateDimensions.push(dateDim);
         var newPerspective = this.selectedPerspective;
         newPerspective.dimensions.dateDimensions = newDateDimensions;
         console.log(newPerspective);
+        this.allDimensions.dateDimensions.find(function (leveldim) { return dateDim == leveldim; }).selected = !this.allDimensions.dateDimensions.find(function (leveldim) { return dateDim == leveldim; }).selected;
         this.internalService.changePerspective(newPerspective);
     };
     PerspectiveComponent.prototype.toggleNumber = function (numberDim) {
@@ -738,24 +751,31 @@ var PerspectiveComponent = /** @class */ (function () {
             else
                 found = true;
         });
-        if (!found)
+        if (found)
             newNumberDimensions.push(numberDim);
         var newPerspective = this.selectedPerspective;
         newPerspective.dimensions.numberDimensions = newNumberDimensions;
         console.log(newPerspective);
+        this.allDimensions.numberDimensions.find(function (leveldim) { return numberDim == leveldim; }).selected = !this.allDimensions.numberDimensions.find(function (leveldim) { return numberDim == leveldim; }).selected;
         this.internalService.changePerspective(newPerspective);
     };
     PerspectiveComponent.prototype.toggleTag = function (tagDim) {
         var newTagDimensions = [];
+        var found = false;
         this.selectedPerspective.dimensions.tagDimensions.forEach(function (dim) {
             if (dim.label != tagDim.label) {
                 newTagDimensions.push(dim);
             }
+            else
+                found = true;
         });
+        if (found)
+            newTagDimensions.push(tagDim);
         var newPerspective = this.selectedPerspective;
         newPerspective.label = "custom Perspective";
         newPerspective.dimensions.tagDimensions = newTagDimensions;
         console.log(newPerspective);
+        this.allDimensions.tagDimensions.find(function (leveldim) { return tagDim == leveldim; }).selected = !this.allDimensions.tagDimensions.find(function (leveldim) { return tagDim == leveldim; }).selected;
         this.internalService.changePerspective(newPerspective);
     };
     PerspectiveComponent.prototype.newPerspective = function () {
@@ -766,7 +786,7 @@ var PerspectiveComponent = /** @class */ (function () {
     PerspectiveComponent.prototype.savePerspective = function () {
         var _this = this;
         var newPerspective = this.selectedPerspective;
-        if (this.label) {
+        if (this.label.value) {
             this.selectedPerspective.label = this.label.value;
         }
         newPerspective.dimensions = this.selectedDimensions;
@@ -790,29 +810,26 @@ var PerspectiveComponent = /** @class */ (function () {
         this.label = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
         this.internalService.selectedUserObs.subscribe(function (user) { return _this.user = user; });
         this.internalService.selectedContextObs.subscribe(function (context) { return _this.selectedContext = context; });
+        this.internalService.allDimensionsObs.subscribe(function (alldims) {
+            _this.allDimensions = alldims;
+            _this.selectedDimensions = alldims;
+        });
         this.internalService.selectedPerspectivesObs.subscribe(function (perspectives) { return _this.perspectives = perspectives; });
-        this.internalService.allDimensionsObs.subscribe(function (alldims) { return _this.allDimensions = alldims; });
-        this.internalService.selectedDimensionsObs.subscribe(function (dimensions) { return _this.selectedDimensions = dimensions; });
-    };
-    PerspectiveComponent.prototype.ngAfterContentInit = function () {
-        var _this = this;
         this.internalService.selectedPerspectiveObs.subscribe(function (perspective) {
             console.log(perspective);
             if (perspective != null) {
                 _this.selectedPerspective = perspective;
             }
             else {
-                var allDimens = _this.internalService.allDimensions.getValue();
-                console.log(allDimens);
+                var copyDimensions = _this.allDimensions;
                 _this.selectedPerspective = {
-                    objId: _this.selectedContext._id,
                     label: "New Perspective",
-                    dimensions: _this.allDimensions
+                    dimensions: copyDimensions
                 };
-                console.log(_this.allDimensions);
             }
-            console.log(_this.selectedPerspective);
         });
+    };
+    PerspectiveComponent.prototype.ngAfterContentInit = function () {
     };
     PerspectiveComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1963,7 +1980,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "http://localhost:8080";
+        this.domain = "";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {
@@ -2537,14 +2554,6 @@ var InternalService = /** @class */ (function () {
     };
     InternalService.prototype.loadMyThoughts = function () {
         var _this = this;
-        if (this.selectedUser.getValue().starterPerspectives) {
-            this.selectedPerspectives.next(this.selectedUser.getValue().starterPerspectives); // load starter Perspectives available
-            this.selectedPerspective.next(this.selectedUser.getValue().starterPerspectives[0]); // select first one Selected
-        }
-        else {
-            this.selectedPerspectives.next(null); // no Perspectives available
-            this.selectedPerspective.next(null); // no Perspective Selected
-        }
         this.dataService.getAllThought().subscribe(function (data) {
             _this.selectedContext.next(_this.UserThought); //Take "My Thought" as Selected Thought
             _this.selectedThought.next(_this.UserThought); //Take "My Thought" as Selected Context
@@ -2553,6 +2562,14 @@ var InternalService = /** @class */ (function () {
             _this.getDimensions(data['allThoughts']); // Get Dimensions of selected Thought Array
             _this.drawViewerService.clearAll(); // Clear Viewer
             _this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
+            if (_this.selectedUser.getValue().starterPerspectives) {
+                _this.selectedPerspectives.next(_this.selectedUser.getValue().starterPerspectives); // load starter Perspectives available
+                _this.selectedPerspective.next(_this.selectedUser.getValue().starterPerspectives[0]); // select first one Selected
+            }
+            else {
+                _this.selectedPerspectives.next(null); // no Perspectives available
+                _this.selectedPerspective.next(null); // no Perspective Selected
+            }
         });
     };
     InternalService.prototype.getDimensions = function (thoughts) {
@@ -2585,9 +2602,10 @@ var InternalService = /** @class */ (function () {
                         _this.newDimensionsArray.numberDimensions.push({ label: dim.label });
                 });
             }
-            _this.allDimensions.next(_this.newDimensionsArray);
-            console.log(_this.newDimensionsArray);
         });
+        this.allDimensions.next(this.newDimensionsArray);
+        this.selectedPerspective.next(null); // no Perspective Selected
+        console.log(this.newDimensionsArray);
     };
     InternalService.prototype.changePerspective = function (perspective) {
         if (perspective.label == "specialCode!") {
@@ -2603,6 +2621,7 @@ var InternalService = /** @class */ (function () {
     };
     InternalService.prototype.perspectiveFilter = function (thoughts) {
         this.drawViewerService.clearAll(); // Clear Viewer
+        console.log(this.selectedPerspective.getValue());
         var relevantLevels = this.selectedPerspective.getValue().dimensions.levelDimensions;
         var relevantDates = this.selectedPerspective.getValue().dimensions.dateDimensions;
         var relevantTags = this.selectedPerspective.getValue().dimensions.tagDimensions;
@@ -2615,6 +2634,8 @@ var InternalService = /** @class */ (function () {
             if (relevantLevels) {
                 relevantLevels.forEach(function (levelDim) {
                     if (levelDim.objId == thought.contexts[0])
+                        pushIt = true;
+                    else if (levelDim.objId == thought._id)
                         pushIt = true;
                 });
             }
