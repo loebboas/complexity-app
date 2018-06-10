@@ -211,8 +211,10 @@ export class InternalService {
   perspectiveFilter(thoughts: Thought[]) {
     this.drawViewerService.clearAll(); // Clear Viewer
     console.log(this.selectedPerspective.getValue());
-    var relevantLevels: LevelDimension[] = this.selectedPerspective.getValue().dimensions.levelDimensions;
-    var relevantDates: DateDimension[] = this.selectedPerspective.getValue().dimensions.dateDimensions;
+    var relevantLevels: LevelDimension[] = [];
+    this.selectedPerspective.getValue().dimensions.levelDimensions.forEach(dimension => { if (dimension.selected) relevantLevels.push(dimension)});
+    var relevantDates: DateDimension[] = [];
+    this.selectedPerspective.getValue().dimensions.dateDimensions.forEach(dimension => { if (dimension.selected) relevantDates.push(dimension)});
     var relevantTags: TagDimension[] = this.selectedPerspective.getValue().dimensions.tagDimensions;
     var relevantNumbers: NumberDimension[] = this.selectedPerspective.getValue().dimensions.numberDimensions;
     var newThoughtArray: Thought[] = [];
