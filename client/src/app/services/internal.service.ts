@@ -146,14 +146,16 @@ export class InternalService {
       this.getDimensions(data['allThoughts']); // Get Dimensions of selected Thought Array
     
   
-        this.drawViewerService.clearAll(); // Clear Viewer
-        this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
+        
         if(this.selectedUser.getValue().starterPerspectives){
           this.selectedPerspectives.next(this.selectedUser.getValue().starterPerspectives); // load starter Perspectives available
           this.selectedPerspective.next(this.selectedUser.getValue().starterPerspectives[0]); // select first one Selected
+          this.perspectiveFilter(data['allThoughts']);
         } else {
           this.selectedPerspectives.next(null); // no Perspectives available
           this.selectedPerspective.next(null); // no Perspective Selected
+          this.drawViewerService.clearAll(); // Clear Viewer
+        this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
         }
     })
   }
@@ -167,24 +169,24 @@ export class InternalService {
     };
     thoughts.forEach(thought => {
       if (thought.contents.length > 0) {
-        this.newDimensionsArray.levelDimensions.push({ label: thought.label, objId: thought._id, level: thought.contexts.length })
+        this.newDimensionsArray.levelDimensions.push({ label: thought.label, objId: thought._id, level: thought.contexts.length, selected: true })
       }
       if (thought.dateDim.length > 0) {
         thought.dateDim.forEach(dim => {
           if (!this.newDimensionsArray.dateDimensions.find(d => dim.label == d.label))
-            this.newDimensionsArray.dateDimensions.push({ label: dim.label })
+            this.newDimensionsArray.dateDimensions.push({ label: dim.label, selected: true })
         })
       }
       if (thought.tagDim.length > 0) {
         thought.tagDim.forEach(dim => {
           if (!this.newDimensionsArray.tagDimensions.find(d => dim.label == d.label))
-            this.newDimensionsArray.tagDimensions.push({ label: dim.label })
+            this.newDimensionsArray.tagDimensions.push({ label: dim.label, selected: true })
         })
       }
       if (thought.numberDim.length > 0) {
         thought.numberDim.forEach(dim => {
           if (!this.newDimensionsArray.numberDimensions.find(d => dim.label == d.label))
-            this.newDimensionsArray.numberDimensions.push({ label: dim.label })
+            this.newDimensionsArray.numberDimensions.push({ label: dim.label, selected: true })
         })
       }
       
@@ -213,10 +215,13 @@ export class InternalService {
     console.log(this.selectedPerspective.getValue());
     var relevantLevels: LevelDimension[] = [];
     this.selectedPerspective.getValue().dimensions.levelDimensions.forEach(dimension => { if (dimension.selected) relevantLevels.push(dimension)});
+    console.log(relevantLevels);
     var relevantDates: DateDimension[] = [];
     this.selectedPerspective.getValue().dimensions.dateDimensions.forEach(dimension => { if (dimension.selected) relevantDates.push(dimension)});
-    var relevantTags: TagDimension[] = this.selectedPerspective.getValue().dimensions.tagDimensions;
-    var relevantNumbers: NumberDimension[] = this.selectedPerspective.getValue().dimensions.numberDimensions;
+    var relevantTags: TagDimension[] = [];
+    this.selectedPerspective.getValue().dimensions.tagDimensions.forEach(dimension => { if (dimension.selected) relevantTags.push(dimension)});
+    var relevantNumbers: NumberDimension[] = [];
+    this.selectedPerspective.getValue().dimensions.numberDimensions.forEach(dimension => { if (dimension.selected) relevantNumbers.push(dimension)});;
     var newThoughtArray: Thought[] = [];
     thoughts.forEach(thought => {
       var pushIt = false;

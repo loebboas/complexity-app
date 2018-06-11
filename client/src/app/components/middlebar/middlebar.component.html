@@ -3,6 +3,7 @@
     <span class='spacer'></span>
     <button mat-button *ngIf="selectedContext._id != selectedThought._id"> {{ selectedContext.label }}</button>
     <button mat-raised-button> {{ selectedThought.label }}</button>
+    <button mat-button *ngIf="selectedPerspective"> {{ selectedPerspective.label }}</button>
     <span class='spacer'></span>
   </mat-toolbar-row>
 </mat-toolbar>

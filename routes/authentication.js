@@ -199,7 +199,7 @@ module.exports = (router) => {
   router.get('/profile', (req, res) => {
     // Search for user in database
     User.findOne({ _id: req.decoded.userId })
-    .select('username email stream friends changeHistory socialHistory startPerspectives').exec((err, user) => {
+    .select('username email stream friends changeHistory socialHistory starterPerspectives').populate('starterPerspectives').exec((err, user) => {
       // Check if error connecting
       if (err) {
         res.json({ success: false, message: err }); // Return error

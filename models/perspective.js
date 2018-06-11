@@ -9,11 +9,11 @@ const perspectiveSchema = new Schema({
     objId: { type: Schema.Types.ObjectId, ref: 'Thought' },
     label: String,
     dimensions: {
-        levelDimensions: [{ label: String, objId: String, startValue: String, endValue: String, level: Number }],
-        numberDimensions: [{ label: String, startValue: Number, endValue: Number }],
-        tagDimensions: [{ label: String, tags: [String] }],
-        locationDimensions: [{ label: String, startValue: String, endValue: String }],
-        dateDimensions: [{ label: String, startValue: Date, endValue: Date }]
+        levelDimensions: [{ label: String, objId: String, startValue: String, endValue: String, level: Number, selected: Boolean }],
+        numberDimensions: [{ label: String, startValue: Number, endValue: Number, selected: Boolean }],
+        tagDimensions: [{ label: String, tags: [String], selected: Boolean }],
+        locationDimensions: [{ label: String, startValue: String, endValue: String, selected: Boolean }],
+        dateDimensions: [{ label: String, startValue: Date, endValue: Date, selected: Boolean }]
     }
 });
 

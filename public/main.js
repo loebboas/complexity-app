@@ -440,7 +440,7 @@ module.exports = ".spacer{\r\n    flex: 1 1 auto;\r\n   \r\n}\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n  <mat-toolbar-row>\n    <span class='spacer'></span>\n    <button mat-button *ngIf=\"selectedContext._id != selectedThought._id\"> {{ selectedContext.label }}</button>\n    <button mat-raised-button> {{ selectedThought.label }}</button>\n    <span class='spacer'></span>\n  </mat-toolbar-row>\n</mat-toolbar>"
+module.exports = "<mat-toolbar>\n  <mat-toolbar-row>\n    <span class='spacer'></span>\n    <button mat-button *ngIf=\"selectedContext._id != selectedThought._id\"> {{ selectedContext.label }}</button>\n    <button mat-raised-button> {{ selectedThought.label }}</button>\n    <button mat-button *ngIf=\"selectedPerspective\"> {{ selectedPerspective.label }}</button>\n    <span class='spacer'></span>\n  </mat-toolbar-row>\n</mat-toolbar>"
 
 /***/ }),
 
@@ -470,11 +470,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var MiddlebarComponent = /** @class */ (function () {
     function MiddlebarComponent(internalService) {
         this.internalService = internalService;
+        this.lastPerspectives = [];
     }
     MiddlebarComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.internalService.selectedContextObs.subscribe(function (context) { return _this.selectedContext = context; });
         this.internalService.selectedThoughtObs.subscribe(function (thought) { return _this.selectedThought = thought; });
+        this.internalService.selectedPerspectiveObs.subscribe(function (perspective) {
+            _this.selectedPerspective = perspective;
+            _this.lastPerspectives.push(perspective);
+        });
     };
     MiddlebarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2560,15 +2565,16 @@ var InternalService = /** @class */ (function () {
             _this.privateThoughts.next(data['allThoughts']); //Save Private Thoughts for Search
             _this.selectedThoughtArray.next(data['allThoughts']);
             _this.getDimensions(data['allThoughts']); // Get Dimensions of selected Thought Array
-            _this.drawViewerService.clearAll(); // Clear Viewer
-            _this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
             if (_this.selectedUser.getValue().starterPerspectives) {
                 _this.selectedPerspectives.next(_this.selectedUser.getValue().starterPerspectives); // load starter Perspectives available
                 _this.selectedPerspective.next(_this.selectedUser.getValue().starterPerspectives[0]); // select first one Selected
+                _this.perspectiveFilter(data['allThoughts']);
             }
             else {
                 _this.selectedPerspectives.next(null); // no Perspectives available
                 _this.selectedPerspective.next(null); // no Perspective Selected
+                _this.drawViewerService.clearAll(); // Clear Viewer
+                _this.drawViewerService.drawThoughtsArray(data['allThoughts']); // Draw ThoughtsArray
             }
         });
     };
@@ -2582,24 +2588,24 @@ var InternalService = /** @class */ (function () {
         };
         thoughts.forEach(function (thought) {
             if (thought.contents.length > 0) {
-                _this.newDimensionsArray.levelDimensions.push({ label: thought.label, objId: thought._id, level: thought.contexts.length });
+                _this.newDimensionsArray.levelDimensions.push({ label: thought.label, objId: thought._id, level: thought.contexts.length, selected: true });
             }
             if (thought.dateDim.length > 0) {
                 thought.dateDim.forEach(function (dim) {
                     if (!_this.newDimensionsArray.dateDimensions.find(function (d) { return dim.label == d.label; }))
-                        _this.newDimensionsArray.dateDimensions.push({ label: dim.label });
+                        _this.newDimensionsArray.dateDimensions.push({ label: dim.label, selected: true });
                 });
             }
             if (thought.tagDim.length > 0) {
                 thought.tagDim.forEach(function (dim) {
                     if (!_this.newDimensionsArray.tagDimensions.find(function (d) { return dim.label == d.label; }))
-                        _this.newDimensionsArray.tagDimensions.push({ label: dim.label });
+                        _this.newDimensionsArray.tagDimensions.push({ label: dim.label, selected: true });
                 });
             }
             if (thought.numberDim.length > 0) {
                 thought.numberDim.forEach(function (dim) {
                     if (!_this.newDimensionsArray.numberDimensions.find(function (d) { return dim.label == d.label; }))
-                        _this.newDimensionsArray.numberDimensions.push({ label: dim.label });
+                        _this.newDimensionsArray.numberDimensions.push({ label: dim.label, selected: true });
                 });
             }
         });
@@ -2622,10 +2628,20 @@ var InternalService = /** @class */ (function () {
     InternalService.prototype.perspectiveFilter = function (thoughts) {
         this.drawViewerService.clearAll(); // Clear Viewer
         console.log(this.selectedPerspective.getValue());
-        var relevantLevels = this.selectedPerspective.getValue().dimensions.levelDimensions;
-        var relevantDates = this.selectedPerspective.getValue().dimensions.dateDimensions;
-        var relevantTags = this.selectedPerspective.getValue().dimensions.tagDimensions;
-        var relevantNumbers = this.selectedPerspective.getValue().dimensions.numberDimensions;
+        var relevantLevels = [];
+        this.selectedPerspective.getValue().dimensions.levelDimensions.forEach(function (dimension) { if (dimension.selected)
+            relevantLevels.push(dimension); });
+        console.log(relevantLevels);
+        var relevantDates = [];
+        this.selectedPerspective.getValue().dimensions.dateDimensions.forEach(function (dimension) { if (dimension.selected)
+            relevantDates.push(dimension); });
+        var relevantTags = [];
+        this.selectedPerspective.getValue().dimensions.tagDimensions.forEach(function (dimension) { if (dimension.selected)
+            relevantTags.push(dimension); });
+        var relevantNumbers = [];
+        this.selectedPerspective.getValue().dimensions.numberDimensions.forEach(function (dimension) { if (dimension.selected)
+            relevantNumbers.push(dimension); });
+        ;
         var newThoughtArray = [];
         thoughts.forEach(function (thought) {
             var pushIt = false;
