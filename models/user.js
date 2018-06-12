@@ -131,6 +131,8 @@ const userSchema = new Schema({
   followThought: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
   starterPerspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
   lastPerspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
+  favoritePerspectives: [{ type: Schema.Types.ObjectId, ref: 'Perspective' }],
+  myDimensions: { type: Schema.Types.ObjectId, ref: 'Perspective' },
   changeHistory: [{ event: String, timestamp: Date }],
   socialHistory: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, event: String, timestamp: Date }]
 });

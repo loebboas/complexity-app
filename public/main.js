@@ -1007,6 +1007,9 @@ var RegisterComponent = /** @class */ (function () {
                 // Function to send login data to API
                 _this.authService.login(user_1).subscribe(function (data) {
                     _this.authService.storeUserData(data['token'], data['user']);
+                    var myDimensions;
+                    myDimensions.label = user_1.username + "'s Dimensions";
+                    _this.dataService.newPerspective(myDimensions).subscribe();
                     _this.internalService.loadData();
                 });
             }
@@ -1985,7 +1988,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
         this.http = http;
-        this.domain = "";
+        this.domain = "http://localhost:8080";
     }
     // Function to create headers, add token, to be used in HTTP requests
     AuthService.prototype.createAuthenticationHeaders = function () {

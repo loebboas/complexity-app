@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Thought } from '../../models/thought';
 import { InternalService } from '../../services/internal.service';
+import { Perspective } from '../../models/perspective';
 
 @Component({
   selector: 'app-register',
@@ -133,7 +134,9 @@ export class RegisterComponent implements OnInit {
         // Function to send login data to API
         this.authService.login(user).subscribe(data => {
           this.authService.storeUserData(data['token'], data['user'])
-
+              var myDimensions: Perspective;
+              myDimensions.label = user.username + "'s Dimensions";
+              this.dataService.newPerspective(myDimensions).subscribe();
               this.internalService.loadData();
             })
       }

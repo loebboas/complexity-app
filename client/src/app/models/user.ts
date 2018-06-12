@@ -11,6 +11,8 @@ export interface User {
     followThought?: [string],
     starterPerspectives?: any[],
     lastPerspectives?: any[],
+    favortiePerspectives?: any[],
+    myDimensions?: Perspective,
     changeHistory?: [{ event: string, timestamp: Date }],
     socialHistory?: [{ user: string, event: string, timestamp: Date }]
 }
